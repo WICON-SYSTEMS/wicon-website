@@ -1,7 +1,6 @@
 <div align="center">
 
-<img width="521" height="479" alt="wicon" src="https://github.com/user-attachments/assets/a93c8b66-6e0b-4a23-83d6-41e6c3762bc0" />
-
+<img width="554" height="274" alt="wicon-body" src="https://github.com/user-attachments/assets/d3a726df-627d-4ee1-b361-484f4bcbc7af" />
 
 # WiCon Systems Website
 
