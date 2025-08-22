@@ -9,7 +9,7 @@
 
 _A modern, responsive marketing website showcasing WiCon Systems' technology solutions and digital education programs_
 
-[🌐 Live Demo](https://wicon-systems.com) • [📖 Documentation](#documentation) • [🤝 Contributing](#contributing) • [🐛 Report Bug](https://github.com/WICON-SYSTEMS/wicon-website/issues)
+[🌐 Live Demo](https://wicon-lyart.vercel.app/) • [📖 Documentation](#documentation) • [🤝 Contributing](#contributing) • [🐛 Report Bug](https://github.com/WICON-SYSTEMS/wicon-website/issues)
 
 </div>
 
@@ -455,6 +455,6 @@ For licensing inquiries, contact [legal@wicon-systems.com](mailto:legal@wicon-sy
 
 **Made with ❤️ by the WiCon Systems Team**
 
-[Website](https://wicon-systems.com) • [GitHub](https://github.com/WICON-SYSTEMS) • [Contact](mailto:info@wicon-systems.com)
+[Website](https://wicon-lyart.vercel.app/) • [GitHub](https://github.com/WICON-SYSTEMS) • [Contact](mailto:info@wicon-systems.com)
 
 </div>
