@@ -1,5 +1,8 @@
 <div align="center">
 
+<img width="521" height="479" alt="wicon" src="https://github.com/user-attachments/assets/a93c8b66-6e0b-4a23-83d6-41e6c3762bc0" />
+
+
 # WiCon Systems Website
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
