@@ -422,7 +422,7 @@ Report any violations to [conduct@wicon-systems.com](mailto:conduct@wicon-system
 - 📖 **Documentation** - Check this README and inline code comments
 - 🐛 **Issues** - Search existing issues or create a new one
 - 💬 **Discussions** - Use GitHub Discussions for questions
-- 📧 **Email** - Contact [dev@wicon-systems.com](mailto:dev@wicon-systems.com)
+- 📧 **Email** - Contact [tanzeglenn@gmail.com](mailto:tanzeglenn@gmail.com)
 
 ### Reporting Issues
 
@@ -447,7 +447,7 @@ For feature requests, please provide:
 
 This project is proprietary software owned by WiCon Systems. All rights reserved.
 
-**© 2024 WiCon Systems. All rights reserved.**
+**© 2025 WiCon Systems. All rights reserved.**
 
 For licensing inquiries, contact [legal@wicon-systems.com](mailto:legal@wicon-systems.com).
 
@@ -455,7 +455,6 @@ For licensing inquiries, contact [legal@wicon-systems.com](mailto:legal@wicon-sy
 
 <div align="center">
 
-**Made with ❤️ by the WiCon Systems Team**
 
 [Website](https://wicon-lyart.vercel.app/) • [GitHub](https://github.com/WICON-SYSTEMS) • [Contact](mailto:info@wicon-systems.com)
 
