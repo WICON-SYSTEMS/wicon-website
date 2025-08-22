@@ -1,0 +1,19 @@
+/* Floating image animation */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Soft shadow pulse under image */
+@keyframes shadowPulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(0.95); opacity: 0.4; }
+}
+
+.floatY {
+  animation: floatY 6s ease-in-out infinite;
+}
+
+.shadowPulse {
+  animation: shadowPulse 3s ease-in-out infinite;
+}

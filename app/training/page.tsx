@@ -1,0 +1,563 @@
+import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Checkbox } from "@/components/ui/checkbox"
+import {
+  GraduationCap,
+  Code,
+  Cpu,
+  Zap,
+  Calendar,
+  Clock,
+  Users,
+  Award,
+  CheckCircle,
+  MapPin,
+  Phone,
+  Mail,
+  Download,
+} from "lucide-react"
+
+export default function TrainingPage() {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="bg-black text-white py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <div className="flex items-center justify-center mb-6">
+                <GraduationCap className="w-12 h-12 mr-4" />
+                <h1 className="text-4xl md:text-5xl font-bold">WiCon for Digital Education</h1>
+              </div>
+              <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                Master the future of technology with our comprehensive training program covering software development,
+                IoT solutions, and WiCon controller technology.
+              </p>
+              <div className="bg-gray-900 rounded-lg p-6 inline-block mb-8">
+                <div className="text-3xl font-bold mb-2">October 2025 Program</div>
+                <div className="text-gray-300">Registration Opens: September 2025</div>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Button className="bg-white text-black hover:bg-gray-300 px-8 py-3 text-lg font-semibold" asChild>
+                  <a href="#register">Register Now</a>
+                </Button>
+                <Button
+                  variant="outline"
+                  className="border-white text-white hover:bg-white hover:text-black px-8 py-3 text-lg font-semibold bg-transparent"
+                  asChild
+                >
+                  <a href="/downloads/wicon-digital-education-2025-brochure.pdf" download>
+                    <Download className="w-5 h-5 mr-2" />
+                    Download 2025 Brochure
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Program Overview */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl font-bold text-black mb-6">Program Overview</h2>
+                <p className="text-lg text-gray-600 mb-6">
+                  WiCon for Digital Education is an intensive 4-week training program designed to equip participants
+                  with cutting-edge skills in software development, IoT solutions, and our proprietary WiCon controller
+                  technology.
+                </p>
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                  <div className="flex items-center mb-2">
+                    <Award className="w-5 h-5 text-green-600 mr-2" />
+                    <span className="font-bold text-green-800">2024 Program Success</span>
+                  </div>
+                  <p className="text-green-700 text-sm mb-3">
+                    48 graduates • 92% job placement rate • 4.9/5 average rating
+                  </p>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="border-green-600 text-green-600 hover:bg-green-50 bg-transparent"
+                  >
+                    <a href="/training/2024">View 2024 Success Stories</a>
+                  </Button>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <CheckCircle className="w-6 h-6 text-green-600 mr-3" />
+                    <span className="text-gray-700">Hands-on practical training with real projects</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="w-6 h-6 text-green-600 mr-3" />
+                    <span className="text-gray-700">Industry-certified instructors and mentors</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="w-6 h-6 text-green-600 mr-3" />
+                    <span className="text-gray-700">Certificate of completion recognized by industry</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="w-6 h-6 text-green-600 mr-3" />
+                    <span className="text-gray-700">Job placement assistance for top performers</span>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gray-50 p-8 rounded-lg">
+                <h3 className="text-xl font-bold text-black mb-4">Program Details</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <Calendar className="w-5 h-5 text-gray-600 mr-3" />
+                    <span className="text-gray-700">Duration: 4 weeks intensive</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Clock className="w-5 h-5 text-gray-600 mr-3" />
+                    <span className="text-gray-700">Schedule: Monday-Friday, 9AM-5PM</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Users className="w-5 h-5 text-gray-600 mr-3" />
+                    <span className="text-gray-700">Limited to 50 participants</span>
+                  </div>
+                  <div className="flex items-center">
+                    <MapPin className="w-5 h-5 text-gray-600 mr-3" />
+                    <span className="text-gray-700">Location: WiCon Systems HQ, Buea</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Award className="w-5 h-5 text-gray-600 mr-3" />
+                    <span className="text-gray-700">Industry-recognized certification</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Training Tracks */}
+        <section className="py-20 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Three Specialized Training Tracks</h2>
+              <p className="text-xl text-gray-600">Choose your focus area or take the comprehensive program</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <Card className="bg-white border-gray-200 hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
+                    <Code className="w-6 h-6 text-white" />
+                  </div>
+                  <CardTitle className="text-xl">Software Development Track</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">
+                    Master modern web and mobile app development with hands-on projects.
+                  </p>
+                  <ul className="space-y-2 text-sm text-gray-600">
+                    <li>• React & Next.js Development</li>
+                    <li>• Mobile App Development</li>
+                    <li>• Database Design & Management</li>
+                    <li>• API Development & Integration</li>
+                    <li>• Version Control with Git</li>
+                  </ul>
+                </CardContent>
+              </Card>
+              <Card className="bg-white border-gray-200 hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
+                    <Cpu className="w-6 h-6 text-white" />
+                  </div>
+                  <CardTitle className="text-xl">IoT Solutions Track</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">
+                    Build smart connected devices and automation systems from scratch.
+                  </p>
+                  <ul className="space-y-2 text-sm text-gray-600">
+                    <li>• Sensor Integration & Programming</li>
+                    <li>• Microcontroller Programming</li>
+                    <li>• Wireless Communication Protocols</li>
+                    <li>• Cloud Platform Integration</li>
+                    <li>• Smart Home Automation</li>
+                  </ul>
+                </CardContent>
+              </Card>
+              <Card className="bg-white border-gray-200 hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
+                    <Zap className="w-6 h-6 text-white" />
+                  </div>
+                  <CardTitle className="text-xl">WiCon Controller Track</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">
+                    Learn to design, install, and maintain WiCon wireless control systems.
+                  </p>
+                  <ul className="space-y-2 text-sm text-gray-600">
+                    <li>• WiCon System Architecture</li>
+                    <li>• Installation & Configuration</li>
+                    <li>• Safety Protocols & Monitoring</li>
+                    <li>• Troubleshooting & Maintenance</li>
+                    <li>• Custom Controller Programming</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Trainer Registration */}
+        <section id="trainer-registration" className=" py-20 bg-black text-white">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Join Our Training Team</h2>
+              <p className="text-xl text-gray-300">
+                Share your expertise and help shape the next generation of tech professionals
+              </p>
+            </div>
+            <Card className="bg-gray-900 border-gray-700">
+              <CardContent className="p-8">
+                <div className="mb-8">
+                  <h3 className="text-2xl font-bold text-white mb-4">We're Looking for Expert Trainers</h3>
+                  <p className="text-gray-300 mb-6">
+                    Join our team of industry professionals and help deliver world-class training in software
+                    development, IoT solutions, and WiCon controller technology.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div className="text-center">
+                      <Code className="w-8 h-8 mx-auto mb-2 text-white" />
+                      <h4 className="font-semibold text-white">Software Development</h4>
+                      <p className="text-sm text-gray-400">React, Next.js, Mobile Apps</p>
+                    </div>
+                    <div className="text-center">
+                      <Cpu className="w-8 h-8 mx-auto mb-2 text-white" />
+                      <h4 className="font-semibold text-white">IoT Solutions</h4>
+                      <p className="text-sm text-gray-400">Hardware, Sensors, Automation</p>
+                    </div>
+                    <div className="text-center">
+                      <Zap className="w-8 h-8 mx-auto mb-2 text-white" />
+                      <h4 className="font-semibold text-white">WiCon Controllers</h4>
+                      <p className="text-sm text-gray-400">Installation, Programming</p>
+                    </div>
+                  </div>
+                </div>
+
+                <form className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="trainerFirstName" className="text-white">
+                        First Name *
+                      </Label>
+                      <Input
+                        id="trainerFirstName"
+                        placeholder="Enter your first name"
+                        className="mt-1 bg-gray-800 border-gray-600 text-white"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="trainerLastName" className="text-white">
+                        Last Name *
+                      </Label>
+                      <Input
+                        id="trainerLastName"
+                        placeholder="Enter your last name"
+                        className="mt-1 bg-gray-800 border-gray-600 text-white"
+                      />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="trainerEmail" className="text-white">
+                        Email Address *
+                      </Label>
+                      <Input
+                        id="trainerEmail"
+                        type="email"
+                        placeholder="your.email@example.com"
+                        className="mt-1 bg-gray-800 border-gray-600 text-white"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="trainerPhone" className="text-white">
+                        Phone Number *
+                      </Label>
+                      <Input
+                        id="trainerPhone"
+                        placeholder="+237 6XX XXX XXX"
+                        className="mt-1 bg-gray-800 border-gray-600 text-white"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <Label htmlFor="expertise" className="text-white">
+                      Area of Expertise *
+                    </Label>
+                    <Select>
+                      <SelectTrigger className="mt-1 bg-gray-800 border-gray-600 text-white">
+                        <SelectValue placeholder="Select your primary expertise" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-gray-800 border-gray-600">
+                        <SelectItem value="software">Software Development</SelectItem>
+                        <SelectItem value="iot">IoT Solutions & Hardware</SelectItem>
+                        <SelectItem value="wicon">WiCon Controller Systems</SelectItem>
+                        <SelectItem value="multiple">Multiple Areas</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="trainerExperience" className="text-white">
+                        Years of Experience *
+                      </Label>
+                      <Select>
+                        <SelectTrigger className="mt-1 bg-gray-800 border-gray-600 text-white">
+                          <SelectValue placeholder="Select experience level" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-gray-800 border-gray-600">
+                          <SelectItem value="3-5">3-5 years</SelectItem>
+                          <SelectItem value="5-10">5-10 years</SelectItem>
+                          <SelectItem value="10+">10+ years</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label htmlFor="teachingExperience" className="text-white">
+                        Teaching/Training Experience
+                      </Label>
+                      <Select>
+                        <SelectTrigger className="mt-1 bg-gray-800 border-gray-600 text-white">
+                          <SelectValue placeholder="Select teaching experience" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-gray-800 border-gray-600">
+                          <SelectItem value="none">No formal teaching experience</SelectItem>
+                          <SelectItem value="some">Some training/mentoring experience</SelectItem>
+                          <SelectItem value="experienced">Experienced trainer/educator</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <div>
+                    <Label htmlFor="currentRole" className="text-white">
+                      Current Role/Position *
+                    </Label>
+                    <Input
+                      id="currentRole"
+                      placeholder="e.g., Senior Software Engineer, IoT Consultant"
+                      className="mt-1 bg-gray-800 border-gray-600 text-white"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="company" className="text-white">
+                      Current Company/Organization
+                    </Label>
+                    <Input
+                      id="company"
+                      placeholder="Company or organization name"
+                      className="mt-1 bg-gray-800 border-gray-600 text-white"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="availability" className="text-white">
+                      Availability for October 2025 Program *
+                    </Label>
+                    <Select>
+                      <SelectTrigger className="mt-1 bg-gray-800 border-gray-600 text-white">
+                        <SelectValue placeholder="Select your availability" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-gray-800 border-gray-600">
+                        <SelectItem value="full-time">Full-time (4 weeks)</SelectItem>
+                        <SelectItem value="part-time">Part-time (specific days/hours)</SelectItem>
+                        <SelectItem value="guest">Guest sessions only</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <Label htmlFor="trainerMotivation" className="text-white">
+                      Why do you want to be a trainer? *
+                    </Label>
+                    <Textarea
+                      id="trainerMotivation"
+                      placeholder="Tell us about your passion for teaching and what you hope to contribute..."
+                      className="mt-1 bg-gray-800 border-gray-600 text-white"
+                      rows={4}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="resume" className="text-white">
+                      Resume/CV Upload
+                    </Label>
+                    <Input
+                      id="resume"
+                      type="file"
+                      accept=".pdf,.doc,.docx"
+                      className="mt-1 bg-gray-800 border-gray-600 text-white file:bg-gray-700 file:text-white file:border-0"
+                    />
+                    <p className="text-sm text-gray-400 mt-1">Upload your resume (PDF, DOC, or DOCX format)</p>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Checkbox id="trainerTerms" className="border-gray-600" />
+                    <Label htmlFor="trainerTerms" className="text-sm text-white">
+                      I agree to the trainer terms and conditions and commit to the program requirements *
+                    </Label>
+                  </div>
+                  <Button className="w-full bg-white text-black hover:bg-gray-100 py-3">
+                    Submit Trainer Application
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* Registration Form */}
+        <section className="py-20 bg-white" id="register">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Register for 2025 Program</h2>
+              <p className="text-xl text-gray-600">Secure your spot in the next WiCon for Digital Education program</p>
+            </div>
+            <Card className="bg-white border-gray-200">
+              <CardContent className="p-8">
+                <form className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="firstName">First Name *</Label>
+                      <Input id="firstName" placeholder="Enter your first name" className="mt-1" />
+                    </div>
+                    <div>
+                      <Label htmlFor="lastName">Last Name *</Label>
+                      <Input id="lastName" placeholder="Enter your last name" className="mt-1" />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="email">Email Address *</Label>
+                      <Input id="email" type="email" placeholder="your.email@example.com" className="mt-1" />
+                    </div>
+                    <div>
+                      <Label htmlFor="phone">Phone Number *</Label>
+                      <Input id="phone" placeholder="+237 6XX XXX XXX" className="mt-1" />
+                    </div>
+                  </div>
+                  <div>
+                    <Label htmlFor="track">Preferred Training Track *</Label>
+                    <Select>
+                      <SelectTrigger className="mt-1">
+                        <SelectValue placeholder="Select your preferred track" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="software">Software Development Track</SelectItem>
+                        <SelectItem value="iot">IoT Solutions Track</SelectItem>
+                        <SelectItem value="wicon">WiCon Controller Track</SelectItem>
+                        <SelectItem value="comprehensive">Comprehensive Program (All Tracks)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="education">Education Level *</Label>
+                      <Select>
+                        <SelectTrigger className="mt-1">
+                          <SelectValue placeholder="Select education level" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="high-school">High School</SelectItem>
+                          <SelectItem value="diploma">Diploma/Certificate</SelectItem>
+                          <SelectItem value="bachelor">Bachelor's Degree</SelectItem>
+                          <SelectItem value="master">Master's Degree</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label htmlFor="experience">Technical Experience</Label>
+                      <Select>
+                        <SelectTrigger className="mt-1">
+                          <SelectValue placeholder="Select experience level" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="beginner">Beginner (0-1 years)</SelectItem>
+                          <SelectItem value="intermediate">Intermediate (2-3 years)</SelectItem>
+                          <SelectItem value="advanced">Advanced (4+ years)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <div>
+                    <Label htmlFor="motivation">Why do you want to join this program? *</Label>
+                    <Textarea
+                      id="motivation"
+                      placeholder="Tell us about your goals and motivation for joining the program..."
+                      className="mt-1"
+                      rows={4}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="employer">Current Employer/Institution (Optional)</Label>
+                    <Input id="employer" placeholder="Company or school name" className="mt-1" />
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Checkbox id="terms" />
+                    <Label htmlFor="terms" className="text-sm">
+                      I agree to the terms and conditions and understand that registration is subject to approval *
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Checkbox id="updates" />
+                    <Label htmlFor="updates" className="text-sm">
+                      I would like to receive updates about WiCon Systems training programs and events
+                    </Label>
+                  </div>
+                  <Button className="w-full bg-black text-white hover:bg-gray-800 py-3">
+                    Submit Registration Application
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* Contact Information */}
+        <section className="py-20 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-black mb-4">Questions About the Program?</h2>
+              <p className="text-xl text-gray-600">Get in touch with our training coordinators</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <Card className="bg-white border-gray-200 text-center">
+                <CardContent className="p-6">
+                  <Phone className="w-8 h-8 mx-auto mb-4 text-black" />
+                  <h3 className="font-bold text-black mb-2">Call Us</h3>
+                  <p className="text-gray-600">+237 670791815</p>
+                  <p className="text-sm text-gray-500 mt-1">Mon-Fri, 8AM-5PM</p>
+                </CardContent>
+              </Card>
+              <Card className="bg-white border-gray-200 text-center">
+                <CardContent className="p-6">
+                  <Mail className="w-8 h-8 mx-auto mb-4 text-black" />
+                  <h3 className="font-bold text-black mb-2">Email Us</h3>
+                  <p className="text-gray-600">training@wiconsystems.com</p>
+                  <p className="text-sm text-gray-500 mt-1">Response within 24 hours</p>
+                </CardContent>
+              </Card>
+              <Card className="bg-white border-gray-200 text-center">
+                <CardContent className="p-6">
+                  <MapPin className="w-8 h-8 mx-auto mb-4 text-black" />
+                  <h3 className="font-bold text-black mb-2">Visit Us</h3>
+                  <p className="text-gray-600">WiCon Systems HQ</p>
+                  <p className="text-sm text-gray-500 mt-1">Buea, Southwest Region</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  )
+}
