@@ -33,8 +33,8 @@ export default function TrainingPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <div className="flex items-center justify-center mb-6">
-                <GraduationCap className="w-12 h-12 mr-4" />
-                <h1 className="text-4xl md:text-5xl font-bold">WiCon for Digital Education</h1>
+                <GraduationCap className="w-15 h-15 mr-2" />
+                <h1 className="text-2xl md:text-4xl font-bold">WiCon SMART SOLUTION FOR DIGITAL EDUCATION</h1>
               </div>
               <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
                 Master the future of technology with our comprehensive training program covering software development,
@@ -70,7 +70,7 @@ export default function TrainingPage() {
               <div>
                 <h2 className="text-3xl font-bold text-black mb-6">Program Overview</h2>
                 <p className="text-lg text-gray-600 mb-6">
-                  WiCon for Digital Education is an intensive 4-week training program designed to equip participants
+                  WiCon SMART SOLUTION FOR DIGITAL EDUCATION is an intensive 4-week training program designed to equip participants
                   with cutting-edge skills in software development, IoT solutions, and our proprietary WiCon controller
                   technology.
                 </p>
@@ -210,11 +210,11 @@ export default function TrainingPage() {
           </div>
         </section>
 
-        {/* Trainer Registration */}
-        <section id="trainer-registration" className=" py-20 bg-black text-white">
+        {/* volunteer Registration */}
+        <section id="volunteer-registration" className=" py-20 bg-black text-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Join Our Training Team</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Join as a Volunteer</h2>
               <p className="text-xl text-gray-300">
                 Share your expertise and help shape the next generation of tech professionals
               </p>
@@ -222,8 +222,8 @@ export default function TrainingPage() {
             <Card className="bg-gray-900 border-gray-700">
               <CardContent className="p-8">
                 <div className="mb-8">
-                  <h3 className="text-2xl font-bold text-white mb-4">We're Looking for Expert Trainers</h3>
-                  <p className="text-gray-300 mb-6">
+                  {/* <h3 className="text-2xl font-bold text-white mb-4">We're Looking for Expert volunteers</h3> */}
+                  <p className="text-gray-300 mb-6 text-center">
                     Join our team of industry professionals and help deliver world-class training in software
                     development, IoT solutions, and WiCon controller technology.
                   </p>
@@ -249,21 +249,21 @@ export default function TrainingPage() {
                 <form className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <Label htmlFor="trainerFirstName" className="text-white">
+                      <Label htmlFor="volunteerFirstName" className="text-white">
                         First Name *
                       </Label>
                       <Input
-                        id="trainerFirstName"
+                        id="volunteerFirstName"
                         placeholder="Enter your first name"
                         className="mt-1 bg-gray-800 border-gray-600 text-white"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="trainerLastName" className="text-white">
+                      <Label htmlFor="volunteerLastName" className="text-white">
                         Last Name *
                       </Label>
                       <Input
-                        id="trainerLastName"
+                        id="volunteerLastName"
                         placeholder="Enter your last name"
                         className="mt-1 bg-gray-800 border-gray-600 text-white"
                       />
@@ -271,22 +271,22 @@ export default function TrainingPage() {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <Label htmlFor="trainerEmail" className="text-white">
+                      <Label htmlFor="volunteerEmail" className="text-white">
                         Email Address *
                       </Label>
                       <Input
-                        id="trainerEmail"
+                        id="volunteerEmail"
                         type="email"
                         placeholder="your.email@example.com"
                         className="mt-1 bg-gray-800 border-gray-600 text-white"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="trainerPhone" className="text-white">
+                      <Label htmlFor="volunteerPhone" className="text-white">
                         Phone Number *
                       </Label>
                       <Input
-                        id="trainerPhone"
+                        id="volunteerPhone"
                         placeholder="+237 6XX XXX XXX"
                         className="mt-1 bg-gray-800 border-gray-600 text-white"
                       />
@@ -304,13 +304,15 @@ export default function TrainingPage() {
                         <SelectItem value="software">Software Development</SelectItem>
                         <SelectItem value="iot">IoT Solutions & Hardware</SelectItem>
                         <SelectItem value="wicon">WiCon Controller Systems</SelectItem>
+                        <SelectItem value="designer">Designer</SelectItem>
+                        <SelectItem value="logistics">Logistics</SelectItem>
                         <SelectItem value="multiple">Multiple Areas</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <Label htmlFor="trainerExperience" className="text-white">
+                      <Label htmlFor="volunteerExperience" className="text-white">
                         Years of Experience *
                       </Label>
                       <Select>
@@ -335,7 +337,7 @@ export default function TrainingPage() {
                         <SelectContent className="bg-gray-800 border-gray-600">
                           <SelectItem value="none">No formal teaching experience</SelectItem>
                           <SelectItem value="some">Some training/mentoring experience</SelectItem>
-                          <SelectItem value="experienced">Experienced trainer/educator</SelectItem>
+                          <SelectItem value="experienced">Experienced volunteer/educator</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -376,11 +378,11 @@ export default function TrainingPage() {
                     </Select>
                   </div>
                   <div>
-                    <Label htmlFor="trainerMotivation" className="text-white">
-                      Why do you want to be a trainer? *
+                    <Label htmlFor="volunteerMotivation" className="text-white">
+                      Why do you want to be a volunteer? *
                     </Label>
                     <Textarea
-                      id="trainerMotivation"
+                      id="volunteerMotivation"
                       placeholder="Tell us about your passion for teaching and what you hope to contribute..."
                       className="mt-1 bg-gray-800 border-gray-600 text-white"
                       rows={4}
@@ -399,13 +401,13 @@ export default function TrainingPage() {
                     <p className="text-sm text-gray-400 mt-1">Upload your resume (PDF, DOC, or DOCX format)</p>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Checkbox id="trainerTerms" className="border-gray-600" />
-                    <Label htmlFor="trainerTerms" className="text-sm text-white">
-                      I agree to the trainer terms and conditions and commit to the program requirements *
+                    <Checkbox id="volunteerTerms" className="border-gray-600" />
+                    <Label htmlFor="volunteerTerms" className="text-sm text-white">
+                      I agree to the volunteer terms and conditions and commit to the program requirements *
                     </Label>
                   </div>
                   <Button className="w-full bg-white text-black hover:bg-gray-100 py-3">
-                    Submit Trainer Application
+                    Submit Volunteer Application
                   </Button>
                 </form>
               </CardContent>
@@ -418,7 +420,7 @@ export default function TrainingPage() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Register for 2025 Program</h2>
-              <p className="text-xl text-gray-600">Secure your spot in the next WiCon for Digital Education program</p>
+              <p className="text-xl text-gray-600">Secure your spot in the next WiCon SMART SOLUTION FOR DIGITAL EDUCATION program</p>
             </div>
             <Card className="bg-white border-gray-200">
               <CardContent className="p-8">

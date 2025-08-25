@@ -73,9 +73,9 @@ export function Footer() {
               <li>
                 <span className="text-gray-300">Wireless Controllers</span>
               </li>
-              <li>
+              {/* <li>
                 <span className="text-gray-300">Solar PV Systems</span>
-              </li>
+              </li> */}
               <li>
                 <span className="text-gray-300">Electrical Wiring</span>
               </li>

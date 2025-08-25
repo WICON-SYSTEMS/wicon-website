@@ -25,18 +25,18 @@ export default function ProductsPage() {
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-gray-50 to-white py-20">
+        <section className="bg-gradient-to-b from-gray-50 to-white py-10 md:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-black mb-6">Our Products & Solutions</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Comprehensive electrical solutions designed for Cameroon's unique needs. From wireless controllers to
-              solar systems, we provide cutting-edge technology with reliable support.
+              automated systems, we provide cutting-edge technology with reliable support.
             </p>
           </div>
         </section>
 
         {/* WiCon Wireless Controllers */}
-        <section className="py-20 bg-white">
+        <section className="pb-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>

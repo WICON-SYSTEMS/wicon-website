@@ -14,7 +14,7 @@ export default function ContactPage() {
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-gray-50 to-white py-20">
+        <section className="bg-gradient-to-b from-gray-50 to-white py-10 md:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-black mb-6">Contact WiCon Systems</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -25,7 +25,7 @@ export default function ContactPage() {
         </section>
 
         {/* Contact Form & Info */}
-        <section className="py-20 bg-white">
+        <section className="pb-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Contact Form */}
@@ -86,7 +86,7 @@ export default function ContactPage() {
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="wireless-controllers">WiCon Wireless Controllers</SelectItem>
-                            <SelectItem value="solar-pv">Solar PV Systems</SelectItem>
+                            <SelectItem value="software">Software Solutions</SelectItem>
                             <SelectItem value="electrical-wiring">Electrical Wiring</SelectItem>
                             <SelectItem value="cctv-security">CCTV Security Systems</SelectItem>
                             <SelectItem value="maintenance">Maintenance & Support</SelectItem>

@@ -30,7 +30,7 @@ export function Header() {
       name: "Join Us",
       dropdown: [
         { name: "Careers", href: "/careers", description: "Work With Us" },
-        { name: "Become a Trainer", href: "/training#trainer-registration", description: "Teach & Inspire" },
+        { name: "Become a volunteer", href: "/training#volunteer-registration", description: "Teach & Inspire" },
       ],
     },
     { name: "Contact", href: "/contact" },
@@ -47,7 +47,7 @@ export function Header() {
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
@@ -103,10 +103,10 @@ export function Header() {
 
           {/* Contact Info & CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <div className="flex items-center text-sm text-gray-600">
+            {/* <div className="flex items-center text-sm text-gray-600">
               <Phone className="w-4 h-4 mr-1" />
               <span>+237 670791815</span>
-            </div>
+            </div> */}
             <Button className="bg-black text-white hover:bg-gray-800">Get Quote</Button>
           </div>
 
@@ -152,10 +152,10 @@ export function Header() {
                 </div>
               ))}
               <div className="px-3 py-2 border-t border-gray-200 mt-2">
-                <div className="flex items-center text-sm text-gray-600 mb-2">
+                {/* <div className="flex items-center text-sm text-gray-600 mb-2">
                   <Phone className="w-4 h-4 mr-1" />
                   <span>+237 670791815</span>
-                </div>
+                </div> */}
                 <Button className="w-full bg-black text-white hover:bg-gray-800">Get Quote</Button>
               </div>
             </div>

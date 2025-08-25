@@ -56,10 +56,10 @@ export default function ServicesPage() {
                       <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
                       <span className="text-sm">WiCon Wireless Controller setup</span>
                     </div>
-                    <div className="flex items-center">
+                    {/* <div className="flex items-center">
                       <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
                       <span className="text-sm">Solar PV system installation</span>
-                    </div>
+                    </div> */}
                     <div className="flex items-center">
                       <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
                       <span className="text-sm">Complete electrical wiring</span>

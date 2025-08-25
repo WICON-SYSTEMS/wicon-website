@@ -114,7 +114,7 @@ export default function CareersPage() {
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Join Our Team</h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
               Shape the future of electrical systems in Cameroon. We're looking for passionate interns ready to learn
-              and contribute to innovative projects in wireless control, solar energy, and electrical infrastructure.
+              and contribute to innovative projects in wireless control, and electrical infrastructure.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -168,7 +168,7 @@ export default function CareersPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 text-center">
-                    Contribute to actual client projects including solar installations, CCTV systems, and wireless
+                    Contribute to actual client projects including software solutions, CCTV systems, and wireless
                     controller implementations.
                   </p>
                 </CardContent>
@@ -229,7 +229,6 @@ export default function CareersPage() {
                     <h4 className="font-semibold mb-2">What You'll Learn:</h4>
                     <ul className="text-sm text-gray-600 space-y-1">
                       <li>• Electrical system design and installation</li>
-                      <li>• Solar PV system configuration</li>
                       <li>• CCTV security system setup</li>
                       <li>• Wireless controller programming</li>
                       <li>• Safety protocols and compliance</li>
@@ -389,11 +388,11 @@ export default function CareersPage() {
                   <div className="space-y-6">
                     <div className="flex items-center justify-between border-b pb-2">
                       <h3 className="text-lg font-semibold">Academic Background</h3>
-                      <Button type="button" variant="outline" onClick={addAcademic} className="gap-2"><Plus className="w-4 h-4" /> Add</Button>
+                      <Button type="button" variant="outline" onClick={addAcademic} className="gap-2 cursor-pointer"><Plus className="w-4 h-4" /> Add</Button>
                     </div>
                     <div className="space-y-4">
                       {formData.academicEntries.map((row, idx) => (
-                        <div key={idx} className="grid md:grid-cols-4 gap-6">
+                        <div key={idx} className="grid md:grid-cols-2 gap-3 border rounded-md p-4">
                           <div className="space-y-2">
                             <Label>Institution</Label>
                             <Input placeholder="Institution" value={row.institution} onChange={(e) => updateAcademic(idx, "institution", e.target.value)} />
@@ -407,12 +406,12 @@ export default function CareersPage() {
                             <Input placeholder="Major" value={row.major} onChange={(e) => updateAcademic(idx, "major", e.target.value)} />
                           </div>
                           <div className="flex items-end gap-2">
-                            <div className="flex-1 space-y-2">
+                            <div className="flex-1 justify-between space-y-2">
                               <Label htmlFor={`graduation-${idx}`}>Graduation Date</Label>
-                              <Input id={`graduation-${idx}`} type="month" value={row.graduationDate} onChange={(e) => updateAcademic(idx, "graduationDate", e.target.value)} />
+                              <Input id={`graduation-${idx}`} className="cursor-pointer" type="month" value={row.graduationDate} onChange={(e) => updateAcademic(idx, "graduationDate", e.target.value)} />
                             </div>
                             {formData.academicEntries.length > 1 && (
-                              <Button type="button" variant="ghost" onClick={() => removeAcademic(idx)} aria-label="Remove academic row"><Trash2 className="w-4 h-4" /></Button>
+                              <Button type="button" className="cursor-pointer hover:text-red-700 hover:bg-red-100" variant="ghost" onClick={() => removeAcademic(idx)} aria-label="Remove academic row"><Trash2 className="w-4 h-4" /></Button>
                             )}
                           </div>
                         </div>
@@ -455,7 +454,7 @@ export default function CareersPage() {
                   <div className="space-y-6">
                     <div className="flex items-center justify-between border-b pb-2">
                       <h3 className="text-lg font-semibold">Professional Experience</h3>
-                      <Button type="button" variant="outline" onClick={addExperience} className="gap-2"><Plus className="w-4 h-4" /> Add</Button>
+                      <Button type="button" variant="outline" onClick={addExperience} className="gap-2 cursor-pointer"><Plus className="w-4 h-4" /> Add</Button>
                     </div>
                     <div className="space-y-4">
                       {formData.experienceEntries.map((row, idx) => (
@@ -465,10 +464,10 @@ export default function CareersPage() {
                             <Input placeholder="Job Title" value={row.title} onChange={(e) => updateExperience(idx, "title", e.target.value)} />
                           </div>
                           <Textarea placeholder="Responsibilities" value={row.responsibilities} onChange={(e) => updateExperience(idx, "responsibilities", e.target.value)} rows={3} />
-                          <div className="flex gap-2">
+                          <div className="flex  ">
                             <Input className="flex-1" placeholder="Duration (e.g., Jun 2023 - Sep 2023)" value={row.duration} onChange={(e) => updateExperience(idx, "duration", e.target.value)} />
                             {formData.experienceEntries.length > 1 && (
-                              <Button type="button" variant="ghost" onClick={() => removeExperience(idx)} aria-label="Remove experience row"><Trash2 className="w-4 h-4" /></Button>
+                              <Button type="button" className="cursor-pointer hover:text-red-700 hover:bg-red-100" variant="ghost" onClick={() => removeExperience(idx)} aria-label="Remove experience row"><Trash2 className="w-4 h-4" /></Button>
                             )}
                           </div>
                         </div>
@@ -512,7 +511,7 @@ export default function CareersPage() {
                   <div className="space-y-6">
                     <div className="flex items-center justify-between border-b pb-2">
                       <h3 className="text-lg font-semibold">References</h3>
-                      <Button type="button" variant="outline" onClick={addReference} className="gap-2"><Plus className="w-4 h-4" /> Add</Button>
+                      <Button type="button" variant="outline" onClick={addReference} className="gap-2 cursor-pointer"><Plus className="w-4 h-4" /> Add</Button>
                     </div>
                     <div className="space-y-4">
                       {formData.references.map((row, idx) => (
@@ -522,7 +521,7 @@ export default function CareersPage() {
                           <div className="flex gap-2">
                             <Input className="flex-1" placeholder="Contact Information" value={row.contact} onChange={(e) => updateReference(idx, "contact", e.target.value)} />
                             {formData.references.length > 1 && (
-                              <Button type="button" variant="ghost" onClick={() => removeReference(idx)} aria-label="Remove reference row"><Trash2 className="w-4 h-4" /></Button>
+                              <Button type="button" className="cursor-pointer hover:text-red-700 hover:bg-red-100" variant="ghost" onClick={() => removeReference(idx)} aria-label="Remove reference row"><Trash2 className="w-4 h-4" /></Button>
                             )}
                           </div>
                         </div>
@@ -535,6 +534,7 @@ export default function CareersPage() {
                     <div className="flex items-center space-x-2">
                       <Checkbox
                         id="terms"
+                        className="cursor-pointer"
                         checked={formData.agreeToTerms}
                         onCheckedChange={(checked) => handleInputChange("agreeToTerms", checked as boolean)}
                       />

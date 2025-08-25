@@ -25,12 +25,12 @@ export default function HomePage() {
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-gray-50 to-white py-20">
+        <section className="bg-gradient-to-b from-gray-50 to-white pt-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black leading-tight mb-6">
-                WiCon Limited: Pioneering Smart Home Technology Solutions
+                WiCon: <br /> Pioneering Smart Home Technology Solutions
                 </h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                   From wireless electrical control to custom software and IoT solutions. Reduce costs, improve
@@ -65,7 +65,7 @@ export default function HomePage() {
         
 
         {/* Value Proposition Section */}
-        <section className="py-20 bg-white">
+        <section className="py-5 md:py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Why Choose WiCon Systems?</h2>
@@ -168,7 +168,7 @@ export default function HomePage() {
                   </Button>
                 </CardContent>
               </Card>
-              <Card className="bg-white border-gray-200 hover:shadow-lg transition-shadow">
+              {/* <Card className="bg-white border-gray-200 hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
                   <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
                     <Sun className="w-6 h-6 text-white" />
@@ -182,7 +182,7 @@ export default function HomePage() {
                     Learn More
                   </Button>
                 </CardContent>
-              </Card>
+              </Card> */}
               <Card className="bg-white border-gray-200 hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
                   <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
@@ -216,14 +216,14 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* WiCon for Digital Education Banner */}
+        {/* WiCon SMART SOLUTION FOR DIGITAL EDUCATION Banner */}
         <section className="py-16 bg-black text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
                 <div className="flex items-center mb-4">
-                  <GraduationCap className="w-8 h-8 mr-3 text-white" />
-                  <h2 className="text-3xl font-bold">WiCon for Digital Education</h2>
+                  <GraduationCap className="w-15 h-15 mr-3 text-white" />
+                  <h2 className="text-2xl font-bold">WiCon SMART SOLUTION FOR DIGITAL EDUCATION</h2>
                 </div>
                 <p className="text-xl text-gray-300 mb-6">
                   Join our annual training program and master software development, IoT solutions, and WiCon controller
@@ -398,7 +398,7 @@ export default function HomePage() {
                     ))}
                   </div>
                   <p className="text-gray-600 mb-6 italic">
-                    "The solar PV system installation was professional and efficient. Our electricity bills have dropped
+                    "The automated system installation was professional and efficient. Our electricity bills have dropped
                     significantly, and the system works perfectly even during rainy season."
                   </p>
                   <div>
