@@ -120,8 +120,8 @@ export default function RegistrationDetailPage() {
       const name = `${item.first_name || ''} ${item.last_name || ''}`.trim() || "there"
       const subject = type === "accept" ? "Your training registration" : "Your training registration"
       const body = type === "accept"
-        ? `<p>Hi ${name},</p><p>We are pleased to inform you that your training registration has been accepted.</p>${message ? `<p>${message}</p>` : ""}`
-        : `<p>Hi ${name},</p><p>Thank you for registering. After review, we won't be moving forward at this time.</p>${message ? `<p>${message}</p>` : ""}`
+        ? `<p>Hi ${name} Congratulations,</p><p>We are pleased to inform you that your training registration has been accepted.</p>${message ? `<p>${message}</p>` : ""}`
+        : `<p>Hi ${name},</p><p>Thank you for registering. After review, we're sorry to inform you that your registration won't be moving forward at this time.</p>${message ? `<p>${message}</p>` : ""}`
       
       const emailRes = await fetch('/api/admin/email', {
         method: 'POST',
