@@ -28,6 +28,7 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccessModal, setShowSuccessModal] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const [mapLoading, setMapLoading] = useState(true)
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
@@ -326,7 +327,10 @@ export default function ContactPage() {
                           <p className="text-gray-600 mb-4">
                             Get instant support via WhatsApp. Popular and convenient for quick questions and updates.
                           </p>
-                          <Button className="bg-green-600 text-white hover:bg-green-700">
+                          <Button 
+                            className="bg-green-600 text-white hover:bg-green-700"
+                            onClick={() => window.open('https://wa.me/237670791815', '_blank')}
+                          >
                             <MessageCircle className="mr-2 w-4 h-4" />
                             Chat on WhatsApp
                           </Button>
@@ -347,12 +351,27 @@ export default function ContactPage() {
               <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Find Us</h2>
               <p className="text-xl text-gray-600">Located in the heart of Buea, Southwest Region</p>
             </div>
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <img
-                src="/placeholder.svg?height=400&width=800&text=Interactive+Map+of+Buea+Location"
-                alt="WiCon Systems Location Map"
-                className="w-full h-96 object-cover"
-              />
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden relative">
+              {mapLoading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-50 z-10">
+                  <div className="flex items-center space-x-3">
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-600"></div>
+                    <span className="text-gray-600 font-medium">Loading Map...</span>
+                  </div>
+                </div>
+              )}
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31708.794234567!2d9.292!3d4.1553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10610d0d3b3b3b3b%3A0x1234567890abcdef!2sBuea%2C%20Cameroon!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+                width="100%"
+                height="400"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="WiCon Systems Location in Buea, Southwest Region"
+                className="w-full h-96"
+                onLoad={() => setMapLoading(false)}
+              ></iframe>
             </div>
           </div>
         </section>
@@ -375,7 +394,11 @@ export default function ContactPage() {
                     </div>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Button size="lg" className="bg-red-600 text-white hover:bg-red-700 px-8 py-3">
+                    <Button 
+                      size="lg" 
+                      className="bg-red-600 text-white hover:bg-red-700 px-8 py-3"
+                      onClick={() => window.location.href = 'tel:+237670791815'}
+                    >
                       <Phone className="mr-2 w-5 h-5" />
                       Emergency: +237 670791815
                     </Button>
