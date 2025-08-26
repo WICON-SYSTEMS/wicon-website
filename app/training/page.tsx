@@ -23,9 +23,11 @@ import {
   Phone,
   Mail,
   Download,
+  Loader2,
 } from "lucide-react"
 
 import { useState } from "react"
+import { toast } from "sonner"
 
 export default function TrainingPage() {
   // Volunteer form state
@@ -45,11 +47,36 @@ export default function TrainingPage() {
     resume: null as File | null,
   })
   const [submittingVolunteer, setSubmittingVolunteer] = useState(false)
+  const [showVolunteerErrors, setShowVolunteerErrors] = useState(false)
+
+  const volunteerErrors = {
+    firstName: showVolunteerErrors && !volunteer.firstName.trim(),
+    lastName: showVolunteerErrors && !volunteer.lastName.trim(),
+    email: showVolunteerErrors && !volunteer.email.trim(),
+    phone: showVolunteerErrors && !volunteer.phone.trim(),
+    motivation: showVolunteerErrors && !volunteer.motivation.trim(),
+    agree: showVolunteerErrors && !volunteer.agree,
+  }
 
   const handleVolunteerSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
       setSubmittingVolunteer(true)
+      setShowVolunteerErrors(false)
+
+      // simple required validation
+      if (
+        !volunteer.firstName.trim() ||
+        !volunteer.lastName.trim() ||
+        !volunteer.email.trim() ||
+        !volunteer.phone.trim() ||
+        !volunteer.motivation.trim() ||
+        !volunteer.agree
+      ) {
+        setShowVolunteerErrors(true)
+        toast.error("Please fill all required fields and accept the terms.")
+        return
+      }
       const fd = new FormData()
       Object.entries({
         firstName: volunteer.firstName,
@@ -70,7 +97,7 @@ export default function TrainingPage() {
       const res = await fetch("/api/training/volunteer", { method: "POST", body: fd })
       const data = await res.json()
       if (!res.ok || !data.ok) throw new Error(data?.error || "Submission failed")
-      alert("Volunteer application submitted!")
+      toast.success("Volunteer application submitted! Confirmation email sent.")
       setVolunteer({
         firstName: "",
         lastName: "",
@@ -87,7 +114,7 @@ export default function TrainingPage() {
         resume: null,
       })
     } catch (err: any) {
-      alert(err?.message || "Something went wrong")
+      toast.error(err?.message || "Something went wrong")
     } finally {
       setSubmittingVolunteer(false)
     }
@@ -108,11 +135,40 @@ export default function TrainingPage() {
     updates: false,
   })
   const [submittingRegister, setSubmittingRegister] = useState(false)
+  const [showRegisterErrors, setShowRegisterErrors] = useState(false)
+
+  const registerErrors = {
+    firstName: showRegisterErrors && !register.firstName.trim(),
+    lastName: showRegisterErrors && !register.lastName.trim(),
+    email: showRegisterErrors && !register.email.trim(),
+    phone: showRegisterErrors && !register.phone.trim(),
+    track: showRegisterErrors && !register.track.trim(),
+    education: showRegisterErrors && !register.education.trim(),
+    motivation: showRegisterErrors && !register.motivation.trim(),
+    terms: showRegisterErrors && !register.terms,
+  }
 
   const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
       setSubmittingRegister(true)
+      setShowRegisterErrors(false)
+
+      // simple required validation
+      if (
+        !register.firstName.trim() ||
+        !register.lastName.trim() ||
+        !register.email.trim() ||
+        !register.phone.trim() ||
+        !register.track.trim() ||
+        !register.education.trim() ||
+        !register.motivation.trim() ||
+        !register.terms
+      ) {
+        setShowRegisterErrors(true)
+        toast.error("Please fill all required fields and accept the terms.")
+        return
+      }
       const fd = new FormData()
       Object.entries({
         firstName: register.firstName,
@@ -131,7 +187,7 @@ export default function TrainingPage() {
       const res = await fetch("/api/training/register", { method: "POST", body: fd })
       const data = await res.json()
       if (!res.ok || !data.ok) throw new Error(data?.error || "Submission failed")
-      alert("Registration submitted!")
+      toast.success("Registration submitted! Confirmation email sent.")
       setRegister({
         firstName: "",
         lastName: "",
@@ -146,7 +202,7 @@ export default function TrainingPage() {
         updates: false,
       })
     } catch (err: any) {
-      alert(err?.message || "Something went wrong")
+      toast.error(err?.message || "Something went wrong")
     } finally {
       setSubmittingRegister(false)
     }
@@ -373,7 +429,7 @@ export default function TrainingPage() {
                   </div>
                 </div>
 
-                <form className="space-y-6" onSubmit={handleVolunteerSubmit}>
+                <form className="space-y-6" onSubmit={handleVolunteerSubmit} aria-busy={submittingVolunteer}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <Label htmlFor="volunteerFirstName" className="text-white">
@@ -385,7 +441,9 @@ export default function TrainingPage() {
                         value={volunteer.firstName}
                         onChange={(e) => setVolunteer((p) => ({ ...p, firstName: e.target.value }))}
                         className="mt-1 bg-gray-800 border-gray-600 text-white"
+                        aria-invalid={volunteerErrors.firstName || undefined}
                       />
+                      {volunteerErrors.firstName && <p className="text-sm text-red-400 mt-1">First name is required</p>}
                     </div>
                     <div>
                       <Label htmlFor="volunteerLastName" className="text-white">
@@ -397,7 +455,9 @@ export default function TrainingPage() {
                         value={volunteer.lastName}
                         onChange={(e) => setVolunteer((p) => ({ ...p, lastName: e.target.value }))}
                         className="mt-1 bg-gray-800 border-gray-600 text-white"
+                        aria-invalid={volunteerErrors.lastName || undefined}
                       />
+                      {volunteerErrors.lastName && <p className="text-sm text-red-400 mt-1">Last name is required</p>}
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -412,7 +472,9 @@ export default function TrainingPage() {
                         value={volunteer.email}
                         onChange={(e) => setVolunteer((p) => ({ ...p, email: e.target.value }))}
                         className="mt-1 bg-gray-800 border-gray-600 text-white"
+                        aria-invalid={volunteerErrors.email || undefined}
                       />
+                      {volunteerErrors.email && <p className="text-sm text-red-400 mt-1">Email is required</p>}
                     </div>
                     <div>
                       <Label htmlFor="volunteerPhone" className="text-white">
@@ -424,7 +486,9 @@ export default function TrainingPage() {
                         value={volunteer.phone}
                         onChange={(e) => setVolunteer((p) => ({ ...p, phone: e.target.value }))}
                         className="mt-1 bg-gray-800 border-gray-600 text-white"
+                        aria-invalid={volunteerErrors.phone || undefined}
                       />
+                      {volunteerErrors.phone && <p className="text-sm text-red-400 mt-1">Phone is required</p>}
                     </div>
                   </div>
                   <div>
@@ -487,6 +551,7 @@ export default function TrainingPage() {
                       value={volunteer.currentRole}
                       onChange={(e) => setVolunteer((p) => ({ ...p, currentRole: e.target.value }))}
                       className="mt-1 bg-gray-800 border-gray-600 text-white"
+                      aria-invalid={volunteerErrors.motivation || undefined}
                     />
                   </div>
                   <div>
@@ -527,7 +592,9 @@ export default function TrainingPage() {
                       onChange={(e) => setVolunteer((p) => ({ ...p, motivation: e.target.value }))}
                       className="mt-1 bg-gray-800 border-gray-600 text-white"
                       rows={4}
+                      aria-invalid={volunteerErrors.motivation || undefined}
                     />
+                    {volunteerErrors.motivation && <p className="text-sm text-red-400 mt-1">Motivation is required</p>}
                   </div>
                   <div>
                     <Label htmlFor="resume" className="text-white">
@@ -548,7 +615,9 @@ export default function TrainingPage() {
                       I agree to the volunteer terms and conditions and commit to the program requirements *
                     </Label>
                   </div>
-                  <Button className="w-full bg-white text-black hover:bg-gray-100 py-3" type="submit" disabled={submittingVolunteer}>
+                  {volunteerErrors.agree && <p className="text-sm text-red-400">You must accept the terms</p>}
+                  <Button className="w-full bg-white text-black hover:bg-gray-100 py-3" type="submit" disabled={submittingVolunteer} aria-busy={submittingVolunteer}>
+                    {submittingVolunteer && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                     {submittingVolunteer ? 'Submitting...' : 'Submit Volunteer Application'}
                   </Button>
                 </form>
@@ -566,25 +635,29 @@ export default function TrainingPage() {
             </div>
             <Card className="bg-white border-gray-200">
               <CardContent className="p-8">
-                <form className="space-y-6" onSubmit={handleRegisterSubmit}>
+                <form className="space-y-6" onSubmit={handleRegisterSubmit} aria-busy={submittingRegister}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <Label htmlFor="firstName">First Name *</Label>
-                      <Input id="firstName" placeholder="Enter your first name" className="mt-1" value={register.firstName} onChange={(e) => setRegister((p) => ({ ...p, firstName: e.target.value }))} />
+                      <Input id="firstName" placeholder="Enter your first name" className="mt-1" value={register.firstName} onChange={(e) => setRegister((p) => ({ ...p, firstName: e.target.value }))} aria-invalid={registerErrors.firstName || undefined} />
+                      {registerErrors.firstName && <p className="text-sm text-red-600 mt-1">First name is required</p>}
                     </div>
                     <div>
                       <Label htmlFor="lastName">Last Name *</Label>
-                      <Input id="lastName" placeholder="Enter your last name" className="mt-1" value={register.lastName} onChange={(e) => setRegister((p) => ({ ...p, lastName: e.target.value }))} />
+                      <Input id="lastName" placeholder="Enter your last name" className="mt-1" value={register.lastName} onChange={(e) => setRegister((p) => ({ ...p, lastName: e.target.value }))} aria-invalid={registerErrors.lastName || undefined} />
+                      {registerErrors.lastName && <p className="text-sm text-red-600 mt-1">Last name is required</p>}
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <Label htmlFor="email">Email Address *</Label>
-                      <Input id="email" type="email" placeholder="your.email@example.com" className="mt-1" value={register.email} onChange={(e) => setRegister((p) => ({ ...p, email: e.target.value }))} />
+                      <Input id="email" type="email" placeholder="your.email@example.com" className="mt-1" value={register.email} onChange={(e) => setRegister((p) => ({ ...p, email: e.target.value }))} aria-invalid={registerErrors.email || undefined} />
+                      {registerErrors.email && <p className="text-sm text-red-600 mt-1">Email is required</p>}
                     </div>
                     <div>
                       <Label htmlFor="phone">Phone Number *</Label>
-                      <Input id="phone" placeholder="+237 6XX XXX XXX" className="mt-1" value={register.phone} onChange={(e) => setRegister((p) => ({ ...p, phone: e.target.value }))} />
+                      <Input id="phone" placeholder="+237 6XX XXX XXX" className="mt-1" value={register.phone} onChange={(e) => setRegister((p) => ({ ...p, phone: e.target.value }))} aria-invalid={registerErrors.phone || undefined} />
+                      {registerErrors.phone && <p className="text-sm text-red-600 mt-1">Phone is required</p>}
                     </div>
                   </div>
                   <div>
@@ -605,7 +678,7 @@ export default function TrainingPage() {
                     <div>
                       <Label htmlFor="education">Education Level *</Label>
                       <Select value={register.education} onValueChange={(v) => setRegister((p) => ({ ...p, education: v }))}>
-                        <SelectTrigger className="mt-1">
+                        <SelectTrigger className="mt-1" aria-invalid={registerErrors.education || undefined}>
                           <SelectValue placeholder="Select education level" />
                         </SelectTrigger>
                         <SelectContent>
@@ -616,6 +689,7 @@ export default function TrainingPage() {
                           <SelectItem value="other">Other</SelectItem>
                         </SelectContent>
                       </Select>
+                      {registerErrors.education && <p className="text-sm text-red-600 mt-1">Education level is required</p>}
                     </div>
                     <div>
                       <Label htmlFor="experience">Technical Experience</Label>
@@ -640,7 +714,9 @@ export default function TrainingPage() {
                       value={register.motivation}
                       onChange={(e) => setRegister((p) => ({ ...p, motivation: e.target.value }))}
                       rows={4}
+                      aria-invalid={registerErrors.motivation || undefined}
                     />
+                    {registerErrors.motivation && <p className="text-sm text-red-600 mt-1">Motivation is required</p>}
                   </div>
                   <div>
                     <Label htmlFor="employer">Current Employer/Institution (Optional)</Label>
@@ -652,13 +728,15 @@ export default function TrainingPage() {
                       I agree to the terms and conditions and understand that registration is subject to approval *
                     </Label>
                   </div>
+                  {registerErrors.terms && <p className="text-sm text-red-600">You must accept the terms</p>}
                   <div className="flex items-center space-x-2">
                     <Checkbox id="updates" checked={register.updates} onCheckedChange={(c) => setRegister((p) => ({ ...p, updates: Boolean(c) }))} />
                     <Label htmlFor="updates" className="text-sm">
                       I would like to receive updates about WiCon Systems training programs and events
                     </Label>
                   </div>
-                  <Button className="w-full bg-black text-white hover:bg-gray-800 py-3" type="submit" disabled={submittingRegister}>
+                  <Button className="w-full bg-black text-white hover:bg-gray-800 py-3" type="submit" disabled={submittingRegister} aria-busy={submittingRegister}>
+                    {submittingRegister && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                     {submittingRegister ? 'Submitting...' : 'Submit Registration Application'}
                   </Button>
                 </form>

@@ -12,7 +12,8 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Users, GraduationCap, Briefcase, Clock, MapPin, Mail, Phone, Plus, Trash2 } from "lucide-react"
+import { Users, GraduationCap, Briefcase, Clock, MapPin, Mail, Phone, Plus, Trash2, Loader2 } from "lucide-react"
+import { toast } from "sonner"
 
 export default function CareersPage() {
   const [formData, setFormData] = useState({
@@ -52,10 +53,29 @@ export default function CareersPage() {
   })
 
   const [submitting, setSubmitting] = useState(false)
+  const [errors, setErrors] = useState<{ [k: string]: boolean }>({})
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
+      // Validate required fields before submitting
+      const nextErrors: { [k: string]: boolean } = {
+        fullName: !formData.fullName.trim(),
+        address: !formData.address.trim(),
+        email: !formData.email.trim(),
+        phone: !formData.phone.trim(),
+        dob: !formData.dob,
+        sex: !String(formData.sex),
+        position: !formData.position.trim(),
+        availability: !String(formData.availability),
+        cvFile: !formData.cvFile,
+        agreeToTerms: !formData.agreeToTerms,
+      }
+      setErrors(nextErrors)
+      if (Object.values(nextErrors).some(Boolean)) {
+        toast.error('Please fix the highlighted fields')
+        return
+      }
       setSubmitting(true)
       const fd = new FormData()
       // primitive fields
@@ -92,7 +112,7 @@ export default function CareersPage() {
         throw new Error(data?.error || 'Submission failed')
       }
 
-      alert('Application submitted successfully!')
+      toast.success('Application submitted successfully! A confirmation email has been sent.')
       // optional: reset some fields (keep file previews?)
       setFormData((prev) => ({
         ...prev,
@@ -118,7 +138,7 @@ export default function CareersPage() {
         agreeToTerms: false,
       }))
     } catch (err: any) {
-      alert(err?.message || 'Something went wrong')
+      toast.error(err?.message || 'Something went wrong')
     } finally {
       setSubmitting(false)
     }
@@ -419,7 +439,7 @@ export default function CareersPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-10">
+                <form onSubmit={handleSubmit} className="space-y-10" aria-busy={submitting}>
                   {/* Applicant Information */}
                   <div className="space-y-6">
                     <h3 className="text-lg font-semibold border-b pb-2">Applicant Information</h3>
@@ -428,28 +448,33 @@ export default function CareersPage() {
                       <div className="md:col-span-2 grid md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                           <Label htmlFor="fullName">Full Name *</Label>
-                          <Input id="fullName" value={formData.fullName} onChange={(e) => handleInputChange("fullName", e.target.value)} placeholder="Enter your full name" required />
+                          <Input id="fullName" value={formData.fullName} onChange={(e) => handleInputChange("fullName", e.target.value)} placeholder="Enter your full name" aria-invalid={errors.fullName || undefined} />
+                          {errors.fullName && <p className="text-sm text-red-600">Full name is required</p>}
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="address">Address *</Label>
-                          <Input id="address" value={formData.address} onChange={(e) => handleInputChange("address", e.target.value)} placeholder="Street, City, Region" required />
+                          <Input id="address" value={formData.address} onChange={(e) => handleInputChange("address", e.target.value)} placeholder="Street, City, Region" aria-invalid={errors.address || undefined} />
+                          {errors.address && <p className="text-sm text-red-600">Address is required</p>}
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="email">Email Address *</Label>
-                          <Input id="email" type="email" value={formData.email} onChange={(e) => handleInputChange("email", e.target.value)} placeholder="your.email@example.com" required />
+                          <Input id="email" type="email" value={formData.email} onChange={(e) => handleInputChange("email", e.target.value)} placeholder="your.email@example.com" aria-invalid={errors.email || undefined} />
+                          {errors.email && <p className="text-sm text-red-600">Email is required</p>}
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="phone">Phone Number *</Label>
-                          <Input id="phone" value={formData.phone} onChange={(e) => handleInputChange("phone", e.target.value)} placeholder="+237 XXX XXX XXX" required />
+                          <Input id="phone" value={formData.phone} onChange={(e) => handleInputChange("phone", e.target.value)} placeholder="+237 XXX XXX XXX" aria-invalid={errors.phone || undefined} />
+                          {errors.phone && <p className="text-sm text-red-600">Phone is required</p>}
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="dob">Date of Birth *</Label>
-                          <Input id="dob" type="date" value={formData.dob} onChange={(e) => handleInputChange("dob", e.target.value)} required />
+                          <Input id="dob" type="date" value={formData.dob} onChange={(e) => handleInputChange("dob", e.target.value)} aria-invalid={errors.dob || undefined} />
+                          {errors.dob && <p className="text-sm text-red-600">Date of birth is required</p>}
                         </div>
                         <div className="space-y-2">
                           <Label>Sex *</Label>
-                          <Select onValueChange={(value) => handleInputChange("sex", value)}>
-                            <SelectTrigger>
+                          <Select value={String(formData.sex)} onValueChange={(value) => handleInputChange("sex", value)}>
+                            <SelectTrigger aria-invalid={errors.sex || undefined}>
                               <SelectValue placeholder="Select" />
                             </SelectTrigger>
                             <SelectContent>
@@ -457,6 +482,7 @@ export default function CareersPage() {
                               <SelectItem value="female">Female</SelectItem>
                             </SelectContent>
                           </Select>
+                          {errors.sex && <p className="text-sm text-red-600">Please select your sex</p>}
                         </div>
                       </div>
 
@@ -520,12 +546,13 @@ export default function CareersPage() {
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="position">Position Applied For *</Label>
-                        <Input id="position" value={formData.position} onChange={(e) => handleInputChange("position", e.target.value)} placeholder="e.g., Electrical Intern" required />
+                        <Input id="position" value={formData.position} onChange={(e) => handleInputChange("position", e.target.value)} placeholder="e.g., Electrical Intern" aria-invalid={errors.position || undefined} />
+                        {errors.position && <p className="text-sm text-red-600">Position is required</p>}
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="availability">Availability *</Label>
-                        <Select onValueChange={(v) => handleInputChange("availability", v)}>
-                          <SelectTrigger>
+                        <Select value={String(formData.availability)} onValueChange={(v) => handleInputChange("availability", v)}>
+                          <SelectTrigger aria-invalid={errors.availability || undefined}>
                             <SelectValue placeholder="Select availability" />
                           </SelectTrigger>
                           <SelectContent>
@@ -533,6 +560,7 @@ export default function CareersPage() {
                             <SelectItem value="part-time">Part-time</SelectItem>
                           </SelectContent>
                         </Select>
+                        {errors.availability && <p className="text-sm text-red-600">Availability is required</p>}
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="startDate">Preferred Start Date</Label>
@@ -594,7 +622,8 @@ export default function CareersPage() {
                     <h3 className="text-lg font-semibold border-b pb-2">Attachments</h3>
                     <div className="space-y-2">
                       <Label htmlFor="cv">Upload CV (PDF/DOC/DOCX) *</Label>
-                      <Input className="space-y-2 cursor-pointer" id="cv" type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} required />
+                      <Input className="space-y-2 cursor-pointer" id="cv" type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} aria-invalid={errors.cvFile || undefined} />
+                      {errors.cvFile && <p className="text-sm text-red-600">CV file is required</p>}
                       <p className="text-sm text-gray-500">Max 5MB.</p>
                       {formData.cvFile && (
                         <p className="text-sm text-gray-600">Selected: {formData.cvFile.name}</p>
@@ -638,12 +667,15 @@ export default function CareersPage() {
                         internship application purposes. *
                       </Label>
                     </div>
+                    {errors.agreeToTerms && <p className="text-sm text-red-600">You must accept the terms</p>}
 
                     <Button
                       type="submit"
                       className="w-full bg-black text-white hover:bg-gray-800 cursor-pointer"
                       disabled={!formData.agreeToTerms || submitting}
+                      aria-busy={submitting}
                     >
+                      {submitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                       {submitting ? 'Submitting...' : 'Submit Application'}
                     </Button>
                   </div>

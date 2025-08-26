@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabaseServer } from '@/lib/supabase/server'
+import { sendMail, buildTrainingRegistrationEmail } from '@/lib/email'
 
 export async function POST(req: Request) {
   try {
@@ -34,10 +35,26 @@ export async function POST(req: Request) {
       employer: employer || null,
       agreed_terms: terms,
       wants_updates: updates,
-    }).select('*').single()
+    }).select('id, first_name, email').single()
 
     if (error) {
       return NextResponse.json({ ok: false, error: error.message }, { status: 500 })
+    }
+
+    // send confirmation email (fire and forget)
+    try {
+      const { subject, html } = buildTrainingRegistrationEmail({
+        firstName,
+        lastName,
+        email,
+        phone,
+        track,
+        education,
+        experience,
+      })
+      await sendMail({ to: email, subject, html })
+    } catch (e) {
+      // ignore email errors
     }
 
     return NextResponse.json({ ok: true, id: data.id })

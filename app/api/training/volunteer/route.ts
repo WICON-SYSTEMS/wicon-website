@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabaseServer } from '@/lib/supabase/server'
+import { sendMail, buildTrainingVolunteerEmail } from '@/lib/email'
 
 const RESUME_BUCKET = 'training-resumes'
 
@@ -72,9 +73,26 @@ export async function POST(req: Request) {
       resume_bucket: RESUME_BUCKET,
       resume_path,
       agreed_terms: agree,
-    }).select('*').single()
+    }).select('id, first_name, email').single()
 
-    if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 })
+    if (error) {
+      return NextResponse.json({ ok: false, error: error.message }, { status: 500 })
+    }
+    // send confirmation email (fire and forget)
+    try {
+      const { subject, html } = buildTrainingVolunteerEmail({
+        firstName,
+        lastName,
+        email,
+        phone,
+        expertise,
+        years,
+        availability,
+      })
+      await sendMail({ to: email, subject, html })
+    } catch (e) {
+      // ignore email errors
+    }
 
     return NextResponse.json({ ok: true, id: data.id })
   } catch (e: any) {

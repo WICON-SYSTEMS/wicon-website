@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabaseServer } from '@/lib/supabase/server'
+import { sendMail, buildInternshipApplicationEmail } from '@/lib/email'
 
 // Buckets
 const CV_BUCKET = 'applications-cv'
@@ -122,6 +123,22 @@ export async function POST(req: Request) {
 
     if (error) {
       return NextResponse.json({ ok: false, error: error.message }, { status: 500 })
+    }
+
+    // send confirmation email (fire and forget)
+    try {
+      const { subject, html } = buildInternshipApplicationEmail({
+        fullName,
+        email,
+        phone,
+        position,
+        availability,
+        startDate: startDate || null,
+        endDate: endDate || null,
+      })
+      await sendMail({ to: email, subject, html })
+    } catch (e) {
+      // do not fail request due to email errors
     }
 
     return NextResponse.json({ ok: true, id: data.id })
