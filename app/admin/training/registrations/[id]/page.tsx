@@ -167,7 +167,7 @@ export default function RegistrationDetailPage() {
             <img src={BRAND_LOGO} alt="Logo" className="h-8 w-8 object-contain" />
             <span className="font-semibold">{BRAND_NAME} • Training Registration</span>
           </div>
-          <button className="text-sm underline" onClick={() => router.push('/admin')}>Back to Admin</button>
+          <button className="text-sm underline cursor-pointer" onClick={() => router.push('/admin')}>Back to Admin</button>
         </div>
       </header>
       <main className="mx-auto max-w-6xl px-4 py-6">

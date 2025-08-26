@@ -70,6 +70,7 @@ export default function AdminPage() {
   const [saved, setSaved] = useState(false)
   const [activeTab, setActiveTab] = useState<"internships" | "registrations" | "volunteers">("internships")
   const [q, setQ] = useState("")
+  const [dateFilter, setDateFilter] = useState<"all" | "today" | "yesterday" | "week" | "month">("all")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [authError, setAuthError] = useState<string | null>(null)
@@ -217,6 +218,33 @@ export default function AdminPage() {
     return items.slice(start, start + pageSize)
   }
 
+  function filterByDate<T extends { created_at?: string }>(items: T[], filter: string): T[] {
+    if (filter === "all") return items
+    
+    const now = new Date()
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+    const yesterday = new Date(today.getTime() - 24 * 60 * 60 * 1000)
+    const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000)
+    const monthAgo = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000)
+    
+    return items.filter(item => {
+      if (!item.created_at) return false // Skip items without created_at
+      const itemDate = new Date(item.created_at)
+      switch (filter) {
+        case "today":
+          return itemDate >= today
+        case "yesterday":
+          return itemDate >= yesterday && itemDate < today
+        case "week":
+          return itemDate >= weekAgo
+        case "month":
+          return itemDate >= monthAgo
+        default:
+          return true
+      }
+    })
+  }
+
   const tabButtons = (
     <div className="flex gap-2 mb-4">
       {(["internships","registrations","volunteers"] as const).map(t => (
@@ -225,6 +253,30 @@ export default function AdminPage() {
           onClick={() => setActiveTab(t)}
           className={`px-3 py-2 rounded border cursor-pointer hover:bg-slate-200 ${activeTab===t?"bg-black text-white border-black":"bg-white text-black border-gray-300"}`}
         >{t}</button>
+      ))}
+    </div>
+  )
+
+  const dateFilterButtons = (
+    <div className="flex gap-2 mb-4">
+      {([
+        { key: "all", label: "All Time" },
+        { key: "today", label: "Today" },
+        { key: "yesterday", label: "Yesterday" },
+        { key: "week", label: "Last Week" },
+        { key: "month", label: "Last Month" }
+      ] as const).map(({ key, label }) => (
+        <button
+          key={key}
+          onClick={() => setDateFilter(key)}
+          className={`px-3 py-1.5 rounded text-sm border cursor-pointer ${
+            dateFilter === key
+              ? "bg-blue-600 text-white border-blue-600"
+              : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+          }`}
+        >
+          {label}
+        </button>
       ))}
     </div>
   )
@@ -270,66 +322,91 @@ export default function AdminPage() {
           <div className="text-sm text-gray-500" aria-live="polite">{loading?"Loading...":""}</div>
         </div>
       {tabButtons}
+      {dateFilterButtons}
       {searchBar}
       {error && (<div className="text-red-600 mb-4">{error}</div>)}
 
-      {activeTab === "internships" && (
-        <Table
-          headers={["Name","Email","Phone","Position","Status","Actions"]}
-          rows={paginate(internships, pageIntern).map(i=>[
-            i.full_name,
-            i.email,
-            i.phone,
-            i.position,
-            <StatusBadge key={`status-${i.id}`} status={i.status || 'pending'} />,
-            <div key={i.id} className="flex flex-wrap gap-3">
-              <Link className="underline" href={`/admin/internship/${i.id}`}>View</Link>
+      {activeTab === "internships" && (() => {
+        const filtered = filterByDate(internships, dateFilter)
+        return (
+          <>
+            <Table
+              headers={["Name","Email","Phone","Position","Status","Actions"]}
+              rows={paginate(filtered, pageIntern).map(i=>[
+                i.full_name,
+                i.email,
+                i.phone,
+                i.position,
+                <StatusBadge key={`status-${i.id}`} status={i.status || 'pending'} />,
+                <div key={i.id} className="flex flex-wrap gap-3">
+                  <Link className="underline" href={`/admin/internship/${i.id}`}>View</Link>
+                </div>
+              ])}
+            />
+            {filtered.length > pageSize && (
+              <Pagination total={filtered.length} page={pageIntern} pageSize={pageSize} onPageChange={setPageIntern} />
+            )}
+            <div className="mt-2 text-sm text-gray-500">
+              Showing {filtered.length} of {internships.length} internship applications
             </div>
-          ])}
-        />
-      )}
-      {activeTab === "internships" && internships.length > pageSize && (
-        <Pagination total={internships.length} page={pageIntern} pageSize={pageSize} onPageChange={setPageIntern} />
-      )}
+          </>
+        )
+      })()}
 
-      {activeTab === "registrations" && (
-        <Table
-          headers={["Name","Email","Phone","Track","Status","Actions"]}
-          rows={paginate(registrations, pageReg).map(r=>[
-            `${r.first_name} ${r.last_name}`,
-            r.email,
-            r.phone,
-            r.track,
-            <StatusBadge key={`status-${r.id}`} status={r.status || 'pending'} />,
-            <div key={r.id} className="flex flex-wrap gap-3">
-              <Link className="underline" href={`/admin/training/registrations/${r.id}`}>View</Link>
+      {activeTab === "registrations" && (() => {
+        const filtered = filterByDate(registrations, dateFilter)
+        return (
+          <>
+            <Table
+              headers={["Name","Email","Phone","Track","Status","Actions"]}
+              rows={paginate(filtered, pageReg).map(r=>[
+                `${r.first_name} ${r.last_name}`,
+                r.email,
+                r.phone,
+                r.track,
+                <StatusBadge key={`status-${r.id}`} status={r.status || 'pending'} />,
+                <div key={r.id} className="flex flex-wrap gap-3">
+                  <Link className="underline" href={`/admin/training/registrations/${r.id}`}>View</Link>
+                </div>
+              ])}
+            />
+            {filtered.length > pageSize && (
+              <Pagination total={filtered.length} page={pageReg} pageSize={pageSize} onPageChange={setPageReg} />
+            )}
+            <div className="mt-2 text-sm text-gray-500">
+              Showing {filtered.length} of {registrations.length} training registrations
             </div>
-          ])}
-        />
-      )}
-      {activeTab === "registrations" && registrations.length > pageSize && (
-        <Pagination total={registrations.length} page={pageReg} pageSize={pageSize} onPageChange={setPageReg} />
-      )}
+          </>
+        )
+      })()}
 
-      {activeTab === "volunteers" && (
-        <Table
-          headers={["Name","Email","Phone","Expertise","Years","Status","Actions"]}
-          rows={paginate(volunteers, pageVol).map(v=>[
-            `${v.first_name} ${v.last_name}`,
-            v.email,
-            v.phone,
-            v.expertise,
-            v.years_experience,
-            <StatusBadge key={`status-${v.id}`} status={v.status || 'pending'} />,
-            <div key={v.id} className="flex flex-wrap gap-3">
-              <Link className="underline" href={`/admin/training/volunteers/${v.id}`}>View</Link>
+      {activeTab === "volunteers" && (() => {
+        const filtered = filterByDate(volunteers, dateFilter)
+        return (
+          <>
+            <Table
+              headers={["Name","Email","Phone","Expertise","Years","Status","Actions"]}
+              rows={paginate(filtered, pageVol).map(v=>[
+                `${v.first_name} ${v.last_name}`,
+                v.email,
+                v.phone,
+                v.expertise,
+                v.years_experience,
+                <StatusBadge key={`status-${v.id}`} status={v.status || 'pending'} />,
+                <div key={v.id} className="flex flex-wrap gap-3">
+                  <Link className="underline" href={`/admin/training/volunteers/${v.id}`}>View</Link>
+                </div>
+              ])}
+            />
+            {filtered.length > pageSize && (
+              <Pagination total={filtered.length} page={pageVol} pageSize={pageSize} onPageChange={setPageVol} />
+            )}
+            <div className="mt-2 text-sm text-gray-500">
+              Showing {filtered.length} of {volunteers.length} volunteer applications
             </div>
-          ])}
-        />
-      )}
-      {activeTab === "volunteers" && volunteers.length > pageSize && (
-        <Pagination total={volunteers.length} page={pageVol} pageSize={pageSize} onPageChange={setPageVol} />
-      )}
+          </>
+        )
+      })()}
       </div>
       {loading && (
         <div className="fixed inset-0 pointer-events-none flex items-center justify-center" aria-live="polite">
