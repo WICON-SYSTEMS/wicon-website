@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Phone, MapPin, Clock, MessageCircle, AlertTriangle, Send, CheckCircle, X } from "lucide-react"
 
 export default function ContactPage() {
+  const [requestType, setRequestType] = useState<'inquiry' | 'quote'>('inquiry')
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -22,7 +23,12 @@ export default function ContactPage() {
     budget: '',
     timeline: '',
     message: '',
-    preferredContact: 'email'
+    preferredContact: 'email',
+    // Quote-specific fields
+    propertyType: '',
+    propertySize: '',
+    urgency: '',
+    additionalServices: [] as string[]
   })
   
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -30,11 +36,25 @@ export default function ContactPage() {
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [mapLoading, setMapLoading] = useState(true)
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = (field: string, value: string | string[]) => {
     setFormData(prev => ({ ...prev, [field]: value }))
     // Clear error when user starts typing
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: '' }))
+    }
+  }
+
+  const handleRequestTypeChange = (type: 'inquiry' | 'quote') => {
+    setRequestType(type)
+    // Clear quote-specific errors when switching to inquiry
+    if (type === 'inquiry') {
+      setErrors(prev => {
+        const newErrors = { ...prev }
+        delete newErrors.propertyType
+        delete newErrors.propertySize
+        delete newErrors.urgency
+        return newErrors
+      })
     }
   }
 
@@ -51,6 +71,14 @@ export default function ContactPage() {
     if (!formData.phone.trim()) newErrors.phone = 'Phone number is required'
     if (!formData.service) newErrors.service = 'Please select a service'
     if (!formData.message.trim()) newErrors.message = 'Message is required'
+    
+    // Quote-specific validation
+    if (requestType === 'quote') {
+      if (!formData.propertyType) newErrors.propertyType = 'Property type is required for quotes'
+      if (!formData.propertySize) newErrors.propertySize = 'Property size is required for quotes'
+      if (!formData.urgency) newErrors.urgency = 'Timeline is required for quotes'
+      if (!formData.budget) newErrors.budget = 'Budget range is required for quotes'
+    }
     
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -85,7 +113,11 @@ export default function ContactPage() {
           budget: '',
           timeline: '',
           message: '',
-          preferredContact: 'email'
+          preferredContact: 'email',
+          propertyType: '',
+          propertySize: '',
+          urgency: '',
+          additionalServices: []
         })
       } else {
         alert(`Error: ${result.error || 'Failed to send message'}`)
@@ -117,11 +149,43 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Contact Form */}
               <div>
-                <h2 className="text-3xl font-bold text-black mb-6">Get Your Free Quote</h2>
-                <p className="text-gray-600 mb-8">
-                  Fill out the form below and our team will get back to you within 24 hours with a detailed quote and
-                  consultation.
+                <h2 className="text-3xl font-bold text-black mb-6">
+                  {requestType === 'quote' ? 'Get Your Free Quote' : 'Contact Us'}
+                </h2>
+                <p className="text-gray-600 mb-6">
+                  {requestType === 'quote' 
+                    ? 'Fill out the form below and our team will get back to you within 24 hours with a detailed quote and consultation.'
+                    : 'Have a question or need assistance? Fill out the form below and our team will get back to you within 24 hours.'
+                  }
                 </p>
+                
+                {/* Request Type Toggle */}
+                <div className="mb-8">
+                  <div className="flex items-center space-x-1 bg-gray-100 rounded-lg p-1 w-fit">
+                    <button
+                      type="button"
+                      onClick={() => handleRequestTypeChange('inquiry')}
+                      className={`px-4 py-2 rounded-md text-sm font-medium transition-all cursor-pointer ${
+                        requestType === 'inquiry'
+                          ? 'bg-white text-black shadow-sm'
+                          : 'text-gray-600 hover:text-black'
+                      }`}
+                    >
+                      General Inquiry
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleRequestTypeChange('quote')}
+                      className={`px-4 py-2 rounded-md text-sm font-medium transition-all cursor-pointer ${
+                        requestType === 'quote'
+                          ? 'bg-white text-black shadow-sm'
+                          : 'text-gray-600 hover:text-black'
+                      }`}
+                    >
+                      Quote Request
+                    </button>
+                  </div>
+                </div>
                 <Card className="bg-gray-50 border-gray-200">
                   <CardContent className="p-8">
                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -208,6 +272,92 @@ export default function ContactPage() {
                         </Select>
                         {errors.service && <p className="text-red-500 text-sm mt-1">{errors.service}</p>}
                       </div>
+                      
+                      {/* Quote-Specific Fields */}
+                      {requestType === 'quote' && (
+                        <>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                              <Label htmlFor="propertyType" className="text-sm font-medium text-black">
+                                Property Type *
+                              </Label>
+                              <Select value={formData.propertyType} onValueChange={(value) => handleInputChange('propertyType', value)}>
+                                <SelectTrigger className={`mt-1 ${errors.propertyType ? 'border-red-500' : ''}`}>
+                                  <SelectValue placeholder="Select property type" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="residential-home">Residential Home</SelectItem>
+                                  <SelectItem value="residential-apartment">Apartment/Condo</SelectItem>
+                                  <SelectItem value="commercial-office">Commercial Office</SelectItem>
+                                  <SelectItem value="commercial-retail">Retail Store</SelectItem>
+                                  <SelectItem value="commercial-warehouse">Warehouse/Industrial</SelectItem>
+                                  <SelectItem value="commercial-restaurant">Restaurant/Hotel</SelectItem>
+                                  <SelectItem value="other">Other</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              {errors.propertyType && <p className="text-red-500 text-sm mt-1">{errors.propertyType}</p>}
+                            </div>
+                            <div>
+                              <Label htmlFor="propertySize" className="text-sm font-medium text-black">
+                                Property Size *
+                              </Label>
+                              <Select value={formData.propertySize} onValueChange={(value) => handleInputChange('propertySize', value)}>
+                                <SelectTrigger className={`mt-1 ${errors.propertySize ? 'border-red-500' : ''}`}>
+                                  <SelectValue placeholder="Select size range" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="small">Small (&lt; 1,000 sq ft)</SelectItem>
+                                  <SelectItem value="medium">Medium (1,000 - 3,000 sq ft)</SelectItem>
+                                  <SelectItem value="large">Large (3,000 - 10,000 sq ft)</SelectItem>
+                                  <SelectItem value="xlarge">Very Large (&gt; 10,000 sq ft)</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              {errors.propertySize && <p className="text-red-500 text-sm mt-1">{errors.propertySize}</p>}
+                            </div>
+                          </div>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                              <Label htmlFor="budget" className="text-sm font-medium text-black">
+                                Budget Range *
+                              </Label>
+                              <Select value={formData.budget} onValueChange={(value) => handleInputChange('budget', value)}>
+                                <SelectTrigger className={`mt-1 ${errors.budget ? 'border-red-500' : ''}`}>
+                                  <SelectValue placeholder="Select budget range" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="under-500k">Under 500,000 XAF</SelectItem>
+                                  <SelectItem value="500k-1m">500,000 - 1,000,000 XAF</SelectItem>
+                                  <SelectItem value="1m-2m">1,000,000 - 2,000,000 XAF</SelectItem>
+                                  <SelectItem value="2m-5m">2,000,000 - 5,000,000 XAF</SelectItem>
+                                  <SelectItem value="over-5m">Over 5,000,000 XAF</SelectItem>
+                                  <SelectItem value="flexible">Flexible/Discuss</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              {errors.budget && <p className="text-red-500 text-sm mt-1">{errors.budget}</p>}
+                            </div>
+                            <div>
+                              <Label htmlFor="urgency" className="text-sm font-medium text-black">
+                                Project Timeline *
+                              </Label>
+                              <Select value={formData.urgency} onValueChange={(value) => handleInputChange('urgency', value)}>
+                                <SelectTrigger className={`mt-1 ${errors.urgency ? 'border-red-500' : ''}`}>
+                                  <SelectValue placeholder="Select timeline" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="urgent">Urgent (Within 1 week)</SelectItem>
+                                  <SelectItem value="soon">Soon (Within 1 month)</SelectItem>
+                                  <SelectItem value="planning">Planning (1-3 months)</SelectItem>
+                                  <SelectItem value="future">Future (3+ months)</SelectItem>
+                                  <SelectItem value="flexible">Flexible</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              {errors.urgency && <p className="text-red-500 text-sm mt-1">{errors.urgency}</p>}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                      
                       <div>
                         <Label htmlFor="message" className="text-sm font-medium text-black">
                           Project Details & Message *
@@ -283,7 +433,7 @@ export default function ContactPage() {
                             <strong>Phone:</strong> +237 670791815
                           </p>
                           <p className="text-gray-600">
-                            <strong>Email:</strong> info@wiconsystems.cm
+                            <strong>Email:</strong> wiconsystems@gmail.com
                           </p>
                         </div>
                       </div>

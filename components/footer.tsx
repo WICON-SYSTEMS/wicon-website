@@ -29,7 +29,7 @@ export function Footer() {
               </div>
               <div className="flex items-center text-gray-300">
                 <Mail className="w-4 h-4 mr-2" />
-                <span>info@wiconsystems.cm</span>
+                <span>wiconsystems@gmail.com</span>
               </div>
             </div>
           </div>

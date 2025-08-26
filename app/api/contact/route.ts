@@ -15,7 +15,12 @@ export async function POST(req: Request) {
       budget,
       timeline,
       message,
-      preferredContact
+      preferredContact,
+      // Quote-specific fields
+      propertyType,
+      propertySize,
+      urgency,
+      additionalServices
     } = body
 
     // Validate required fields
@@ -54,10 +59,13 @@ export async function POST(req: Request) {
           </p>
           
           <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3b82f6;">
-            <h3 style="color: #1f2937; margin-top: 0;">Your Inquiry Details:</h3>
+            <h3 style="color: #1f2937; margin-top: 0;">${propertyType ? 'Your Quote Request Details:' : 'Your Inquiry Details:'}</h3>
             <p style="margin: 5px 0; color: #4b5563;"><strong>Service Interest:</strong> ${service}</p>
+            ${propertyType ? `<p style="margin: 5px 0; color: #4b5563;"><strong>Property Type:</strong> ${propertyType}</p>` : ''}
+            ${propertySize ? `<p style="margin: 5px 0; color: #4b5563;"><strong>Property Size:</strong> ${propertySize}</p>` : ''}
             ${projectType ? `<p style="margin: 5px 0; color: #4b5563;"><strong>Project Type:</strong> ${projectType}</p>` : ''}
             ${budget ? `<p style="margin: 5px 0; color: #4b5563;"><strong>Budget Range:</strong> ${budget}</p>` : ''}
+            ${urgency ? `<p style="margin: 5px 0; color: #4b5563;"><strong>Timeline:</strong> ${urgency}</p>` : ''}
             ${timeline ? `<p style="margin: 5px 0; color: #4b5563;"><strong>Timeline:</strong> ${timeline}</p>` : ''}
             <p style="margin: 5px 0; color: #4b5563;"><strong>Preferred Contact:</strong> ${preferredContact || 'Email'}</p>
           </div>
@@ -95,18 +103,21 @@ export async function POST(req: Request) {
     try {
       const adminEmail = process.env.ADMIN_EMAIL
       if (adminEmail) {
-        const adminSubject = `New Contact Form Submission - ${firstName} ${lastName}`
+        const adminSubject = `New ${propertyType ? 'Quote Request' : 'Contact Form'} Submission - ${firstName} ${lastName}`
         const adminHtml = `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #1f2937; border-bottom: 2px solid #f59e0b; padding-bottom: 10px;">New Contact Form Submission</h2>
+            <h2 style="color: #1f2937; border-bottom: 2px solid #f59e0b; padding-bottom: 10px;">New ${propertyType ? 'Quote Request' : 'Contact Form'} Submission</h2>
             <div style="background: #fef3c7; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h3 style="color: #374151; margin-top: 0;">Contact Details:</h3>
               <p><strong>Name:</strong> ${firstName} ${lastName}</p>
               <p><strong>Email:</strong> ${email}</p>
               <p><strong>Phone:</strong> ${phone}</p>
               <p><strong>Service Interest:</strong> ${service}</p>
+              ${propertyType ? `<p><strong>Property Type:</strong> ${propertyType}</p>` : ''}
+              ${propertySize ? `<p><strong>Property Size:</strong> ${propertySize}</p>` : ''}
               ${projectType ? `<p><strong>Project Type:</strong> ${projectType}</p>` : ''}
               ${budget ? `<p><strong>Budget Range:</strong> ${budget}</p>` : ''}
+              ${urgency ? `<p><strong>Timeline:</strong> ${urgency}</p>` : ''}
               ${timeline ? `<p><strong>Timeline:</strong> ${timeline}</p>` : ''}
               <p><strong>Preferred Contact:</strong> ${preferredContact || 'Email'}</p>
               <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
