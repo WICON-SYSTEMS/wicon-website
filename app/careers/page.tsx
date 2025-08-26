@@ -51,10 +51,77 @@ export default function CareersPage() {
     photoPreview: null as string | null,
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [submitting, setSubmitting] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Application submitted:", formData)
-    // Handle form submission here
+    try {
+      setSubmitting(true)
+      const fd = new FormData()
+      // primitive fields
+      fd.append('fullName', formData.fullName)
+      fd.append('address', formData.address)
+      fd.append('email', formData.email)
+      fd.append('phone', formData.phone)
+      fd.append('dob', formData.dob)
+      fd.append('sex', String(formData.sex))
+      fd.append('position', formData.position)
+      fd.append('availability', String(formData.availability))
+      fd.append('startDate', formData.startDate)
+      fd.append('endDate', formData.endDate)
+      fd.append('skills', formData.skills)
+      fd.append('certifications', formData.certifications)
+      fd.append('languages', formData.languages)
+      fd.append('agreeToTerms', String(formData.agreeToTerms))
+
+      // complex arrays
+      fd.append('academicEntries', JSON.stringify(formData.academicEntries))
+      fd.append('experienceEntries', JSON.stringify(formData.experienceEntries))
+      fd.append('references', JSON.stringify(formData.references))
+
+      // files
+      if (formData.cvFile) fd.append('cvFile', formData.cvFile)
+      if (formData.photoFile) fd.append('photoFile', formData.photoFile)
+
+      const res = await fetch('/api/careers/submit', {
+        method: 'POST',
+        body: fd,
+      })
+      const data = await res.json()
+      if (!res.ok || !data.ok) {
+        throw new Error(data?.error || 'Submission failed')
+      }
+
+      alert('Application submitted successfully!')
+      // optional: reset some fields (keep file previews?)
+      setFormData((prev) => ({
+        ...prev,
+        fullName: '',
+        address: '',
+        email: '',
+        phone: '',
+        dob: '',
+        sex: '',
+        position: '',
+        availability: '',
+        startDate: '',
+        endDate: '',
+        skills: '',
+        certifications: '',
+        languages: '',
+        academicEntries: [{ institution: '', degree: '', major: '', graduationDate: '' }],
+        experienceEntries: [{ company: '', title: '', responsibilities: '', duration: '' }],
+        references: [{ referee: '', relationship: '', contact: '' }],
+        cvFile: null,
+        photoFile: null,
+        photoPreview: null,
+        agreeToTerms: false,
+      }))
+    } catch (err: any) {
+      alert(err?.message || 'Something went wrong')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const handleInputChange = (field: string, value: string | boolean) => {
@@ -575,9 +642,9 @@ export default function CareersPage() {
                     <Button
                       type="submit"
                       className="w-full bg-black text-white hover:bg-gray-800 cursor-pointer"
-                      disabled={!formData.agreeToTerms}
+                      disabled={!formData.agreeToTerms || submitting}
                     >
-                      Submit Application
+                      {submitting ? 'Submitting...' : 'Submit Application'}
                     </Button>
                   </div>
                 </form>

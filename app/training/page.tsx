@@ -1,3 +1,5 @@
+"use client"
+
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -23,7 +25,132 @@ import {
   Download,
 } from "lucide-react"
 
+import { useState } from "react"
+
 export default function TrainingPage() {
+  // Volunteer form state
+  const [volunteer, setVolunteer] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    expertise: "",
+    years: "",
+    teaching: "",
+    currentRole: "",
+    company: "",
+    availability: "",
+    motivation: "",
+    agree: false,
+    resume: null as File | null,
+  })
+  const [submittingVolunteer, setSubmittingVolunteer] = useState(false)
+
+  const handleVolunteerSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    try {
+      setSubmittingVolunteer(true)
+      const fd = new FormData()
+      Object.entries({
+        firstName: volunteer.firstName,
+        lastName: volunteer.lastName,
+        email: volunteer.email,
+        phone: volunteer.phone,
+        expertise: volunteer.expertise,
+        years: volunteer.years,
+        teaching: volunteer.teaching,
+        currentRole: volunteer.currentRole,
+        company: volunteer.company,
+        availability: volunteer.availability,
+        motivation: volunteer.motivation,
+        agree: String(volunteer.agree),
+      }).forEach(([k, v]) => fd.append(k, String(v)))
+      if (volunteer.resume) fd.append("resume", volunteer.resume)
+
+      const res = await fetch("/api/training/volunteer", { method: "POST", body: fd })
+      const data = await res.json()
+      if (!res.ok || !data.ok) throw new Error(data?.error || "Submission failed")
+      alert("Volunteer application submitted!")
+      setVolunteer({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        expertise: "",
+        years: "",
+        teaching: "",
+        currentRole: "",
+        company: "",
+        availability: "",
+        motivation: "",
+        agree: false,
+        resume: null,
+      })
+    } catch (err: any) {
+      alert(err?.message || "Something went wrong")
+    } finally {
+      setSubmittingVolunteer(false)
+    }
+  }
+
+  // Registration form state
+  const [register, setRegister] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    track: "",
+    education: "",
+    experience: "",
+    motivation: "",
+    employer: "",
+    terms: false,
+    updates: false,
+  })
+  const [submittingRegister, setSubmittingRegister] = useState(false)
+
+  const handleRegisterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    try {
+      setSubmittingRegister(true)
+      const fd = new FormData()
+      Object.entries({
+        firstName: register.firstName,
+        lastName: register.lastName,
+        email: register.email,
+        phone: register.phone,
+        track: register.track,
+        education: register.education,
+        experience: register.experience,
+        motivation: register.motivation,
+        employer: register.employer,
+        terms: String(register.terms),
+        updates: String(register.updates),
+      }).forEach(([k, v]) => fd.append(k, String(v)))
+
+      const res = await fetch("/api/training/register", { method: "POST", body: fd })
+      const data = await res.json()
+      if (!res.ok || !data.ok) throw new Error(data?.error || "Submission failed")
+      alert("Registration submitted!")
+      setRegister({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        track: "",
+        education: "",
+        experience: "",
+        motivation: "",
+        employer: "",
+        terms: false,
+        updates: false,
+      })
+    } catch (err: any) {
+      alert(err?.message || "Something went wrong")
+    } finally {
+      setSubmittingRegister(false)
+    }
+  }
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -246,7 +373,7 @@ export default function TrainingPage() {
                   </div>
                 </div>
 
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleVolunteerSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <Label htmlFor="volunteerFirstName" className="text-white">
@@ -255,6 +382,8 @@ export default function TrainingPage() {
                       <Input
                         id="volunteerFirstName"
                         placeholder="Enter your first name"
+                        value={volunteer.firstName}
+                        onChange={(e) => setVolunteer((p) => ({ ...p, firstName: e.target.value }))}
                         className="mt-1 bg-gray-800 border-gray-600 text-white"
                       />
                     </div>
@@ -265,6 +394,8 @@ export default function TrainingPage() {
                       <Input
                         id="volunteerLastName"
                         placeholder="Enter your last name"
+                        value={volunteer.lastName}
+                        onChange={(e) => setVolunteer((p) => ({ ...p, lastName: e.target.value }))}
                         className="mt-1 bg-gray-800 border-gray-600 text-white"
                       />
                     </div>
@@ -278,6 +409,8 @@ export default function TrainingPage() {
                         id="volunteerEmail"
                         type="email"
                         placeholder="your.email@example.com"
+                        value={volunteer.email}
+                        onChange={(e) => setVolunteer((p) => ({ ...p, email: e.target.value }))}
                         className="mt-1 bg-gray-800 border-gray-600 text-white"
                       />
                     </div>
@@ -288,6 +421,8 @@ export default function TrainingPage() {
                       <Input
                         id="volunteerPhone"
                         placeholder="+237 6XX XXX XXX"
+                        value={volunteer.phone}
+                        onChange={(e) => setVolunteer((p) => ({ ...p, phone: e.target.value }))}
                         className="mt-1 bg-gray-800 border-gray-600 text-white"
                       />
                     </div>
@@ -296,7 +431,7 @@ export default function TrainingPage() {
                     <Label htmlFor="expertise" className="text-white">
                       Area of Expertise *
                     </Label>
-                    <Select>
+                    <Select value={volunteer.expertise} onValueChange={(v) => setVolunteer((p) => ({ ...p, expertise: v }))}>
                       <SelectTrigger className="mt-1 bg-gray-800 border-gray-600 text-white">
                         <SelectValue placeholder="Select your primary expertise" />
                       </SelectTrigger>
@@ -315,7 +450,7 @@ export default function TrainingPage() {
                       <Label htmlFor="volunteerExperience" className="text-white">
                         Years of Experience *
                       </Label>
-                      <Select>
+                      <Select value={volunteer.years} onValueChange={(v) => setVolunteer((p) => ({ ...p, years: v }))}>
                         <SelectTrigger className="mt-1 bg-gray-800 border-gray-600 text-white">
                           <SelectValue placeholder="Select experience level" />
                         </SelectTrigger>
@@ -330,7 +465,7 @@ export default function TrainingPage() {
                       <Label htmlFor="teachingExperience" className="text-white">
                         Teaching/Training Experience
                       </Label>
-                      <Select>
+                      <Select value={volunteer.teaching} onValueChange={(v) => setVolunteer((p) => ({ ...p, teaching: v }))}>
                         <SelectTrigger className="mt-1 bg-gray-800 border-gray-600 text-white">
                           <SelectValue placeholder="Select teaching experience" />
                         </SelectTrigger>
@@ -349,6 +484,8 @@ export default function TrainingPage() {
                     <Input
                       id="currentRole"
                       placeholder="e.g., Senior Software Engineer, IoT Consultant"
+                      value={volunteer.currentRole}
+                      onChange={(e) => setVolunteer((p) => ({ ...p, currentRole: e.target.value }))}
                       className="mt-1 bg-gray-800 border-gray-600 text-white"
                     />
                   </div>
@@ -359,6 +496,8 @@ export default function TrainingPage() {
                     <Input
                       id="company"
                       placeholder="Company or organization name"
+                      value={volunteer.company}
+                      onChange={(e) => setVolunteer((p) => ({ ...p, company: e.target.value }))}
                       className="mt-1 bg-gray-800 border-gray-600 text-white"
                     />
                   </div>
@@ -366,7 +505,7 @@ export default function TrainingPage() {
                     <Label htmlFor="availability" className="text-white">
                       Availability for October 2025 Program *
                     </Label>
-                    <Select>
+                    <Select value={volunteer.availability} onValueChange={(v) => setVolunteer((p) => ({ ...p, availability: v }))}>
                       <SelectTrigger className="mt-1 bg-gray-800 border-gray-600 text-white">
                         <SelectValue placeholder="Select your availability" />
                       </SelectTrigger>
@@ -384,6 +523,8 @@ export default function TrainingPage() {
                     <Textarea
                       id="volunteerMotivation"
                       placeholder="Tell us about your passion for teaching and what you hope to contribute..."
+                      value={volunteer.motivation}
+                      onChange={(e) => setVolunteer((p) => ({ ...p, motivation: e.target.value }))}
                       className="mt-1 bg-gray-800 border-gray-600 text-white"
                       rows={4}
                     />
@@ -396,18 +537,19 @@ export default function TrainingPage() {
                       id="resume"
                       type="file"
                       accept=".pdf,.doc,.docx"
+                      onChange={(e) => setVolunteer((p) => ({ ...p, resume: e.target.files && e.target.files[0] ? e.target.files[0] : null }))}
                       className="mt-1 bg-gray-800 border-gray-600 text-white file:bg-gray-700 file:text-white file:border-0"
                     />
                     <p className="text-sm text-gray-400 mt-1">Upload your resume (PDF, DOC, or DOCX format)</p>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Checkbox id="volunteerTerms" className="border-gray-600" />
+                    <Checkbox id="volunteerTerms" className="border-gray-600" checked={volunteer.agree} onCheckedChange={(c) => setVolunteer((p) => ({ ...p, agree: Boolean(c) }))} />
                     <Label htmlFor="volunteerTerms" className="text-sm text-white">
                       I agree to the volunteer terms and conditions and commit to the program requirements *
                     </Label>
                   </div>
-                  <Button className="w-full bg-white text-black hover:bg-gray-100 py-3">
-                    Submit Volunteer Application
+                  <Button className="w-full bg-white text-black hover:bg-gray-100 py-3" type="submit" disabled={submittingVolunteer}>
+                    {submittingVolunteer ? 'Submitting...' : 'Submit Volunteer Application'}
                   </Button>
                 </form>
               </CardContent>
@@ -424,30 +566,30 @@ export default function TrainingPage() {
             </div>
             <Card className="bg-white border-gray-200">
               <CardContent className="p-8">
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleRegisterSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <Label htmlFor="firstName">First Name *</Label>
-                      <Input id="firstName" placeholder="Enter your first name" className="mt-1" />
+                      <Input id="firstName" placeholder="Enter your first name" className="mt-1" value={register.firstName} onChange={(e) => setRegister((p) => ({ ...p, firstName: e.target.value }))} />
                     </div>
                     <div>
                       <Label htmlFor="lastName">Last Name *</Label>
-                      <Input id="lastName" placeholder="Enter your last name" className="mt-1" />
+                      <Input id="lastName" placeholder="Enter your last name" className="mt-1" value={register.lastName} onChange={(e) => setRegister((p) => ({ ...p, lastName: e.target.value }))} />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <Label htmlFor="email">Email Address *</Label>
-                      <Input id="email" type="email" placeholder="your.email@example.com" className="mt-1" />
+                      <Input id="email" type="email" placeholder="your.email@example.com" className="mt-1" value={register.email} onChange={(e) => setRegister((p) => ({ ...p, email: e.target.value }))} />
                     </div>
                     <div>
                       <Label htmlFor="phone">Phone Number *</Label>
-                      <Input id="phone" placeholder="+237 6XX XXX XXX" className="mt-1" />
+                      <Input id="phone" placeholder="+237 6XX XXX XXX" className="mt-1" value={register.phone} onChange={(e) => setRegister((p) => ({ ...p, phone: e.target.value }))} />
                     </div>
                   </div>
                   <div>
                     <Label htmlFor="track">Preferred Training Track *</Label>
-                    <Select>
+                    <Select value={register.track} onValueChange={(v) => setRegister((p) => ({ ...p, track: v }))}>
                       <SelectTrigger className="mt-1">
                         <SelectValue placeholder="Select your preferred track" />
                       </SelectTrigger>
@@ -462,7 +604,7 @@ export default function TrainingPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <Label htmlFor="education">Education Level *</Label>
-                      <Select>
+                      <Select value={register.education} onValueChange={(v) => setRegister((p) => ({ ...p, education: v }))}>
                         <SelectTrigger className="mt-1">
                           <SelectValue placeholder="Select education level" />
                         </SelectTrigger>
@@ -477,7 +619,7 @@ export default function TrainingPage() {
                     </div>
                     <div>
                       <Label htmlFor="experience">Technical Experience</Label>
-                      <Select>
+                      <Select value={register.experience} onValueChange={(v) => setRegister((p) => ({ ...p, experience: v }))}>
                         <SelectTrigger className="mt-1">
                           <SelectValue placeholder="Select experience level" />
                         </SelectTrigger>
@@ -495,27 +637,29 @@ export default function TrainingPage() {
                       id="motivation"
                       placeholder="Tell us about your goals and motivation for joining the program..."
                       className="mt-1"
+                      value={register.motivation}
+                      onChange={(e) => setRegister((p) => ({ ...p, motivation: e.target.value }))}
                       rows={4}
                     />
                   </div>
                   <div>
                     <Label htmlFor="employer">Current Employer/Institution (Optional)</Label>
-                    <Input id="employer" placeholder="Company or school name" className="mt-1" />
+                    <Input id="employer" placeholder="Company or school name" className="mt-1" value={register.employer} onChange={(e) => setRegister((p) => ({ ...p, employer: e.target.value }))} />
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Checkbox id="terms" />
+                    <Checkbox id="terms" checked={register.terms} onCheckedChange={(c) => setRegister((p) => ({ ...p, terms: Boolean(c) }))} />
                     <Label htmlFor="terms" className="text-sm">
                       I agree to the terms and conditions and understand that registration is subject to approval *
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Checkbox id="updates" />
+                    <Checkbox id="updates" checked={register.updates} onCheckedChange={(c) => setRegister((p) => ({ ...p, updates: Boolean(c) }))} />
                     <Label htmlFor="updates" className="text-sm">
                       I would like to receive updates about WiCon Systems training programs and events
                     </Label>
                   </div>
-                  <Button className="w-full bg-black text-white hover:bg-gray-800 py-3">
-                    Submit Registration Application
+                  <Button className="w-full bg-black text-white hover:bg-gray-800 py-3" type="submit" disabled={submittingRegister}>
+                    {submittingRegister ? 'Submitting...' : 'Submit Registration Application'}
                   </Button>
                 </form>
               </CardContent>

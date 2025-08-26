@@ -1,0 +1,80 @@
+// Prisma schema for Supabase (PostgreSQL)
+// Ensure DATABASE_URL is set in your environment (e.g., .env or .env.local)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// Note: Buckets are managed by Supabase Storage; not modeled here.
+
+model InternshipApplication {
+  id              String   @id @default(uuid()) @db.Uuid
+  fullName        String   @map("full_name")
+  address         String?
+  email           String
+  phone           String?
+  dob             DateTime? @db.Date
+  sex             String?
+  position        String?
+  availability    String?
+  startDate       DateTime? @map("start_date") @db.Date
+  endDate         DateTime? @map("end_date") @db.Date
+  skills          String?
+  certifications  String?
+  languages       String?
+  academicEntries Json     @map("academic_entries")
+  experienceEntries Json   @map("experience_entries")
+  referencesList  Json     @map("references_list")
+  cvBucket        String?  @map("cv_bucket")
+  cvPath          String?  @map("cv_path")
+  photoBucket     String?  @map("photo_bucket")
+  photoPath       String?  @map("photo_path")
+  createdAt       DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@map("internship_applications")
+}
+
+model TrainingRegistration {
+  id             String   @id @default(uuid()) @db.Uuid
+  firstName      String   @map("first_name")
+  lastName       String   @map("last_name")
+  email          String
+  phone          String
+  track          String
+  educationLevel String   @map("education_level")
+  experienceLevel String? @map("experience_level")
+  motivation     String
+  employer       String?
+  agreedTerms    Boolean  @default(false) @map("agreed_terms")
+  wantsUpdates   Boolean  @default(false) @map("wants_updates")
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@map("training_registrations")
+}
+
+model TrainingVolunteer {
+  id                 String   @id @default(uuid()) @db.Uuid
+  firstName          String   @map("first_name")
+  lastName           String   @map("last_name")
+  email              String
+  phone              String
+  expertise          String
+  yearsExperience    String   @map("years_experience")
+  teachingExperience String?  @map("teaching_experience")
+  currentRole        String   @map("current_role")
+  company            String?
+  availability       String
+  motivation         String
+  resumeBucket       String?  @map("resume_bucket")
+  resumePath         String?  @map("resume_path")
+  agreedTerms        Boolean  @default(false) @map("agreed_terms")
+  createdAt          DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@map("training_volunteers")
+}
