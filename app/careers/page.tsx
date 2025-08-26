@@ -47,6 +47,8 @@ export default function CareersPage() {
       { referee: "", relationship: "", contact: "" },
     ] as { referee: string; relationship: string; contact: string }[],
     cvFile: null as File | null,
+    photoFile: null as File | null,
+    photoPreview: null as string | null,
   })
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -62,6 +64,12 @@ export default function CareersPage() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0] ? e.target.files[0] : null
     setFormData((prev) => ({ ...prev, cvFile: file }))
+  }
+
+  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0] ? e.target.files[0] : null
+    const preview = file ? URL.createObjectURL(file) : null
+    setFormData((prev) => ({ ...prev, photoFile: file, photoPreview: preview }))
   }
 
   // Repeatable list handlers
@@ -348,38 +356,58 @@ export default function CareersPage() {
                   {/* Applicant Information */}
                   <div className="space-y-6">
                     <h3 className="text-lg font-semibold border-b pb-2">Applicant Information</h3>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <Label htmlFor="fullName">Full Name *</Label>
-                        <Input id="fullName" value={formData.fullName} onChange={(e) => handleInputChange("fullName", e.target.value)} placeholder="Enter your full name" required />
+                    <div className="grid md:grid-cols-3 gap-6">
+                      {/* Fields */}
+                      <div className="md:col-span-2 grid md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <Label htmlFor="fullName">Full Name *</Label>
+                          <Input id="fullName" value={formData.fullName} onChange={(e) => handleInputChange("fullName", e.target.value)} placeholder="Enter your full name" required />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="address">Address *</Label>
+                          <Input id="address" value={formData.address} onChange={(e) => handleInputChange("address", e.target.value)} placeholder="Street, City, Region" required />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="email">Email Address *</Label>
+                          <Input id="email" type="email" value={formData.email} onChange={(e) => handleInputChange("email", e.target.value)} placeholder="your.email@example.com" required />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="phone">Phone Number *</Label>
+                          <Input id="phone" value={formData.phone} onChange={(e) => handleInputChange("phone", e.target.value)} placeholder="+237 XXX XXX XXX" required />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="dob">Date of Birth *</Label>
+                          <Input id="dob" type="date" value={formData.dob} onChange={(e) => handleInputChange("dob", e.target.value)} required />
+                        </div>
+                        <div className="space-y-2">
+                          <Label>Sex *</Label>
+                          <Select onValueChange={(value) => handleInputChange("sex", value)}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="male">Male</SelectItem>
+                              <SelectItem value="female">Female</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="address">Address *</Label>
-                        <Input id="address" value={formData.address} onChange={(e) => handleInputChange("address", e.target.value)} placeholder="Street, City, Region" required />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email Address *</Label>
-                        <Input id="email" type="email" value={formData.email} onChange={(e) => handleInputChange("email", e.target.value)} placeholder="your.email@example.com" required />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="phone">Phone Number *</Label>
-                        <Input id="phone" value={formData.phone} onChange={(e) => handleInputChange("phone", e.target.value)} placeholder="+237 XXX XXX XXX" required />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="dob">Date of Birth *</Label>
-                        <Input id="dob" type="date" value={formData.dob} onChange={(e) => handleInputChange("dob", e.target.value)} required />
-                      </div>
-                      <div className="space-y-2">
-                        <Label>Sex *</Label>
-                        <Select onValueChange={(value) => handleInputChange("sex", value)}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="male">Male</SelectItem>
-                            <SelectItem value="female">Female</SelectItem>
-                          </SelectContent>
-                        </Select>
+
+                      {/* Photo upload */}
+                      <div className="md:col-span-1">
+                        <div className="space-y-3">
+                          <Label htmlFor="photo">Passport Photo (Square)</Label>
+                          <div className="aspect-square w-full max-w-xs mx-auto rounded-lg overflow-hidden bg-gray-100 border border-dashed border-gray-300 flex items-center justify-center">
+                            {formData.photoPreview ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img src={formData.photoPreview} alt="Photo preview" className="w-full h-full object-cover" />
+                            ) : (
+                              <span className="text-sm text-gray-500">Upload 1:1 photo</span>
+                            )}
+                          </div>
+                          <Input id="photo" type="file" accept="image/*" onChange={handlePhotoChange} className="cursor-pointer" />
+                          <p className="text-xs text-gray-500">Square image recommended. Max 5MB.</p>
+                        </div>
                       </div>
                     </div>
                   </div>

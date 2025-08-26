@@ -29,10 +29,10 @@ export default function TrainingPage() {
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-black text-white py-20">
+        <section className="bg-black text-white py-10 md:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <div className="flex items-center justify-center mb-6">
+              <div className="flex flex-col sm:flex-row items-center justify-center mb-6">
                 <GraduationCap className="w-15 h-15 mr-2" />
                 <h1 className="text-2xl md:text-4xl font-bold">WiCon SMART SOLUTION FOR DIGITAL EDUCATION</h1>
               </div>
@@ -45,12 +45,12 @@ export default function TrainingPage() {
                 <div className="text-gray-300">Registration Opens: September 2025</div>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button className="bg-white text-black hover:bg-gray-300 px-8 py-3 text-lg font-semibold" asChild>
+                <Button className="bg-white text-black hover:bg-gray-300 px-10 py-5 text-2xl font-bold" >
                   <a href="#register">Register Now</a>
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-black px-8 py-3 text-lg font-semibold bg-transparent"
+                  className="border-white text-white hover:bg-white hover:text-black px-8 py-3 text-sm md:text-lg font-semibold bg-transparent"
                   asChild
                 >
                   <a href="/downloads/wicon-digital-education-2025-brochure.pdf" download>
@@ -64,7 +64,7 @@ export default function TrainingPage() {
         </section>
 
         {/* Program Overview */}
-        <section className="py-20 bg-white">
+        <section className="py-10 md:py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -139,7 +139,7 @@ export default function TrainingPage() {
         </section>
 
         {/* Training Tracks */}
-        <section className="py-20 bg-gray-50">
+        <section className="py-10 md:py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Three Specialized Training Tracks</h2>
@@ -524,7 +524,7 @@ export default function TrainingPage() {
         </section>
 
         {/* Contact Information */}
-        <section className="py-20 bg-gray-50">
+        <section className="pb-10 md:py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-black mb-4">Questions About the Program?</h2>

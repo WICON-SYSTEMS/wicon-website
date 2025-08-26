@@ -41,7 +41,7 @@ The WiCon Systems website is a content-first, responsive marketing platform buil
 - **🌐 IoT Solutions** - Internet of Things integrations
 - **☀️ Solar PV & Electrical Services** - Renewable energy installations
 - **📹 CCTV Security Systems** - Comprehensive surveillance solutions
-- **🎓 WiCon SMART SOLUTION FOR DIGITAL EDUCATION** - Annual training programs
+- **🎓 WiCon SMART HOME SOLUTION FOR DIGITAL EDUCATION** - Annual training programs
 
 ## ✨ Key Features
 

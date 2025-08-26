@@ -216,14 +216,14 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* WiCon SMART SOLUTION FOR DIGITAL EDUCATION Banner */}
-        <section className="py-16 bg-black text-white">
+        {/* WiCon SMART HOME SOLUTION FOR DIGITAL EDUCATION Banner */}
+        <section className="py-10 bg-black text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
-                <div className="flex items-center mb-4">
+                <div className="flex flex-col sm:flex-row items-start md:items-center mb-4">
                   <GraduationCap className="w-15 h-15 mr-3 text-white" />
-                  <h2 className="text-2xl font-bold">WiCon SMART SOLUTION FOR DIGITAL EDUCATION</h2>
+                  <h2 className="text-2xl font-bold">WiCon SMART HOME SOLUTION FOR DIGITAL EDUCATION</h2>
                 </div>
                 <p className="text-xl text-gray-300 mb-6">
                   Join our annual training program and master software development, IoT solutions, and WiCon controller

@@ -15,7 +15,7 @@ export default function Training2024Page() {
             <div className="text-center">
               <div className="flex items-center justify-center mb-6">
                 <Award className="w-12 h-12 mr-4 text-yellow-400" />
-                <h1 className="text-4xl md:text-5xl font-bold">WiCon SMART SOLUTION FOR DIGITAL EDUCATION 2024</h1>
+                <h1 className="text-4xl md:text-5xl font-bold">WiCon SMART HOME SOLUTION FOR DIGITAL EDUCATION 2024</h1>
               </div>
               <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
                 A remarkable success story - 48 participants graduated with industry-ready skills in software

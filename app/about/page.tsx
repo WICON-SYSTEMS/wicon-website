@@ -21,7 +21,7 @@ export default function AboutPage() {
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-gray-50 to-white py-20">
+        <section className="bg-gradient-to-b from-gray-50 to-white pt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h1 className="text-4xl md:text-5xl font-bold text-black mb-6">About WiCon Systems</h1>
@@ -38,7 +38,7 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-black mb-6">Our Story</h2>
+                <h2 className="text-3xl md:text-4xl font-bold text-black mb-6 text-center">Our Story</h2>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed">
                   Founded in 2014 in Buea, Southwest Region, Cameroon, WiCon Systems emerged from a vision to
                   revolutionize electrical control and safety in our region. Our founders recognized the unique
