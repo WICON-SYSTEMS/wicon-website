@@ -94,6 +94,38 @@ export async function POST(req: Request) {
       // ignore email errors
     }
 
+    // send admin notification email (fire and forget)
+    try {
+      const adminEmail = process.env.ADMIN_EMAIL
+      if (adminEmail) {
+        const adminSubject = `New Volunteer Application - ${firstName} ${lastName}`
+        const adminHtml = `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #1f2937; border-bottom: 2px solid #8b5cf6; padding-bottom: 10px;">New Volunteer Application</h2>
+            <div style="background: #faf5ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
+              <h3 style="color: #374151; margin-top: 0;">Volunteer Details:</h3>
+              <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+              <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Phone:</strong> ${phone}</p>
+              <p><strong>Expertise:</strong> ${expertise}</p>
+              <p><strong>Years of Experience:</strong> ${years}</p>
+              ${teaching ? `<p><strong>Teaching Experience:</strong> ${teaching}</p>` : ''}
+              <p><strong>Current Role:</strong> ${currentRole}</p>
+              ${company ? `<p><strong>Company:</strong> ${company}</p>` : ''}
+              <p><strong>Availability:</strong> ${availability}</p>
+              <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
+            </div>
+            <div style="background: #ede9fe; padding: 15px; border-radius: 8px; border-left: 4px solid #8b5cf6;">
+              <p style="margin: 0; color: #6b21a8;"><strong>Action Required:</strong> Please review this volunteer application in the admin panel.</p>
+            </div>
+          </div>
+        `
+        await sendMail({ to: adminEmail, subject: adminSubject, html: adminHtml })
+      }
+    } catch (e) {
+      // do not fail request due to admin email errors
+    }
+
     return NextResponse.json({ ok: true, id: data.id })
   } catch (e: any) {
     return NextResponse.json({ ok: false, error: e?.message || 'Unknown error' }, { status: 500 })

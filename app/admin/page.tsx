@@ -102,22 +102,40 @@ export default function AdminPage() {
   useEffect(() => {
     const storedUser = typeof window !== "undefined" ? localStorage.getItem(STORAGE_USER) : null
     const storedPass = typeof window !== "undefined" ? localStorage.getItem(STORAGE_PASS) : null
-    async function tryValidate(u: string, p: string) {
+    const lastValidated = typeof window !== "undefined" ? localStorage.getItem('admin-last-validated') : null
+    
+    // Check if we validated recently (within 30 minutes)
+    const thirtyMinutesAgo = Date.now() - (30 * 60 * 1000)
+    const recentlyValidated = lastValidated && parseInt(lastValidated) > thirtyMinutesAgo
+    
+    async function tryValidate(u: string, p: string, skipServerCheck = false) {
+      if (skipServerCheck && recentlyValidated) {
+        // Use cached validation if recent
+        setUsername(u)
+        setPasscode(p)
+        setSaved(true)
+        return
+      }
+      
       try {
         const res = await fetch('/api/admin/auth', { headers: { 'x-admin-username': u, 'x-admin-passcode': p } })
         if (res.ok) {
           setSaved(true)
+          localStorage.setItem('admin-last-validated', Date.now().toString())
         } else {
           setSaved(false)
+          localStorage.removeItem('admin-last-validated')
         }
       } catch {
         setSaved(false)
+        localStorage.removeItem('admin-last-validated')
       }
     }
     if (storedUser && storedPass) {
       setUsername(storedUser)
       setPasscode(storedPass)
-      tryValidate(storedUser, storedPass)
+      // Use cached validation if recent, otherwise validate with server
+      tryValidate(storedUser, storedPass, true)
     }
   }, [])
 
@@ -174,6 +192,7 @@ export default function AdminPage() {
   function signOut() {
     localStorage.removeItem(STORAGE_USER)
     localStorage.removeItem(STORAGE_PASS)
+    localStorage.removeItem('admin-last-validated')
     setUsername("")
     setPasscode("")
     setSaved(false)
@@ -204,7 +223,7 @@ export default function AdminPage() {
         <button
           key={t}
           onClick={() => setActiveTab(t)}
-          className={`px-3 py-2 rounded border ${activeTab===t?"bg-black text-white border-black":"bg-white text-black border-gray-300"}`}
+          className={`px-3 py-2 rounded border cursor-pointer hover:bg-slate-200 ${activeTab===t?"bg-black text-white border-black":"bg-white text-black border-gray-300"}`}
         >{t}</button>
       ))}
     </div>
@@ -332,7 +351,7 @@ function HeaderBar({ onSignOut }: { onSignOut?: ()=>void }) {
           ) : (
             <span className="font-semibold">{BRAND_NAME}</span>
           )}
-          <span className="text-gray-400">Admin</span>
+          <span className="text-gray-400">Admin Panel</span>
         </div>
         {onSignOut && (
           <button onClick={onSignOut} className="text-sm underline cursor-pointer hover:text-slate-600">Sign out</button>

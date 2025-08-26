@@ -141,6 +141,36 @@ export async function POST(req: Request) {
       // do not fail request due to email errors
     }
 
+    // send admin notification email (fire and forget)
+    try {
+      const adminEmail = process.env.ADMIN_EMAIL
+      if (adminEmail) {
+        const adminSubject = `New Internship Application - ${fullName}`
+        const adminHtml = `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #1f2937; border-bottom: 2px solid #3b82f6; padding-bottom: 10px;">New Internship Application</h2>
+            <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
+              <h3 style="color: #374151; margin-top: 0;">Applicant Details:</h3>
+              <p><strong>Name:</strong> ${fullName}</p>
+              <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Phone:</strong> ${phone}</p>
+              <p><strong>Position:</strong> ${position}</p>
+              <p><strong>Availability:</strong> ${availability}</p>
+              ${startDate ? `<p><strong>Start Date:</strong> ${startDate}</p>` : ''}
+              ${endDate ? `<p><strong>End Date:</strong> ${endDate}</p>` : ''}
+              <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
+            </div>
+            <div style="background: #dbeafe; padding: 15px; border-radius: 8px; border-left: 4px solid #3b82f6;">
+              <p style="margin: 0; color: #1e40af;"><strong>Action Required:</strong> Please review this application in the admin panel.</p>
+            </div>
+          </div>
+        `
+        await sendMail({ to: adminEmail, subject: adminSubject, html: adminHtml })
+      }
+    } catch (e) {
+      // do not fail request due to admin email errors
+    }
+
     return NextResponse.json({ ok: true, id: data.id })
   } catch (e: any) {
     return NextResponse.json({ ok: false, error: e?.message || 'Unknown error' }, { status: 500 })
