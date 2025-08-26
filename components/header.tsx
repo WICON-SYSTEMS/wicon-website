@@ -107,7 +107,9 @@ export function Header() {
               <Phone className="w-4 h-4 mr-1" />
               <span>+237 670791815</span>
             </div> */}
+            <Link href="/contact">
             <Button className="bg-black text-white hover:bg-gray-800">Get Quote</Button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -156,7 +158,9 @@ export function Header() {
                   <Phone className="w-4 h-4 mr-1" />
                   <span>+237 670791815</span>
                 </div> */}
+                <Link href="/contact">
                 <Button className="w-full bg-black text-white hover:bg-gray-800">Get Quote</Button>
+                </Link>
               </div>
             </div>
           </div>

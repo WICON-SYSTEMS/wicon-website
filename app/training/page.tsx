@@ -519,6 +519,8 @@ export default function TrainingPage() {
                           <SelectValue placeholder="Select experience level" />
                         </SelectTrigger>
                         <SelectContent className="bg-gray-800 border-gray-600">
+                        <SelectItem value="0-1">0-1 years</SelectItem>
+                        <SelectItem value="1-2">1-2 years</SelectItem>
                           <SelectItem value="3-5">3-5 years</SelectItem>
                           <SelectItem value="5-10">5-10 years</SelectItem>
                           <SelectItem value="10+">10+ years</SelectItem>
