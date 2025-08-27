@@ -243,7 +243,7 @@ export default function TrainingPage() {
                   alt="training-logo"
                 />
                 <h1 className="text-2xl md:text-4xl font-bold text-left md:text-center">
-                  WiCon SMART SOLUTION FOR DIGITAL EDUCATION
+                  WiCon SMART HOME SOLUTION FOR DIGITAL EDUCATION
                 </h1>
               </div>
               <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
@@ -265,15 +265,15 @@ export default function TrainingPage() {
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-black px-8 py-3 text-sm md:text-lg font-semibold bg-transparent"
+                  className="border-white text-white hover:bg-gray-50 px-8 py-3 bg-transparent"
                   asChild
                 >
                   <a
-                    href="/downloads/wicon-digital-education-2025-brochure.pdf"
-                    download
+                    href="/downloads/Program Brochure.pdf"
+                    download="Program Brochure.pdf"
                   >
-                    <Download className="w-5 h-5 mr-2" />
-                    Download 2025 Brochure
+                    <Download className="w-4 h-4 mr-2" />
+                    Download 2025 Bronchure
                   </a>
                 </Button>
               </div>
@@ -290,10 +290,11 @@ export default function TrainingPage() {
                   Program Overview
                 </h2>
                 <p className="text-lg text-gray-600 mb-6">
-                  WiCon SMART SOLUTION FOR DIGITAL EDUCATION is an intensive
-                  4-week training program designed to equip participants with
-                  cutting-edge skills in software development, IoT solutions,
-                  and our proprietary WiCon controller technology.
+                  WiCon SMART HOME SOLUTION FOR DIGITAL EDUCATION is an
+                  intensive 4-week training program designed to equip
+                  participants with cutting-edge skills in software development,
+                  IoT solutions, and our proprietary WiCon controller
+                  technology.
                 </p>
                 <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
                   <div className="flex items-center mb-2">

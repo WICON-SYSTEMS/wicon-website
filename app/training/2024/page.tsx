@@ -31,7 +31,7 @@ export default function Training2024Page() {
                   alt="training-logo"
                 />
                 <h1 className="text-2xl md:text-4xl font-bold text-left md:text-center">
-                  WiCon SMART SOLUTION FOR DIGITAL EDUCATION
+                  WiCon SMART HOME SOLUTION FOR DIGITAL EDUCATION
                 </h1>
               </div>
               <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
@@ -41,7 +41,11 @@ export default function Training2024Page() {
               </p>
               <div className="bg-gray-900 rounded-lg p-6 inline-block">
                 <div className="text-3xl font-bold mb-2 text-yellow-400">
-                  Program Completed
+                  Program Completed!
+                </div>
+                <div className="text-xl font-bold mb-2 text-blue-400">
+                  <span className="text-white">Theme:</span> Smart Innovation
+                  Showcase
                 </div>
                 <div className="text-gray-300">April 2024 • Buea, Cameroon</div>
               </div>
@@ -286,7 +290,7 @@ export default function Training2024Page() {
                   </p>
                 </CardContent>
               </Card>
-              <Card className="bg-gray-100 border-gray-200 overflow-hidden">
+              {/* <Card className="bg-gray-100 border-gray-200 overflow-hidden">
                 <div className="aspect-video bg-gray-200 flex items-center justify-center">
                   <img
                     src="/public7.jpg"
@@ -299,7 +303,7 @@ export default function Training2024Page() {
                     Industry networking and job fair event
                   </p>
                 </CardContent>
-              </Card>
+              </Card> */}
               <Card className="bg-gray-100 border-gray-200 overflow-hidden">
                 <div className="aspect-video bg-gray-200 flex items-center justify-center">
                   <img
@@ -378,10 +382,10 @@ export default function Training2024Page() {
                     />
                   </div>
                   <h3 className="font-bold text-black mb-2">
-                    Emmanuel Tabi - IoT Engineer
+                    Christien Mesueme Ndumbe
                   </h3>
                   <p className="text-gray-600 text-sm mb-3">
-                    Started his own IoT consulting firm
+                    Started his own IT consulting firm
                   </p>
                   <p className="text-gray-700">
                     "The hands-on approach and real projects gave me the

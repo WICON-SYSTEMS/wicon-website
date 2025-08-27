@@ -31,7 +31,7 @@ export default function HomePage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black leading-tight mb-6">
-                  WiCon: <br /> Pioneering Smart Home Technology Solutions
+                  WiCon <br /> Pioneering Smart Home Technology Solutions
                 </h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                   From wireless electrical control to custom software and IoT
