@@ -179,13 +179,23 @@ NEXT_PUBLIC_SUPABASE_URL="https://your-project.supabase.co"
 NEXT_PUBLIC_SUPABASE_ANON_KEY="your-anon-key"
 SUPABASE_SERVICE_ROLE_KEY="your-service-role-key"
 
-# Email Configuration (Gmail SMTP)
-EMAIL_USER="your-email@gmail.com"
-EMAIL_PASS="your-app-password"
-ADMIN_EMAIL="admin@wicon-systems.com"
+#EMAIL CONFIGURATION
+SMTP_HOST="your-credentials"
+SMTP_PORT="your-credentials"
+SMTP_USER="your-credentials"
+SMTP_PASS="your-credentials"
+SMTP_FROM="your-credentials"
+
+#EMAIL BRADNING
+BRAND_NAME=WiCon Systems
+BRAND_PRIMARY="#000000"
+BRAND_ACCENT="#111827" # slate-900
+BRAND_BG="#F9FAFB" # gray-50
+BRAND_LOGO_URL="/wicon-logo.png"
+BRAND_LOGO="https://i.ibb.co/SXXnrnkC/wicon-logo.png"
 
 # Admin Panel Authentication
-ADMIN_USERNAME="admin"
+ADMIN_USERNAME="your-admin-username"
 ADMIN_PASSCODE="your-secure-passcode"
 ```
 
@@ -504,7 +514,6 @@ For licensing inquiries, contact [legal@wicon-systems.com](mailto:legal@wicon-sy
 ---
 
 <div align="center">
-
 
 [Website](https://wicon-lyart.vercel.app/) • [GitHub](https://github.com/WICON-SYSTEMS) • [Contact](mailto:info@wicon-systems.com)
 
