@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
+import { toast } from "sonner"
 
 const STORAGE_PASS = "admin@wicon"
 const STORAGE_USER = "admin"
@@ -134,9 +135,9 @@ export default function RegistrationDetailPage() {
       setItem((prev: any) => ({ ...prev, status: type === 'accept' ? 'accepted' : 'declined', reviewMessage: message }))
       setMessage("")
       setShowConfirmDialog(null)
-      alert(`Registration ${type === 'accept' ? 'accepted' : 'declined'} and email sent successfully!`)
+      toast.success(`Registration ${type === 'accept' ? 'accepted' : 'declined'} and email sent successfully!`)
     } catch (e: any) {
-      alert(`Failed to ${type} registration: ${e?.message || 'Unknown error'}`)
+      toast.error(`Failed to ${type} registration: ${e?.message || 'Unknown error'}`)
     } finally {
       setIsUpdating(false)
     }

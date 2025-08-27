@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
+import { toast } from "sonner"
 
 const STORAGE_PASS = "admin@wicon"
 const STORAGE_USER = "admin"
@@ -207,9 +208,9 @@ export default function AdminPage() {
         body: JSON.stringify({ to, subject, html })
       })
       if (!res.ok) throw new Error(await res.text())
-      alert("Email sent")
+      toast.success("Email sent")
     } catch (e: any) {
-      alert(`Email failed: ${e?.message || "Unknown error"}`)
+      toast.error(`Email failed: ${e?.message || "Unknown error"}`)
     }
   }
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
+import { toast } from "sonner"
 
 const STORAGE_PASS = "admin@wicon"
 const STORAGE_USER = "admin"
@@ -131,9 +132,9 @@ export default function InternshipDetailPage() {
       setItem((prev: any) => ({ ...prev, status: type === 'accept' ? 'accepted' : 'declined', reviewMessage: message }))
       setMessage("")
       setShowConfirmDialog(null)
-      alert(`Application ${type === 'accept' ? 'accepted' : 'declined'} and email sent successfully!`)
+      toast.success(`Application ${type === 'accept' ? 'accepted' : 'declined'} and email sent successfully!`)
     } catch (e: any) {
-      alert(`Failed to ${type} application: ${e?.message || 'Unknown error'}`)
+      toast.error(`Failed to ${type} application: ${e?.message || 'Unknown error'}`)
     } finally {
       setIsUpdating(false)
     }
