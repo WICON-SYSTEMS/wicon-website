@@ -43,11 +43,11 @@ export default function SmartHomeBlogPost() {
               <div className="flex items-center text-gray-600 mb-6 flex-wrap gap-4">
                 <div className="flex items-center">
                   <User className="w-4 h-4 mr-2" />
-                  <span>Engr. Ekull Joseph Marrion</span>
+                  <span>Engr. Ekulle Joseph Marrion</span>
                 </div>
                 <div className="flex items-center">
                   <Calendar className="w-4 h-4 mr-2" />
-                  <span>November 28, 2024</span>
+                  <span>July 30, 2025</span>
                 </div>
                 <div className="flex items-center">
                   <Clock className="w-4 h-4 mr-2" />
