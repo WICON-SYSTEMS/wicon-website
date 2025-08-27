@@ -429,8 +429,8 @@ export default function Training2024Page() {
                     <div>
                       <h4 className="font-bold mb-2">Industry Recognition</h4>
                       <p className="text-gray-300">
-                        Recognized by leading tech companies across Cameroon and
-                        West Africa
+                        In partnership with MINISTRY OF YOUTH AFFAIRS AND CIVIC
+                        EDUCATION
                       </p>
                     </div>
                   </div>
@@ -455,9 +455,6 @@ export default function Training2024Page() {
                     </div>
                   </div>
                 </div>
-                <Button className="mt-8 bg-white text-black hover:bg-gray-200">
-                  View Sample Certificate
-                </Button>
               </div>
             </div>
           </div>
