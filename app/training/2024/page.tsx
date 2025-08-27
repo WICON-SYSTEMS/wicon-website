@@ -429,8 +429,9 @@ export default function Training2024Page() {
                     <div>
                       <h4 className="font-bold mb-2">Industry Recognition</h4>
                       <p className="text-gray-300">
-                        In partnership with MINISTRY OF YOUTH AFFAIRS AND CIVIC
-                        EDUCATION - MINJEC
+                        In partnership with: MINISTRY OF YOUTH AFFAIRS AND CIVIC
+                        EDUCATION -{" "}
+                        <span className="font-extrabold">MINJEC</span>
                       </p>
                     </div>
                   </div>
