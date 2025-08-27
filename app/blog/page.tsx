@@ -4,12 +4,13 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, User, ArrowRight, Clock } from "lucide-react"
+import Link from "next/link"
 
 export default function BlogPage() {
   const blogPosts = [
     {
       id: 1,
-      title: "Reducing Electricity Costs with Smart Controllers",
+      title: "Cutting Down Electricity Costs with Smart Controllers",
       excerpt:
         "Discover how WiCon's wireless controllers can reduce your electricity bills by up to 30% through intelligent monitoring and automated control systems.",
       author: "Engr. Akum Bate",
@@ -17,20 +18,10 @@ export default function BlogPage() {
       readTime: "5 min read",
       category: "Cost Savings",
       image: "/placeholder.svg?height=200&width=400&text=Smart+Controllers",
+      href: "/blog/cutting-down-electricity-costs",
     },
     {
       id: 2,
-      title: "Solar Energy Solutions for Cameroon Homes",
-      excerpt:
-        "A comprehensive guide to solar PV systems in Cameroon's tropical climate. Learn about system sizing, battery storage, and maximizing energy independence.",
-      author: "Sarah Mballa",
-      date: "December 10, 2024",
-      readTime: "7 min read",
-      category: "Solar Energy",
-      image: "/placeholder.svg?height=200&width=400&text=Solar+Panels",
-    },
-    {
-      id: 3,
       title: "Electrical Safety in Tropical Climates",
       excerpt:
         "Essential safety considerations for electrical installations in Cameroon's humid environment. Best practices for protection against moisture and corrosion.",
@@ -39,9 +30,10 @@ export default function BlogPage() {
       readTime: "6 min read",
       category: "Safety",
       image: "/placeholder.svg?height=200&width=400&text=Electrical+Safety",
+      href: "/blog/electrical-safety-tropical-climates",
     },
     {
-      id: 4,
+      id: 3,
       title: "Smart Home Technology in Buea",
       excerpt:
         "How smart home technology is transforming residential living in Buea. From automated lighting to security systems, explore the possibilities.",
@@ -50,9 +42,10 @@ export default function BlogPage() {
       readTime: "4 min read",
       category: "Smart Home",
       image: "/placeholder.svg?height=200&width=400&text=Smart+Home",
+      href: "/blog/smart-home-technology-buea",
     },
     {
-      id: 5,
+      id: 4,
       title: "CCTV Security Systems: A Complete Guide",
       excerpt:
         "Everything you need to know about modern CCTV systems. Camera types, installation considerations, and remote monitoring capabilities for Cameroon businesses.",
@@ -61,21 +54,11 @@ export default function BlogPage() {
       readTime: "8 min read",
       category: "Security",
       image: "/placeholder.svg?height=200&width=400&text=CCTV+Systems",
-    },
-    {
-      id: 6,
-      title: "Energy Independence Through Solar Power",
-      excerpt:
-        "Case study: How a Limbe family achieved 90% energy independence with a 5kW solar system. Real costs, savings, and lessons learned.",
-      author: "Paul Talla",
-      date: "November 15, 2024",
-      readTime: "6 min read",
-      category: "Case Study",
-      image: "/placeholder.svg?height=200&width=400&text=Energy+Independence",
+      href: "/blog/cctv-security-systems-guide",
     },
   ]
 
-  const categories = ["All", "Cost Savings", "Solar Energy", "Safety", "Smart Home", "Security", "Case Study"]
+  const categories = ["All", "Cost Savings", "Safety", "Smart Home", "Security"]
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -101,34 +84,34 @@ export default function BlogPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                   <div>
                     <img
-                      src="/placeholder.svg?height=300&width=500&text=Featured+Post"
-                      alt="Featured Post"
+                      src={blogPosts[0].image || "/placeholder.svg"}
+                      alt={blogPosts[0].title}
                       className="w-full h-64 lg:h-full object-cover"
                     />
                   </div>
                   <CardContent className="p-8 flex flex-col justify-center">
                     <Badge variant="secondary" className="w-fit mb-4">
-                      Cost Savings
+                      {blogPosts[0].category}
                     </Badge>
                     <h2 className="text-2xl md:text-3xl font-bold text-black mb-4">
-                      Reducing Electricity Costs with Smart Controllers
+                      {blogPosts[0].title}
                     </h2>
                     <p className="text-gray-600 mb-6 leading-relaxed">
-                      Discover how WiCon's wireless controllers can reduce your electricity bills by up to 30% through
-                      intelligent monitoring and automated control systems. Learn about real-world implementations and
-                      cost savings achieved by our clients.
+                      {blogPosts[0].excerpt}
                     </p>
                     <div className="flex items-center text-sm text-gray-500 mb-6">
                       <User className="w-4 h-4 mr-2" />
-                      <span className="mr-4">Emmanuel Nkeng</span>
+                      <span className="mr-4">{blogPosts[0].author}</span>
                       <Calendar className="w-4 h-4 mr-2" />
-                      <span className="mr-4">December 15, 2024</span>
+                      <span className="mr-4">{blogPosts[0].date}</span>
                       <Clock className="w-4 h-4 mr-2" />
-                      <span>5 min read</span>
+                      <span>{blogPosts[0].readTime}</span>
                     </div>
                     <Button className="w-fit bg-black text-white hover:bg-gray-800">
-                      Read Full Article
-                      <ArrowRight className="ml-2 w-4 h-4" />
+                      <Link href={blogPosts[0].href} className="inline-flex items-center">
+                        Read Full Article
+                        <ArrowRight className="ml-2 w-4 h-4" />
+                      </Link>
                     </Button>
                   </CardContent>
                 </div>
@@ -185,8 +168,10 @@ export default function BlogPage() {
                       <span>{post.readTime}</span>
                     </div>
                     <Button variant="outline" size="sm" className="w-full bg-transparent">
-                      Read More
-                      <ArrowRight className="ml-2 w-3 h-3" />
+                      <Link href={post.href} className="inline-flex items-center">
+                        Read More
+                        <ArrowRight className="ml-2 w-3 h-3" />
+                      </Link>
                     </Button>
                   </CardContent>
                 </Card>
@@ -204,7 +189,7 @@ export default function BlogPage() {
               industry updates in Cameroon.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-              <input type="email" placeholder="Enter your email" className="flex-1 px-4 py-3 rounded-lg text-black" />
+              <input type="email" placeholder="Enter your email" className="flex-1 px-4 py-3 rounded-lg text-white bg-gray-800" />
               <Button className="bg-white text-black hover:bg-gray-100 px-6 py-3">Subscribe</Button>
             </div>
           </div>

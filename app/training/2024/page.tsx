@@ -13,8 +13,8 @@ export default function Training2024Page() {
         <section className="bg-black text-white py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <div className="flex items-center justify-center mb-6">
-                <Award className="w-12 h-12 mr-4 text-yellow-400" />
+              <div className="flex flex-col sm:flex-row items-center md:items-start justify-center mb-6">
+                <Award className="w-14 h-14 mb-2 sm:mb-0 text-yellow-400" />
                 <h1 className="text-4xl md:text-5xl font-bold">WiCon SMART HOME SOLUTION FOR DIGITAL EDUCATION 2024</h1>
               </div>
               <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
@@ -162,7 +162,7 @@ export default function Training2024Page() {
               <Card className="bg-gray-100 border-gray-200 overflow-hidden">
                 <div className="aspect-video bg-gray-200 flex items-center justify-center">
                   <img
-                    src="/training-room-computers.png"
+                    src="/public1.jpg"
                     alt="Students in training session"
                     className="w-full h-full object-cover"
                   />
@@ -174,7 +174,7 @@ export default function Training2024Page() {
               <Card className="bg-gray-100 border-gray-200 overflow-hidden">
                 <div className="aspect-video bg-gray-200 flex items-center justify-center">
                   <img
-                    src="/iot-hardware-setup-lesson.png"
+                    src="/public2.jpg"
                     alt="IoT training session"
                     className="w-full h-full object-cover"
                   />
@@ -186,7 +186,7 @@ export default function Training2024Page() {
               <Card className="bg-gray-100 border-gray-200 overflow-hidden">
                 <div className="aspect-video bg-gray-200 flex items-center justify-center">
                   <img
-                    src="/placeholder-yn90w.png"
+                    src="/public3.jpg"
                     alt="Graduation ceremony"
                     className="w-full h-full object-cover"
                   />
@@ -198,7 +198,7 @@ export default function Training2024Page() {
               <Card className="bg-gray-100 border-gray-200 overflow-hidden">
                 <div className="aspect-video bg-gray-200 flex items-center justify-center">
                   <img
-                    src="/wicon-controller-lab.png"
+                    src="/public4.jpg"
                     alt="WiCon controller training"
                     className="w-full h-full object-cover"
                   />
@@ -210,7 +210,7 @@ export default function Training2024Page() {
               <Card className="bg-gray-100 border-gray-200 overflow-hidden">
                 <div className="aspect-video bg-gray-200 flex items-center justify-center">
                   <img
-                    src="/group-project-presentation.png"
+                    src="/public5.jpg"
                     alt="Project presentations"
                     className="w-full h-full object-cover"
                   />
@@ -221,7 +221,31 @@ export default function Training2024Page() {
               </Card>
               <Card className="bg-gray-100 border-gray-200 overflow-hidden">
                 <div className="aspect-video bg-gray-200 flex items-center justify-center">
-                  <img src="/networking-event.png" alt="Networking event" className="w-full h-full object-cover" />
+                  <img src="/public6.jpg" alt="Networking event" className="w-full h-full object-cover" />
+                </div>
+                <CardContent className="p-4">
+                  <p className="text-sm text-gray-600">Industry networking and job fair event</p>
+                </CardContent>
+              </Card>
+              <Card className="bg-gray-100 border-gray-200 overflow-hidden">
+                <div className="aspect-video bg-gray-200 flex items-center justify-center">
+                  <img src="/public7.jpg" alt="Networking event" className="w-full h-full object-cover" />
+                </div>
+                <CardContent className="p-4">
+                  <p className="text-sm text-gray-600">Industry networking and job fair event</p>
+                </CardContent>
+              </Card>
+              <Card className="bg-gray-100 border-gray-200 overflow-hidden">
+                <div className="aspect-video bg-gray-200 flex items-center justify-center">
+                  <img src="/public8.jpg" alt="Networking event" className="w-full h-full object-cover" />
+                </div>
+                <CardContent className="p-4">
+                  <p className="text-sm text-gray-600">Industry networking and job fair event</p>
+                </CardContent>
+              </Card>
+              <Card className="bg-gray-100 border-gray-200 overflow-hidden">
+                <div className="aspect-video bg-gray-200 flex items-center justify-center">
+                  <img src="/public9.jpg" alt="Networking event" className="w-full h-full object-cover" />
                 </div>
                 <CardContent className="p-4">
                   <p className="text-sm text-gray-600">Industry networking and job fair event</p>
@@ -244,7 +268,7 @@ export default function Training2024Page() {
                   <div className="aspect-video bg-gray-200 rounded-lg flex items-center justify-center mb-4 relative">
                     <Play className="w-16 h-16 text-white bg-black bg-opacity-50 rounded-full p-4 cursor-pointer hover:bg-opacity-70 transition-all" />
                     <img
-                      src="/african-software-developer-headshot.png"
+                      src="/public4.jpg"
                       alt="Graduate testimonial"
                       className="w-full h-full object-cover rounded-lg absolute inset-0"
                     />
@@ -262,7 +286,7 @@ export default function Training2024Page() {
                   <div className="aspect-video bg-gray-200 rounded-lg flex items-center justify-center mb-4 relative">
                     <Play className="w-16 h-16 text-white bg-black bg-opacity-50 rounded-full p-4 cursor-pointer hover:bg-opacity-70 transition-all" />
                     <img
-                      src="/african-iot-engineer-headshot.png"
+                      src="/public2.jpg"
                       alt="Graduate testimonial"
                       className="w-full h-full object-cover rounded-lg absolute inset-0"
                     />
@@ -340,8 +364,15 @@ export default function Training2024Page() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-black text-white hover:bg-gray-800 px-8 py-3">Register for 2025 Program</Button>
-              <Button variant="outline" className="border-black text-black hover:bg-gray-50 px-8 py-3 bg-transparent">
-                Download 2024 Report
+              <Button 
+                variant="outline" 
+                className="border-black text-black hover:bg-gray-50 px-8 py-3 bg-transparent"
+                asChild
+              >
+                <a href="/downloads/A PRESENTATION  BY AKUM BATE ON DIGITAL EDUCATION.docx222.docx" download="A PRESENTATION  BY AKUM BATE ON DIGITAL EDUCATION.docx222.docx">
+                  <Download className="w-4 h-4 mr-2" />
+                  Download 2024 Presentation from CEO
+                </a>
               </Button>
             </div>
           </div>
