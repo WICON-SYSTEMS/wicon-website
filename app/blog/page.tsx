@@ -18,7 +18,7 @@ export default function BlogPage() {
       date: "December 15, 2024",
       readTime: "5 min read",
       category: "Cost Savings",
-      image: "/placeholder.svg?height=200&width=400&text=Smart+Controllers",
+      image: "/wicon-box.png",
       href: "/blog/cutting-down-electricity-costs",
     },
     {
@@ -30,7 +30,7 @@ export default function BlogPage() {
       date: "December 5, 2024",
       readTime: "6 min read",
       category: "Safety",
-      image: "/placeholder.svg?height=200&width=400&text=Electrical+Safety",
+      image: "/electrical-safety.jpeg",
       href: "/blog/electrical-safety-tropical-climates",
     },
     {
@@ -42,7 +42,7 @@ export default function BlogPage() {
       date: "November 28, 2024",
       readTime: "4 min read",
       category: "Smart Home",
-      image: "/placeholder.svg?height=200&width=400&text=Smart+Home",
+      image: "/Smart-Home-Technology.jpg",
       href: "/blog/smart-home-technology-buea",
     },
     {
@@ -54,7 +54,7 @@ export default function BlogPage() {
       date: "November 20, 2024",
       readTime: "8 min read",
       category: "Security",
-      image: "/placeholder.svg?height=200&width=400&text=CCTV+Systems",
+      image: "/cctv-security.jpg",
       href: "/blog/cctv-security-systems-guide",
     },
   ]
@@ -85,7 +85,7 @@ export default function BlogPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                   <div>
                     <img
-                      src={blogPosts[0].image || "/placeholder.svg"}
+                      src={blogPosts[0].image || "/wicon-box.png"}
                       alt={blogPosts[0].title}
                       className="w-full h-64 lg:h-full object-cover"
                     />
