@@ -1,5 +1,7 @@
 <div align="center">
 
+<img width="554" height="274" alt="wicon-body" src="https://github.com/user-attachments/assets/d3a726df-627d-4ee1-b361-484f4bcbc7af" />
+
 # WiCon Systems Website
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
@@ -9,7 +11,7 @@
 
 _A modern, responsive marketing website showcasing WiCon Systems' technology solutions and digital education programs_
 
-[🌐 Live Demo](https://wicon-systems.com) • [📖 Documentation](#documentation) • [🤝 Contributing](#contributing) • [🐛 Report Bug](https://github.com/WICON-SYSTEMS/wicon-website/issues)
+[🌐 Live Demo](https://wicon-lyart.vercel.app/) • [📖 Documentation](#documentation) • [🤝 Contributing](#contributing) • [🐛 Report Bug](https://github.com/WICON-SYSTEMS/wicon-website/issues)
 
 </div>
 
@@ -470,7 +472,7 @@ Report any violations to [conduct@wicon-systems.com](mailto:conduct@wicon-system
 - 📖 **Documentation** - Check this README and inline code comments
 - 🐛 **Issues** - Search existing issues or create a new one
 - 💬 **Discussions** - Use GitHub Discussions for questions
-- 📧 **Email** - Contact [dev@wicon-systems.com](mailto:dev@wicon-systems.com)
+- 📧 **Email** - Contact [tanzeglenn@gmail.com](mailto:tanzeglenn@gmail.com)
 
 ### Reporting Issues
 
@@ -495,7 +497,7 @@ For feature requests, please provide:
 
 This project is proprietary software owned by WiCon Systems. All rights reserved.
 
-**© 2024 WiCon Systems. All rights reserved.**
+**© 2025 WiCon Systems. All rights reserved.**
 
 For licensing inquiries, contact [legal@wicon-systems.com](mailto:legal@wicon-systems.com).
 
@@ -503,8 +505,7 @@ For licensing inquiries, contact [legal@wicon-systems.com](mailto:legal@wicon-sy
 
 <div align="center">
 
-**Made with ❤️ by the WiCon Systems Team**
 
-[Website](https://wicon-systems.com) • [GitHub](https://github.com/WICON-SYSTEMS) • [Contact](mailto:info@wicon-systems.com)
+[Website](https://wicon-lyart.vercel.app/) • [GitHub](https://github.com/WICON-SYSTEMS) • [Contact](mailto:info@wicon-systems.com)
 
 </div>
