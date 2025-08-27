@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server"
 import { sendMail } from "@/lib/email"
+import { supabaseServer } from "@/lib/supabase/server"
+
+export const runtime = "nodejs"
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || process.env.SMTP_FROM || "admin@example.com"
 const BRAND_NAME = process.env.BRAND_NAME || "WiCon Systems"
@@ -12,9 +15,29 @@ function isValidEmail(email: string) {
 
 export async function POST(req: Request) {
   try {
-    const { email } = await req.json()
+    const { email, source } = await req.json()
     if (!email || !isValidEmail(email)) {
       return NextResponse.json({ error: "Invalid email address." }, { status: 400 })
+    }
+
+    // Persist subscriber (upsert by email) via Supabase
+    const ip = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || ""
+    const userAgent = req.headers.get("user-agent") || ""
+    const payload = {
+      id: crypto.randomUUID(),
+      email: email.toLowerCase(),
+      status: "subscribed",
+      source: source || "blog",
+      ip,
+      user_agent: userAgent,
+      updated_at: new Date().toISOString(),
+      // updated_at is handled by DB trigger/@updatedAt
+    }
+    const { error: upsertError } = await supabaseServer
+      .from('newsletter_subscribers')
+      .upsert(payload, { onConflict: 'email' })
+    if (upsertError) {
+      return NextResponse.json({ error: upsertError.message }, { status: 500 })
     }
 
     // Send confirmation email to subscriber

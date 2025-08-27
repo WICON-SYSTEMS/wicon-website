@@ -49,6 +49,14 @@ type TrainingVolunteer = BaseItem & {
   created_at?: string
 }
 
+type Subscriber = BaseItem & {
+  email: string
+  status?: string
+  source?: string | null
+  created_at?: string | null
+  unsubscribed_at?: string | null
+}
+
 function Pagination({ total, page, pageSize, onPageChange }: { total: number; page: number; pageSize: number; onPageChange: (p: number) => void }) {
   const totalPages = Math.max(1, Math.ceil(total / pageSize))
   if (totalPages <= 1) return null
@@ -69,7 +77,7 @@ export default function AdminPage() {
   const [username, setUsername] = useState("")
   const [passcode, setPasscode] = useState("")
   const [saved, setSaved] = useState(false)
-  const [activeTab, setActiveTab] = useState<"internships" | "registrations" | "volunteers">("internships")
+  const [activeTab, setActiveTab] = useState<"internships" | "registrations" | "volunteers" | "subscribers">("internships")
   const [q, setQ] = useState("")
   const [dateFilter, setDateFilter] = useState<"all" | "today" | "yesterday" | "week" | "month">("all")
   const [loading, setLoading] = useState(false)
@@ -80,6 +88,7 @@ export default function AdminPage() {
   const [pageIntern, setPageIntern] = useState(1)
   const [pageReg, setPageReg] = useState(1)
   const [pageVol, setPageVol] = useState(1)
+  const [pageSub, setPageSub] = useState(1)
   const pageSize = 10
   
   function StatusBadge({ status }: { status: string }) {
@@ -100,6 +109,7 @@ export default function AdminPage() {
   const [internships, setInternships] = useState<Internship[]>([])
   const [registrations, setRegistrations] = useState<TrainingRegistration[]>([])
   const [volunteers, setVolunteers] = useState<TrainingVolunteer[]>([])
+  const [subscribers, setSubscribers] = useState<Subscriber[]>([])
 
   useEffect(() => {
     const storedUser = typeof window !== "undefined" ? localStorage.getItem(STORAGE_USER) : null
@@ -152,7 +162,9 @@ export default function AdminPage() {
         ? "/api/admin/internship"
         : activeTab === "registrations"
         ? "/api/admin/training/registrations"
-        : "/api/admin/training/volunteers"
+        : activeTab === "volunteers"
+        ? "/api/admin/training/volunteers"
+        : "/api/admin/subscribers"
       const url = q ? `${urlBase}?q=${encodeURIComponent(q)}` : urlBase
       const res = await fetch(url, { headers })
       if (!res.ok) throw new Error(await res.text())
@@ -160,6 +172,7 @@ export default function AdminPage() {
       if (activeTab === "internships") setInternships(data.items)
       if (activeTab === "registrations") setRegistrations(data.items)
       if (activeTab === "volunteers") setVolunteers(data.items)
+      if (activeTab === "subscribers") setSubscribers(data.items)
     } catch (e: any) {
       setError(e?.message || "Failed to load")
     } finally {
@@ -219,7 +232,7 @@ export default function AdminPage() {
     return items.slice(start, start + pageSize)
   }
 
-  function filterByDate<T extends { created_at?: string }>(items: T[], filter: string): T[] {
+  function filterByDate<T extends { created_at?: string | null }>(items: T[], filter: string): T[] {
     if (filter === "all") return items
     
     const now = new Date()
@@ -246,9 +259,27 @@ export default function AdminPage() {
     })
   }
 
+  async function downloadCSV() {
+    try {
+      const res = await fetch('/api/admin/subscribers/csv', { headers })
+      if (!res.ok) throw new Error(await res.text())
+      const blob = await res.blob()
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `newsletter-subscribers-${new Date().toISOString().slice(0,10)}.csv`
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+      URL.revokeObjectURL(url)
+    } catch (e: any) {
+      toast.error(`Download failed: ${e?.message || 'Unknown error'}`)
+    }
+  }
+
   const tabButtons = (
     <div className="flex gap-2 mb-4">
-      {(["internships","registrations","volunteers"] as const).map(t => (
+      {(["internships","registrations","volunteers","subscribers"] as const).map(t => (
         <button
           key={t}
           onClick={() => setActiveTab(t)}
@@ -287,7 +318,7 @@ export default function AdminPage() {
       <input
         value={q}
         onChange={e=>setQ(e.target.value)}
-        placeholder="Search name, email, phone"
+        placeholder="Search name, email, phone, or source"
         className="w-full max-w-md border rounded px-3 py-2"
       />
       <button onClick={fetchTab} className="px-3 py-2 rounded border bg-white">Search</button>
@@ -320,7 +351,12 @@ export default function AdminPage() {
       <div className="max-w-6xl mx-auto w-full p-6 flex-1">
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-2xl font-semibold">Admin</h1>
-          <div className="text-sm text-gray-500" aria-live="polite">{loading?"Loading...":""}</div>
+          <div className="flex items-center gap-3">
+            {activeTab === "subscribers" && (
+              <button onClick={downloadCSV} className="text-sm px-3 py-1.5 border rounded bg-white hover:bg-gray-50 cursor-pointer ">Download CSV</button>
+            )}
+            <div className="text-sm text-gray-500" aria-live="polite">{loading?"Loading...":""}</div>
+          </div>
         </div>
       {tabButtons}
       {dateFilterButtons}
@@ -408,6 +444,32 @@ export default function AdminPage() {
           </>
         )
       })()}
+
+      {activeTab === "subscribers" && (() => {
+        const filtered = filterByDate(subscribers, dateFilter)
+        return (
+          <>
+            <Table
+              headers={["Email","Status","Source","Subscribed","Actions"]}
+              rows={paginate(filtered, pageSub).map(s=>[
+                s.email,
+                s.status || 'subscribed',
+                s.source || '',
+                s.created_at ? new Date(s.created_at).toLocaleString() : '',
+                <div key={s.id} className="flex flex-wrap gap-3">
+                  <button onClick={()=>copyToClipboard(s.email)} className="underline cursor-pointer">Copy Email</button>
+                </div>
+              ])}
+            />
+            {filtered.length > pageSize && (
+              <Pagination total={filtered.length} page={pageSub} pageSize={pageSize} onPageChange={setPageSub} />
+            )}
+            <div className="mt-2 text-sm text-gray-500">
+              Showing {filtered.length} of {subscribers.length} subscribers
+            </div>
+          </>
+        )
+      })()}
       </div>
       {loading && (
         <div className="fixed inset-0 pointer-events-none flex items-center justify-center" aria-live="polite">
@@ -464,3 +526,14 @@ function Table({ headers, rows }: { headers: string[]; rows: any[][] }) {
     </div>
   )
 }
+
+async function copyToClipboard(text: string) {
+  try {
+    await navigator.clipboard.writeText(text)
+    toast.success("Copied to clipboard")
+  } catch {
+    toast.error("Failed to copy")
+  }
+}
+
+ 
