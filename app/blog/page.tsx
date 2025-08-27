@@ -26,7 +26,7 @@ export default function BlogPage() {
       title: "Electrical Safety in Tropical Climates",
       excerpt:
         "Essential safety considerations for electrical installations in Cameroon's humid environment. Best practices for protection against moisture and corrosion.",
-      author: "Engr. Akum Bate",
+      author: "Engr. Ekull Joseph Marrion",
       date: "December 5, 2024",
       readTime: "6 min read",
       category: "Safety",
@@ -38,7 +38,7 @@ export default function BlogPage() {
       title: "Smart Home Technology in Buea",
       excerpt:
         "How smart home technology is transforming residential living in Buea. From automated lighting to security systems, explore the possibilities.",
-      author: "Emmanuel Nkeng",
+      author: "Engr. Ekull Joseph Marrion",
       date: "November 28, 2024",
       readTime: "4 min read",
       category: "Smart Home",
@@ -50,7 +50,7 @@ export default function BlogPage() {
       title: "CCTV Security Systems: A Complete Guide",
       excerpt:
         "Everything you need to know about modern CCTV systems. Camera types, installation considerations, and remote monitoring capabilities for Cameroon businesses.",
-      author: "Sarah Mballa",
+      author: "Engr. Ekull Joseph Marrion",
       date: "November 20, 2024",
       readTime: "8 min read",
       category: "Security",
