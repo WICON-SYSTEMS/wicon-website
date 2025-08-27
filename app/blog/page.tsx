@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, User, ArrowRight, Clock } from "lucide-react"
 import Link from "next/link"
+import { NewsletterSignup } from "@/components/newsletter-signup"
 
 export default function BlogPage() {
   const blogPosts = [
@@ -188,10 +189,12 @@ export default function BlogPage() {
               Subscribe to our newsletter for the latest insights on electrical technology, energy solutions, and
               industry updates in Cameroon.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-              <input type="email" placeholder="Enter your email" className="flex-1 px-4 py-3 rounded-lg text-white bg-gray-800" />
-              <Button className="bg-white text-black hover:bg-gray-100 px-6 py-3">Subscribe</Button>
-            </div>
+            {/* Functional signup with success modal */}
+            <NewsletterSignup
+              className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto"
+              inputClassName="flex-1 px-4 py-3 rounded-lg text-white bg-gray-800 placeholder-gray-400 outline-none focus:ring-2 focus:ring-white/30"
+              buttonClassName="bg-white text-black hover:bg-gray-100 px-6 py-3"
+            />
           </div>
         </section>
       </main>
