@@ -1,11 +1,11 @@
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Calendar, User, ArrowRight, Clock } from "lucide-react"
-import Link from "next/link"
-import { NewsletterSignup } from "@/components/newsletter-signup"
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Calendar, User, ArrowRight, Clock } from "lucide-react";
+import Link from "next/link";
+import { NewsletterSignup } from "@/components/newsletter-signup";
 
 export default function BlogPage() {
   const blogPosts = [
@@ -14,7 +14,7 @@ export default function BlogPage() {
       title: "Cutting Down Electricity Costs with Smart Controllers",
       excerpt:
         "Discover how WiCon's wireless controllers can reduce your electricity bills by up to 30% through intelligent monitoring and automated control systems.",
-      author: "Engr. Akum Bate",
+      author: "Engr. Ekull Joseph Marrion",
       date: "December 15, 2024",
       readTime: "5 min read",
       category: "Cost Savings",
@@ -26,7 +26,7 @@ export default function BlogPage() {
       title: "Electrical Safety in Tropical Climates",
       excerpt:
         "Essential safety considerations for electrical installations in Cameroon's humid environment. Best practices for protection against moisture and corrosion.",
-      author: "Paul Talla",
+      author: "Engr. Akum Bate",
       date: "December 5, 2024",
       readTime: "6 min read",
       category: "Safety",
@@ -57,9 +57,15 @@ export default function BlogPage() {
       image: "/cctv-security.jpg",
       href: "/blog/cctv-security-systems-guide",
     },
-  ]
+  ];
 
-  const categories = ["All", "Cost Savings", "Safety", "Smart Home", "Security"]
+  const categories = [
+    "All",
+    "Cost Savings",
+    "Safety",
+    "Smart Home",
+    "Security",
+  ];
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -68,10 +74,12 @@ export default function BlogPage() {
         {/* Hero Section */}
         <section className="bg-gradient-to-b from-gray-50 to-white py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-black mb-6">WiCon Systems Blog</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-black mb-6">
+              WiCon Systems Blog
+            </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Expert insights, tips, and updates on electrical systems, solar energy, and smart technology solutions for
-              Cameroon.
+              Expert insights, tips, and updates on electrical systems, solar
+              energy, and smart technology solutions for Cameroon.
             </p>
           </div>
         </section>
@@ -109,7 +117,10 @@ export default function BlogPage() {
                       <span>{blogPosts[0].readTime}</span>
                     </div>
                     <Button className="w-fit bg-black text-white hover:bg-gray-800">
-                      <Link href={blogPosts[0].href} className="inline-flex items-center">
+                      <Link
+                        href={blogPosts[0].href}
+                        className="inline-flex items-center"
+                      >
                         Read Full Article
                         <ArrowRight className="ml-2 w-4 h-4" />
                       </Link>
@@ -130,7 +141,11 @@ export default function BlogPage() {
                   key={category}
                   variant={category === "All" ? "default" : "outline"}
                   size="sm"
-                  className={category === "All" ? "bg-black text-white" : "bg-transparent"}
+                  className={
+                    category === "All"
+                      ? "bg-black text-white"
+                      : "bg-transparent"
+                  }
                 >
                   {category}
                 </Button>
@@ -144,7 +159,10 @@ export default function BlogPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {blogPosts.slice(1).map((post) => (
-                <Card key={post.id} className="bg-white border-gray-200 hover:shadow-lg transition-shadow">
+                <Card
+                  key={post.id}
+                  className="bg-white border-gray-200 hover:shadow-lg transition-shadow"
+                >
                   <div className="overflow-hidden">
                     <img
                       src={post.image || "/placeholder.svg"}
@@ -156,10 +174,14 @@ export default function BlogPage() {
                     <Badge variant="secondary" className="w-fit mb-2">
                       {post.category}
                     </Badge>
-                    <h3 className="text-xl font-bold text-black leading-tight">{post.title}</h3>
+                    <h3 className="text-xl font-bold text-black leading-tight">
+                      {post.title}
+                    </h3>
                   </CardHeader>
                   <CardContent className="pt-0">
-                    <p className="text-gray-600 text-sm mb-4 leading-relaxed">{post.excerpt}</p>
+                    <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                      {post.excerpt}
+                    </p>
                     <div className="flex items-center text-xs text-gray-500 mb-4">
                       <User className="w-3 h-3 mr-1" />
                       <span className="mr-3">{post.author}</span>
@@ -168,8 +190,15 @@ export default function BlogPage() {
                       <Clock className="w-3 h-3 mr-1" />
                       <span>{post.readTime}</span>
                     </div>
-                    <Button variant="outline" size="sm" className="w-full bg-transparent">
-                      <Link href={post.href} className="inline-flex items-center">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full bg-transparent"
+                    >
+                      <Link
+                        href={post.href}
+                        className="inline-flex items-center"
+                      >
                         Read More
                         <ArrowRight className="ml-2 w-3 h-3" />
                       </Link>
@@ -184,10 +213,12 @@ export default function BlogPage() {
         {/* Newsletter Signup */}
         <section className="py-20 bg-black text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Stay Updated with WiCon Systems</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Stay Updated with WiCon Systems
+            </h2>
             <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Subscribe to our newsletter for the latest insights on electrical technology, energy solutions, and
-              industry updates in Cameroon.
+              Subscribe to our newsletter for the latest insights on electrical
+              technology, energy solutions, and industry updates in Cameroon.
             </p>
             {/* Functional signup with success modal */}
             <NewsletterSignup
@@ -200,5 +231,5 @@ export default function BlogPage() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
