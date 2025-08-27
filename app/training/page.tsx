@@ -54,6 +54,10 @@ export default function TrainingPage() {
     lastName: showVolunteerErrors && !volunteer.lastName.trim(),
     email: showVolunteerErrors && !volunteer.email.trim(),
     phone: showVolunteerErrors && !volunteer.phone.trim(),
+    expertise: showVolunteerErrors && !volunteer.expertise.trim(),
+    years: showVolunteerErrors && !volunteer.years.trim(),
+    currentRole: showVolunteerErrors && !volunteer.currentRole.trim(),
+    availability: showVolunteerErrors && !volunteer.availability.trim(),
     motivation: showVolunteerErrors && !volunteer.motivation.trim(),
     agree: showVolunteerErrors && !volunteer.agree,
   }
@@ -402,29 +406,29 @@ export default function TrainingPage() {
                 Share your expertise and help shape the next generation of tech professionals
               </p>
             </div>
-            <Card className="bg-gray-900 border-gray-700">
+            <Card className="bg-white border-gray-200 shadow-lg">
               <CardContent className="p-8">
                 <div className="mb-8">
                   {/* <h3 className="text-2xl font-bold text-white mb-4">We're Looking for Expert volunteers</h3> */}
-                  <p className="text-gray-300 mb-6 text-center">
+                  <p className="text-gray-600 mb-6 text-center">
                     Join our team of industry professionals and help deliver world-class training in software
                     development, IoT solutions, and WiCon controller technology.
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     <div className="text-center">
-                      <Code className="w-8 h-8 mx-auto mb-2 text-white" />
-                      <h4 className="font-semibold text-white">Software Development</h4>
-                      <p className="text-sm text-gray-400">React, Next.js, Mobile Apps</p>
+                      <Code className="w-8 h-8 mx-auto mb-2 text-blue-600" />
+                      <h4 className="font-semibold text-gray-900">Software Development</h4>
+                      <p className="text-sm text-gray-600">React, Next.js, Mobile Apps</p>
                     </div>
                     <div className="text-center">
-                      <Cpu className="w-8 h-8 mx-auto mb-2 text-white" />
-                      <h4 className="font-semibold text-white">IoT Solutions</h4>
-                      <p className="text-sm text-gray-400">Hardware, Sensors, Automation</p>
+                      <Cpu className="w-8 h-8 mx-auto mb-2 text-blue-600" />
+                      <h4 className="font-semibold text-gray-900">IoT Solutions</h4>
+                      <p className="text-sm text-gray-600">Hardware, Sensors, Automation</p>
                     </div>
                     <div className="text-center">
-                      <Zap className="w-8 h-8 mx-auto mb-2 text-white" />
-                      <h4 className="font-semibold text-white">WiCon Controllers</h4>
-                      <p className="text-sm text-gray-400">Installation, Programming</p>
+                      <Zap className="w-8 h-8 mx-auto mb-2 text-blue-600" />
+                      <h4 className="font-semibold text-gray-900">WiCon Controllers</h4>
+                      <p className="text-sm text-gray-600">Installation, Programming</p>
                     </div>
                   </div>
                 </div>
@@ -432,7 +436,7 @@ export default function TrainingPage() {
                 <form className="space-y-6" onSubmit={handleVolunteerSubmit} aria-busy={submittingVolunteer}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <Label htmlFor="volunteerFirstName" className="text-white">
+                      <Label htmlFor="volunteerFirstName" className="text-sm font-medium text-black">
                         First Name *
                       </Label>
                       <Input
@@ -440,13 +444,13 @@ export default function TrainingPage() {
                         placeholder="Enter your first name"
                         value={volunteer.firstName}
                         onChange={(e) => setVolunteer((p) => ({ ...p, firstName: e.target.value }))}
-                        className="mt-1 bg-gray-800 border-gray-600 text-white"
+                        className={`mt-1 ${volunteerErrors.firstName ? 'border-red-500' : ''}`}
                         aria-invalid={volunteerErrors.firstName || undefined}
                       />
-                      {volunteerErrors.firstName && <p className="text-sm text-red-400 mt-1">First name is required</p>}
+                      {volunteerErrors.firstName && <p className="text-sm text-red-500 mt-1">First name is required</p>}
                     </div>
                     <div>
-                      <Label htmlFor="volunteerLastName" className="text-white">
+                      <Label htmlFor="volunteerLastName" className="text-sm font-medium text-black">
                         Last Name *
                       </Label>
                       <Input
@@ -454,15 +458,15 @@ export default function TrainingPage() {
                         placeholder="Enter your last name"
                         value={volunteer.lastName}
                         onChange={(e) => setVolunteer((p) => ({ ...p, lastName: e.target.value }))}
-                        className="mt-1 bg-gray-800 border-gray-600 text-white"
+                        className={`mt-1 ${volunteerErrors.lastName ? 'border-red-500' : ''}`}
                         aria-invalid={volunteerErrors.lastName || undefined}
                       />
-                      {volunteerErrors.lastName && <p className="text-sm text-red-400 mt-1">Last name is required</p>}
+                      {volunteerErrors.lastName && <p className="text-sm text-red-500 mt-1">Last name is required</p>}
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <Label htmlFor="volunteerEmail" className="text-white">
+                      <Label htmlFor="volunteerEmail" className="text-sm font-medium text-black">
                         Email Address *
                       </Label>
                       <Input
@@ -471,35 +475,36 @@ export default function TrainingPage() {
                         placeholder="your.email@example.com"
                         value={volunteer.email}
                         onChange={(e) => setVolunteer((p) => ({ ...p, email: e.target.value }))}
-                        className="mt-1 bg-gray-800 border-gray-600 text-white"
+                        className={`mt-1 ${volunteerErrors.email ? 'border-red-500' : ''}`}
                         aria-invalid={volunteerErrors.email || undefined}
                       />
-                      {volunteerErrors.email && <p className="text-sm text-red-400 mt-1">Email is required</p>}
+                      {volunteerErrors.email && <p className="text-sm text-red-500 mt-1">Email is required</p>}
                     </div>
                     <div>
-                      <Label htmlFor="volunteerPhone" className="text-white">
+                      <Label htmlFor="volunteerPhone" className="text-sm font-medium text-black">
                         Phone Number *
                       </Label>
                       <Input
                         id="volunteerPhone"
+                        type="tel"
                         placeholder="+237 6XX XXX XXX"
                         value={volunteer.phone}
                         onChange={(e) => setVolunteer((p) => ({ ...p, phone: e.target.value }))}
-                        className="mt-1 bg-gray-800 border-gray-600 text-white"
+                        className={`mt-1 ${volunteerErrors.phone ? 'border-red-500' : ''}`}
                         aria-invalid={volunteerErrors.phone || undefined}
                       />
-                      {volunteerErrors.phone && <p className="text-sm text-red-400 mt-1">Phone is required</p>}
+                      {volunteerErrors.phone && <p className="text-sm text-red-500 mt-1">Phone number is required</p>}
                     </div>
                   </div>
                   <div>
-                    <Label htmlFor="expertise" className="text-white">
+                    <Label htmlFor="expertise" className="text-sm font-medium text-black">
                       Area of Expertise *
                     </Label>
                     <Select value={volunteer.expertise} onValueChange={(v) => setVolunteer((p) => ({ ...p, expertise: v }))}>
-                      <SelectTrigger className="mt-1 bg-gray-800 border-gray-600 text-white">
+                      <SelectTrigger className={`mt-1 ${volunteerErrors.expertise ? 'border-red-500' : ''}`}>
                         <SelectValue placeholder="Select your primary expertise" />
                       </SelectTrigger>
-                      <SelectContent className="bg-gray-800 border-gray-600">
+                      <SelectContent>
                         <SelectItem value="software">Software Development</SelectItem>
                         <SelectItem value="iot">IoT Solutions & Hardware</SelectItem>
                         <SelectItem value="wicon">WiCon Controller Systems</SelectItem>
@@ -508,34 +513,37 @@ export default function TrainingPage() {
                         <SelectItem value="multiple">Multiple Areas</SelectItem>
                       </SelectContent>
                     </Select>
+                    {volunteerErrors.expertise && <p className="text-sm text-red-500 mt-1">Area of expertise is required</p>}
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <Label htmlFor="volunteerExperience" className="text-white">
+                      <Label htmlFor="volunteerExperience" className="text-sm font-medium text-black">
                         Years of Experience *
                       </Label>
                       <Select value={volunteer.years} onValueChange={(v) => setVolunteer((p) => ({ ...p, years: v }))}>
-                        <SelectTrigger className="mt-1 bg-gray-800 border-gray-600 text-white">
+                        <SelectTrigger className={`mt-1 ${volunteerErrors.years ? 'border-red-500' : ''}`}>
                           <SelectValue placeholder="Select experience level" />
                         </SelectTrigger>
-                        <SelectContent className="bg-gray-800 border-gray-600">
-                        <SelectItem value="0-1">0-1 years</SelectItem>
-                        <SelectItem value="1-2">1-2 years</SelectItem>
+                        <SelectContent>
+                          <SelectItem value="0-1">0-1 years</SelectItem>
+                          <SelectItem value="1-2">1-2 years</SelectItem>
+                          <SelectItem value="2-3">2-3 years</SelectItem>
                           <SelectItem value="3-5">3-5 years</SelectItem>
                           <SelectItem value="5-10">5-10 years</SelectItem>
                           <SelectItem value="10+">10+ years</SelectItem>
                         </SelectContent>
                       </Select>
+                      {volunteerErrors.years && <p className="text-sm text-red-500 mt-1">Years of experience is required</p>}
                     </div>
                     <div>
-                      <Label htmlFor="teachingExperience" className="text-white">
+                      <Label htmlFor="teachingExperience" className="text-sm font-medium text-black">
                         Teaching/Training Experience
                       </Label>
                       <Select value={volunteer.teaching} onValueChange={(v) => setVolunteer((p) => ({ ...p, teaching: v }))}>
-                        <SelectTrigger className="mt-1 bg-gray-800 border-gray-600 text-white">
+                        <SelectTrigger className="mt-1">
                           <SelectValue placeholder="Select teaching experience" />
                         </SelectTrigger>
-                        <SelectContent className="bg-gray-800 border-gray-600">
+                        <SelectContent>
                           <SelectItem value="none">No formal teaching experience</SelectItem>
                           <SelectItem value="some">Some training/mentoring experience</SelectItem>
                           <SelectItem value="experienced">Experienced volunteer/educator</SelectItem>
@@ -544,7 +552,7 @@ export default function TrainingPage() {
                     </div>
                   </div>
                   <div>
-                    <Label htmlFor="currentRole" className="text-white">
+                    <Label htmlFor="currentRole" className="text-sm font-medium text-black">
                       Current Role/Position *
                     </Label>
                     <Input
@@ -552,12 +560,13 @@ export default function TrainingPage() {
                       placeholder="e.g., Senior Software Engineer, IoT Consultant"
                       value={volunteer.currentRole}
                       onChange={(e) => setVolunteer((p) => ({ ...p, currentRole: e.target.value }))}
-                      className="mt-1 bg-gray-800 border-gray-600 text-white"
-                      aria-invalid={volunteerErrors.motivation || undefined}
+                      className={`mt-1 ${volunteerErrors.currentRole ? 'border-red-500' : ''}`}
+                      aria-invalid={volunteerErrors.currentRole || undefined}
                     />
+                    {volunteerErrors.currentRole && <p className="text-sm text-red-500 mt-1">Current role is required</p>}
                   </div>
                   <div>
-                    <Label htmlFor="company" className="text-white">
+                    <Label htmlFor="company" className="text-sm font-medium text-black">
                       Current Company/Organization
                     </Label>
                     <Input
@@ -565,26 +574,27 @@ export default function TrainingPage() {
                       placeholder="Company or organization name"
                       value={volunteer.company}
                       onChange={(e) => setVolunteer((p) => ({ ...p, company: e.target.value }))}
-                      className="mt-1 bg-gray-800 border-gray-600 text-white"
+                      className="mt-1"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="availability" className="text-white">
+                    <Label htmlFor="availability" className="text-sm font-medium text-black">
                       Availability for October 2025 Program *
                     </Label>
                     <Select value={volunteer.availability} onValueChange={(v) => setVolunteer((p) => ({ ...p, availability: v }))}>
-                      <SelectTrigger className="mt-1 bg-gray-800 border-gray-600 text-white">
+                      <SelectTrigger className={`mt-1 ${volunteerErrors.availability ? 'border-red-500' : ''}`}>
                         <SelectValue placeholder="Select your availability" />
                       </SelectTrigger>
-                      <SelectContent className="bg-gray-800 border-gray-600">
+                      <SelectContent>
                         <SelectItem value="full-time">Full-time (4 weeks)</SelectItem>
                         <SelectItem value="part-time">Part-time (specific days/hours)</SelectItem>
                         <SelectItem value="guest">Guest sessions only</SelectItem>
                       </SelectContent>
                     </Select>
+                    {volunteerErrors.availability && <p className="text-sm text-red-500 mt-1">Availability is required</p>}
                   </div>
                   <div>
-                    <Label htmlFor="volunteerMotivation" className="text-white">
+                    <Label htmlFor="volunteerMotivation" className="text-sm font-medium text-black">
                       Why do you want to be a volunteer? *
                     </Label>
                     <Textarea
@@ -592,14 +602,14 @@ export default function TrainingPage() {
                       placeholder="Tell us about your passion for teaching and what you hope to contribute..."
                       value={volunteer.motivation}
                       onChange={(e) => setVolunteer((p) => ({ ...p, motivation: e.target.value }))}
-                      className="mt-1 bg-gray-800 border-gray-600 text-white"
+                      className={`mt-1 min-h-[120px] ${volunteerErrors.motivation ? 'border-red-500' : ''}`}
                       rows={4}
                       aria-invalid={volunteerErrors.motivation || undefined}
                     />
-                    {volunteerErrors.motivation && <p className="text-sm text-red-400 mt-1">Motivation is required</p>}
+                    {volunteerErrors.motivation && <p className="text-sm text-red-500 mt-1">Motivation is required</p>}
                   </div>
                   <div>
-                    <Label htmlFor="resume" className="text-white">
+                    <Label htmlFor="resume" className="text-sm font-medium text-black">
                       Resume/CV Upload
                     </Label>
                     <Input
@@ -607,18 +617,18 @@ export default function TrainingPage() {
                       type="file"
                       accept=".pdf,.doc,.docx"
                       onChange={(e) => setVolunteer((p) => ({ ...p, resume: e.target.files && e.target.files[0] ? e.target.files[0] : null }))}
-                      className="mt-1 bg-gray-800 border-gray-600 text-white file:bg-gray-700 file:text-white file:border-0"
+                      className="mt-1"
                     />
-                    <p className="text-sm text-gray-400 mt-1">Upload your resume (PDF, DOC, or DOCX format)</p>
+                    <p className="text-sm text-gray-600 mt-1">Upload your resume (PDF, DOC, or DOCX format)</p>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Checkbox id="volunteerTerms" className="border-gray-600" checked={volunteer.agree} onCheckedChange={(c) => setVolunteer((p) => ({ ...p, agree: Boolean(c) }))} />
-                    <Label htmlFor="volunteerTerms" className="text-sm text-white">
+                    <Checkbox id="volunteerTerms" checked={volunteer.agree} onCheckedChange={(c) => setVolunteer((p) => ({ ...p, agree: Boolean(c) }))} />
+                    <Label htmlFor="volunteerTerms" className="text-sm text-gray-700">
                       I agree to the volunteer terms and conditions and commit to the program requirements *
                     </Label>
                   </div>
-                  {volunteerErrors.agree && <p className="text-sm text-red-400">You must accept the terms</p>}
-                  <Button className="w-full bg-white text-black hover:bg-gray-100 py-3" type="submit" disabled={submittingVolunteer} aria-busy={submittingVolunteer}>
+                  {volunteerErrors.agree && <p className="text-sm text-red-500">You must accept the terms</p>}
+                  <Button className="w-full bg-black text-white hover:bg-gray-800 py-3" type="submit" disabled={submittingVolunteer} aria-busy={submittingVolunteer}>
                     {submittingVolunteer && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                     {submittingVolunteer ? 'Submitting...' : 'Submit Volunteer Application'}
                   </Button>

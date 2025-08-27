@@ -69,10 +69,17 @@ The WiCon Systems website is a content-first, responsive marketing platform buil
 - **[Lucide Icons](https://lucide.dev/)** - Beautiful icon library
 - **[shadcn/ui](https://ui.shadcn.com/)** - Re-usable component system
 
+### Backend & Database
+
+- **[Supabase](https://supabase.com/)** - Backend-as-a-Service with PostgreSQL
+- **[Prisma](https://www.prisma.io/)** - Type-safe database ORM
+- **[Nodemailer](https://nodemailer.com/)** - Email sending functionality
+
 ### Forms & Validation
 
 - **[React Hook Form](https://react-hook-form.com/)** - Performant forms library
 - **[Zod](https://zod.dev/)** - TypeScript-first schema validation
+- **[Sonner](https://sonner.emilkowal.ski/)** - Toast notifications
 
 ### Development Tools
 
@@ -155,6 +162,49 @@ Ensure you have the following installed:
 4. **Open in browser**
 
    Navigate to [http://localhost:3000](http://localhost:3000)
+
+### Environment Setup
+
+Create a `.env.local` file in the project root with the following variables:
+
+```bash
+# Database Configuration
+DATABASE_URL="postgresql://user:password@host:port/database?sslmode=require&statement_cache_size=0"
+DIRECT_URL="postgresql://user:password@host:port/database?sslmode=require"
+
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL="https://your-project.supabase.co"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="your-anon-key"
+SUPABASE_SERVICE_ROLE_KEY="your-service-role-key"
+
+# Email Configuration (Gmail SMTP)
+EMAIL_USER="your-email@gmail.com"
+EMAIL_PASS="your-app-password"
+ADMIN_EMAIL="admin@wicon-systems.com"
+
+# Admin Panel Authentication
+ADMIN_USERNAME="admin"
+ADMIN_PASSCODE="your-secure-passcode"
+```
+
+### Backend Setup
+
+1. **Set up Supabase project** at [supabase.com](https://supabase.com)
+2. **Configure database connection** in `.env.local`
+3. **Run Prisma migrations**:
+   ```bash
+   pnpm prisma generate
+   pnpm prisma db push
+   ```
+4. **Create storage buckets** in Supabase:
+   - `internship-applications` (for CV uploads)
+   - `training-applications` (for document uploads)
+
+### Email Configuration
+
+1. **Enable 2FA** on your Gmail account
+2. **Generate app password** in Google Account settings
+3. **Configure environment variables** with your credentials
 
 ### Quick Commands
 
