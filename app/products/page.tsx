@@ -18,6 +18,7 @@ import {
   CheckCircle,
   ArrowRight,
 } from "lucide-react"
+import Link from "next/link"
 
 export default function ProductsPage() {
   return (
@@ -291,16 +292,20 @@ export default function ProductsPage() {
               Contact our experts for a free consultation and customized quote for your electrical project.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact">
               <Button size="lg" className="bg-white text-black hover:bg-gray-300 px-8 py-3 cursor-pointer">
                 Get Free Consultation
               </Button>
+              </Link>
+              <Link href="tel:+237670791815">
               <Button
-                size="lg"
+                size="lg" 
                 variant="outline"
                 className="border-white text-white hover:bg-white hover:text-black px-8 py-3 bg-transparent cursor-pointer"
               >
                 Call +237 670791815
               </Button>
+              </Link>
             </div>
           </div>
         </section>
