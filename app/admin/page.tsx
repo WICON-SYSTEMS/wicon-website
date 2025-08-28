@@ -395,7 +395,7 @@ export default function AdminPage() {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 
-                <h1 className="text-2xl font-semibold">Admin</h1>
+                <h1 className="text-2xl font-semibold capitalize">{activeTab} </h1>
               </div>
               <div className="flex items-center gap-3">
                 {activeTab === "subscribers" && (
