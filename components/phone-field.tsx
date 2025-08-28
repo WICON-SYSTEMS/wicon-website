@@ -3,6 +3,7 @@
 import PhoneInput from "react-phone-number-input"
 import type { Value } from "react-phone-number-input"
 import type { CountryCode } from "libphonenumber-js/core"
+import flags from "react-phone-number-input/flags"
 import 'react-phone-number-input/style.css'
 import { forwardRef } from "react"
 
@@ -26,6 +27,7 @@ const PhoneField = forwardRef<HTMLInputElement, PhoneFieldProps>(function PhoneF
       international
       countryCallingCodeEditable={false}
       defaultCountry={defaultCountry}
+      flags={flags}
       value={value as Value}
       onChange={onChange as unknown as (value: Value) => void}
       placeholder={placeholder}
