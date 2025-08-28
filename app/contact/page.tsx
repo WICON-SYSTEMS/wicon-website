@@ -502,16 +502,8 @@ export default function ContactPage() {
               <p className="text-xl text-gray-600">Located in the heart of Buea, Southwest Region</p>
             </div>
             <div className="bg-white rounded-lg shadow-lg overflow-hidden relative">
-              {mapLoading && (
-                <div className="absolute inset-0 flex items-center justify-center bg-gray-50 z-10">
-                  <div className="flex items-center space-x-3">
-                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-600"></div>
-                    <span className="text-gray-600 font-medium">Loading Map...</span>
-                  </div>
-                </div>
-              )}
               <iframe
-                src="https://www.google.com/maps/place/4%C2%B009'08.1%22N+9%C2%B014'10.1%22E/@4.1520186,9.2361329,21z/data=!4m4!3m3!8m2!3d4.152243!4d9.236124?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D"
+                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3979.345749657581!2d9.236124000000002!3d4.1522429999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNMKwMDknMDguMSJOIDnCsDE0JzEwLjEiRQ!5e0!3m2!1sen!2scm!4v1756391783305!5m2!1sen!2scm"
                 width="100%"
                 height="400"
                 style={{ border: 0 }}
