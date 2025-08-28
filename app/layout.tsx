@@ -5,6 +5,7 @@ import { Toaster } from "sonner"
 import "./globals.css"
 //! TO BE USED IF NECESSARY
 // import RouteLoader from "@/components/route-loader" 
+import TopProgress from "@/components/top-progress"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -86,6 +87,7 @@ html {
       </head>
       <body className={inter.className}>
         {/* <RouteLoader /> */}
+        <TopProgress />
         {children}
         <Toaster richColors position="top-center" />
       </body>
