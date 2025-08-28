@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { sendMail } from '@/lib/email'
+import { supabaseServer } from '@/lib/supabase/server'
 
 export async function POST(req: Request) {
   try {
@@ -13,6 +14,27 @@ export async function POST(req: Request) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
       return NextResponse.json({ ok: false, error: 'Invalid email address' }, { status: 400 })
+    }
+
+    // Persist to database via Supabase
+    const id = crypto.randomUUID()
+    const { data: inserted, error: insertError } = await supabaseServer
+      .from('partnership_interests')
+      .insert({
+        id,
+        name,
+        organization,
+        email,
+        phone,
+        partnership_type: partnershipType,
+        message,
+        agreed_terms: !!agree,
+      })
+      .select()
+      .single()
+
+    if (insertError) {
+      return NextResponse.json({ ok: false, error: insertError.message }, { status: 500 })
     }
 
     // Send confirmation email to partner
@@ -62,6 +84,7 @@ export async function POST(req: Request) {
               <p><strong>Message:</strong></p>
               <p style="white-space: pre-wrap;">${message}</p>
               <p style="margin-top: 8px; color: #6b7280; font-size: 12px;">Submitted: ${new Date().toLocaleString()}</p>
+              <p style="margin-top: 8px; color: #6b7280; font-size: 12px;">ID: ${inserted?.id || ''}</p>
             </div>
           </div>
         `

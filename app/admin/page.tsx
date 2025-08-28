@@ -57,6 +57,17 @@ type Subscriber = BaseItem & {
   unsubscribed_at?: string | null
 }
 
+type PartnershipInterest = BaseItem & {
+  name: string
+  organization: string
+  email: string
+  phone: string
+  partnership_type: string
+  status?: string
+  reviewed_at?: string
+  created_at?: string
+}
+
 function Pagination({ total, page, pageSize, onPageChange }: { total: number; page: number; pageSize: number; onPageChange: (p: number) => void }) {
   const totalPages = Math.max(1, Math.ceil(total / pageSize))
   if (totalPages <= 1) return null
@@ -77,7 +88,7 @@ export default function AdminPage() {
   const [username, setUsername] = useState("")
   const [passcode, setPasscode] = useState("")
   const [saved, setSaved] = useState(false)
-  const [activeTab, setActiveTab] = useState<"internships" | "registrations" | "volunteers" | "subscribers">("internships")
+  const [activeTab, setActiveTab] = useState<"internships" | "registrations" | "volunteers" | "partners" | "subscribers">("internships")
   const [q, setQ] = useState("")
   const [dateFilter, setDateFilter] = useState<"all" | "today" | "yesterday" | "week" | "month">("all")
   const [loading, setLoading] = useState(false)
@@ -89,6 +100,7 @@ export default function AdminPage() {
   const [pageReg, setPageReg] = useState(1)
   const [pageVol, setPageVol] = useState(1)
   const [pageSub, setPageSub] = useState(1)
+  const [pagePartners, setPagePartners] = useState(1)
   const pageSize = 10
   
   function StatusBadge({ status }: { status: string }) {
@@ -110,6 +122,7 @@ export default function AdminPage() {
   const [registrations, setRegistrations] = useState<TrainingRegistration[]>([])
   const [volunteers, setVolunteers] = useState<TrainingVolunteer[]>([])
   const [subscribers, setSubscribers] = useState<Subscriber[]>([])
+  const [partners, setPartners] = useState<PartnershipInterest[]>([])
 
   useEffect(() => {
     const storedUser = typeof window !== "undefined" ? localStorage.getItem(STORAGE_USER) : null
@@ -164,6 +177,8 @@ export default function AdminPage() {
         ? "/api/admin/training/registrations"
         : activeTab === "volunteers"
         ? "/api/admin/training/volunteers"
+        : activeTab === "partners"
+        ? "/api/admin/training/partners"
         : "/api/admin/subscribers"
       const url = q ? `${urlBase}?q=${encodeURIComponent(q)}` : urlBase
       const res = await fetch(url, { headers })
@@ -173,6 +188,7 @@ export default function AdminPage() {
       if (activeTab === "registrations") setRegistrations(data.items)
       if (activeTab === "volunteers") setVolunteers(data.items)
       if (activeTab === "subscribers") setSubscribers(data.items)
+      if (activeTab === "partners") setPartners(data.items)
     } catch (e: any) {
       setError(e?.message || "Failed to load")
     } finally {
@@ -279,7 +295,7 @@ export default function AdminPage() {
 
   const tabButtons = (
     <div className="flex gap-2 mb-4">
-      {(["internships","registrations","volunteers","subscribers"] as const).map(t => (
+      {(["internships","registrations","volunteers","partners","subscribers"] as const).map(t => (
         <button
           key={t}
           onClick={() => setActiveTab(t)}
@@ -466,6 +482,31 @@ export default function AdminPage() {
             )}
             <div className="mt-2 text-sm text-gray-500">
               Showing {filtered.length} of {subscribers.length} subscribers
+            </div>
+          </>
+        )
+      })()}
+
+      {activeTab === "partners" && (() => {
+        const filtered = filterByDate(partners, dateFilter)
+        return (
+          <>
+            <Table
+              headers={["Name","Organization","Email","Phone","Interest","Status"]}
+              rows={paginate(filtered, pagePartners).map(p=>[
+                p.name,
+                p.organization,
+                p.email,
+                p.phone,
+                p.partnership_type,
+                p.status || 'new',
+              ])}
+            />
+            {filtered.length > pageSize && (
+              <Pagination total={filtered.length} page={pagePartners} pageSize={pageSize} onPageChange={setPagePartners} />
+            )}
+            <div className="mt-2 text-sm text-gray-500">
+              Showing {filtered.length} of {partners.length} partnership interests
             </div>
           </>
         )

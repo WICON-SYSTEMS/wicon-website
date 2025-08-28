@@ -64,8 +64,8 @@ function brandedHtml(inner: string) {
   // Normalize minimal bodies
   const body = inner?.trim() ? inner : `<p>Thank you for your submission.</p>`
   const logoBlock = BRAND_LOGO_URL
-    ? `<img src="${BRAND_LOGO_URL}" alt="${BRAND_NAME} logo" width="140" height="40" style="display:block;height:auto;max-width:140px;" />`
-    : `<div style="font-weight:700;font-size:20px;color:#111827;">${BRAND_NAME}</div>`
+    ? `<div style="font-weight:700;font-size:20px;color:#FFFFFF;">${BRAND_NAME}</div>`
+    : `<img src="${BRAND_LOGO_URL}" alt="${BRAND_NAME} logo" width="140" height="40" style="display:block;height:auto;max-width:140px;" />`
 
   return `<!doctype html>
 <html lang="en">
@@ -94,7 +94,7 @@ function brandedHtml(inner: string) {
             <tr>
               <td style="padding:0 24px 24px 24px;color:#6b7280;">
                 <hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0;" />
-                <p style="margin:6px 0 0 0;font-size:12px;line-height:1.5;">This is an automated message from ${BRAND_NAME}. Please do not reply to this email. If you have questions, contact support@wiconsystems.com.</p>
+                <p style="margin:6px 0 0 0;font-size:12px;line-height:1.5;">This is an automated message from ${BRAND_NAME}. Please do not reply to this email. If you have questions, contact contactwiconsystems@gmail.com</p>
               </td>
             </tr>
             <tr>

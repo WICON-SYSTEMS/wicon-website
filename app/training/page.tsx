@@ -34,6 +34,15 @@ import {
 
 import { useState } from "react";
 import { toast } from "sonner";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
 
 export default function TrainingPage() {
   // Volunteer form state
@@ -78,6 +87,7 @@ export default function TrainingPage() {
     message: "",
     agree: false,
   });
+  const [showPartnerSuccess, setShowPartnerSuccess] = useState(false);
   const [submittingPartner, setSubmittingPartner] = useState(false);
   const [showPartnerErrors, setShowPartnerErrors] = useState(false);
 
@@ -118,7 +128,7 @@ export default function TrainingPage() {
       });
       const data = await res.json();
       if (!res.ok || !data.ok) throw new Error(data?.error || "Submission failed");
-      toast.success("Thanks! We'll reach out about partnership opportunities.");
+      setShowPartnerSuccess(true);
       setPartner({
         name: "",
         organization: "",
@@ -640,19 +650,19 @@ export default function TrainingPage() {
                   <div>
                     <Label htmlFor="partnershipType">Partnership Interest *</Label>
                     <Select
-                      value={partner.partnershipType}
+                      value={partner.partnershipType}                      
                       onValueChange={(v) => setPartner((p) => ({ ...p, partnershipType: v }))}
                     >
-                      <SelectTrigger className={`mt-1 ${partnerErrors.partnershipType ? "border-red-500" : ""}`}>
+                      <SelectTrigger className={`mt-1 cursor-pointer ${partnerErrors.partnershipType ? "border-red-500" : ""}`}>
                         <SelectValue placeholder="Select partnership type" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="sponsorship">Sponsorship</SelectItem>
-                        <SelectItem value="training-support">Training Support</SelectItem>
-                        <SelectItem value="equipment-donation">Equipment Donation</SelectItem>
-                        <SelectItem value="venue-logistics">Venue / Logistics</SelectItem>
-                        <SelectItem value="internship-pipeline">Internship Pipeline</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
+                        <SelectItem className="cursor-pointer" value="sponsorship">Sponsorship</SelectItem>
+                        <SelectItem className="cursor-pointer" value="training-support">Training Support</SelectItem>
+                        <SelectItem className="cursor-pointer" value="equipment-donation">Equipment Donation</SelectItem>
+                        <SelectItem className="cursor-pointer" value="venue-logistics">Venue / Logistics</SelectItem>
+                        <SelectItem className="cursor-pointer" value="internship-pipeline">Internship Pipeline</SelectItem>
+                        <SelectItem className="cursor-pointer" value="other">Other</SelectItem>
                       </SelectContent>
                     </Select>
                     {partnerErrors.partnershipType && (
@@ -678,6 +688,7 @@ export default function TrainingPage() {
                     <Checkbox
                       id="partnerAgree"
                       checked={partner.agree}
+                      className="cursor-pointer"
                       onCheckedChange={(c) => setPartner((p) => ({ ...p, agree: Boolean(c) }))}
                     />
                     <Label htmlFor="partnerAgree" className="text-sm">
@@ -701,6 +712,23 @@ export default function TrainingPage() {
             </Card>
           </div>
         </section>
+
+        {/* Partnership Success Modal */}
+        <Dialog open={showPartnerSuccess} onOpenChange={setShowPartnerSuccess}>
+          <DialogContent aria-describedby="partner-success-description">
+            <DialogHeader>
+              <DialogTitle>Thank you for your interest!</DialogTitle>
+              <DialogDescription id="partner-success-description">
+                Your partnership request has been received. We'll reach out to you shortly with next steps.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button className="bg-black text-white hover:bg-gray-800">Done</Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
 
         {/* volunteer Registration */}
         <section
