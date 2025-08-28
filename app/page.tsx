@@ -3,6 +3,7 @@ import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import styles from "./page.module.css";
 import { Card, CardContent } from "@/components/ui/card";
+import RevealOnScroll from "@/components/reveal-on-scroll";
 import {
   Shield,
   DollarSign,
@@ -25,8 +26,10 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
+        {/* Scroll reveal controller for this page only */}
+        <RevealOnScroll />
         {/* Hero Section */}
-        <section className={`g-gradient-to-b from-gray-50 to-white pt-10 ${styles.fadeUp}`}>
+        <section data-reveal className={`bg-gradient-to-b from-gray-50 to-white pt-10 ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -88,19 +91,19 @@ export default function HomePage() {
         </section>
 
         {/* Value Proposition Section */}
-        <section className="py-5 md:py-20 bg-white">
+        <section data-reveal className={`py-5 md:py-20 bg-white ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+            <div className={`text-center mb-16`}>
+              <h2 data-reveal className={`text-3xl md:text-4xl font-bold text-black mb-4 ${styles.reveal}`}>
                 Why Choose WiCon Systems?
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p data-reveal className={`text-xl text-gray-600 max-w-3xl mx-auto ${styles.reveal} ${styles.st1}`}>
                 Over 10 years of expertise delivering safe, reliable, and
                 innovative technology solutions
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card className="border-gray-200 hover:shadow-lg transition-shadow">
+              <Card data-reveal className={`border-gray-200 hover:shadow-lg transition-shadow ${styles.reveal}`}>
                 <CardContent className="p-8 text-center">
                   <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
                     <Shield className="w-8 h-8 text-white" />
@@ -115,7 +118,7 @@ export default function HomePage() {
                   </p>
                 </CardContent>
               </Card>
-              <Card className="border-gray-200 hover:shadow-lg transition-shadow">
+              <Card data-reveal className={`border-gray-200 hover:shadow-lg transition-shadow ${styles.reveal} ${styles.st1}`}>
                 <CardContent className="p-8 text-center">
                   <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
                     <DollarSign className="w-8 h-8 text-white" />
@@ -130,7 +133,7 @@ export default function HomePage() {
                   </p>
                 </CardContent>
               </Card>
-              <Card className="border-gray-200 hover:shadow-lg transition-shadow">
+              <Card data-reveal className={`border-gray-200 hover:shadow-lg transition-shadow ${styles.reveal} ${styles.st2}`}>
                 <CardContent className="p-8 text-center">
                   <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
                     <Users className="w-8 h-8 text-white" />
@@ -150,19 +153,19 @@ export default function HomePage() {
         </section>
 
         {/* Featured Products Section */}
-        <section className="py-20 bg-gray-50">
+        <section data-reveal className={`py-20 bg-gray-50 ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+              <h2 data-reveal className={`text-3xl md:text-4xl font-bold text-black mb-4 ${styles.reveal}`}>
                 Our Technology Solutions & Services
               </h2>
-              <p className="text-xl text-gray-600">
+              <p data-reveal className={`text-xl text-gray-600 ${styles.reveal} ${styles.st1}`}>
                 Complete electrical, software, and IoT solutions for residential
                 and commercial needs
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <Card className="bg-white border-gray-200 hover:shadow-lg transition-shadow">
+              <Card data-reveal className={`bg-white border-gray-200 hover:shadow-lg transition-shadow ${styles.reveal}`}>
                 <CardContent className="p-6">
                   <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
                     <Zap className="w-6 h-6 text-white" />
@@ -170,20 +173,13 @@ export default function HomePage() {
                   <h3 className="text-lg font-bold text-black mb-2">
                     WiCon Wireless Controllers
                   </h3>
-                  <p className="text-gray-600 text-sm mb-4">
-                    Remote control and monitoring of electrical facilities with
-                    advanced safety features and IoT integration.
+                  <p className="text-gray-600">
+                    Control lighting, power, and systems wirelessly with
+                    reliable, secure controllers.
                   </p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="w-full bg-transparent"
-                  >
-                    Learn More
-                  </Button>
                 </CardContent>
               </Card>
-              <Card className="bg-white border-gray-200 hover:shadow-lg transition-shadow">
+              <Card data-reveal className={`bg-white border-gray-200 hover:shadow-lg transition-shadow ${styles.reveal} ${styles.st1}`}>
                 <CardContent className="p-6">
                   <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
                     <Code className="w-6 h-6 text-white" />
@@ -194,17 +190,10 @@ export default function HomePage() {
                   <p className="text-gray-600 text-sm mb-4">
                     Tailored software applications, web platforms, and mobile
                     apps to digitize and streamline your business operations.
-                  </p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="w-full bg-transparent"
-                  >
-                    Learn More
-                  </Button>
+                  </p>                
                 </CardContent>
               </Card>
-              <Card className="bg-white border-gray-200 hover:shadow-lg transition-shadow">
+              <Card data-reveal className={`bg-white border-gray-200 hover:shadow-lg transition-shadow ${styles.reveal} ${styles.st2}`}>
                 <CardContent className="p-6">
                   <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
                     <Cpu className="w-6 h-6 text-white" />
@@ -215,14 +204,7 @@ export default function HomePage() {
                   <p className="text-gray-600 text-sm mb-4">
                     Smart sensors, connected devices, and automation systems for
                     intelligent monitoring and control.
-                  </p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="w-full bg-transparent"
-                  >
-                    Learn More
-                  </Button>
+                  </p>                 
                 </CardContent>
               </Card>
               {/* <Card className="bg-white border-gray-200 hover:shadow-lg transition-shadow">
@@ -240,7 +222,7 @@ export default function HomePage() {
                   </Button>
                 </CardContent>
               </Card> */}
-              <Card className="bg-white border-gray-200 hover:shadow-lg transition-shadow">
+              <Card data-reveal className={`bg-white border-gray-200 hover:shadow-lg transition-shadow ${styles.reveal} ${styles.st3}`}>
                 <CardContent className="p-6">
                   <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
                     <Wrench className="w-6 h-6 text-white" />
@@ -252,16 +234,10 @@ export default function HomePage() {
                     Professional domestic electrical installations meeting all
                     safety standards with smart home integration.
                   </p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="w-full bg-transparent"
-                  >
-                    Learn More
-                  </Button>
+                 
                 </CardContent>
               </Card>
-              <Card className="bg-white border-gray-200 hover:shadow-lg transition-shadow">
+              <Card data-reveal className={`bg-white border-gray-200 hover:shadow-lg transition-shadow ${styles.reveal} ${styles.st4}`}>
                 <CardContent className="p-6">
                   <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
                     <Camera className="w-6 h-6 text-white" />
@@ -273,13 +249,7 @@ export default function HomePage() {
                     Advanced security camera systems with AI-powered monitoring
                     and mobile app integration.
                   </p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="w-full bg-transparent"
-                  >
-                    Learn More
-                  </Button>
+                  
                 </CardContent>
               </Card>
             </div>
@@ -287,27 +257,27 @@ export default function HomePage() {
         </section>
 
         {/* WiCon SMART HOME SOLUTION FOR DIGITAL EDUCATION Banner */}
-        <section className="py-10 bg-black text-white">
+        <section data-reveal className={`py-10 bg-black text-white ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
-                <div className="flex items-center md:items-center mb-4">
+                <div data-reveal className={`flex items-center md:items-center mb-4 ${styles.reveal}`}>
                   {/* <GraduationCap className="w-15 h-15 mr-3 text-white" /> */}
                   <img
                     src="/training-logo-removebg-preview.png"
                     className="w-25 h-15 mr-3"
                     alt="training-logo"
                   />
-                  <h2 className="text-2xl font-bold">
+                  <h2 data-reveal className={`text-2xl font-bold ${styles.reveal}`}>
                     WiCon SMART HOME SOLUTION FOR DIGITAL EDUCATION
                   </h2>
                 </div>
-                <p className="text-xl text-gray-300 mb-6">
+                <p data-reveal className={`text-xl text-gray-300 mb-6 ${styles.reveal} ${styles.st1}`}>
                   Join our annual training program and master software
                   development, IoT solutions, and WiCon controller technology.
                   Limited to 50 participants.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div data-reveal className={`flex flex-col sm:flex-row gap-4 ${styles.reveal} ${styles.st2}`}>
                   <Button
                     className="bg-white text-black hover:bg-gray-200"
                     asChild
@@ -326,7 +296,7 @@ export default function HomePage() {
                   </Button>
                 </div>
               </div>
-              <div className="text-center lg:text-right">
+              <div data-reveal className={`text-center lg:text-right ${styles.reveal} ${styles.st1}`}>
                 <div className="inline-block bg-gray-900 rounded-lg p-6">
                   <div className="text-3xl font-bold text-white mb-2">
                     October 2025
@@ -355,20 +325,20 @@ export default function HomePage() {
         </section>
 
         {/* Why Choose WiCon Section */}
-        <section className="py-20 bg-white">
+        <section data-reveal className={`py-20 bg-white ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-black mb-6">
+                <h2 data-reveal className={`text-3xl md:text-4xl font-bold text-black mb-6 ${styles.reveal}`}>
                   Trusted Technology Partner Since 2014
                 </h2>
-                <p className="text-lg text-gray-600 mb-8">
+                <p data-reveal className={`text-lg text-gray-600 mb-8 ${styles.reveal} ${styles.st1}`}>
                   With over a decade of experience in electrical construction,
                   software development, and IoT solutions, WiCon Systems has
                   become the trusted technology partner for businesses and
                   homeowners across Southwest Region, Cameroon.
                 </p>
-                <div className="space-y-4">
+                <div data-reveal className={`space-y-4 ${styles.reveal} ${styles.st2}`}>
                   <div className="flex items-center">
                     <CheckCircle className="w-6 h-6 text-green-600 mr-3" />
                     <span className="text-gray-700">
@@ -395,7 +365,7 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-              <div>
+              <div data-reveal className={`${styles.reveal} ${styles.st1}`}>
                 <img
                   src="/wicon-body.png"
                   alt="WiCon Systems Technology Team"
@@ -407,18 +377,18 @@ export default function HomePage() {
         </section>
 
         {/* Trusted Clients Section */}
-        <section className="py-20 bg-gray-50">
+        <section data-reveal className={`py-20 bg-gray-50 ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+              <h2 data-reveal className={`text-3xl md:text-4xl font-bold text-black mb-4 ${styles.reveal}`}>
                 Trusted by Leading Organizations
               </h2>
-              <p className="text-xl text-gray-600">
+              <p data-reveal className={`text-xl text-gray-600 ${styles.reveal} ${styles.st1}`}>
                 Proud to serve educational institutions, businesses, and
                 organizations across Southwest Region
               </p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <div data-reveal className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ${styles.reveal} ${styles.st2}`}>
               <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex items-center justify-center min-h-[100px]">
                 <p className="text-center font-semibold text-gray-800 text-sm">
                   BUEA INSTITUTE OF TECHNOLOGY
@@ -471,7 +441,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="text-center mt-12">
-              <p className="text-gray-600 text-lg">
+              <p data-reveal className={`text-gray-600 text-lg ${styles.reveal}`}>
                 Join these satisfied clients who trust WiCon Systems for their
                 electrical needs
               </p>
@@ -486,18 +456,18 @@ export default function HomePage() {
         </section>
 
         {/* Client Testimonials */}
-        <section className="pb-20 bg-gray-50">
+        <section data-reveal className={`pb-20 bg-gray-50 ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+              <h2 data-reveal className={`text-3xl md:text-4xl font-bold text-black mb-4 ${styles.reveal}`}>
                 What Our Clients Say
               </h2>
-              <p className="text-xl text-gray-600">
+              <p data-reveal className={`text-xl text-gray-600 ${styles.reveal} ${styles.st1}`}>
                 Trusted by businesses and homeowners across Cameroon
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card className="bg-white border-gray-200">
+              <Card data-reveal className={`bg-white border-gray-200 ${styles.reveal}`}>
                 <CardContent className="p-8">
                   <div className="flex mb-4">
                     {[...Array(5)].map((_, i) => (
@@ -569,17 +539,17 @@ export default function HomePage() {
         </section>
 
         {/* Contact CTA Section */}
-        <section className="py-20 bg-black text-white">
+        <section data-reveal className={`py-20 bg-black text-white ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 data-reveal className={`text-3xl md:text-4xl font-bold mb-4 ${styles.reveal}`}>
               Ready to Transform Your Business with Technology?
             </h2>
-            <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            <p data-reveal className={`text-xl text-gray-300 mb-8 max-w-3xl mx-auto ${styles.reveal} ${styles.st1}`}>
               Get a free consultation for your electrical, software, or IoT
               project. Our technology experts are ready to help you find the
               perfect digital solution for your needs.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div data-reveal className={`flex flex-col sm:flex-row gap-4 justify-center ${styles.reveal} ${styles.st2}`}>
               <Link href="/contact">
                 <Button
                   size="lg"
