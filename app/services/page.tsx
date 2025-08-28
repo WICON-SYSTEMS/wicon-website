@@ -3,6 +3,7 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import type { Metadata } from "next"
 import {
   Wrench,
   Users,
@@ -15,6 +16,12 @@ import {
   GraduationCap,
   Calendar,
 } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: "Services",
+  description:
+    "Professional electrical services in Cameroon: installation, maintenance, and support for WiCon wireless controllers, wiring, and CCTV.",
+}
 
 export default function ServicesPage() {
   return (

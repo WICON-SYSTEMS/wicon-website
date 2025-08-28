@@ -1,6 +1,7 @@
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import type { Metadata } from "next";
 import styles from "./page.module.css";
 import { Card, CardContent } from "@/components/ui/card";
 import RevealOnScroll from "@/components/reveal-on-scroll";
@@ -20,6 +21,12 @@ import {
   GraduationCap,
 } from "lucide-react";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description:
+    "WiCon Systems – smart automation and wireless electrical control solutions in Cameroon.",
+};
 
 export default function HomePage() {
   return (

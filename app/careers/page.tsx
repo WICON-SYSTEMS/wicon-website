@@ -51,7 +51,7 @@ export default function CareersPage() {
     photoFile: null as File | null,
     photoPreview: null as string | null,
   })
-
+  
   const [submitting, setSubmitting] = useState(false)
   const [errors, setErrors] = useState<{ [k: string]: boolean }>({})
 

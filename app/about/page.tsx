@@ -2,6 +2,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import type { Metadata } from "next"
 import {
   Users,
   Target,
@@ -14,6 +15,12 @@ import {
   Lightbulb,
   Sparkles,
 } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Learn about WiCon Systems – our mission, vision, values, and the team powering smart automation in Cameroon.",
+}
 
 export default function AboutPage() {
   return (

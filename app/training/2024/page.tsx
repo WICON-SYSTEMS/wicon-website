@@ -2,6 +2,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import type { Metadata } from "next";
 import {
   Users,
   Award,
@@ -13,6 +14,12 @@ import {
   Download,
 } from "lucide-react";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Training 2024",
+  description:
+    "Highlights from WiCon Systems’ 2024 Digital Education program – achievements, partners, and certification details.",
+};
 
 export default function Training2024Page() {
   return (

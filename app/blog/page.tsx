@@ -6,6 +6,13 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, User, ArrowRight, Clock } from "lucide-react";
 import Link from "next/link";
 import { NewsletterSignup } from "@/components/newsletter-signup";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description:
+    "WiCon Systems blog – insights on smart automation, electrical safety, energy, and technology in Cameroon.",
+};
 
 export default function BlogPage() {
   const blogPosts = [
