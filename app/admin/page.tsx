@@ -3,6 +3,20 @@
 import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import { toast } from "sonner"
+import {
+  SidebarProvider,
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarGroupContent,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarRail,
+  SidebarInset,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
 
 const STORAGE_PASS = "admin@wicon"
 const STORAGE_USER = "admin"
@@ -293,18 +307,6 @@ export default function AdminPage() {
     }
   }
 
-  const tabButtons = (
-    <div className="flex gap-2 mb-4">
-      {(["internships","registrations","volunteers","partners","subscribers"] as const).map(t => (
-        <button
-          key={t}
-          onClick={() => setActiveTab(t)}
-          className={`px-3 py-2 rounded border cursor-pointer hover:bg-slate-200 ${activeTab===t?"bg-black text-white border-black":"bg-white text-black border-gray-300"}`}
-        >{t}</button>
-      ))}
-    </div>
-  )
-
   const dateFilterButtons = (
     <div className="flex gap-2 mb-4">
       {([
@@ -362,22 +364,49 @@ export default function AdminPage() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col">
-      <HeaderBar onSignOut={signOut} />
-      <div className="max-w-6xl mx-auto w-full p-6 flex-1">
-        <div className="flex items-center justify-between mb-4">
-          <h1 className="text-2xl font-semibold">Admin</h1>
-          <div className="flex items-center gap-3">
-            {activeTab === "subscribers" && (
-              <button onClick={downloadCSV} className="text-sm px-3 py-1.5 border rounded bg-white hover:bg-gray-50 cursor-pointer ">Download CSV</button>
-            )}
-            <div className="text-sm text-gray-500" aria-live="polite">{loading?"Loading...":""}</div>
-          </div>
-        </div>
-      {tabButtons}
-      {dateFilterButtons}
-      {searchBar}
-      {error && (<div className="text-red-600 mb-4">{error}</div>)}
+    <SidebarProvider>
+      <Sidebar side="left" collapsible="icon">
+        <SidebarContent>
+          <SidebarGroup>
+            <SidebarGroupLabel className="text-lg uppercase mb-10 mt-3" >Admin Portal</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {(["internships","registrations","volunteers","partners","subscribers"] as const).map(t => (
+                  <SidebarMenuItem key={t}>
+                    <SidebarMenuButton
+                      isActive={activeTab === t}
+                      onClick={() => setActiveTab(t)}
+                      className="my-2 cursor-pointer border border-gray-300 rounded px-3 py-2"
+                    >
+                      <span className="uppercase text-lg">{t}</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        </SidebarContent>
+        <SidebarRail />
+      </Sidebar>
+      <SidebarInset>
+        <main className="min-h-screen flex flex-col">
+          <HeaderBar onSignOut={signOut} />
+          <div className="max-w-6xl mx-auto w-full p-6 flex-1">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                
+                <h1 className="text-2xl font-semibold">Admin</h1>
+              </div>
+              <div className="flex items-center gap-3">
+                {activeTab === "subscribers" && (
+                  <button onClick={downloadCSV} className="text-sm px-3 py-1.5 border rounded bg-white hover:bg-gray-50 cursor-pointer ">Download CSV</button>
+                )}
+                <div className="text-sm text-gray-500" aria-live="polite">{loading?"Loading...":""}</div>
+              </div>
+            </div>
+            {dateFilterButtons}
+            {searchBar}
+            {error && (<div className="text-red-600 mb-4">{error}</div>)}
 
       {activeTab === "internships" && (() => {
         const filtered = filterByDate(internships, dateFilter)
@@ -511,21 +540,24 @@ export default function AdminPage() {
           </>
         )
       })()}
-      </div>
-      {loading && (
-        <div className="fixed inset-0 pointer-events-none flex items-center justify-center" aria-live="polite">
-          <div className="bg-black/60 text-white px-4 py-2 rounded">Loading...</div>
-        </div>
-      )}
-    </main>
+          </div>
+          {loading && (
+            <div className="fixed inset-0 pointer-events-none flex items-center justify-center" aria-live="polite">
+              <div className="bg-black/60 text-white px-4 py-2 rounded">Loading...</div>
+            </div>
+          )}
+        </main>
+      </SidebarInset>
+    </SidebarProvider>
   )
 }
 
 function HeaderBar({ onSignOut }: { onSignOut?: ()=>void }) {
   return (
     <header className="w-full border-b bg-white">
-      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div className="w-full  px-10 py-5 flex items-center justify-between">
         <div className="flex items-center gap-3">
+        <SidebarTrigger className="border" />
           {BRAND_LOGO ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src="/wicon-logo.png" alt={`${BRAND_NAME} logo`} className="h-8 w-auto" />
