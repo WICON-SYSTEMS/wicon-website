@@ -3,6 +3,8 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { Toaster } from "sonner"
 import "./globals.css"
+//! TO BE USED IF NECESSARY
+// import RouteLoader from "@/components/route-loader" 
 
 const inter = Inter({
   subsets: ["latin"],
@@ -83,6 +85,7 @@ html {
         `}</style>
       </head>
       <body className={inter.className}>
+        {/* <RouteLoader /> */}
         {children}
         <Toaster richColors position="top-center" />
       </body>

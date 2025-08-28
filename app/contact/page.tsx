@@ -511,7 +511,7 @@ export default function ContactPage() {
                 </div>
               )}
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31708.794234567!2d9.292!3d4.1553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10610d0d3b3b3b3b%3A0x1234567890abcdef!2sBuea%2C%20Cameroon!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+                src="https://www.google.com/maps/place/4%C2%B009'08.1%22N+9%C2%B014'10.1%22E/@4.1520186,9.2361329,21z/data=!4m4!3m3!8m2!3d4.152243!4d9.236124?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D"
                 width="100%"
                 height="400"
                 style={{ border: 0 }}
