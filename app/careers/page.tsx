@@ -14,6 +14,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox"
 import { Users, GraduationCap, Briefcase, Clock, MapPin, Mail, Phone, Plus, Trash2, Loader2 } from "lucide-react"
 import { toast } from "sonner"
+import PhoneField from "@/components/phone-field"
+import { isValidPhoneNumber } from "react-phone-number-input"
 
 export default function CareersPage() {
   const [formData, setFormData] = useState({
@@ -463,8 +465,31 @@ export default function CareersPage() {
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="phone">Phone Number *</Label>
-                          <Input id="phone" value={formData.phone} onChange={(e) => handleInputChange("phone", e.target.value)} placeholder="+237 XXX XXX XXX" aria-invalid={errors.phone || undefined} />
-                          {errors.phone && <p className="text-sm text-red-600">Phone is required</p>}
+                          <div className="mt-1">
+                            <PhoneField
+                              id="phone"
+                              value={formData.phone || undefined}
+                              defaultCountry="CM"
+                              onChange={(val) => {
+                                const next = val || ""
+                                handleInputChange("phone", next)
+                                if (next && typeof next === "string" && isValidPhoneNumber(next)) {
+                                  setErrors((p) => ({ ...p, phone: false }))
+                                }
+                              }}
+                              placeholder="e.g. +237 6XX XXX XXX"
+                              error={!!errors.phone}
+                            />
+                          </div>
+                          {errors.phone ? (
+                            <p className="text-sm text-red-600">
+                              {formData.phone && typeof formData.phone === 'string' && !isValidPhoneNumber(formData.phone)
+                                ? 'Enter a valid phone number'
+                                : 'Phone is required'}
+                            </p>
+                          ) : (
+                            <p className="text-[12px] text-gray-500">Includes country code with flag (e.g., Cameroon +237)</p>
+                          )}
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="dob">Date of Birth *</Label>

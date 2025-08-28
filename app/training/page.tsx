@@ -34,6 +34,8 @@ import {
 
 import { useState } from "react";
 import { toast } from "sonner";
+import PhoneField from "@/components/phone-field";
+import { isValidPhoneNumber } from "react-phone-number-input";
 import {
   Dialog,
   DialogContent,
@@ -634,16 +636,22 @@ export default function TrainingPage() {
                     </div>
                     <div>
                       <Label htmlFor="partnerPhone">Phone *</Label>
-                      <Input
-                        id="partnerPhone"
-                        placeholder="+237 6XX XXX XXX"
-                        value={partner.phone}
-                        onChange={(e) => setPartner((p) => ({ ...p, phone: e.target.value }))}
-                        className={`mt-1 ${partnerErrors.phone ? "border-red-500" : ""}`}
-                        aria-invalid={partnerErrors.phone || undefined}
-                      />
-                      {partnerErrors.phone && (
+                      <div className="mt-1">
+                        <PhoneField
+                          id="partnerPhone"
+                          value={partner.phone || undefined}
+                          defaultCountry="CM"
+                          onChange={(val) => setPartner((p) => ({ ...p, phone: val || "" }))}
+                          placeholder="e.g. +237 6XX XXX XXX"
+                          error={!!partnerErrors.phone || (partner.phone ? !isValidPhoneNumber(partner.phone) : false)}
+                        />
+                      </div>
+                      {partnerErrors.phone ? (
                         <p className="text-sm text-red-600 mt-1">Phone is required</p>
+                      ) : partner.phone && !isValidPhoneNumber(partner.phone) ? (
+                        <p className="text-sm text-red-600 mt-1">Enter a valid phone number</p>
+                      ) : (
+                        <p className="text-[12px] text-gray-500 mt-1">Includes country code with flag (e.g., Cameroon +237)</p>
                       )}
                     </div>
                   </div>
@@ -882,23 +890,22 @@ export default function TrainingPage() {
                       >
                         Phone Number *
                       </Label>
-                      <Input
-                        id="volunteerPhone"
-                        type="tel"
-                        placeholder="+237 6XX XXX XXX"
-                        value={volunteer.phone}
-                        onChange={(e) =>
-                          setVolunteer((p) => ({ ...p, phone: e.target.value }))
-                        }
-                        className={`mt-1 ${
-                          volunteerErrors.phone ? "border-red-500" : ""
-                        }`}
-                        aria-invalid={volunteerErrors.phone || undefined}
-                      />
-                      {volunteerErrors.phone && (
-                        <p className="text-sm text-red-500 mt-1">
-                          Phone number is required
-                        </p>
+                      <div className="mt-1">
+                        <PhoneField
+                          id="volunteerPhone"
+                          value={volunteer.phone || undefined}
+                          defaultCountry="CM"
+                          onChange={(val) => setVolunteer((p) => ({ ...p, phone: val || "" }))}
+                          placeholder="e.g. +237 6XX XXX XXX"
+                          error={!!volunteerErrors.phone || (volunteer.phone ? !isValidPhoneNumber(volunteer.phone) : false)}
+                        />
+                      </div>
+                      {volunteerErrors.phone ? (
+                        <p className="text-sm text-red-500 mt-1">Phone number is required</p>
+                      ) : volunteer.phone && !isValidPhoneNumber(volunteer.phone) ? (
+                        <p className="text-sm text-red-500 mt-1">Enter a valid phone number</p>
+                      ) : (
+                        <p className="text-[12px] text-gray-500 mt-1">Includes country code with flag (e.g., Cameroon +237)</p>
                       )}
                     </div>
                   </div>
@@ -1272,20 +1279,25 @@ export default function TrainingPage() {
                     </div>
                     <div>
                       <Label htmlFor="phone">Phone Number *</Label>
-                      <Input
-                        id="phone"
-                        placeholder="+237 6XX XXX XXX"
-                        className="mt-1"
-                        value={register.phone}
-                        onChange={(e) =>
-                          setRegister((p) => ({ ...p, phone: e.target.value }))
-                        }
-                        aria-invalid={registerErrors.phone || undefined}
-                      />
-                      {registerErrors.phone && (
-                        <p className="text-sm text-red-600 mt-1">
-                          Phone is required
-                        </p>
+                      <div className="mt-1">
+                        <PhoneField
+                          id="phone"
+                          value={register.phone || undefined}
+                          defaultCountry="CM"
+                          onChange={(val) => {
+                            const next = val || "";
+                            setRegister((p) => ({ ...p, phone: next }));
+                          }}
+                          placeholder="e.g. +237 6XX XXX XXX"
+                          error={!!registerErrors.phone || (register.phone ? !isValidPhoneNumber(register.phone) : false)}
+                        />
+                      </div>
+                      {registerErrors.phone ? (
+                        <p className="text-sm text-red-600 mt-1">Phone is required</p>
+                      ) : register.phone && !isValidPhoneNumber(register.phone) ? (
+                        <p className="text-sm text-red-600 mt-1">Enter a valid phone number</p>
+                      ) : (
+                        <p className="text-[12px] text-gray-500 mt-1">Includes country code with flag (e.g., Cameroon +237)</p>
                       )}
                     </div>
                   </div>

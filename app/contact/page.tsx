@@ -10,6 +10,8 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Phone, MapPin, Clock, MessageCircle, AlertTriangle, Send, CheckCircle, X } from "lucide-react"
+import PhoneField from "@/components/phone-field"
+import { isValidPhoneNumber } from "react-phone-number-input"
 
 export default function ContactPage() {
   const [requestType, setRequestType] = useState<'inquiry' | 'quote'>('inquiry')
@@ -237,26 +239,37 @@ export default function ContactPage() {
                         {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                       </div>
                       <div>
-                        <Label htmlFor="phone" className="text-sm font-medium text-black">
-                          Phone Number *
-                        </Label>
-                        <Input 
-                          id="phone" 
-                          type="tel" 
-                          placeholder="+237 6XX XXX XXX" 
-                          className={`mt-1 ${errors.phone ? 'border-red-500' : ''}`}
-                          value={formData.phone}
-                          onChange={(e) => handleInputChange('phone', e.target.value)}
-                          required 
-                        />
-                        {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+                        <Label htmlFor="phone" className="text-sm font-medium text-black">Phone Number *</Label>
+                        <div className="mt-1">
+                          <PhoneField
+                            id="phone"
+                            value={formData.phone || undefined}
+                            defaultCountry="CM"
+                            onChange={(val) => {
+                              const next = val || ''
+                              handleInputChange('phone', next)
+                              if (next && typeof next === 'string' && !isValidPhoneNumber(next)) {
+                                setErrors((prev) => ({ ...prev, phone: 'Please enter a valid phone number' }))
+                              } else {
+                                setErrors((prev) => ({ ...prev, phone: '' }))
+                              }
+                            }}
+                            placeholder="e.g. +237 6XX XXX XXX"
+                            error={!!errors.phone}
+                          />
+                        </div>
+                        {errors.phone ? (
+                          <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                        ) : (
+                          <p className="text-[12px] text-gray-500 mt-1">Includes country code with flag (e.g., Cameroon +237)</p>
+                        )}
                       </div>
                       <div>
                         <Label htmlFor="service" className="text-sm font-medium text-black">
                           Service Interest *
                         </Label>
                         <Select value={formData.service} onValueChange={(value) => handleInputChange('service', value)}>
-                          <SelectTrigger className={`mt-1 ${errors.service ? 'border-red-500' : ''}`}>
+                          <SelectTrigger className={`mt-1 cursor-pointer ${errors.service ? 'border-red-500' : ''}`}>
                             <SelectValue placeholder="Select a service" />
                           </SelectTrigger>
                           <SelectContent>
@@ -282,7 +295,7 @@ export default function ContactPage() {
                                 Property Type *
                               </Label>
                               <Select value={formData.propertyType} onValueChange={(value) => handleInputChange('propertyType', value)}>
-                                <SelectTrigger className={`mt-1 ${errors.propertyType ? 'border-red-500' : ''}`}>
+                                <SelectTrigger className={`mt-1 cursor-pointer ${errors.propertyType ? 'border-red-500' : ''}`}>
                                   <SelectValue placeholder="Select property type" />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -302,7 +315,7 @@ export default function ContactPage() {
                                 Property Size *
                               </Label>
                               <Select value={formData.propertySize} onValueChange={(value) => handleInputChange('propertySize', value)}>
-                                <SelectTrigger className={`mt-1 ${errors.propertySize ? 'border-red-500' : ''}`}>
+                                <SelectTrigger className={`mt-1 cursor-pointer ${errors.propertySize ? 'border-red-500' : ''}`}>
                                   <SelectValue placeholder="Select size range" />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -322,7 +335,7 @@ export default function ContactPage() {
                                 Budget Range *
                               </Label>
                               <Select value={formData.budget} onValueChange={(value) => handleInputChange('budget', value)}>
-                                <SelectTrigger className={`mt-1 ${errors.budget ? 'border-red-500' : ''}`}>
+                                <SelectTrigger className={`mt-1 cursor-pointer ${errors.budget ? 'border-red-500' : ''}`}>
                                   <SelectValue placeholder="Select budget range" />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -341,7 +354,7 @@ export default function ContactPage() {
                                 Project Timeline *
                               </Label>
                               <Select value={formData.urgency} onValueChange={(value) => handleInputChange('urgency', value)}>
-                                <SelectTrigger className={`mt-1 ${errors.urgency ? 'border-red-500' : ''}`}>
+                                <SelectTrigger className={`mt-1 cursor-pointer ${errors.urgency ? 'border-red-500' : ''}`}>
                                   <SelectValue placeholder="Select timeline" />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -434,7 +447,7 @@ export default function ContactPage() {
                           </p>
                           <p className="text-gray-600">
                             <strong>Email:</strong> wiconsystems@gmail.com
-                          </p>
+                          </p>We Serve Southwest Region
                         </div>
                       </div>
                     </CardContent>
