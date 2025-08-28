@@ -15,6 +15,8 @@ import {
   Lightbulb,
   Sparkles,
 } from "lucide-react"
+import styles from "../page.module.css";
+import RevealOnScroll from "@/components/reveal-on-scroll"
 
 export const metadata: Metadata = {
   title: "About",
@@ -27,8 +29,10 @@ export default function AboutPage() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
+        <RevealOnScroll />
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-gray-50 to-white pt-20">
+        <section data-reveal
+          className={`bg-gradient-to-b from-gray-50 to-white pt-10 ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h1 className="text-4xl md:text-5xl font-bold text-black mb-6">About WiCon Systems</h1>
@@ -41,7 +45,8 @@ export default function AboutPage() {
         </section>
 
         {/* Company Story */}
-        <section className="pb-20 bg-white">
+        <section data-reveal
+          className={`pb-20 bg-white ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -84,7 +89,8 @@ export default function AboutPage() {
         </section>
 
         {/* Purpose, Brand Vision, Brand Values */}
-        <section className="py-20 bg-gray-50">
+        <section data-reveal
+          className={`py-20 bg-gray-50 ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <Card className="bg-white border-gray-200">
@@ -131,7 +137,8 @@ export default function AboutPage() {
         </section>
 
         {/* Key Features of the Service */}
-        <section className="py-20 bg-white">
+        <section data-reveal
+          className={`py-20 bg-white ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black">Key Features of the Service</h2>
@@ -182,7 +189,8 @@ export default function AboutPage() {
         </section>
 
         {/* Team Section */}
-        <section className="py-20 bg-white">
+        <section data-reveal
+          className={`py-20 bg-white ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Meet Our Expert Team</h2>
@@ -238,7 +246,8 @@ export default function AboutPage() {
         </section>
 
         {/* Service Areas & Statistics */}
-        <section className="py-20 bg-gray-50">
+        <section data-reveal
+          className={`py-20 bg-gray-50 ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               <div>
