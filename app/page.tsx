@@ -65,7 +65,7 @@ export default function HomePage() {
                 <div
                   className={`flex flex-col sm:flex-row gap-4 ${styles.fadeUp} ${styles.delay4}`}
                 >
-                  <Link href="/solutions">
+                  <Link href="/products">
                     <Button
                       size="lg"
                       className="bg-black text-white hover:bg-gray-700 px-8 py-3 cursor-pointer"

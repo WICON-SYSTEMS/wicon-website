@@ -17,6 +17,14 @@ import {
   Building,
   CheckCircle,
   ArrowRight,
+  Brain,
+  Cpu,
+  Activity,
+  Lightbulb,
+  Thermometer,
+  Clock,
+  Target,
+  Sparkles
 } from "lucide-react"
 import Link from "next/link"
 
@@ -28,35 +36,165 @@ export default function ProductsPage() {
         {/* Hero Section */}
         <section className="bg-gradient-to-b from-gray-50 to-white py-10 md:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-black mb-6">Our Products & Solutions</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-black mb-6">Smart Electrical Solutions</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Comprehensive electrical solutions designed for Cameroon's unique needs. From wireless controllers to
-              automated systems, we provide cutting-edge technology with reliable support.
+              Revolutionary AI-powered electrical systems designed for you. Experience the future of smart home automation with WiCon AI - intelligent control that learns, adapts, and operates without your intervention.
             </p>
+            <div className="mt-8 flex justify-center">
+              <div className="bg-black border border-gray-300 rounded-lg px-6 py-3 inline-flex items-center gap-3">
+                <Brain className="w-6 h-6 text-white" />
+                <span className="text-white font-semibold">Powered by WiCon AI Technology</span>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* WiCon Wireless Controllers */}
-        <section className="pb-20 bg-white">
+        {/* WiCon AI Feature Section */}
+        <section className="py-20 bg-black text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center mr-4">
+                    <Brain className="w-8 h-8 text-black" />
+                  </div>
+                  <div>
+                    <h2 className="text-4xl md:text-5xl font-bold mb-2">WiCon AI</h2>
+                    <p className="text-gray-300 text-lg">Artificial Intelligence for Smart Homes</p>
+                  </div>
+                </div>
+                <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+                  Let WiCon's Artificial Intelligence take control of your smart home, regulating and switching without your intervention. Experience true automation that learns your patterns and optimizes your electrical systems automatically.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                  <div className="bg-gray-800 border border-gray-700 rounded-lg p-4">
+                    <div className="flex items-center mb-2">
+                      <Cpu className="w-5 h-5 text-white mr-2" />
+                      <span className="font-semibold">Smart Learning</span>
+                    </div>
+                    <p className="text-sm text-gray-300">AI learns your daily routines and preferences</p>
+                  </div>
+                  <div className="bg-gray-800 border border-gray-700 rounded-lg p-4">
+                    <div className="flex items-center mb-2">
+                      <Activity className="w-5 h-5 text-white mr-2" />
+                      <span className="font-semibold">Auto Regulation</span>
+                    </div>
+                    <p className="text-sm text-gray-300">Automatically adjusts settings for optimal efficiency</p>
+                  </div>
+                  <div className="bg-gray-800 border border-gray-700 rounded-lg p-4">
+                    <div className="flex items-center mb-2">
+                      <Target className="w-5 h-5 text-white mr-2" />
+                      <span className="font-semibold">Predictive Control</span>
+                    </div>
+                    <p className="text-sm text-gray-300">Anticipates needs before you realize them</p>
+                  </div>
+                  <div className="bg-gray-800 border border-gray-700 rounded-lg p-4">
+                    <div className="flex items-center mb-2">
+                      <Sparkles className="w-5 h-5 text-white mr-2" />
+                      <span className="font-semibold">Zero Intervention</span>
+                    </div>
+                    <p className="text-sm text-gray-300">Operates seamlessly in the background</p>
+                  </div>
+                </div>
+              </div>
+              <div className="relative">
+                <div className="bg-gray-900 border border-gray-700 rounded-2xl p-8">
+                  <div className="text-center mb-6">
+                    <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Brain className="w-10 h-10 text-black" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-2">WiCon AI Features</h3>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex items-center">
+                      <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
+                        <CheckCircle className="w-5 h-5 text-black" />
+                      </div>
+                      <span>Intelligent lighting control</span>
+                    </div>
+                    <div className="flex items-center">
+                      <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
+                        <CheckCircle className="w-5 h-5 text-black" />
+                      </div>
+                      <span>Adaptive temperature management</span>
+                    </div>
+                    <div className="flex items-center">
+                      <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
+                        <CheckCircle className="w-5 h-5 text-black" />
+                      </div>
+                      <span>Energy optimization algorithms</span>
+                    </div>
+                    <div className="flex items-center">
+                      <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
+                        <CheckCircle className="w-5 h-5 text-black" />
+                      </div>
+                      <span>Predictive maintenance alerts</span>
+                    </div>
+                    <div className="flex items-center">
+                      <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
+                        <CheckCircle className="w-5 h-5 text-black" />
+                      </div>
+                      <span>Behavioral pattern recognition</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* WiCon Wireless Controllers with AI */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">WiCon Controller System</h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                The complete smart electrical control solution powered by WiCon AI technology
+              </p>
+            </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mr-4">
                     <Zap className="w-6 h-6 text-white" />
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-black">WiCon Wireless Controllers</h2>
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-black">WiCon Wireless Controllers</h3>
+                    <p className="text-gray-600 font-medium">Enhanced with AI Intelligence</p>
+                  </div>
                 </div>
                 <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                  Revolutionary wireless control system that allows remote switching, monitoring, and safety management
-                  of electrical facilities. Perfect for both residential and commercial applications.
+                  Revolutionary wireless control system enhanced with WiCon AI for intelligent automation. Experience remote switching, monitoring, and safety management that learns and adapts to your needs.
                 </p>
-                <Tabs defaultValue="features" className="w-full">
-                  <TabsList className="grid w-full grid-cols-3 mb-2">
-                    <TabsTrigger value="features">Features</TabsTrigger>
+                <Tabs defaultValue="ai-features" className="w-full">
+                  <TabsList className="grid w-full grid-cols-4 mb-2">
+                    <TabsTrigger value="ai-features">AI Features</TabsTrigger>
+                    <TabsTrigger value="features">Core Features</TabsTrigger>
                     <TabsTrigger value="benefits">Benefits</TabsTrigger>
                     <TabsTrigger value="specs">Specifications</TabsTrigger>
                   </TabsList>
+                  <TabsContent value="ai-features" className="space-y-4">
+                    <div className="flex items-center">
+                      <Brain className="w-5 h-5 text-black mr-3" />
+                      <span><strong>WiCon AI Integration:</strong> Intelligent automation without intervention</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Lightbulb className="w-5 h-5 text-gray-600 mr-3" />
+                      <span>Smart lighting that adapts to your schedule</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Thermometer className="w-5 h-5 text-gray-600 mr-3" />
+                      <span>Intelligent climate control optimization</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Clock className="w-5 h-5 text-gray-600 mr-3" />
+                      <span>Predictive scheduling based on usage patterns</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Target className="w-5 h-5 text-gray-600 mr-3" />
+                      <span>Proactive energy management and cost reduction</span>
+                    </div>
+                  </TabsContent>
                   <TabsContent value="features" className="space-y-4">
                     <div className="flex items-center">
                       <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
@@ -287,9 +425,14 @@ export default function ProductsPage() {
         {/* CTA Section */}
         <section className="py-20 bg-black text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Upgrade Your Electrical Systems?</h2>
+            <div className="flex justify-center mb-6">
+              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
+                <Brain className="w-8 h-8 text-black" />
+              </div>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Experience the Future with WiCon AI</h2>
             <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Contact our experts for a free consultation and customized quote for your electrical project.
+              Transform your home or business with intelligent electrical systems that think, learn, and adapt. Contact our experts for a free consultation and discover how WiCon AI can revolutionize your electrical experience.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
