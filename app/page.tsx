@@ -26,20 +26,32 @@ export default function HomePage() {
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-gray-50 to-white pt-10">
+        <section className={`g-gradient-to-b from-gray-50 to-white pt-10 ${styles.fadeUp}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black leading-tight mb-6">
-                  WiCon <br /> Pioneering Smart Home Technology Solutions
+                <h1 className="leading-tight mb-6">
+                  <span
+                    className={`block font-extrabold tracking-tight text-black ${styles.fadeUp}`}
+                    style={{ lineHeight: 1.05 }}
+                  >
+                    <span className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl">Wi</span>
+                    <span className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl">Con</span>
+                  </span>
+                  <span
+                    className={`mt-2 block font-semibold text-gray-800 tracking-tight ${styles.fadeUp} ${styles.delay1}`}
+                  >
+                    <span className="text-2xl md:text-3xl lg:text-4xl">&quot;Pioneering Smart Home Technology Solutions&quot;</span>
+                  </span>
+                  {/* <span className={`mt-3 inline-block ${styles.underline} ${styles.delay2}`} aria-hidden="true" /> */}
                 </h1>
-                <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                <p className={`text-xl text-gray-600 mb-8 leading-relaxed ${styles.fadeUp} ${styles.delay3}`}>
                   From wireless electrical control to custom software and IoT
                   solutions. Reduce costs, improve efficiency, and digitally
                   transform your business with WiCon's innovative technology
                   solutions.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className={`flex flex-col sm:flex-row gap-4 ${styles.fadeUp} ${styles.delay4}`}>
                   <Link href="/solutions">
                     <Button
                       size="lg"
