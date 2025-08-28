@@ -99,6 +99,7 @@ function Pagination({ total, page, pageSize, onPageChange }: { total: number; pa
 }
 
 export default function AdminPage() {
+  const [mounted, setMounted] = useState(false)
   const [username, setUsername] = useState("")
   const [passcode, setPasscode] = useState("")
   const [saved, setSaved] = useState(false)
@@ -139,6 +140,11 @@ export default function AdminPage() {
   const [partners, setPartners] = useState<PartnershipInterest[]>([])
 
   useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted) return
     const storedUser = typeof window !== "undefined" ? localStorage.getItem(STORAGE_USER) : null
     const storedPass = typeof window !== "undefined" ? localStorage.getItem(STORAGE_PASS) : null
     const lastValidated = typeof window !== "undefined" ? localStorage.getItem('admin-last-validated') : null
@@ -176,7 +182,7 @@ export default function AdminPage() {
       // Use cached validation if recent, otherwise validate with server
       tryValidate(storedUser, storedPass, true)
     }
-  }, [])
+  }, [mounted])
 
   const headers = useMemo(() => ({ "x-admin-username": username, "x-admin-passcode": passcode }), [username, passcode])
 
@@ -343,10 +349,21 @@ export default function AdminPage() {
     </div>
   )
 
+  if (!mounted) {
+    return (
+      <main className="min-h-screen flex flex-col">
+        <HeaderBar showSidebarTrigger={false} />
+        <div className="flex-1 flex items-center justify-center p-6">
+          <div className="text-center">Loading...</div>
+        </div>
+      </main>
+    )
+  }
+
   if (!saved) {
     return (
       <main className="min-h-screen flex flex-col">
-        <HeaderBar />
+        <HeaderBar showSidebarTrigger={false} />
         <div className="flex-1 flex items-center justify-center p-6">
           <div className="w-full max-w-sm border rounded-lg p-6 shadow-sm">
             <h1 className="text-xl font-semibold mb-1 text-center">Admin Sign In</h1>
@@ -356,7 +373,7 @@ export default function AdminPage() {
             <label className="block text-sm mb-1">Passcode</label>
             <input value={passcode} onChange={e=>setPasscode(e.target.value)} type="password" className="w-full border rounded px-3 py-2 mb-4" placeholder="Passcode" autoComplete="current-password" />
             {authError && <div className="text-sm text-red-600 mb-3" role="alert" aria-live="assertive">{authError}</div>}
-            <button onClick={saveCreds} className="w-full px-3 py-2 rounded border bg-black text-white cursor-pointer">Continue</button>
+            <button onClick={saveCreds} className="w-full px-3 py-2 rounded border bg-black text-white hover:bg-gray-800 cursor-pointer">Continue</button>
           </div>
         </div>
       </main>
@@ -390,7 +407,7 @@ export default function AdminPage() {
       </Sidebar>
       <SidebarInset>
         <main className="min-h-screen flex flex-col">
-          <HeaderBar onSignOut={signOut} />
+          <HeaderBar onSignOut={signOut} showSidebarTrigger={true} />
           <div className="max-w-6xl mx-auto w-full p-6 flex-1">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
@@ -552,12 +569,12 @@ export default function AdminPage() {
   )
 }
 
-function HeaderBar({ onSignOut }: { onSignOut?: ()=>void }) {
+function HeaderBar({ onSignOut, showSidebarTrigger = false }: { onSignOut?: ()=>void; showSidebarTrigger?: boolean }) {
   return (
     <header className="w-full border-b bg-white">
       <div className="w-full  px-10 py-5 flex items-center justify-between">
         <div className="flex items-center gap-3">
-        <SidebarTrigger className="border" />
+        {showSidebarTrigger && <SidebarTrigger className="border" />}
           {BRAND_LOGO ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src="/wicon-logo.png" alt={`${BRAND_NAME} logo`} className="h-8 w-auto" />
@@ -608,5 +625,3 @@ async function copyToClipboard(text: string) {
     toast.error("Failed to copy")
   }
 }
-
- 

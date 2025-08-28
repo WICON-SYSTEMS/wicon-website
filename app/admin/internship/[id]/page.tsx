@@ -388,14 +388,14 @@ export default function InternshipDetailPage() {
                     <button 
                       onClick={()=>setShowConfirmDialog('decline')} 
                       disabled={isUpdating}
-                      className="rounded border border-red-300 px-4 py-2 text-sm text-red-700 hover:bg-red-50 disabled:opacity-50"
+                      className="rounded border border-red-300 px-4 py-2 text-sm cursor-pointer text-red-700 hover:bg-red-50 disabled:opacity-50"
                     >
                       {isUpdating ? 'Processing...' : 'Decline Application'}
                     </button>
                     <button 
                       onClick={()=>setShowConfirmDialog('accept')} 
                       disabled={isUpdating}
-                      className="rounded bg-green-600 px-4 py-2 text-sm text-white hover:bg-green-700 disabled:opacity-50"
+                      className="rounded bg-green-600 px-4 py-2 text-sm cursor-pointer text-white hover:bg-green-700 disabled:opacity-50"
                     >
                       {isUpdating ? 'Processing...' : 'Accept Application'}
                     </button>
@@ -431,14 +431,14 @@ export default function InternshipDetailPage() {
                     <button 
                       onClick={() => setShowConfirmDialog(null)}
                       disabled={isUpdating}
-                      className="flex-1 rounded border px-3 py-2 text-sm hover:bg-gray-50 disabled:opacity-50"
+                      className="flex-1 rounded border px-3 py-2 text-sm cursor-pointer hover:bg-gray-50 disabled:opacity-50"
                     >
                       Cancel
                     </button>
                     <button 
                       onClick={() => updateStatus(showConfirmDialog)}
                       disabled={isUpdating}
-                      className={`flex-1 rounded px-3 py-2 text-sm text-white disabled:opacity-50 ${
+                      className={`flex-1 rounded px-3 py-2 text-sm cursor-pointer text-white disabled:opacity-50 ${
                         showConfirmDialog === 'accept' 
                           ? 'bg-green-600 hover:bg-green-700' 
                           : 'bg-red-600 hover:bg-red-700'

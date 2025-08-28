@@ -203,14 +203,14 @@ export default function RegistrationDetailPage() {
                     <button
                       onClick={() => setShowConfirmDialog('accept')}
                       disabled={isUpdating}
-                      className="rounded bg-green-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-green-700 disabled:opacity-50"
+                      className="rounded bg-green-600 px-3 py-1.5 text-sm font-medium cursor-pointer text-white hover:bg-green-700 disabled:opacity-50"
                     >
                       {isUpdating ? 'Processing...' : 'Accept'}
                     </button>
                     <button
                       onClick={() => setShowConfirmDialog('decline')}
                       disabled={isUpdating}
-                      className="rounded bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50"
+                      className="rounded bg-red-600 px-3 py-1.5 text-sm font-medium cursor-pointer text-white hover:bg-red-700 disabled:opacity-50"
                     >
                       {isUpdating ? 'Processing...' : 'Decline'}
                     </button>
