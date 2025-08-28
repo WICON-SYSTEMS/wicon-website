@@ -68,6 +68,73 @@ export default function TrainingPage() {
     agree: showVolunteerErrors && !volunteer.agree,
   };
 
+  // Partnership interest form state
+  const [partner, setPartner] = useState({
+    name: "",
+    organization: "",
+    email: "",
+    phone: "",
+    partnershipType: "",
+    message: "",
+    agree: false,
+  });
+  const [submittingPartner, setSubmittingPartner] = useState(false);
+  const [showPartnerErrors, setShowPartnerErrors] = useState(false);
+
+  const partnerErrors = {
+    name: showPartnerErrors && !partner.name.trim(),
+    organization: showPartnerErrors && !partner.organization.trim(),
+    email: showPartnerErrors && !partner.email.trim(),
+    phone: showPartnerErrors && !partner.phone.trim(),
+    partnershipType: showPartnerErrors && !partner.partnershipType.trim(),
+    message: showPartnerErrors && !partner.message.trim(),
+    agree: showPartnerErrors && !partner.agree,
+  };
+
+  const handlePartnerSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      setSubmittingPartner(true);
+      setShowPartnerErrors(false);
+
+      if (
+        !partner.name.trim() ||
+        !partner.organization.trim() ||
+        !partner.email.trim() ||
+        !partner.phone.trim() ||
+        !partner.partnershipType.trim() ||
+        !partner.message.trim() ||
+        !partner.agree
+      ) {
+        setShowPartnerErrors(true);
+        toast.error("Please complete all required fields and accept the terms.");
+        return;
+      }
+
+      const res = await fetch("/api/training/partners", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(partner),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data?.error || "Submission failed");
+      toast.success("Thanks! We'll reach out about partnership opportunities.");
+      setPartner({
+        name: "",
+        organization: "",
+        email: "",
+        phone: "",
+        partnershipType: "",
+        message: "",
+        agree: false,
+      });
+    } catch (err: any) {
+      toast.error(err?.message || "Something went wrong");
+    } finally {
+      setSubmittingPartner(false);
+    }
+  };
+
   const handleVolunteerSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -462,6 +529,176 @@ export default function TrainingPage() {
                 </CardContent>
               </Card>
             </div>
+          </div>
+        </section>
+
+        {/* Program Partners */}
+        <section className="py-20 bg-white" id="partners">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+                Program Partners
+              </h2>
+              <p className="text-xl text-gray-600">
+                We proudly partner with leading organizations to deliver impact
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center">
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 w-full max-w-sm flex flex-col items-center text-center">
+                <img
+                  src="/minjec-logo.png"
+                  alt="MINJEC - Ministry of Youth Affairs and Civic Education"
+                  className="h-20 w-auto object-contain mb-4"
+                />
+                <div className="font-bold text-black text-sm md:text-base">
+                  MINISTRY OF YOUTH AFFAIRS AND CIVIC EDUCATION
+                </div>
+                <div className="text-sm text-gray-600 mt-1">(MINJEC)</div>
+                <p className="text-gray-600 text-sm mt-3">Official Partner</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Partner With Us */}
+        <section className="py-20 bg-gray-50">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+                Partner With Us
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Are you an organization interested in supporting skills development and
+                youth empowerment? Join us as a program partner. We welcome sponsorships,
+                training support, equipment donations, internship pipelines, and more.
+              </p>
+            </div>
+            <Card className="bg-white border-gray-200">
+              <CardContent className="p-8">
+                <form className="space-y-6" onSubmit={handlePartnerSubmit} aria-busy={submittingPartner}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="partnerName">Your Name *</Label>
+                      <Input
+                        id="partnerName"
+                        placeholder="Enter your full name"
+                        value={partner.name}
+                        onChange={(e) => setPartner((p) => ({ ...p, name: e.target.value }))}
+                        className={`mt-1 ${partnerErrors.name ? "border-red-500" : ""}`}
+                        aria-invalid={partnerErrors.name || undefined}
+                      />
+                      {partnerErrors.name && (
+                        <p className="text-sm text-red-600 mt-1">Name is required</p>
+                      )}
+                    </div>
+                    <div>
+                      <Label htmlFor="organization">Organization *</Label>
+                      <Input
+                        id="organization"
+                        placeholder="Company/Institution name"
+                        value={partner.organization}
+                        onChange={(e) => setPartner((p) => ({ ...p, organization: e.target.value }))}
+                        className={`mt-1 ${partnerErrors.organization ? "border-red-500" : ""}`}
+                        aria-invalid={partnerErrors.organization || undefined}
+                      />
+                      {partnerErrors.organization && (
+                        <p className="text-sm text-red-600 mt-1">Organization is required</p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="partnerEmail">Email *</Label>
+                      <Input
+                        id="partnerEmail"
+                        type="email"
+                        placeholder="your.email@example.com"
+                        value={partner.email}
+                        onChange={(e) => setPartner((p) => ({ ...p, email: e.target.value }))}
+                        className={`mt-1 ${partnerErrors.email ? "border-red-500" : ""}`}
+                        aria-invalid={partnerErrors.email || undefined}
+                      />
+                      {partnerErrors.email && (
+                        <p className="text-sm text-red-600 mt-1">Email is required</p>
+                      )}
+                    </div>
+                    <div>
+                      <Label htmlFor="partnerPhone">Phone *</Label>
+                      <Input
+                        id="partnerPhone"
+                        placeholder="+237 6XX XXX XXX"
+                        value={partner.phone}
+                        onChange={(e) => setPartner((p) => ({ ...p, phone: e.target.value }))}
+                        className={`mt-1 ${partnerErrors.phone ? "border-red-500" : ""}`}
+                        aria-invalid={partnerErrors.phone || undefined}
+                      />
+                      {partnerErrors.phone && (
+                        <p className="text-sm text-red-600 mt-1">Phone is required</p>
+                      )}
+                    </div>
+                  </div>
+                  <div>
+                    <Label htmlFor="partnershipType">Partnership Interest *</Label>
+                    <Select
+                      value={partner.partnershipType}
+                      onValueChange={(v) => setPartner((p) => ({ ...p, partnershipType: v }))}
+                    >
+                      <SelectTrigger className={`mt-1 ${partnerErrors.partnershipType ? "border-red-500" : ""}`}>
+                        <SelectValue placeholder="Select partnership type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="sponsorship">Sponsorship</SelectItem>
+                        <SelectItem value="training-support">Training Support</SelectItem>
+                        <SelectItem value="equipment-donation">Equipment Donation</SelectItem>
+                        <SelectItem value="venue-logistics">Venue / Logistics</SelectItem>
+                        <SelectItem value="internship-pipeline">Internship Pipeline</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    {partnerErrors.partnershipType && (
+                      <p className="text-sm text-red-600 mt-1">Please select a partnership type</p>
+                    )}
+                  </div>
+                  <div>
+                    <Label htmlFor="partnerMessage">How would you like to partner with us? *</Label>
+                    <Textarea
+                      id="partnerMessage"
+                      rows={4}
+                      placeholder="Tell us about your organization and partnership goals..."
+                      value={partner.message}
+                      onChange={(e) => setPartner((p) => ({ ...p, message: e.target.value }))}
+                      className={`mt-1 ${partnerErrors.message ? "border-red-500" : ""}`}
+                      aria-invalid={partnerErrors.message || undefined}
+                    />
+                    {partnerErrors.message && (
+                      <p className="text-sm text-red-600 mt-1">Message is required</p>
+                    )}
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="partnerAgree"
+                      checked={partner.agree}
+                      onCheckedChange={(c) => setPartner((p) => ({ ...p, agree: Boolean(c) }))}
+                    />
+                    <Label htmlFor="partnerAgree" className="text-sm">
+                      I agree to be contacted about partnership opportunities *
+                    </Label>
+                  </div>
+                  {partnerErrors.agree && (
+                    <p className="text-sm text-red-600">You must accept the terms</p>
+                  )}
+                  <Button
+                    className="w-full bg-black text-white hover:bg-gray-800 py-3"
+                    type="submit"
+                    disabled={submittingPartner}
+                    aria-busy={submittingPartner}
+                  >
+                    {submittingPartner && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    {submittingPartner ? "Submitting..." : "Submit Partnership Interest"}
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
           </div>
         </section>
 

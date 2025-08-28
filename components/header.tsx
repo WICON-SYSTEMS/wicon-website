@@ -1,13 +1,37 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const closeTimerRef = useRef<number | null>(null);
+
+  const OPEN_DELAY = 60; // ms
+  const CLOSE_DELAY = 180; // ms
+
+  const clearCloseTimer = () => {
+    if (closeTimerRef.current) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  };
+
+  const openDropdown = (name: string) => {
+    clearCloseTimer();
+    // small open intent delay to avoid accidental flickers
+    window.setTimeout(() => setActiveDropdown(name), OPEN_DELAY);
+  };
+
+  const scheduleClose = () => {
+    clearCloseTimer();
+    closeTimerRef.current = window.setTimeout(() => {
+      setActiveDropdown(null);
+    }, CLOSE_DELAY) as unknown as number;
+  };
 
   const navigation = [
     { name: "Home", href: "/" },
@@ -33,7 +57,12 @@ export function Header() {
         {
           name: "Training Program",
           href: "/training",
-          description: "WiCon Digital Education",
+          description: "WiCon Training Program",
+        },
+        {
+          name: "2024 Training Program",
+          href: "/training/2024",
+          description: "WiCon 2024 Training Program",
         },
         { name: "Blog", href: "/blog", description: "Industry Insights" },
       ],
@@ -52,13 +81,8 @@ export function Header() {
     { name: "Contact", href: "/contact" },
   ];
 
-  const handleMouseEnter = (itemName: string) => {
-    setActiveDropdown(itemName);
-  };
-
-  const handleMouseLeave = () => {
-    setActiveDropdown(null);
-  };
+  const handleMouseEnter = (itemName: string) => openDropdown(itemName);
+  const handleMouseLeave = () => scheduleClose();
 
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -86,10 +110,33 @@ export function Header() {
                 onMouseEnter={() =>
                   item.dropdown && handleMouseEnter(item.name)
                 }
-                onMouseLeave={handleMouseLeave}
+                // Do not close on leaving the wrapper; we'll handle closing on trigger/panel leave with delay
               >
                 {item.dropdown ? (
-                  <div className="flex items-center px-4 py-2 text-sm font-medium text-gray-700 hover:text-black cursor-pointer transition-colors">
+                  <div
+                    className="flex items-center px-4 py-2 text-sm font-medium text-gray-700 hover:text-black cursor-pointer transition-colors"
+                    role="button"
+                    tabIndex={0}
+                    aria-haspopup="menu"
+                    aria-expanded={activeDropdown === item.name}
+                    onMouseEnter={() => handleMouseEnter(item.name)}
+                    onMouseLeave={handleMouseLeave}
+                    onFocus={() => handleMouseEnter(item.name)}
+                    onBlur={handleMouseLeave}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        if (activeDropdown === item.name) {
+                          setActiveDropdown(null);
+                        } else {
+                          openDropdown(item.name);
+                        }
+                      }
+                      if (e.key === "Escape") {
+                        setActiveDropdown(null);
+                      }
+                    }}
+                  >
                     <span>{item.name}</span>
                     <ChevronDown className="w-4 h-4 ml-1" />
                   </div>
@@ -104,13 +151,21 @@ export function Header() {
 
                 {/* Dropdown Menu */}
                 {item.dropdown && activeDropdown === item.name && (
-                  <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                  <div
+                    className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
+                    role="menu"
+                    onMouseEnter={clearCloseTimer}
+                    onMouseLeave={handleMouseLeave}
+                  >
                     <div className="py-2">
                       {item.dropdown.map((dropdownItem) => (
                         <Link
                           key={dropdownItem.name}
                           href={dropdownItem.href}
                           className="block px-4 py-3 hover:bg-gray-50 transition-colors"
+                          role="menuitem"
+                          onFocus={clearCloseTimer}
+                          onBlur={handleMouseLeave}
                         >
                           <div className="font-medium text-gray-900">
                             {dropdownItem.name}

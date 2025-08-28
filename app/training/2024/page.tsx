@@ -194,6 +194,34 @@ export default function Training2024Page() {
           </div>
         </section>
 
+        {/* Program Partners */}
+        <section className="pt-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+                Program Partners
+              </h2>
+              <p className="text-xl text-gray-600">
+                We proudly partnered with leading organizations to make the 2024 program a success
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center">
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 w-full max-w-sm flex flex-col items-center text-center">
+                <img
+                  src="/minjec-logo.png"
+                  alt="MINJEC - Ministry of Youth Affairs and Civic Education"
+                  className="h-20 w-auto object-contain mb-4"
+                />
+                <div className="font-bold text-black text-sm md:text-base">
+                  MINISTRY OF YOUTH AFFAIRS AND CIVIC EDUCATION
+                </div>
+                <div className="text-sm text-gray-600 mt-1">(MINJEC)</div>
+                <p className="text-gray-600 text-sm mt-3">Official Partner</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Photo Gallery */}
         <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
