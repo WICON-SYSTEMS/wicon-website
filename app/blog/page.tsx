@@ -17,6 +17,18 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   const blogPosts = [
     {
+      id: 0,
+      title: "The Role of AI on IoT and Smart Home Solutions",
+      excerpt:
+        "AI + IoT are transforming homes—personalized automation, enhanced security, and smarter energy use.",
+      author: "Eng. Marina Ada Nguema Nfumu",
+      date: "August 30, 2025",
+      readTime: "5 min read",
+      category: "AI & IoT",
+      image: "/wicon-box.png",
+      href: "/blog/role-of-ai-on-iot-and-smart-home-solutions",
+    },
+    {
       id: 1,
       title: "Cutting Down Electricity Costs with Smart Controllers",
       excerpt:
