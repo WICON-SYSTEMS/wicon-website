@@ -371,10 +371,10 @@ export default function HomePage() {
               >
                 <div className="inline-block bg-gray-900 rounded-lg p-6">
                   <div className="text-3xl font-bold text-white mb-2">
-                    October 2025
+                    November 2025
                   </div>
                   <div className="text-gray-300 mb-4">
-                    4 Weeks Intensive Program
+                    12 weeks Intensive Program
                   </div>
                   <div className="flex justify-center lg:justify-end space-x-4 text-sm">
                     <div className="text-center">

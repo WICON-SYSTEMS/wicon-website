@@ -119,7 +119,9 @@ export default function TrainingPage() {
         !partner.agree
       ) {
         setShowPartnerErrors(true);
-        toast.error("Please complete all required fields and accept the terms.");
+        toast.error(
+          "Please complete all required fields and accept the terms."
+        );
         return;
       }
 
@@ -129,7 +131,8 @@ export default function TrainingPage() {
         body: JSON.stringify(partner),
       });
       const data = await res.json();
-      if (!res.ok || !data.ok) throw new Error(data?.error || "Submission failed");
+      if (!res.ok || !data.ok)
+        throw new Error(data?.error || "Submission failed");
       setShowPartnerSuccess(true);
       setPartner({
         name: "",
@@ -332,7 +335,7 @@ export default function TrainingPage() {
               </p>
               <div className="bg-gray-900 rounded-lg p-6 inline-block mb-8">
                 <div className="text-3xl font-bold mb-2">
-                  October 2025 Program
+                  November 2025 Program
                 </div>
                 <div className="text-gray-300">
                   Registration Opens: September 2025
@@ -428,7 +431,7 @@ export default function TrainingPage() {
                   <div className="flex items-center">
                     <Calendar className="w-5 h-5 text-gray-600 mr-3" />
                     <span className="text-gray-700">
-                      Duration: 4 weeks intensive
+                      Duration: 12 weeks intensive
                     </span>
                   </div>
                   <div className="flex items-center">
@@ -580,14 +583,19 @@ export default function TrainingPage() {
                 Partner With Us
               </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Are you an organization interested in supporting skills development and
-                youth empowerment? Join us as a program partner. We welcome sponsorships,
-                training support, equipment donations, internship pipelines, and more.
+                Are you an organization interested in supporting skills
+                development and youth empowerment? Join us as a program partner.
+                We welcome sponsorships, training support, equipment donations,
+                internship pipelines, and more.
               </p>
             </div>
             <Card className="bg-white border-gray-200">
               <CardContent className="p-8">
-                <form className="space-y-6" onSubmit={handlePartnerSubmit} aria-busy={submittingPartner}>
+                <form
+                  className="space-y-6"
+                  onSubmit={handlePartnerSubmit}
+                  aria-busy={submittingPartner}
+                >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <Label htmlFor="partnerName">Your Name *</Label>
@@ -595,12 +603,18 @@ export default function TrainingPage() {
                         id="partnerName"
                         placeholder="Enter your full name"
                         value={partner.name}
-                        onChange={(e) => setPartner((p) => ({ ...p, name: e.target.value }))}
-                        className={`mt-1 ${partnerErrors.name ? "border-red-500" : ""}`}
+                        onChange={(e) =>
+                          setPartner((p) => ({ ...p, name: e.target.value }))
+                        }
+                        className={`mt-1 ${
+                          partnerErrors.name ? "border-red-500" : ""
+                        }`}
                         aria-invalid={partnerErrors.name || undefined}
                       />
                       {partnerErrors.name && (
-                        <p className="text-sm text-red-600 mt-1">Name is required</p>
+                        <p className="text-sm text-red-600 mt-1">
+                          Name is required
+                        </p>
                       )}
                     </div>
                     <div>
@@ -609,12 +623,21 @@ export default function TrainingPage() {
                         id="organization"
                         placeholder="Company/Institution name"
                         value={partner.organization}
-                        onChange={(e) => setPartner((p) => ({ ...p, organization: e.target.value }))}
-                        className={`mt-1 ${partnerErrors.organization ? "border-red-500" : ""}`}
+                        onChange={(e) =>
+                          setPartner((p) => ({
+                            ...p,
+                            organization: e.target.value,
+                          }))
+                        }
+                        className={`mt-1 ${
+                          partnerErrors.organization ? "border-red-500" : ""
+                        }`}
                         aria-invalid={partnerErrors.organization || undefined}
                       />
                       {partnerErrors.organization && (
-                        <p className="text-sm text-red-600 mt-1">Organization is required</p>
+                        <p className="text-sm text-red-600 mt-1">
+                          Organization is required
+                        </p>
                       )}
                     </div>
                   </div>
@@ -626,12 +649,18 @@ export default function TrainingPage() {
                         type="email"
                         placeholder="your.email@example.com"
                         value={partner.email}
-                        onChange={(e) => setPartner((p) => ({ ...p, email: e.target.value }))}
-                        className={`mt-1 ${partnerErrors.email ? "border-red-500" : ""}`}
+                        onChange={(e) =>
+                          setPartner((p) => ({ ...p, email: e.target.value }))
+                        }
+                        className={`mt-1 ${
+                          partnerErrors.email ? "border-red-500" : ""
+                        }`}
                         aria-invalid={partnerErrors.email || undefined}
                       />
                       {partnerErrors.email && (
-                        <p className="text-sm text-red-600 mt-1">Email is required</p>
+                        <p className="text-sm text-red-600 mt-1">
+                          Email is required
+                        </p>
                       )}
                     </div>
                     <div>
@@ -641,55 +670,114 @@ export default function TrainingPage() {
                           id="partnerPhone"
                           value={partner.phone || undefined}
                           defaultCountry="CM"
-                          onChange={(val) => setPartner((p) => ({ ...p, phone: val || "" }))}
+                          onChange={(val) =>
+                            setPartner((p) => ({ ...p, phone: val || "" }))
+                          }
                           placeholder="e.g. +237 6XX XXX XXX"
-                          error={!!partnerErrors.phone || (partner.phone ? !isValidPhoneNumber(partner.phone) : false)}
+                          error={
+                            !!partnerErrors.phone ||
+                            (partner.phone
+                              ? !isValidPhoneNumber(partner.phone)
+                              : false)
+                          }
                         />
                       </div>
                       {partnerErrors.phone ? (
-                        <p className="text-sm text-red-600 mt-1">Phone is required</p>
-                      ) : partner.phone && !isValidPhoneNumber(partner.phone) ? (
-                        <p className="text-sm text-red-600 mt-1">Enter a valid phone number</p>
+                        <p className="text-sm text-red-600 mt-1">
+                          Phone is required
+                        </p>
+                      ) : partner.phone &&
+                        !isValidPhoneNumber(partner.phone) ? (
+                        <p className="text-sm text-red-600 mt-1">
+                          Enter a valid phone number
+                        </p>
                       ) : (
-                        <p className="text-[12px] text-gray-500 mt-1">Includes country code with flag (e.g., Cameroon +237)</p>
+                        <p className="text-[12px] text-gray-500 mt-1">
+                          Includes country code with flag (e.g., Cameroon +237)
+                        </p>
                       )}
                     </div>
                   </div>
                   <div>
-                    <Label htmlFor="partnershipType">Partnership Interest *</Label>
+                    <Label htmlFor="partnershipType">
+                      Partnership Interest *
+                    </Label>
                     <Select
-                      value={partner.partnershipType}                      
-                      onValueChange={(v) => setPartner((p) => ({ ...p, partnershipType: v }))}
+                      value={partner.partnershipType}
+                      onValueChange={(v) =>
+                        setPartner((p) => ({ ...p, partnershipType: v }))
+                      }
                     >
-                      <SelectTrigger className={`mt-1 cursor-pointer ${partnerErrors.partnershipType ? "border-red-500" : ""}`}>
+                      <SelectTrigger
+                        className={`mt-1 cursor-pointer ${
+                          partnerErrors.partnershipType ? "border-red-500" : ""
+                        }`}
+                      >
                         <SelectValue placeholder="Select partnership type" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem className="cursor-pointer" value="sponsorship">Sponsorship</SelectItem>
-                        <SelectItem className="cursor-pointer" value="training-support">Training Support</SelectItem>
-                        <SelectItem className="cursor-pointer" value="equipment-donation">Equipment Donation</SelectItem>
-                        <SelectItem className="cursor-pointer" value="venue-logistics">Venue / Logistics</SelectItem>
-                        <SelectItem className="cursor-pointer" value="internship-pipeline">Internship Pipeline</SelectItem>
-                        <SelectItem className="cursor-pointer" value="other">Other</SelectItem>
+                        <SelectItem
+                          className="cursor-pointer"
+                          value="sponsorship"
+                        >
+                          Sponsorship
+                        </SelectItem>
+                        <SelectItem
+                          className="cursor-pointer"
+                          value="training-support"
+                        >
+                          Training Support
+                        </SelectItem>
+                        <SelectItem
+                          className="cursor-pointer"
+                          value="equipment-donation"
+                        >
+                          Equipment Donation
+                        </SelectItem>
+                        <SelectItem
+                          className="cursor-pointer"
+                          value="venue-logistics"
+                        >
+                          Venue / Logistics
+                        </SelectItem>
+                        <SelectItem
+                          className="cursor-pointer"
+                          value="internship-pipeline"
+                        >
+                          Internship Pipeline
+                        </SelectItem>
+                        <SelectItem className="cursor-pointer" value="other">
+                          Other
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                     {partnerErrors.partnershipType && (
-                      <p className="text-sm text-red-600 mt-1">Please select a partnership type</p>
+                      <p className="text-sm text-red-600 mt-1">
+                        Please select a partnership type
+                      </p>
                     )}
                   </div>
                   <div>
-                    <Label htmlFor="partnerMessage">How would you like to partner with us? *</Label>
+                    <Label htmlFor="partnerMessage">
+                      How would you like to partner with us? *
+                    </Label>
                     <Textarea
                       id="partnerMessage"
                       rows={4}
                       placeholder="Tell us about your organization and partnership goals..."
                       value={partner.message}
-                      onChange={(e) => setPartner((p) => ({ ...p, message: e.target.value }))}
-                      className={`mt-1 ${partnerErrors.message ? "border-red-500" : ""}`}
+                      onChange={(e) =>
+                        setPartner((p) => ({ ...p, message: e.target.value }))
+                      }
+                      className={`mt-1 ${
+                        partnerErrors.message ? "border-red-500" : ""
+                      }`}
                       aria-invalid={partnerErrors.message || undefined}
                     />
                     {partnerErrors.message && (
-                      <p className="text-sm text-red-600 mt-1">Message is required</p>
+                      <p className="text-sm text-red-600 mt-1">
+                        Message is required
+                      </p>
                     )}
                   </div>
                   <div className="flex items-center space-x-2">
@@ -697,14 +785,18 @@ export default function TrainingPage() {
                       id="partnerAgree"
                       checked={partner.agree}
                       className="cursor-pointer"
-                      onCheckedChange={(c) => setPartner((p) => ({ ...p, agree: Boolean(c) }))}
+                      onCheckedChange={(c) =>
+                        setPartner((p) => ({ ...p, agree: Boolean(c) }))
+                      }
                     />
                     <Label htmlFor="partnerAgree" className="text-sm">
                       I agree to be contacted about partnership opportunities *
                     </Label>
                   </div>
                   {partnerErrors.agree && (
-                    <p className="text-sm text-red-600">You must accept the terms</p>
+                    <p className="text-sm text-red-600">
+                      You must accept the terms
+                    </p>
                   )}
                   <Button
                     className="w-full bg-black text-white hover:bg-gray-800 py-3"
@@ -712,8 +804,12 @@ export default function TrainingPage() {
                     disabled={submittingPartner}
                     aria-busy={submittingPartner}
                   >
-                    {submittingPartner && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                    {submittingPartner ? "Submitting..." : "Submit Partnership Interest"}
+                    {submittingPartner && (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    )}
+                    {submittingPartner
+                      ? "Submitting..."
+                      : "Submit Partnership Interest"}
                   </Button>
                 </form>
               </CardContent>
@@ -727,12 +823,15 @@ export default function TrainingPage() {
             <DialogHeader>
               <DialogTitle>Thank you for your interest!</DialogTitle>
               <DialogDescription id="partner-success-description">
-                Your partnership request has been received. We'll reach out to you shortly with next steps.
+                Your partnership request has been received. We'll reach out to
+                you shortly with next steps.
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>
               <DialogClose asChild>
-                <Button className="bg-black text-white hover:bg-gray-800">Done</Button>
+                <Button className="bg-black text-white hover:bg-gray-800">
+                  Done
+                </Button>
               </DialogClose>
             </DialogFooter>
           </DialogContent>
@@ -895,17 +994,31 @@ export default function TrainingPage() {
                           id="volunteerPhone"
                           value={volunteer.phone || undefined}
                           defaultCountry="CM"
-                          onChange={(val) => setVolunteer((p) => ({ ...p, phone: val || "" }))}
+                          onChange={(val) =>
+                            setVolunteer((p) => ({ ...p, phone: val || "" }))
+                          }
                           placeholder="e.g. +237 6XX XXX XXX"
-                          error={!!volunteerErrors.phone || (volunteer.phone ? !isValidPhoneNumber(volunteer.phone) : false)}
+                          error={
+                            !!volunteerErrors.phone ||
+                            (volunteer.phone
+                              ? !isValidPhoneNumber(volunteer.phone)
+                              : false)
+                          }
                         />
                       </div>
                       {volunteerErrors.phone ? (
-                        <p className="text-sm text-red-500 mt-1">Phone number is required</p>
-                      ) : volunteer.phone && !isValidPhoneNumber(volunteer.phone) ? (
-                        <p className="text-sm text-red-500 mt-1">Enter a valid phone number</p>
+                        <p className="text-sm text-red-500 mt-1">
+                          Phone number is required
+                        </p>
+                      ) : volunteer.phone &&
+                        !isValidPhoneNumber(volunteer.phone) ? (
+                        <p className="text-sm text-red-500 mt-1">
+                          Enter a valid phone number
+                        </p>
                       ) : (
-                        <p className="text-[12px] text-gray-500 mt-1">Includes country code with flag (e.g., Cameroon +237)</p>
+                        <p className="text-[12px] text-gray-500 mt-1">
+                          Includes country code with flag (e.g., Cameroon +237)
+                        </p>
                       )}
                     </div>
                   </div>
@@ -1066,7 +1179,7 @@ export default function TrainingPage() {
                       htmlFor="availability"
                       className="text-sm font-medium text-black"
                     >
-                      Availability for October 2025 Program *
+                      Availability for November 2025 Program *
                     </Label>
                     <Select
                       value={volunteer.availability}
@@ -1083,7 +1196,7 @@ export default function TrainingPage() {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="full-time">
-                          Full-time (4 weeks)
+                          Full-time (12 weeks)
                         </SelectItem>
                         <SelectItem value="part-time">
                           Part-time (specific days/hours)
@@ -1289,15 +1402,27 @@ export default function TrainingPage() {
                             setRegister((p) => ({ ...p, phone: next }));
                           }}
                           placeholder="e.g. +237 6XX XXX XXX"
-                          error={!!registerErrors.phone || (register.phone ? !isValidPhoneNumber(register.phone) : false)}
+                          error={
+                            !!registerErrors.phone ||
+                            (register.phone
+                              ? !isValidPhoneNumber(register.phone)
+                              : false)
+                          }
                         />
                       </div>
                       {registerErrors.phone ? (
-                        <p className="text-sm text-red-600 mt-1">Phone is required</p>
-                      ) : register.phone && !isValidPhoneNumber(register.phone) ? (
-                        <p className="text-sm text-red-600 mt-1">Enter a valid phone number</p>
+                        <p className="text-sm text-red-600 mt-1">
+                          Phone is required
+                        </p>
+                      ) : register.phone &&
+                        !isValidPhoneNumber(register.phone) ? (
+                        <p className="text-sm text-red-600 mt-1">
+                          Enter a valid phone number
+                        </p>
                       ) : (
-                        <p className="text-[12px] text-gray-500 mt-1">Includes country code with flag (e.g., Cameroon +237)</p>
+                        <p className="text-[12px] text-gray-500 mt-1">
+                          Includes country code with flag (e.g., Cameroon +237)
+                        </p>
                       )}
                     </div>
                   </div>
