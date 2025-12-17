@@ -8,6 +8,7 @@ import "./globals.css"
 // import RouteLoader from "@/components/route-loader" 
 import TopProgress from "@/components/top-progress"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -107,6 +108,7 @@ html {
         {children}
         <Toaster richColors position="top-center" />
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   )
