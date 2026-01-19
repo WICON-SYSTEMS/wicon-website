@@ -1578,8 +1578,7 @@ export default function TrainingPage() {
                       }
                     />
                     <Label htmlFor="updates" className="text-sm">
-                      I would like to receive updates about WiCon Systems
-                      training programs and events
+                      I would like to receive updates about the program
                     </Label>
                   </div>
                   <Button
@@ -1593,55 +1592,11 @@ export default function TrainingPage() {
                     )}
                     {submittingRegister
                       ? "Submitting..."
-                      : "Submit Registration Application"}
+                      : "Register for 2025 Program"}
                   </Button>
                 </form>
               </CardContent>
             </Card>
-          </div>
-        </section>
-
-        {/* Contact Information */}
-        <section className="pb-10 md:py-20 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-black mb-4">
-                Questions About the Program?
-              </h2>
-              <p className="text-xl text-gray-600">
-                Get in touch with our training coordinators
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card className="bg-white border-gray-200 text-center">
-                <CardContent className="p-6">
-                  <Phone className="w-8 h-8 mx-auto mb-4 text-black" />
-                  <h3 className="font-bold text-black mb-2">Call Us</h3>
-                  <p className="text-gray-600">+237 670791815</p>
-                  <p className="text-sm text-gray-500 mt-1">Mon-Fri, 8AM-5PM</p>
-                </CardContent>
-              </Card>
-              <Card className="bg-white border-gray-200 text-center">
-                <CardContent className="p-6">
-                  <Mail className="w-8 h-8 mx-auto mb-4 text-black" />
-                  <h3 className="font-bold text-black mb-2">Email Us</h3>
-                  <p className="text-gray-600">contactwiconsystems@gmail.com</p>
-                  <p className="text-sm text-gray-500 mt-1">
-                    Response within 24 hours
-                  </p>
-                </CardContent>
-              </Card>
-              <Card className="bg-white border-gray-200 text-center">
-                <CardContent className="p-6">
-                  <MapPin className="w-8 h-8 mx-auto mb-4 text-black" />
-                  <h3 className="font-bold text-black mb-2">Visit Us</h3>
-                  <p className="text-gray-600">WiCon Systems HQ</p>
-                  <p className="text-sm text-gray-500 mt-1">
-                    Buea, Southwest Region
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
           </div>
         </section>
       </main>

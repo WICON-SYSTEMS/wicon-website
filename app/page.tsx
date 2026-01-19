@@ -672,13 +672,13 @@ export default function HomePage() {
                   Get Free Consultation
                 </Button>
               </Link>
-              <Link href="tel:+237670791815">
+              <Link href="tel:+237674802971">
                 <Button
                   size="lg"
                   variant="outline"
                   className="border-white text-white hover:bg-white hover:text-black px-8 py-3 bg-transparent cursor-pointer"
                 >
-                  Call +237 670791815
+                  Call +237 674802971
                 </Button>
               </Link>
             </div>

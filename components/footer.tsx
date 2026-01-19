@@ -32,11 +32,11 @@ export function Footer() {
               </div>
               <div className="flex items-center text-gray-300">
                 <Phone className="w-4 h-4 mr-2" />
-                <span>+237 670791815</span>
+                <span>+237 674802971</span>
               </div>
               <div className="flex items-center text-gray-300">
                 <Mail className="w-4 h-4 mr-2" />
-                <span>wiconsystems@gmail.com</span>
+                <span>info@wiconltd.com</span>
               </div>
             </div>
           </div>

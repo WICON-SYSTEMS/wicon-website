@@ -186,7 +186,7 @@ export function Header() {
           <div className="hidden md:flex items-center space-x-4">
             {/* <div className="flex items-center text-sm text-gray-600">
               <Phone className="w-4 h-4 mr-1" />
-              <span>+237 670791815</span>
+              <span>+237 674802971</span>
             </div> */}
             <Link href="/contact">
               <Button className="rounded-lg bg-black text-white hover:bg-gray-800">
@@ -246,7 +246,7 @@ export function Header() {
               <div className="px-3 py-2 border-t border-gray-200 mt-2">
                 {/* <div className="flex items-center text-sm text-gray-600 mb-2">
                   <Phone className="w-4 h-4 mr-1" />
-                  <span>+237 670791815</span>
+                  <span>+237 674802971</span>
                 </div> */}
                 <Link href="/contact">
                   <Button className="w-full bg-black text-white hover:bg-gray-800">

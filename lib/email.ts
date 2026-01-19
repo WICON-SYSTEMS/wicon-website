@@ -1,17 +1,18 @@
-import nodemailer from "nodemailer"
+import nodemailer from "nodemailer";
 
-const SMTP_HOST = process.env.SMTP_HOST || "smtp.gmail.com"
-const SMTP_PORT = Number(process.env.SMTP_PORT || 465)
-const SMTP_USER = process.env.SMTP_USER
-const SMTP_PASS = process.env.SMTP_PASS
-const SMTP_FROM = process.env.SMTP_FROM || "WiCon Systems <no-reply@example.com>"
-const BRAND_NAME = process.env.BRAND_NAME || "WiCon Systems"
-const BRAND_PRIMARY = process.env.BRAND_PRIMARY || "#000000"
-const BRAND_ACCENT = process.env.BRAND_ACCENT || "#111827" // slate-900
-const BRAND_BG = process.env.BRAND_BG || "#F9FAFB" // gray-50
-const BRAND_LOGO_URL = process.env.BRAND_LOGO_URL || ""
+const SMTP_HOST = process.env.SMTP_HOST || "smtp.gmail.com";
+const SMTP_PORT = Number(process.env.SMTP_PORT || 465);
+const SMTP_USER = process.env.SMTP_USER;
+const SMTP_PASS = process.env.SMTP_PASS;
+const SMTP_FROM =
+  process.env.SMTP_FROM || "WiCon Systems <no-reply@example.com>";
+const BRAND_NAME = process.env.BRAND_NAME || "WiCon Systems";
+const BRAND_PRIMARY = process.env.BRAND_PRIMARY || "#000000";
+const BRAND_ACCENT = process.env.BRAND_ACCENT || "#111827"; // slate-900
+const BRAND_BG = process.env.BRAND_BG || "#F9FAFB"; // gray-50
+const BRAND_LOGO_URL = process.env.BRAND_LOGO_URL || "";
 
-let transporter: nodemailer.Transporter | null = null
+let transporter: nodemailer.Transporter | null = null;
 if (SMTP_USER && SMTP_PASS) {
   transporter = nodemailer.createTransport({
     host: SMTP_HOST,
@@ -21,51 +22,50 @@ if (SMTP_USER && SMTP_PASS) {
       user: SMTP_USER,
       pass: SMTP_PASS,
     },
-  })
+  });
 }
 
 export type MailPayload = {
-  to: string | string[]
-  subject: string
-  html?: string
-  text?: string
-}
+  to: string | string[];
+  subject: string;
+  html?: string;
+  text?: string;
+};
 
 export async function sendMail({ to, subject, html, text }: MailPayload) {
   if (!transporter) {
-    console.warn("SMTP not configured; set SMTP_USER and SMTP_PASS. Skipping email send.")
-    return { skipped: true }
+    console.warn(
+      "SMTP not configured; set SMTP_USER and SMTP_PASS. Skipping email send."
+    );
+    return { skipped: true };
   }
   try {
-    const rawHtml = html || (text ? `<pre>${escapeHtml(text)}</pre>` : "")
-    const finalHtml = brandedHtml(rawHtml)
+    const rawHtml = html || (text ? `<pre>${escapeHtml(text)}</pre>` : "");
+    const finalHtml = brandedHtml(rawHtml);
     const info = await transporter.sendMail({
       from: SMTP_FROM,
       to,
       subject,
       html: finalHtml,
       text,
-    })
-    return { ok: true, id: info.messageId }
+    });
+    return { ok: true, id: info.messageId };
   } catch (err) {
-    console.error("Email send failed", err)
-    return { ok: false, error: (err as Error).message }
+    console.error("Email send failed", err);
+    return { ok: false, error: (err as Error).message };
   }
 }
 
 function escapeHtml(s: string) {
-  return s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
 function brandedHtml(inner: string) {
   // Normalize minimal bodies
-  const body = inner?.trim() ? inner : `<p>Thank you for your submission.</p>`
+  const body = inner?.trim() ? inner : `<p>Thank you for your submission.</p>`;
   const logoBlock = BRAND_LOGO_URL
     ? `<div style="font-weight:700;font-size:20px;color:#FFFFFF;">${BRAND_NAME}</div>`
-    : `<img src="${BRAND_LOGO_URL}" alt="${BRAND_NAME} logo" width="140" height="40" style="display:block;height:auto;max-width:140px;" />`
+    : `<img src="${BRAND_LOGO_URL}" alt="${BRAND_NAME} logo" width="140" height="40" style="display:block;height:auto;max-width:140px;" />`;
 
   return `<!doctype html>
 <html lang="en">
@@ -94,7 +94,7 @@ function brandedHtml(inner: string) {
             <tr>
               <td style="padding:0 24px 24px 24px;color:#6b7280;">
                 <hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0;" />
-                <p style="margin:6px 0 0 0;font-size:12px;line-height:1.5;">This is an automated message from ${BRAND_NAME}. Please do not reply to this email. If you have questions, contact contactwiconsystems@gmail.com</p>
+                <p style="margin:6px 0 0 0;font-size:12px;line-height:1.5;">This is an automated message from ${BRAND_NAME}. Please do not reply to this email. If you have questions, contact info@wiconltd.com</p>
               </td>
             </tr>
             <tr>
@@ -107,114 +107,151 @@ function brandedHtml(inner: string) {
       </tr>
     </table>
   </body>
-  </html>`
+  </html>`;
 }
 
 function escapeHtmlTitle(s: string) {
-  return s.replace(/</g, "&lt;").replace(/>/g, "&gt;")
+  return s.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
 // === Domain templates ===
 export type TrainingRegistrationEmailData = {
-  firstName: string
-  lastName: string
-  email: string
-  phone: string
-  track: string
-  education: string
-  experience?: string | null
-}
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  track: string;
+  education: string;
+  experience?: string | null;
+};
 
-export function buildTrainingRegistrationEmail(d: TrainingRegistrationEmailData) {
-  const fullName = `${d.firstName} ${d.lastName}`.trim()
+export function buildTrainingRegistrationEmail(
+  d: TrainingRegistrationEmailData
+) {
+  const fullName = `${d.firstName} ${d.lastName}`.trim();
   const html = `
-    <h1 style="margin:0 0 8px 0;font-size:20px;">Hi ${escapeHtml(fullName)},</h1>
-    <p style="margin:0 0 12px 0;">Thanks for registering for the ${escapeHtml(BRAND_NAME)} Digital Education program. We've received your registration. Here is a quick summary:</p>
+    <h1 style="margin:0 0 8px 0;font-size:20px;">Hi ${escapeHtml(
+      fullName
+    )},</h1>
+    <p style="margin:0 0 12px 0;">Thanks for registering for the ${escapeHtml(
+      BRAND_NAME
+    )} Digital Education program. We've received your registration. Here is a quick summary:</p>
     ${summaryTable([
-      ['Full name', fullName],
-      ['Email', d.email],
-      ['Phone', d.phone],
-      ['Track', d.track],
-      ['Education level', d.education],
-      ['Experience', d.experience || '—'],
+      ["Full name", fullName],
+      ["Email", d.email],
+      ["Phone", d.phone],
+      ["Track", d.track],
+      ["Education level", d.education],
+      ["Experience", d.experience || "—"],
     ])}
     ${nextSteps()}
-  `
-  return { subject: `${BRAND_NAME} Training Registration Received`, html: brandedHtml(html) }
+  `;
+  return {
+    subject: `${BRAND_NAME} Training Registration Received`,
+    html: brandedHtml(html),
+  };
 }
 
 export type TrainingVolunteerEmailData = {
-  firstName: string
-  lastName: string
-  email: string
-  phone: string
-  expertise: string
-  years: string
-  availability: string
-}
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  expertise: string;
+  years: string;
+  availability: string;
+};
 
 export function buildTrainingVolunteerEmail(d: TrainingVolunteerEmailData) {
-  const fullName = `${d.firstName} ${d.lastName}`.trim()
+  const fullName = `${d.firstName} ${d.lastName}`.trim();
   const html = `
-    <h1 style="margin:0 0 8px 0;font-size:20px;">Hi ${escapeHtml(fullName)},</h1>
-    <p style="margin:0 0 12px 0;">Thank you for applying to volunteer with ${escapeHtml(BRAND_NAME)}. Your application has been received. Summary:</p>
+    <h1 style="margin:0 0 8px 0;font-size:20px;">Hi ${escapeHtml(
+      fullName
+    )},</h1>
+    <p style="margin:0 0 12px 0;">Thank you for applying to volunteer with ${escapeHtml(
+      BRAND_NAME
+    )}. Your application has been received. Summary:</p>
     ${summaryTable([
-      ['Full name', fullName],
-      ['Email', d.email],
-      ['Phone', d.phone],
-      ['Expertise', d.expertise],
-      ['Years of experience', d.years],
-      ['Availability', d.availability],
+      ["Full name", fullName],
+      ["Email", d.email],
+      ["Phone", d.phone],
+      ["Expertise", d.expertise],
+      ["Years of experience", d.years],
+      ["Availability", d.availability],
     ])}
-    ${nextSteps('Our team will review your experience and get back to you with opportunities that match your skills.')}
-  `
-  return { subject: `${BRAND_NAME} Volunteer Application Received`, html: brandedHtml(html) }
+    ${nextSteps(
+      "Our team will review your experience and get back to you with opportunities that match your skills."
+    )}
+  `;
+  return {
+    subject: `${BRAND_NAME} Volunteer Application Received`,
+    html: brandedHtml(html),
+  };
 }
 
 export type InternshipApplicationEmailData = {
-  fullName: string
-  email: string
-  phone: string
-  position: string
-  availability: string
-  startDate?: string | null
-  endDate?: string | null
-}
+  fullName: string;
+  email: string;
+  phone: string;
+  position: string;
+  availability: string;
+  startDate?: string | null;
+  endDate?: string | null;
+};
 
-export function buildInternshipApplicationEmail(d: InternshipApplicationEmailData) {
+export function buildInternshipApplicationEmail(
+  d: InternshipApplicationEmailData
+) {
   const html = `
-    <h1 style="margin:0 0 8px 0;font-size:20px;">Hi ${escapeHtml(d.fullName)},</h1>
-    <p style="margin:0 0 12px 0;">Thanks for applying for an internship at ${escapeHtml(BRAND_NAME)}. We've received your application. Summary:</p>
+    <h1 style="margin:0 0 8px 0;font-size:20px;">Hi ${escapeHtml(
+      d.fullName
+    )},</h1>
+    <p style="margin:0 0 12px 0;">Thanks for applying for an internship at ${escapeHtml(
+      BRAND_NAME
+    )}. We've received your application. Summary:</p>
     ${summaryTable([
-      ['Applicant', d.fullName],
-      ['Email', d.email],
-      ['Phone', d.phone],
-      ['Position', d.position],
-      ['Availability', d.availability],
-      ['Preferred start', d.startDate || '—'],
-      ['Preferred end', d.endDate || '—'],
+      ["Applicant", d.fullName],
+      ["Email", d.email],
+      ["Phone", d.phone],
+      ["Position", d.position],
+      ["Availability", d.availability],
+      ["Preferred start", d.startDate || "—"],
+      ["Preferred end", d.endDate || "—"],
     ])}
-    ${nextSteps('We will review your application, including your CV and any supporting materials. If shortlisted, we will contact you to schedule a conversation.')}
-  `
-  return { subject: `${BRAND_NAME} Internship Application Received`, html: brandedHtml(html) }
+    ${nextSteps(
+      "We will review your application, including your CV and any supporting materials. If shortlisted, we will contact you to schedule a conversation."
+    )}
+  `;
+  return {
+    subject: `${BRAND_NAME} Internship Application Received`,
+    html: brandedHtml(html),
+  };
 }
 
 // === Helpers ===
 function summaryTable(rows: Array<[string, string]>) {
   const items = rows
-    .map(([k, v]) => `
+    .map(
+      ([k, v]) => `
       <tr>
-        <td style="padding:6px 8px;border:1px solid #e5e7eb;background:#f9fafb;width:40%;font-weight:600;">${escapeHtml(k)}</td>
-        <td style="padding:6px 8px;border:1px solid #e5e7eb;">${escapeHtml(v)}</td>
-      </tr>`)
-    .join('')
-  return `<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;margin:8px 0 4px 0;font-size:14px;">${items}</table>`
+        <td style="padding:6px 8px;border:1px solid #e5e7eb;background:#f9fafb;width:40%;font-weight:600;">${escapeHtml(
+          k
+        )}</td>
+        <td style="padding:6px 8px;border:1px solid #e5e7eb;">${escapeHtml(
+          v
+        )}</td>
+      </tr>`
+    )
+    .join("");
+  return `<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;margin:8px 0 4px 0;font-size:14px;">${items}</table>`;
 }
 
 function nextSteps(custom?: string) {
-  const text = custom || 'Our team will review your submission and send next steps shortly. You can reply to this email if you have any questions.'
+  const text =
+    custom ||
+    "Our team will review your submission and send next steps shortly. You can reply to this email if you have any questions.";
   return `
     <p style="margin:12px 0 8px 0;">${escapeHtml(text)}</p>
     <p style="margin:0;">If this wasn\'t you, please ignore this message or contact <a href="mailto:support@wiconsystems.com">support@wiconsystems.com</a>.</p>
-  `
+  `;
 }
