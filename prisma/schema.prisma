@@ -121,3 +121,51 @@ model PartnershipInterest {
 
   @@map("partnership_interests")
 }
+
+model Product {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String
+  description String
+  price       Float
+  imageUrl    String?  @map("image_url")
+  category    String?
+  stock       Int      @default(0)
+  status      String   @default("active") // active, draft, archived
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  orderItems  OrderItem[]
+
+  @@map("products")
+}
+
+model Order {
+  id             String   @id @default(uuid()) @db.Uuid
+  customerName   String   @map("customer_name")
+  email          String
+  phone          String
+  address        String
+  totalAmount    Float    @map("total_amount")
+  paymentStatus  String   @default("pending") @map("payment_status") // pending, paid, failed
+  fapshiTransId  String?  @map("fapshi_trans_id")
+  status         String   @default("processing") // processing, shipped, delivered, cancelled
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt      DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  items          OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String   @id @default(uuid()) @db.Uuid
+  orderId   String   @map("order_id") @db.Uuid
+  productId String   @map("product_id") @db.Uuid
+  quantity  Int
+  price     Float    // Price at the time of purchase
+
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id])
+
+  @@map("order_items")
+}

@@ -9,6 +9,7 @@ import "./globals.css"
 import TopProgress from "@/components/top-progress"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/next"
+import { CartProvider } from "@/components/cart-context"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -73,6 +74,8 @@ export const metadata: Metadata = {
   },
 }
 
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -103,12 +106,14 @@ html {
         `}</style>
       </head>
       <body className={inter.className}>
-        {/* <RouteLoader /> */}
-        <TopProgress />
-        {children}
-        <Toaster richColors position="top-center" />
-        <SpeedInsights />
-        <Analytics />
+        <CartProvider>
+          {/* <RouteLoader /> */}
+          <TopProgress />
+          {children}
+          <Toaster richColors position="top-center" />
+          <SpeedInsights />
+          <Analytics />
+        </CartProvider>
       </body>
     </html>
   )

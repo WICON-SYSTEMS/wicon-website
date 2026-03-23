@@ -82,6 +82,29 @@ type PartnershipInterest = BaseItem & {
   created_at?: string
 }
 
+type Product = BaseItem & {
+  name: string
+  description: string
+  price: number
+  image_url?: string | null
+  category?: string | null
+  stock: number
+  status: string
+  created_at?: string
+}
+
+type Order = BaseItem & {
+  customer_name: string
+  email: string
+  phone: string
+  address: string
+  total_amount: number
+  payment_status: string
+  fapshi_trans_id?: string | null
+  status: string
+  created_at?: string
+}
+
 function Pagination({ total, page, pageSize, onPageChange }: { total: number; page: number; pageSize: number; onPageChange: (p: number) => void }) {
   const totalPages = Math.max(1, Math.ceil(total / pageSize))
   if (totalPages <= 1) return null
@@ -103,7 +126,7 @@ export default function AdminPage() {
   const [username, setUsername] = useState("")
   const [passcode, setPasscode] = useState("")
   const [saved, setSaved] = useState(false)
-  const [activeTab, setActiveTab] = useState<"internships" | "registrations" | "volunteers" | "partners" | "subscribers">("internships")
+  const [activeTab, setActiveTab] = useState<"internships" | "registrations" | "volunteers" | "partners" | "subscribers" | "products" | "orders">("internships")
   const [q, setQ] = useState("")
   const [dateFilter, setDateFilter] = useState<"all" | "today" | "yesterday" | "week" | "month">("all")
   const [loading, setLoading] = useState(false)
@@ -116,6 +139,8 @@ export default function AdminPage() {
   const [pageVol, setPageVol] = useState(1)
   const [pageSub, setPageSub] = useState(1)
   const [pagePartners, setPagePartners] = useState(1)
+  const [pageProducts, setPageProducts] = useState(1)
+  const [pageOrders, setPageOrders] = useState(1)
   const pageSize = 10
   
   function StatusBadge({ status }: { status: string }) {
@@ -138,6 +163,8 @@ export default function AdminPage() {
   const [volunteers, setVolunteers] = useState<TrainingVolunteer[]>([])
   const [subscribers, setSubscribers] = useState<Subscriber[]>([])
   const [partners, setPartners] = useState<PartnershipInterest[]>([])
+  const [products, setProducts] = useState<Product[]>([])
+  const [orders, setOrders] = useState<Order[]>([])
 
   useEffect(() => {
     setMounted(true)
@@ -199,6 +226,10 @@ export default function AdminPage() {
         ? "/api/admin/training/volunteers"
         : activeTab === "partners"
         ? "/api/admin/training/partners"
+        : activeTab === "products"
+        ? "/api/admin/products"
+        : activeTab === "orders"
+        ? "/api/admin/orders"
         : "/api/admin/subscribers"
       const url = q ? `${urlBase}?q=${encodeURIComponent(q)}` : urlBase
       const res = await fetch(url, { headers })
@@ -209,6 +240,8 @@ export default function AdminPage() {
       if (activeTab === "volunteers") setVolunteers(data.items)
       if (activeTab === "subscribers") setSubscribers(data.items)
       if (activeTab === "partners") setPartners(data.items)
+      if (activeTab === "products") setProducts(data.items)
+      if (activeTab === "orders") setOrders(data.items)
     } catch (e: any) {
       setError(e?.message || "Failed to load")
     } finally {
@@ -388,7 +421,7 @@ export default function AdminPage() {
             <SidebarGroupLabel className="text-lg uppercase mb-10 mt-3" >Admin Portal</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {(["internships","registrations","volunteers","partners","subscribers"] as const).map(t => (
+                {(["internships","registrations","volunteers","partners","products","orders","subscribers"] as const).map(t => (
                   <SidebarMenuItem key={t}>
                     <SidebarMenuButton
                       isActive={activeTab === t}
@@ -553,6 +586,66 @@ export default function AdminPage() {
             )}
             <div className="mt-2 text-sm text-gray-500">
               Showing {filtered.length} of {partners.length} partnership interests
+            </div>
+          </>
+        )
+      })()}
+
+      {activeTab === "products" && (() => {
+        const filtered = filterByDate(products, dateFilter)
+        return (
+          <>
+            <div className="flex justify-end mb-4">
+              <Link href="/admin/products/new" className="px-4 py-2 bg-black text-white rounded text-sm hover:bg-gray-800">Add New Product</Link>
+            </div>
+            <Table
+              headers={["Name","Category","Price","Stock","Status","Actions"]}
+              rows={paginate(filtered, pageProducts).map(p=>[
+                p.name,
+                p.category || 'N/A',
+                `${p.price.toLocaleString()} XAF`,
+                p.stock,
+                <StatusBadge key={`status-${p.id}`} status={p.status === 'active' ? 'accepted' : p.status === 'draft' ? 'pending' : 'declined'} />,
+                <div key={p.id} className="flex flex-wrap gap-3">
+                  <Link className="underline" href={`/admin/products/${p.id}`}>Edit</Link>
+                </div>
+              ])}
+            />
+            {filtered.length > pageSize && (
+              <Pagination total={filtered.length} page={pageProducts} pageSize={pageSize} onPageChange={setPageProducts} />
+            )}
+            <div className="mt-2 text-sm text-gray-500">
+              Showing {filtered.length} of {products.length} products
+            </div>
+          </>
+        )
+      })()}
+
+      {activeTab === "orders" && (() => {
+        const filtered = filterByDate(orders, dateFilter)
+        return (
+          <>
+            <Table
+              headers={["Customer","Total","Payment","Status","Date","Actions"]}
+              rows={paginate(filtered, pageOrders).map(o=>[
+                <div key={`cust-${o.id}`} className="flex flex-col">
+                  <span className="font-medium">{o.customer_name}</span>
+                  <span className="text-xs text-gray-500">{o.email}</span>
+                </div>,
+                `${o.total_amount.toLocaleString()} XAF`,
+                <span key={`pay-${o.id}`} className={`text-xs font-medium ${o.payment_status === 'paid' ? 'text-green-600' : 'text-yellow-600'}`}>{o.payment_status.toUpperCase()}</span>,
+                <StatusBadge key={`status-${o.id}`} status={o.status === 'delivered' ? 'accepted' : o.status === 'cancelled' ? 'declined' : 'pending'} />,
+                o.created_at ? new Date(o.created_at).toLocaleDateString() : '',
+                <div key={o.id} className="flex flex-wrap gap-3">
+                  <Link className="underline" href={`/admin/orders/${o.id}`}>Manage</Link>
+                </div>
+              ])}
+            />
+            {filtered.length > pageSize && (
+              <Pagination total={filtered.length} page={pageOrders} pageSize={pageSize} onPageChange={setPageOrders} />
+            )}
+            <div className="mt-2 text-sm text-gray-500">
+              Showing {filtered.length} of {orders.length} orders
             </div>
           </>
         )

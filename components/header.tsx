@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, ChevronDown, ShoppingCart } from "lucide-react";
+import { useCart } from "@/components/cart-context";
 
 export function Header() {
+  const { totalCount } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const closeTimerRef = useRef<number | null>(null);
@@ -51,6 +53,7 @@ export function Header() {
         },
       ],
     },
+    { name: "Store", href: "/store" },
     {
       name: "Learning",
       dropdown: [
@@ -183,20 +186,32 @@ export function Header() {
           </nav>
 
           {/* Contact Info & CTA */}
-          <div className="hidden md:flex items-center space-x-4">
-            {/* <div className="flex items-center text-sm text-gray-600">
-              <Phone className="w-4 h-4 mr-1" />
-              <span>+237 674802971</span>
-            </div> */}
+          <div className="hidden md:flex items-center space-x-6">
+            <Link href="/cart" className="relative p-2 text-gray-700 hover:text-black transition-colors">
+              <ShoppingCart className="w-6 h-6" />
+              {totalCount > 0 && (
+                <span className="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">
+                  {totalCount}
+                </span>
+              )}
+            </Link>
             <Link href="/contact">
-              <Button className="rounded-lg bg-black text-white hover:bg-gray-800">
+              <Button className="rounded-lg bg-black text-white hover:bg-gray-800 px-6">
                 Get Quote
               </Button>
             </Link>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center space-x-4">
+            <Link href="/cart" className="relative p-1 text-gray-700 hover:text-black transition-colors">
+              <ShoppingCart className="w-6 h-6" />
+              {totalCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">
+                  {totalCount}
+                </span>
+              )}
+            </Link>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-700 hover:text-black p-2"
