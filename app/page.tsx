@@ -43,26 +43,25 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h1 className="leading-tight mb-6">
+                <h1 className="leading-tight mb-6 mt-4 sm:mt-0">
                   <span
-                    className={`block font-extrabold tracking-tight text-black ${styles.fadeUp}`}
-                    style={{ lineHeight: 1.05 }}
+                    className={`block font-black tracking-tighter text-black ${styles.fadeUp}`}
+                    style={{ lineHeight: 1 }}
                   >
-                    <span className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
+                    <span className="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl">
                       WiCon
                     </span>
                   </span>
                   <span
-                    className={`mt-2 block font-semibold text-gray-800 tracking-tight ${styles.fadeUp} ${styles.delay1}`}
+                    className={`mt-4 block font-bold text-gray-800 tracking-tight leading-[1.1] ${styles.fadeUp} ${styles.delay1}`}
                   >
-                    <span className="text-2xl md:text-5xl lg:text-5xl">
+                    <span className="text-2xl sm:text-4xl lg:text-5xl">
                       &quot;Pioneering Smart Home Technology Solutions&quot;
                     </span>
                   </span>
-                  {/* <span className={`mt-3 inline-block ${styles.underline} ${styles.delay2}`} aria-hidden="true" /> */}
                 </h1>
                 <p
-                  className={`text-xl text-gray-600 mb-8 leading-relaxed ${styles.fadeUp} ${styles.delay3}`}
+                  className={`text-lg sm:text-xl text-gray-500 mb-10 leading-relaxed max-w-xl ${styles.fadeUp} ${styles.delay3}`}
                 >
                   From wireless electrical control to custom software and IoT
                   solutions. Reduce costs, improve efficiency, and digitally
@@ -70,24 +69,24 @@ export default function HomePage() {
                   solutions.
                 </p>
                 <div
-                  className={`flex flex-col sm:flex-row gap-4 ${styles.fadeUp} ${styles.delay4}`}
+                  className={`flex flex-col sm:flex-row gap-4 sm:items-center ${styles.fadeUp} ${styles.delay4}`}
                 >
-                  <Link href="/products">
+                  <Link href="/products" className="w-full sm:w-auto">
                     <Button
                       size="lg"
-                      className="bg-black text-white hover:bg-gray-700 px-8 py-3 cursor-pointer"
+                      className="w-full sm:w-auto bg-black text-white hover:bg-gray-800 px-10 py-4 rounded-2xl font-bold uppercase tracking-widest text-xs cursor-pointer shadow-xl hover:shadow-black/20 transition-all"
                     >
                       View Solutions
-                      <ArrowRight className="ml-2 w-5 h-5" />
+                      <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </Link>
-                  <Link href="/contact">
+                  <Link href="/contact" className="w-full sm:w-auto">
                     <Button
                       size="lg"
                       variant="outline"
-                      className="border-black text-black hover:bg-black hover:text-white px-8 py-3 bg-transparent cursor-pointer"
+                      className="w-full sm:w-auto border-gray-200 text-black hover:bg-gray-50 px-10 py-4 rounded-2xl font-bold uppercase tracking-widest text-xs bg-transparent cursor-pointer transition-all"
                     >
-                      Get Free Consultation
+                      Free Consultation
                     </Button>
                   </Link>
                 </div>
@@ -113,34 +112,34 @@ export default function HomePage() {
           className={`py-5 md:py-20 bg-white ${styles.reveal}`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className={`text-center mb-16`}>
+            <div className={`text-center mb-12 sm:mb-20`}>
               <h2
                 data-reveal
-                className={`text-3xl md:text-4xl font-bold text-black mb-4 ${styles.reveal}`}
+                className={`text-2xl sm:text-4xl lg:text-5xl font-black text-black mb-4 uppercase tracking-tighter ${styles.reveal}`}
               >
                 Why Choose WiCon Systems?
               </h2>
               <p
                 data-reveal
-                className={`text-xl text-gray-600 max-w-3xl mx-auto ${styles.reveal} ${styles.st1}`}
+                className={`text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed ${styles.reveal} ${styles.st1}`}
               >
                 Over 10 years of expertise delivering safe, reliable, and
                 innovative technology solutions
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               <Card
                 data-reveal
-                className={`border-gray-200 hover:shadow-lg transition-shadow ${styles.reveal}`}
+                className={`border-gray-100 rounded-2xl sm:rounded-3xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 overflow-hidden group ${styles.reveal}`}
               >
-                <CardContent className="p-8 text-center">
-                  <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Shield className="w-8 h-8 text-white" />
+                <CardContent className="p-8 sm:p-10 text-center">
+                  <div className="w-16 h-16 bg-gray-50 text-black rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:bg-black group-hover:text-white transition-all duration-500 rotate-3 group-hover:rotate-0">
+                    <Shield className="w-8 h-8" />
                   </div>
                   <h3 className="text-xl font-bold text-black mb-4">
                     Safe & Reliable Technology
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-500 leading-relaxed text-sm sm:text-base">
                     Advanced safety monitoring, reliable wireless technology,
                     and robust software solutions ensure your systems operate
                     safely and efficiently at all times.
@@ -149,16 +148,16 @@ export default function HomePage() {
               </Card>
               <Card
                 data-reveal
-                className={`border-gray-200 hover:shadow-lg transition-shadow ${styles.reveal} ${styles.st1}`}
+                className={`border-gray-100 rounded-2xl sm:rounded-3xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 overflow-hidden group ${styles.reveal} ${styles.st1}`}
               >
-                <CardContent className="p-8 text-center">
-                  <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
-                    <DollarSign className="w-8 h-8 text-white" />
+                <CardContent className="p-8 sm:p-10 text-center">
+                  <div className="w-16 h-16 bg-gray-50 text-black rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:bg-black group-hover:text-white transition-all duration-500 -rotate-3 group-hover:rotate-0">
+                    <DollarSign className="w-8 h-8" />
                   </div>
                   <h3 className="text-xl font-bold text-black mb-4">
                     Cost-Effective Digital Solutions
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-500 leading-relaxed text-sm sm:text-base">
                     Reduce operational costs with smart control systems, custom
                     software solutions, and IoT automation that optimize
                     processes and prevent costly failures.
@@ -167,16 +166,16 @@ export default function HomePage() {
               </Card>
               <Card
                 data-reveal
-                className={`border-gray-200 hover:shadow-lg transition-shadow ${styles.reveal} ${styles.st2}`}
+                className={`border-gray-100 rounded-2xl sm:rounded-3xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 overflow-hidden group ${styles.reveal} ${styles.st2}`}
               >
-                <CardContent className="p-8 text-center">
-                  <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Users className="w-8 h-8 text-white" />
+                <CardContent className="p-8 sm:p-10 text-center">
+                  <div className="w-16 h-16 bg-gray-50 text-black rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:bg-black group-hover:text-white transition-all duration-500 rotate-6 group-hover:rotate-0">
+                    <Users className="w-8 h-8" />
                   </div>
                   <h3 className="text-xl font-bold text-black mb-4">
                     Expert Development & Support
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-500 leading-relaxed text-sm sm:text-base">
                     Professional installation and custom software development by
                     certified technicians and developers with ongoing support
                     throughout Southwest Region, Cameroon.
@@ -190,34 +189,34 @@ export default function HomePage() {
         {/* Featured Products Section */}
         <section data-reveal className={`py-20 bg-gray-50 ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
+            <div className="text-center mb-12 sm:mb-20">
               <h2
                 data-reveal
-                className={`text-3xl md:text-4xl font-bold text-black mb-4 ${styles.reveal}`}
+                className={`text-2xl sm:text-4xl lg:text-5xl font-black text-black mb-4 uppercase tracking-tighter ${styles.reveal}`}
               >
                 Our Technology Solutions & Services
               </h2>
               <p
                 data-reveal
-                className={`text-xl text-gray-600 ${styles.reveal} ${styles.st1}`}
+                className={`text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed ${styles.reveal} ${styles.st1}`}
               >
                 Complete electrical, software, and IoT solutions for residential
                 and commercial needs
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
               <Card
                 data-reveal
-                className={`bg-white border-gray-200 hover:shadow-lg transition-shadow ${styles.reveal}`}
+                className={`bg-white border-gray-100 rounded-2xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group ${styles.reveal}`}
               >
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
-                    <Zap className="w-6 h-6 text-white" />
+                <CardContent className="p-5 sm:p-8 flex flex-col h-full">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                    <Zap className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-black mb-2">
+                  <h3 className="text-sm sm:text-lg font-bold text-black mb-2 sm:mb-3 leading-tight">
                     WiCon Wireless Controllers
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-gray-500 text-[10px] sm:text-sm leading-relaxed line-clamp-3">
                     Control lighting, power, and systems wirelessly with
                     reliable, secure controllers.
                   </p>
@@ -225,16 +224,16 @@ export default function HomePage() {
               </Card>
               <Card
                 data-reveal
-                className={`bg-white border-gray-200 hover:shadow-lg transition-shadow ${styles.reveal} ${styles.st1}`}
+                className={`bg-white border-gray-100 rounded-2xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group ${styles.reveal} ${styles.st1}`}
               >
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
-                    <Code className="w-6 h-6 text-white" />
+                <CardContent className="p-5 sm:p-8 flex flex-col h-full">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                    <Code className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-black mb-2">
+                  <h3 className="text-sm sm:text-lg font-bold text-black mb-2 sm:mb-3 leading-tight">
                     Custom Software Solutions
                   </h3>
-                  <p className="text-gray-600 text-sm mb-4">
+                  <p className="text-gray-500 text-[10px] sm:text-sm leading-relaxed line-clamp-3">
                     Tailored software applications, web platforms, and mobile
                     apps to digitize and streamline your business operations.
                   </p>
@@ -242,48 +241,33 @@ export default function HomePage() {
               </Card>
               <Card
                 data-reveal
-                className={`bg-white border-gray-200 hover:shadow-lg transition-shadow ${styles.reveal} ${styles.st2}`}
+                className={`bg-white border-gray-100 rounded-2xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group ${styles.reveal} ${styles.st2}`}
               >
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
-                    <Cpu className="w-6 h-6 text-white" />
+                <CardContent className="p-5 sm:p-8 flex flex-col h-full">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                    <Cpu className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-black mb-2">
+                  <h3 className="text-sm sm:text-lg font-bold text-black mb-2 sm:mb-3 leading-tight">
                     IoT Solutions
                   </h3>
-                  <p className="text-gray-600 text-sm mb-4">
+                  <p className="text-gray-500 text-[10px] sm:text-sm leading-relaxed line-clamp-3">
                     Smart sensors, connected devices, and automation systems for
                     intelligent monitoring and control.
                   </p>
                 </CardContent>
               </Card>
-              {/* <Card className="bg-white border-gray-200 hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
-                    <Sun className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-lg font-bold text-black mb-2">Solar PV Systems</h3>
-                  <p className="text-gray-600 text-sm mb-4">
-                    Complete domestic solar installations with smart monitoring for energy independence and cost
-                    savings.
-                  </p>
-                  <Button variant="outline" size="sm" className="w-full bg-transparent">
-                    Learn More
-                  </Button>
-                </CardContent>
-              </Card> */}
               <Card
                 data-reveal
-                className={`bg-white border-gray-200 hover:shadow-lg transition-shadow ${styles.reveal} ${styles.st3}`}
+                className={`bg-white border-gray-100 rounded-2xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group ${styles.reveal} ${styles.st3}`}
               >
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
-                    <Wrench className="w-6 h-6 text-white" />
+                <CardContent className="p-5 sm:p-8 flex flex-col h-full">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                    <Wrench className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-black mb-2">
+                  <h3 className="text-sm sm:text-lg font-bold text-black mb-2 sm:mb-3 leading-tight">
                     Electrical Wiring
                   </h3>
-                  <p className="text-gray-600 text-sm mb-4">
+                  <p className="text-gray-500 text-[10px] sm:text-sm leading-relaxed line-clamp-3">
                     Professional domestic electrical installations meeting all
                     safety standards with smart home integration.
                   </p>
@@ -291,16 +275,16 @@ export default function HomePage() {
               </Card>
               <Card
                 data-reveal
-                className={`bg-white border-gray-200 hover:shadow-lg transition-shadow ${styles.reveal} ${styles.st4}`}
+                className={`bg-white border-gray-100 rounded-2xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group ${styles.reveal} ${styles.st4}`}
               >
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
-                    <Camera className="w-6 h-6 text-white" />
+                <CardContent className="p-5 sm:p-8 flex flex-col h-full">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                    <Camera className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-black mb-2">
+                  <h3 className="text-sm sm:text-lg font-bold text-black mb-2 sm:mb-3 leading-tight">
                     CCTV Security Systems
                   </h3>
-                  <p className="text-gray-600 text-sm mb-4">
+                  <p className="text-gray-500 text-[10px] sm:text-sm leading-relaxed line-clamp-3">
                     Advanced security camera systems with AI-powered monitoring
                     and mobile app integration.
                   </p>
@@ -316,49 +300,48 @@ export default function HomePage() {
           className={`py-10 bg-black text-white ${styles.reveal}`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
               <div>
                 <div
                   data-reveal
-                  className={`flex items-center md:items-center mb-4 ${styles.reveal}`}
+                  className={`flex items-start sm:items-center mb-6 ${styles.reveal}`}
                 >
-                  {/* <GraduationCap className="w-15 h-15 mr-3 text-white" /> */}
                   <img
                     src="/training-logo-removebg-preview.png"
-                    className="w-25 h-15 mr-3"
+                    className="w-16 h-auto sm:w-24 mr-4  p-1 shadow-2xl"
                     alt="training-logo"
                   />
                   <h2
                     data-reveal
-                    className={`text-2xl font-bold ${styles.reveal}`}
+                    className={`text-xl sm:text-2xl font-black leading-tight tracking-tight ${styles.reveal}`}
                   >
-                    WiCon SMART HOME SOLUTION FOR DIGITAL EDUCATION
+                    SMART HOME SOLUTIONS <br className="hidden sm:block" />FOR DIGITAL EDUCATION
                   </h2>
                 </div>
                 <p
                   data-reveal
-                  className={`text-xl text-gray-300 mb-6 ${styles.reveal} ${styles.st1}`}
+                  className={`text-base sm:text-xl text-gray-400 mb-8 max-w-xl leading-relaxed ${styles.reveal} ${styles.st1}`}
                 >
                   Join our annual training program and master software
                   development, IoT solutions, and WiCon controller technology.
-                  Limited to 50 participants.
+                  Work with our experts in Buea.
                 </p>
                 <div
                   data-reveal
                   className={`flex flex-col sm:flex-row gap-4 ${styles.reveal} ${styles.st2}`}
                 >
                   <Button
-                    className="bg-white text-black hover:bg-gray-200"
+                    className="bg-white text-black hover:bg-gray-200 rounded-xl font-bold py-6 px-8"
                     asChild
                   >
                     <a href="/training">
-                      Learn More About the Training Program
+                      Learn More
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </a>
                   </Button>
                   <Button
                     variant="outline"
-                    className="border-white text-white hover:bg-white hover:text-black bg-transparent"
+                    className="border-gray-800 text-white hover:bg-white hover:text-black bg-transparent rounded-xl font-bold py-6 px-8"
                     asChild
                   >
                     <a href="/training#registration">Register for 2025</a>
@@ -367,27 +350,28 @@ export default function HomePage() {
               </div>
               <div
                 data-reveal
-                className={`text-center lg:text-right ${styles.reveal} ${styles.st1}`}
+                className={`lg:text-right ${styles.reveal} ${styles.st1}`}
               >
-                <div className="inline-block bg-gray-900 rounded-lg p-6">
-                  <div className="text-3xl font-bold text-white mb-2">
-                    November 2025
+                <div className="inline-block w-full sm:w-auto bg-gray-950 border border-gray-900 rounded-3xl p-8 sm:p-10 shadow-2xl overflow-hidden relative group">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 blur-3xl rounded-full translate-x-10 -translate-y-10 group-hover:scale-150 transition-transform duration-1000"></div>
+                  <div className="text-3xl sm:text-4xl font-black text-white mb-2 tracking-tighter">
+                    Nov 2025
                   </div>
-                  <div className="text-gray-300 mb-4">
-                    12 weeks Intensive Program
+                  <div className="text-gray-500 font-bold uppercase tracking-widest text-xs mb-8">
+                    12 Weeks Intensive Program
                   </div>
-                  <div className="flex justify-center lg:justify-end space-x-4 text-sm">
-                    <div className="text-center">
-                      <div className="font-bold text-white">Software</div>
-                      <div className="text-gray-400">Development</div>
+                  <div className="grid grid-cols-3 gap-4 text-center">
+                    <div className="p-3 bg-white/5 rounded-2xl">
+                      <div className="font-black text-lg text-white">Soft</div>
+                      <div className="text-[10px] uppercase font-bold text-gray-400 tracking-widest">Dev</div>
                     </div>
-                    <div className="text-center">
-                      <div className="font-bold text-white">IoT</div>
-                      <div className="text-gray-400">Solutions</div>
+                    <div className="p-3 bg-white/5 rounded-2xl">
+                      <div className="font-black text-lg text-white">IoT</div>
+                      <div className="text-[10px] uppercase font-bold text-gray-400 tracking-widest">Smart</div>
                     </div>
-                    <div className="text-center">
-                      <div className="font-bold text-white">WiCon</div>
-                      <div className="text-gray-400">Controllers</div>
+                    <div className="p-3 bg-white/5 rounded-2xl">
+                      <div className="font-black text-lg text-white">WiCon</div>
+                      <div className="text-[10px] uppercase font-bold text-gray-400 tracking-widest">Tech</div>
                     </div>
                   </div>
                 </div>
@@ -399,17 +383,17 @@ export default function HomePage() {
         {/* Why Choose WiCon Section */}
         <section data-reveal className={`py-20 bg-white ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-20 items-center">
               <div>
                 <h2
                   data-reveal
-                  className={`text-3xl md:text-4xl font-bold text-black mb-6 ${styles.reveal}`}
+                  className={`text-2xl sm:text-4xl lg:text-5xl font-black text-black mb-6 uppercase tracking-tighter leading-tight ${styles.reveal}`}
                 >
                   Trusted Technology Partner Since 2014
                 </h2>
                 <p
                   data-reveal
-                  className={`text-lg text-gray-600 mb-8 ${styles.reveal} ${styles.st1}`}
+                  className={`text-base sm:text-lg text-gray-500 mb-10 leading-relaxed ${styles.reveal} ${styles.st1}`}
                 >
                   With over a decade of experience in electrical construction,
                   software development, and IoT solutions, WiCon Systems has
@@ -418,39 +402,31 @@ export default function HomePage() {
                 </p>
                 <div
                   data-reveal
-                  className={`space-y-4 ${styles.reveal} ${styles.st2}`}
+                  className={`space-y-6 ${styles.reveal} ${styles.st2}`}
                 >
-                  <div className="flex items-center">
-                    <CheckCircle className="w-6 h-6 text-green-600 mr-3" />
-                    <span className="text-gray-700">
-                      10+ Years of Technology Innovation
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="w-6 h-6 text-green-600 mr-3" />
-                    <span className="text-gray-700">
-                      Certified Technicians & Developers
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="w-6 h-6 text-green-600 mr-3" />
-                    <span className="text-gray-700">
-                      24/7 Technical Support Available
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="w-6 h-6 text-green-600 mr-3" />
-                    <span className="text-gray-700">
-                      Local Understanding of Cameroon's Digital Needs
-                    </span>
-                  </div>
+                  {[
+                    "10+ Years of Technology Innovation",
+                    "Certified Technicians & Developers",
+                    "24/7 Technical Support Available",
+                    "Local Understanding of Cameroon's Digital Needs",
+                  ].map((text, idx) => (
+                    <div key={idx} className="flex items-center group">
+                      <div className="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center mr-4 group-hover:bg-green-500 transition-colors duration-300">
+                        <CheckCircle className="w-4 h-4 text-green-600 group-hover:text-white transition-colors duration-300" />
+                      </div>
+                      <span className="text-gray-700 font-bold text-sm sm:text-base tracking-tight">
+                        {text}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
-              <div data-reveal className={`${styles.reveal} ${styles.st1}`}>
+              <div data-reveal className={`relative ${styles.reveal} ${styles.st1}`}>
+                <div className="absolute -inset-4 bg-gray-50 rounded-3xl -z-10 rotate-2"></div>
                 <img
                   src="/wicon-body.png"
                   alt="WiCon Systems Technology Team"
-                  className="w-full h-auto rounded-md"
+                  className="w-full h-auto rounded-2xl shadow-2xl"
                 />
               </div>
             </div>
@@ -463,13 +439,13 @@ export default function HomePage() {
             <div className="text-center mb-16">
               <h2
                 data-reveal
-                className={`text-3xl md:text-4xl font-bold text-black mb-4 ${styles.reveal}`}
+                className={`text-2xl sm:text-4xl lg:text-5xl font-black text-black mb-4 uppercase tracking-tighter ${styles.reveal}`}
               >
                 Trusted by Leading Organizations
               </h2>
               <p
                 data-reveal
-                className={`text-xl text-gray-600 ${styles.reveal} ${styles.st1}`}
+                className={`text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed ${styles.reveal} ${styles.st1}`}
               >
                 Proud to serve educational institutions, businesses, and
                 organizations across Southwest Region
@@ -477,71 +453,39 @@ export default function HomePage() {
             </div>
             <div
               data-reveal
-              className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ${styles.reveal} ${styles.st2}`}
+              className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 ${styles.reveal} ${styles.st2}`}
             >
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex items-center justify-center min-h-[100px]">
-                <p className="text-center font-semibold text-gray-800 text-sm">
-                  BUEA INSTITUTE OF TECHNOLOGY
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex items-center justify-center min-h-[100px]">
-                <p className="text-center font-semibold text-gray-800 text-sm">
-                  HOTPEC ORPHANAGE
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex items-center justify-center min-h-[100px]">
-                <p className="text-center font-semibold text-gray-800 text-sm">
-                  GTHS BIMBIA
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex items-center justify-center min-h-[100px]">
-                <p className="text-center font-semibold text-gray-800 text-sm">
-                  FULL GOSPEL MISSION KWE-KWE MUYUKA
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex items-center justify-center min-h-[100px]">
-                <p className="text-center font-semibold text-gray-800 text-sm">
-                  LONGAS LOUNGE
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex items-center justify-center min-h-[100px]">
-                <p className="text-center font-semibold text-gray-800 text-sm">
-                  NETWORK RESTAURANT
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex items-center justify-center min-h-[100px]">
-                <p className="text-center font-semibold text-gray-800 text-sm">
-                  Rhika's Garden
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex items-center justify-center min-h-[100px]">
-                <p className="text-center font-semibold text-gray-800 text-sm">
-                  AMAXON COMPLEX
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex items-center justify-center min-h-[100px]">
-                <p className="text-center font-semibold text-gray-800 text-sm">
-                  TTNET
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex items-center justify-center min-h-[100px]">
-                <p className="text-center font-semibold text-gray-800 text-sm">
-                  ISUME MBUA
-                </p>
-              </div>
+              {[
+                "BUEA INSTITUTE OF TECHNOLOGY",
+                "HOTPEC ORPHANAGE",
+                "GTHS BIMBIA",
+                "FULL GOSPEL MISSION KWE-KWE MUYUKA",
+                "LONGAS LOUNGE",
+                "NETWORK RESTAURANT",
+                "Rhika's Garden",
+                "AMAXON COMPLEX",
+                "TTNET",
+                "ISUME MBUA",
+              ].map((client, idx) => (
+                <div key={idx} className="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center min-h-[80px] sm:min-h-[100px] hover:border-black transition-colors duration-500 group">
+                  <p className="text-center font-bold text-gray-400 group-hover:text-black text-[10px] sm:text-xs uppercase tracking-widest transition-colors duration-500">
+                    {client}
+                  </p>
+                </div>
+              ))}
             </div>
-            <div className="text-center mt-12">
+            <div className="text-center mt-12 sm:mt-20">
               <p
                 data-reveal
-                className={`text-gray-600 text-lg ${styles.reveal}`}
+                className={`text-gray-500 text-base sm:text-lg mb-8 ${styles.reveal}`}
               >
                 Join these satisfied clients who trust WiCon Systems for their
                 electrical needs
               </p>
               <Link href="/contact">
-                <Button className="mt-6 bg-black text-white hover:bg-gray-800 px-8 py-3">
+                <Button className="bg-black text-white hover:bg-gray-800 px-10 py-6 rounded-2xl font-bold uppercase tracking-widest text-xs shadow-xl hover:shadow-black/20 transition-all">
                   Become Our Next Success Story
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
             </div>
@@ -554,88 +498,61 @@ export default function HomePage() {
             <div className="text-center mb-16">
               <h2
                 data-reveal
-                className={`text-3xl md:text-4xl font-bold text-black mb-4 ${styles.reveal}`}
+                className={`text-2xl sm:text-4xl lg:text-5xl font-black text-black mb-4 uppercase tracking-tighter ${styles.reveal}`}
               >
                 What Our Clients Say
               </h2>
               <p
                 data-reveal
-                className={`text-xl text-gray-600 ${styles.reveal} ${styles.st1}`}
+                className={`text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed ${styles.reveal} ${styles.st1}`}
               >
                 Trusted by businesses and homeowners across Cameroon
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card
-                data-reveal
-                className={`bg-white border-gray-200 ${styles.reveal}`}
-              >
-                <CardContent className="p-8">
-                  <div className="flex mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-5 h-5 text-yellow-400 fill-current"
-                      />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 mb-6 italic">
-                    "WiCon's wireless controllers have revolutionized how we
-                    manage our facility's electrical systems. The cost savings
-                    and safety improvements are remarkable."
-                  </p>
-                  <div>
-                    <p className="font-semibold text-black">Jean-Paul Mbarga</p>
-                    <p className="text-sm text-gray-500">
-                      Factory Manager, Buea
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+              {[
+                {
+                  quote: "WiCon's wireless controllers have revolutionized how we manage our facility's electrical systems. The cost savings and safety improvements are remarkable.",
+                  author: "Jean-Paul Mbarga",
+                  role: "Factory Manager, Buea"
+                },
+                {
+                  quote: "The automated system installation was professional and efficient. Our electricity bills have dropped significantly, and the system works perfectly even during rainy season.",
+                  author: "Marie Fotso",
+                  role: "Homeowner, Limbe"
+                },
+                {
+                  quote: "Excellent service and support. The CCTV system gives us peace of mind, and their team is always available when we need assistance.",
+                  author: "Dr. Emmanuel Tabi",
+                  role: "Clinic Owner, Tiko"
+                }
+              ].map((testimonial, idx) => (
+                <Card
+                  key={idx}
+                  data-reveal
+                  className={`bg-white border-gray-100 rounded-2xl sm:rounded-3xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 overflow-hidden group ${styles.reveal} ${idx === 1 ? styles.st1 : idx === 2 ? styles.st2 : ""}`}
+                >
+                  <CardContent className="p-8 sm:p-10 flex flex-col h-full">
+                    <div className="flex mb-6">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className="w-4 h-4 text-yellow-500 fill-current mr-1"
+                        />
+                      ))}
+                    </div>
+                    <p className="text-gray-500 mb-8 italic text-sm sm:text-base leading-relaxed flex-1">
+                      &quot;{testimonial.quote}&quot;
                     </p>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="bg-white border-gray-200">
-                <CardContent className="p-8">
-                  <div className="flex mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-5 h-5 text-yellow-400 fill-current"
-                      />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 mb-6 italic">
-                    "The automated system installation was professional and
-                    efficient. Our electricity bills have dropped significantly,
-                    and the system works perfectly even during rainy season."
-                  </p>
-                  <div>
-                    <p className="font-semibold text-black">Marie Fotso</p>
-                    <p className="text-sm text-gray-500">Homeowner, Limbe</p>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="bg-white border-gray-200">
-                <CardContent className="p-8">
-                  <div className="flex mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-5 h-5 text-yellow-400 fill-current"
-                      />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 mb-6 italic">
-                    "Excellent service and support. The CCTV system gives us
-                    peace of mind, and their team is always available when we
-                    need assistance."
-                  </p>
-                  <div>
-                    <p className="font-semibold text-black">
-                      Dr. Emmanuel Tabi
-                    </p>
-                    <p className="text-sm text-gray-500">Clinic Owner, Tiko</p>
-                  </div>
-                </CardContent>
-              </Card>
+                    <div>
+                      <p className="font-black text-black text-base uppercase tracking-tight">{testimonial.author}</p>
+                      <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">
+                        {testimonial.role}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
@@ -645,16 +562,16 @@ export default function HomePage() {
           data-reveal
           className={`py-20 bg-black text-white ${styles.reveal}`}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-12 sm:pb-0">
             <h2
               data-reveal
-              className={`text-3xl md:text-4xl font-bold mb-4 ${styles.reveal}`}
+              className={`text-2xl sm:text-4xl lg:text-5xl font-black mb-6 uppercase tracking-tighter sm:leading-tight ${styles.reveal}`}
             >
               Ready to Transform Your Business with Technology?
             </h2>
             <p
               data-reveal
-              className={`text-xl text-gray-300 mb-8 max-w-3xl mx-auto ${styles.reveal} ${styles.st1}`}
+              className={`text-lg sm:text-xl text-gray-400 mb-10 max-w-3xl mx-auto leading-relaxed ${styles.reveal} ${styles.st1}`}
             >
               Get a free consultation for your electrical, software, or IoT
               project. Our technology experts are ready to help you find the
@@ -662,21 +579,21 @@ export default function HomePage() {
             </p>
             <div
               data-reveal
-              className={`flex flex-col sm:flex-row gap-4 justify-center ${styles.reveal} ${styles.st2}`}
+              className={`flex flex-col sm:flex-row gap-4 justify-center items-center ${styles.reveal} ${styles.st2}`}
             >
-              <Link href="/contact">
+              <Link href="/contact" className="w-full sm:w-auto">
                 <Button
                   size="lg"
-                  className="bg-white text-black hover:bg-gray-300 px-8 py-3 cursor-pointer"
+                  className="w-full sm:w-auto bg-white text-black hover:bg-gray-200 px-10 py-4 rounded-2xl font-bold uppercase tracking-widest text-xs cursor-pointer shadow-xl transition-all"
                 >
-                  Get Free Consultation
+                  Free Consultation
                 </Button>
               </Link>
-              <Link href="tel:+237674802971">
+              <Link href="tel:+237674802971" className="w-full sm:w-auto">
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-black px-8 py-3 bg-transparent cursor-pointer"
+                  className="w-full sm:w-auto border-gray-800 text-white hover:bg-white hover:text-black px-10 py-4 rounded-2xl font-bold uppercase tracking-widest text-xs bg-transparent cursor-pointer transition-all"
                 >
                   Call +237 674802971
                 </Button>

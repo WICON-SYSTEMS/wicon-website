@@ -32,13 +32,13 @@ export default function AboutPage() {
         <RevealOnScroll />
         {/* Hero Section */}
         <section data-reveal
-          className={`bg-gradient-to-b from-gray-50 to-white pt-10 ${styles.reveal}`}>
+          className={`bg-gradient-to-b from-gray-50 to-white pt-10 sm:pt-20 ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h1 className="text-4xl md:text-5xl font-bold text-black mb-6">About WiCon Systems</h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                We are pioneering smart home technology solutions. Professional installation and seamless control—so you
-                enjoy comfort and peace of mind.
+            <div className="text-center mb-16 sm:mb-24">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-black mb-6 uppercase tracking-tighter sm:leading-tight">About WiCon Systems</h1>
+              <p className="text-lg sm:text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed font-medium">
+                Pioneering smart technology solutions in Cameroon. Professional installation and seamless control—for 
+                unmatched comfort and peace of mind.
               </p>
             </div>
           </div>
@@ -48,40 +48,41 @@ export default function AboutPage() {
         <section data-reveal
           className={`pb-20 bg-white ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-20 items-center">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-black mb-6 text-center">Our Story</h2>
-                <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-black mb-6 uppercase tracking-tighter leading-tight">Our Story</h2>
+                <p className="text-base sm:text-lg text-gray-500 mb-6 leading-relaxed font-medium">
                   Founded in 2014 in Buea, Southwest Region, Cameroon, WiCon Systems emerged from a vision to
                   revolutionize electrical control and safety in our region. Our founders recognized the unique
                   challenges faced by businesses and homeowners in managing electrical systems safely and efficiently.
                 </p>
-                <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                <p className="text-base sm:text-lg text-gray-500 mb-8 leading-relaxed font-medium">
                   What started as a small electrical construction company has grown into a leading provider of
                   innovative wireless control solutions, solar energy systems, and comprehensive electrical services.
                   We've built our reputation on reliability, safety, and deep understanding of Cameroon's electrical
                   infrastructure needs.
                 </p>
-                <div className="flex flex-wrap gap-4">
-                  <Badge variant="secondary" className="px-4 py-2 text-sm">
-                    <Calendar className="w-4 h-4 mr-2" />
+                <div className="flex flex-wrap gap-3">
+                  <Badge variant="secondary" className="px-5 py-2.5 rounded-xl border-none bg-gray-50 text-gray-400 font-bold uppercase tracking-widest text-[10px]">
+                    <Calendar className="w-3.5 h-3.5 mr-2" />
                     Founded 2014
                   </Badge>
-                  <Badge variant="secondary" className="px-4 py-2 text-sm">
-                    <MapPin className="w-4 h-4 mr-2" />
+                  <Badge variant="secondary" className="px-5 py-2.5 rounded-xl border-none bg-gray-50 text-gray-400 font-bold uppercase tracking-widest text-[10px]">
+                    <MapPin className="w-3.5 h-3.5 mr-2" />
                     Buea, Cameroon
                   </Badge>
-                  <Badge variant="secondary" className="px-4 py-2 text-sm">
-                    <Users className="w-4 h-4 mr-2" />
+                  <Badge variant="secondary" className="px-5 py-2.5 rounded-xl border-none bg-gray-50 text-gray-400 font-bold uppercase tracking-widest text-[10px]">
+                    <Users className="w-3.5 h-3.5 mr-2" />
                     2-10 Employees
                   </Badge>
                 </div>
               </div>
-              <div>
+              <div className="relative">
+                <div className="absolute -inset-4 bg-gray-50 rounded-3xl -z-10 rotate-1"></div>
                 <img
                   src="/wicon-body.png"
                   alt="WiCon Systems Team"
-                  className="w-full h-auto rounded-md"
+                  className="w-full h-auto rounded-2xl shadow-2xl"
                 />
               </div>
             </div>
@@ -90,44 +91,43 @@ export default function AboutPage() {
 
         {/* Purpose, Brand Vision, Brand Values */}
         <section data-reveal
-          className={`py-20 bg-gray-50 ${styles.reveal}`}>
+          className={`py-20 sm:py-32 bg-gray-50 ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card className="bg-white border-gray-200">
-                <CardContent className="p-8 text-center">
-                  <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Target className="w-8 h-8 text-white" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-10">
+              <Card className="bg-white border-white rounded-[2rem] shadow-2xl shadow-black/[0.03] overflow-hidden group hover:shadow-black/[0.05] transition-all duration-500">
+                <CardContent className="p-8 sm:p-12 text-center">
+                  <div className="w-20 h-20 bg-black rounded-3xl flex items-center justify-center mx-auto mb-8 rotate-3 group-hover:rotate-0 transition-transform duration-500 shadow-xl shadow-black/10">
+                    <Target className="w-10 h-10 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-black mb-4">Our Purpose</h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <h3 className="text-xl sm:text-2xl font-black text-black mb-6 uppercase tracking-tighter">Our Purpose</h3>
+                  <p className="text-gray-500 leading-relaxed font-medium">
                     Protection and comfort for the home, peace for the mind. We don’t just make homes secure; we make
                     people feel more secure too. If you’ve chosen WiCon, you can get on and enjoy your life.
                   </p>
                 </CardContent>
               </Card>
-              <Card className="bg-white border-gray-200">
-                <CardContent className="p-8 text-center">
-                  <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Eye className="w-8 h-8 text-white" />
+              <Card className="bg-black border-black rounded-[2rem] shadow-2xl shadow-black/20 overflow-hidden group transition-all duration-500 scale-105 z-10">
+                <CardContent className="p-8 sm:p-12 text-center">
+                  <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mx-auto mb-8 -rotate-3 group-hover:rotate-0 transition-transform duration-500 shadow-xl">
+                    <Eye className="w-10 h-10 text-black" />
                   </div>
-                  <h3 className="text-xl font-bold text-black mb-4">Our Brand Vision</h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <h3 className="text-xl sm:text-2xl font-black text-white mb-6 uppercase tracking-tighter">Brand Vision</h3>
+                  <p className="text-gray-400 leading-relaxed font-medium">
                     To be Africa’s most trusted brand in home comfort. In many cities of Cameroon, WiCon is already
                     another name for comfort and security. We’re aiming higher—to be the most trusted brand in our
                     field.
                   </p>
                 </CardContent>
               </Card>
-              <Card className="bg-white border-gray-200">
-                <CardContent className="p-8 text-center">
-                  <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Award className="w-8 h-8 text-white" />
+              <Card className="bg-white border-white rounded-[2rem] shadow-2xl shadow-black/[0.03] overflow-hidden group hover:shadow-black/[0.05] transition-all duration-500">
+                <CardContent className="p-8 sm:p-12 text-center">
+                  <div className="w-20 h-20 bg-black rounded-3xl flex items-center justify-center mx-auto mb-8 rotate-3 group-hover:rotate-0 transition-transform duration-500 shadow-xl shadow-black/10">
+                    <Award className="w-10 h-10 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-black mb-4">Our Brand Values</h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    We are passionate about improving lives across Africa and the world at large. Life is easier when
-                    your home is comfortable and secure. We help people enjoy their time together without worrying
-                    about access control for lighting, whether the door is locked, or if the alarm is set. We make
+                  <h3 className="text-xl sm:text-2xl font-black text-black mb-6 uppercase tracking-tighter">Brand Values</h3>
+                  <p className="text-gray-500 leading-relaxed font-medium">
+                    Passionately improving lives across Africa. Life is easier when
+                    your home is comfortable and secure. We make
                     day‑to‑day life simpler, so our customers can go out and chase their dreams.
                   </p>
                 </CardContent>
@@ -138,49 +138,45 @@ export default function AboutPage() {
 
         {/* Key Features of the Service */}
         <section data-reveal
-          className={`py-20 bg-white ${styles.reveal}`}>
+          className={`py-20 sm:py-32 bg-white ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-black">Key Features of the Service</h2>
+            <div className="text-center mb-16 sm:mb-24">
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-black uppercase tracking-tighter leading-tight">Key Features of Service</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card className="bg-gray-50 border-gray-200">
-                <CardContent className="p-8 text-center">
-                  <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
-                    <HeartHandshake className="w-8 h-8 text-white" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-10">
+              <Card className="bg-gray-50 border-transparent rounded-[2rem] overflow-hidden group hover:bg-white hover:shadow-2xl hover:shadow-black/5 transition-all duration-500">
+                <CardContent className="p-8 sm:p-12 text-center">
+                  <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-sm group-hover:bg-black group-hover:text-white transition-all duration-500">
+                    <HeartHandshake className="w-8 h-8" />
                   </div>
-                  <h3 className="text-xl font-bold text-black mb-4">Putting Customers First</h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    To lead, we listen. By talking to people around the globe, we learn about their lives, dreams,
-                    needs, and circumstances. Some are excited about the latest tech. Others worry about privacy.
-                    Many simply want comfort. Understanding what matters most to our customers is the key to our
-                    success.
+                  <h3 className="text-xl font-black text-black mb-4 uppercase tracking-tighter">Customers First</h3>
+                  <p className="text-gray-500 leading-relaxed font-medium">
+                    Understanding what matters most to our customers is the key to our
+                    success. We listen, learn, and deliver.
                   </p>
                 </CardContent>
               </Card>
-              <Card className="bg-gray-50 border-gray-200">
-                <CardContent className="p-8 text-center">
-                  <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Lightbulb className="w-8 h-8 text-white" />
+              <Card className="bg-gray-50 border-transparent rounded-[2rem] overflow-hidden group hover:bg-white hover:shadow-2xl hover:shadow-black/5 transition-all duration-500">
+                <CardContent className="p-8 sm:p-12 text-center">
+                  <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-sm group-hover:bg-black group-hover:text-white transition-all duration-500">
+                    <Lightbulb className="w-8 h-8" />
                   </div>
-                  <h3 className="text-xl font-bold text-black mb-4">Innovativeness</h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    We have a history of innovation. Our founders knew lighting control could be designed better.
-                    Today, innovation means integrating our products into smart homes, platforms, and services—making
-                    life more convenient without compromising security.
+                  <h3 className="text-xl font-black text-black mb-4 uppercase tracking-tighter">Innovation</h3>
+                  <p className="text-gray-500 leading-relaxed font-medium">
+                    Integrating our products into smart homes and platforms—making
+                    life more convenient without compromise.
                   </p>
                 </CardContent>
               </Card>
-              <Card className="bg-gray-50 border-gray-200">
-                <CardContent className="p-8 text-center">
-                  <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Sparkles className="w-8 h-8 text-white" />
+              <Card className="bg-gray-50 border-transparent rounded-[2rem] overflow-hidden group hover:bg-white hover:shadow-2xl hover:shadow-black/5 transition-all duration-500">
+                <CardContent className="p-8 sm:p-12 text-center">
+                  <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-sm group-hover:bg-black group-hover:text-white transition-all duration-500">
+                    <Sparkles className="w-8 h-8" />
                   </div>
-                  <h3 className="text-xl font-bold text-black mb-4">Creating Seamless Experiences</h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    The point of innovation is to make life simpler. Every interaction with WiCon should be easy—from
-                    how customers buy from us to how our products serve them. We stay invisible, yet are always there
-                    when needed.
+                  <h3 className="text-xl font-black text-black mb-4 uppercase tracking-tighter">Seamless</h3>
+                  <p className="text-gray-500 leading-relaxed font-medium">
+                    Every interaction with WiCon should be easy—from
+                    how customers buy from us to how our products serve them.
                   </p>
                 </CardContent>
               </Card>
@@ -190,53 +186,62 @@ export default function AboutPage() {
 
         {/* Team Section */}
         <section data-reveal
-          className={`py-20 bg-white ${styles.reveal}`}>
+          className={`py-20 sm:py-32 bg-white ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Meet Our Expert Team</h2>
-              <p className="text-xl text-gray-600">
-                Certified professionals dedicated to delivering exceptional electrical solutions
+            <div className="text-center mb-16 sm:mb-24">
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-black mb-4 uppercase tracking-tighter sm:leading-tight">Meet Our Team</h2>
+              <p className="text-lg sm:text-xl text-gray-400 font-medium">
+                Certified professionals dedicated to delivering excellence
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card className="bg-white border-gray-200 text-center">
-                <CardContent className="p-8">
-                  <img
-                    src="/placeholder.svg?height=200&width=200&text=CEO"
-                    alt="CEO"
-                    className="w-32 h-32 rounded-full mx-auto mb-6 object-cover"
-                  />
-                  <h3 className="text-xl font-bold text-black mb-2">Engr. Akum Bate</h3>
-                  <p className="text-gray-600 mb-4">Founder & CEo</p>
-                  <p className="text-sm text-gray-500">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-10">
+              <Card className="bg-white border-gray-50 rounded-[2rem] text-center overflow-hidden hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group">
+                <CardContent className="p-8 sm:p-12">
+                  <div className="relative inline-block mb-8">
+                    <div className="absolute -inset-2 bg-gray-50 rounded-full -z-10 rotate-12 group-hover:rotate-0 transition-transform duration-500"></div>
+                    <img
+                      src="/placeholder.svg?height=200&width=200&text=CEO"
+                      alt="CEO"
+                      className="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto object-cover border-4 border-white shadow-xl"
+                    />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-black text-black mb-2 uppercase tracking-tight">Engr. Akum Bate</h3>
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Founder & CEO</p>
+                  <p className="text-sm text-gray-500 font-medium leading-relaxed">
                     Electrical Engineer with 15+ years experience in power systems and wireless technology.
                   </p>
                 </CardContent>
               </Card>
-              <Card className="bg-white border-gray-200 text-center">
-                <CardContent className="p-8">
-                  <img
-                    src="/placeholder.svg?height=200&width=200&text=CTO"
-                    alt="CTO"
-                    className="w-32 h-32 rounded-full mx-auto mb-6 object-cover"
-                  />
-                  <h3 className="text-xl font-bold text-black mb-2">Sarah Mballa</h3>
-                  <p className="text-gray-600 mb-4">Chief Technology Officer</p>
-                  <p className="text-sm text-gray-500">
+              <Card className="bg-white border-gray-50 rounded-[2rem] text-center overflow-hidden hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group">
+                <CardContent className="p-8 sm:p-12">
+                  <div className="relative inline-block mb-8">
+                    <div className="absolute -inset-2 bg-gray-50 rounded-full -z-10 -rotate-12 group-hover:rotate-0 transition-transform duration-500"></div>
+                    <img
+                      src="/placeholder.svg?height=200&width=200&text=CTO"
+                      alt="CTO"
+                      className="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto object-cover border-4 border-white shadow-xl"
+                    />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-black text-black mb-2 uppercase tracking-tight">Sarah Mballa</h3>
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Chief Tech Officer</p>
+                  <p className="text-sm text-gray-500 font-medium leading-relaxed">
                     Electronics specialist focused on developing innovative wireless control solutions.
                   </p>
                 </CardContent>
               </Card>
-              <Card className="bg-white border-gray-200 text-center">
-                <CardContent className="p-8">
-                  <img
-                    src="/placeholder.svg?height=200&width=200&text=Lead+Tech"
-                    alt="Lead Technician"
-                    className="w-32 h-32 rounded-full mx-auto mb-6 object-cover"
-                  />
-                  <h3 className="text-xl font-bold text-black mb-2">Paul Talla</h3>
-                  <p className="text-gray-600 mb-4">Lead Installation Technician</p>
-                  <p className="text-sm text-gray-500">
+              <Card className="bg-white border-gray-50 rounded-[2rem] text-center overflow-hidden hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group">
+                <CardContent className="p-8 sm:p-12">
+                  <div className="relative inline-block mb-8">
+                    <div className="absolute -inset-2 bg-gray-50 rounded-full -z-10 rotate-45 group-hover:rotate-0 transition-transform duration-500"></div>
+                    <img
+                      src="/placeholder.svg?height=200&width=200&text=Lead+Tech"
+                      alt="Lead Technician"
+                      className="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto object-cover border-4 border-white shadow-xl"
+                    />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-black text-black mb-2 uppercase tracking-tight">Paul Talla</h3>
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Lead Technician</p>
+                  <p className="text-sm text-gray-500 font-medium leading-relaxed">
                     Certified electrician with expertise in solar PV systems and security installations.
                   </p>
                 </CardContent>
@@ -247,56 +252,52 @@ export default function AboutPage() {
 
         {/* Service Areas & Statistics */}
         <section data-reveal
-          className={`py-20 bg-gray-50 ${styles.reveal}`}>
+          className={`py-20 sm:py-32 bg-gray-50 ${styles.reveal}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-20">
               <div>
-                <h2 className="text-3xl font-bold text-black mb-6">Service Areas</h2>
-                <p className="text-lg text-gray-600 mb-8">
+                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-black mb-8 uppercase tracking-tighter leading-tight">Service Areas</h2>
+                <p className="text-base sm:text-lg text-gray-500 mb-10 leading-relaxed font-medium">
                   We proudly serve the Southwest Region of Cameroon, with our headquarters in Buea and service coverage
                   extending throughout the region.
                 </p>
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <CheckCircle className="w-6 h-6 text-green-600 mr-3" />
-                    <span className="text-gray-700">Buea (Headquarters)</span>
-                  </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="w-6 h-6 text-green-600 mr-3" />
-                    <span className="text-gray-700">Limbe</span>
-                  </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="w-6 h-6 text-green-600 mr-3" />
-                    <span className="text-gray-700">Tiko</span>
-                  </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="w-6 h-6 text-green-600 mr-3" />
-                    <span className="text-gray-700">Kumba</span>
-                  </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="w-6 h-6 text-green-600 mr-3" />
-                    <span className="text-gray-700">Mamfe</span>
-                  </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {[
+                    "Buea (Headquarters)",
+                    "Limbe",
+                    "Tiko",
+                    "Kumba",
+                    "Mamfe"
+                  ].map((area, idx) => (
+                    <div key={idx} className="flex items-center group">
+                      <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center mr-4 group-hover:bg-green-500 transition-colors duration-300">
+                        <CheckCircle className="w-4 h-4 text-green-600 group-hover:text-white transition-colors duration-300" />
+                      </div>
+                      <span className="text-gray-700 font-bold tracking-tight text-sm sm:text-base">
+                        {area}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
-              <div>
-                <h2 className="text-3xl font-bold text-black mb-6">Our Achievements</h2>
-                <div className="grid grid-cols-2 gap-6">
+              <div className="bg-white p-8 sm:p-12 rounded-[2rem] shadow-2xl shadow-black/[0.03]">
+                <h2 className="text-2xl sm:text-3xl font-black text-black mb-10 uppercase tracking-tighter text-center">Our Impact</h2>
+                <div className="grid grid-cols-2 gap-8 sm:gap-12">
                   <div className="text-center">
-                    <div className="text-4xl font-bold text-black mb-2">10+</div>
-                    <div className="text-gray-600">Years Experience</div>
+                    <div className="text-3xl sm:text-5xl font-black text-black mb-2 tracking-tighter">10+</div>
+                    <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Years Experience</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-4xl font-bold text-black mb-2">500+</div>
-                    <div className="text-gray-600">Projects Completed</div>
+                    <div className="text-3xl sm:text-5xl font-black text-black mb-2 tracking-tighter">500+</div>
+                    <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Projects done</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-4xl font-bold text-black mb-2">100+</div>
-                    <div className="text-gray-600">Happy Clients</div>
+                    <div className="text-3xl sm:text-5xl font-black text-black mb-2 tracking-tighter">100+</div>
+                    <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Happy Clients</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-4xl font-bold text-black mb-2">24/7</div>
-                    <div className="text-gray-600">Support Available</div>
+                    <div className="text-3xl sm:text-5xl font-black text-black mb-2 tracking-tighter">24/7</div>
+                    <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Support</div>
                   </div>
                 </div>
               </div>

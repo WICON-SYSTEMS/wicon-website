@@ -299,873 +299,478 @@ export default function CareersPage() {
 
       <main className="">
         {/* Hero Section */}
-        <section className="bg-black text-white py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Join Our Team
+        <section className="bg-black text-white py-16 sm:py-32 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20"></div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-white mb-8 uppercase tracking-tighter leading-none">
+              Build the <span className="text-gray-500">Future</span>
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+            <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed font-medium">
               Shape the future of electrical systems in Cameroon. We're looking
-              for passionate interns ready to learn and contribute to innovative
-              projects in wireless control, and electrical infrastructure.
+              for passionate talent ready to learn and lead innovative
+              projects in smart infrastructure.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button
-                size="lg"
-                variant="outline"
-                className="text-white bg-black border-white hover:bg-white bg-transparent cursor-pointer"
+                className="h-16 px-12 rounded-2xl bg-white text-black hover:bg-gray-200 text-[10px] font-black uppercase tracking-widest shadow-2xl shadow-white/10 active:scale-95 transition-all cursor-pointer"
                 onClick={scrollToPositions}
               >
-                View Open Positions
+                Open Positions
               </Button>
               <Button
-                size="lg"
-                className="bg-white text-black hover:bg-gray-400 cursor-pointer"
+                className="h-16 px-12 rounded-2xl border-white/20 text-white hover:bg-white hover:text-black text-[10px] font-black uppercase tracking-widest bg-transparent active:scale-95 transition-all cursor-pointer"
                 onClick={scrollToApplication}
               >
-                Apply Now
+                Apply Directly
               </Button>
             </div>
           </div>
         </section>
 
         {/* Why Work With Us */}
-        <section className="py-20 bg-gray-50">
+        <section className="py-20 sm:py-32 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-black mb-4">
-                Why Choose WiCon Systems?
+            <div className="text-center mb-20">
+              <h2 className="text-3xl sm:text-5xl font-black text-black mb-6 uppercase tracking-tighter">
+                Why Us?
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                We believe in nurturing talent and providing hands-on experience
-                in cutting-edge electrical technologies.
+              <p className="text-lg text-gray-500 max-w-2xl mx-auto font-medium">
+                We don't just hire; we nurture. Join an ecosystem built for hyper-growth.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              <Card className="border-0 shadow-lg">
-                <CardHeader className="text-center">
-                  <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Users className="w-8 h-8 text-white" />
-                  </div>
-                  <CardTitle>Mentorship Program</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 text-center">
-                    Work directly with experienced engineers and project
-                    managers who are committed to your growth and development.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 shadow-lg">
-                <CardHeader className="text-center">
-                  <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Briefcase className="w-8 h-8 text-white" />
-                  </div>
-                  <CardTitle>Real Projects</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 text-center">
-                    Contribute to actual client projects including software
-                    solutions, CCTV systems, and wireless controller
-                    implementations.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 shadow-lg">
-                <CardHeader className="text-center">
-                  <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
-                    <GraduationCap className="w-8 h-8 text-white" />
-                  </div>
-                  <CardTitle>Skill Development</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 text-center">
-                    Gain expertise in emerging technologies, safety protocols,
-                    and industry best practices that will advance your career.
-                  </p>
-                </CardContent>
-              </Card>
+            <div className="grid md:grid-cols-3 gap-8 sm:gap-12">
+              {[
+                {
+                  title: "Mentorship",
+                  icon: <Users className="w-8 h-8 text-white" />,
+                  desc: "Work directly with veterans who are committed to your trajectory."
+                },
+                {
+                  title: "Real Impact",
+                  icon: <Briefcase className="w-8 h-8 text-white" />,
+                  desc: "Your code and designs will power real city-scale infrastructure."
+                },
+                {
+                  title: "Skill Up",
+                  icon: <GraduationCap className="w-8 h-8 text-white" />,
+                  desc: "Continuous learning with access to modern tech stacks and hardware."
+                }
+              ].map((val, idx) => (
+                <Card key={idx} className="bg-white border-transparent rounded-[2.5rem] group hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 overflow-hidden">
+                  <CardHeader className="p-10 text-center">
+                    <div className="w-20 h-20 bg-black rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:rotate-6 transition-transform duration-500 shadow-xl shadow-black/10">
+                      {val.icon}
+                    </div>
+                    <CardTitle className="text-xl font-black uppercase tracking-tight text-black mb-4">{val.title}</CardTitle>
+                    <p className="text-gray-500 text-sm font-medium leading-relaxed">
+                      {val.desc}
+                    </p>
+                  </CardHeader>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
 
         {/* Internship Programs */}
-        <section id="internship-programs" className="py-20">
+        <section id="internship-programs" className="py-20 sm:py-32 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-black mb-4">
-                Internship Programs
+            <div className="text-center mb-20">
+              <h2 className="text-3xl sm:text-5xl font-black text-black mb-6 uppercase tracking-tighter">
+                Tracks
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                We offer two distinct internship tracks designed to meet
-                different career goals and academic requirements.
+              <p className="text-lg text-gray-500 max-w-2xl mx-auto font-medium">
+                Tailored paths for academic growth or professional transition.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Academic Internship */}
-              <Card className="border-2 border-gray-200 hover:border-black transition-colors">
-                <CardHeader>
-                  <div className="flex items-center mb-4">
-                    <GraduationCap className="w-8 h-8 text-black mr-3" />
-                    <CardTitle className="text-xl">
-                      Academic Internship
-                    </CardTitle>
-                  </div>
-                  <CardDescription className="text-base">
-                    Perfect for students completing degree requirements or
-                    seeking academic credit.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center text-sm text-gray-600">
-                    <Clock className="w-4 h-4 mr-2" />
-                    <span>3-6 months duration</span>
-                  </div>
-                  <div className="flex items-center text-sm text-gray-600">
-                    <MapPin className="w-4 h-4 mr-2" />
-                    <span>Buea, Southwest Region</span>
-                  </div>
-
-                  <div className="pt-4">
-                    <h4 className="font-semibold mb-2">What You'll Learn:</h4>
-                    <ul className="text-sm text-gray-600 space-y-1">
-                      <li>• Electrical system design and installation</li>
-                      <li>• CCTV security system setup</li>
-                      <li>• Wireless controller programming</li>
-                      <li>• Safety protocols and compliance</li>
-                    </ul>
-                  </div>
-
-                  <div className="pt-4">
-                    <h4 className="font-semibold mb-2">Requirements:</h4>
-                    <ul className="text-sm text-gray-600 space-y-1">
-                      <li>• Currently enrolled in relevant degree program</li>
-                      <li>• Basic understanding of electrical principles</li>
-                      <li>• Strong communication skills</li>
-                      <li>• Commitment to learning and safety</li>
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Professional Internship */}
-              <Card className="border-2 border-gray-200 hover:border-black transition-colors">
-                <CardHeader>
-                  <div className="flex items-center mb-4">
-                    <Briefcase className="w-8 h-8 text-black mr-3" />
-                    <CardTitle className="text-xl">
-                      Professional Internship
-                    </CardTitle>
-                  </div>
-                  <CardDescription className="text-base">
-                    Designed for career changers and professionals seeking
-                    hands-on experience.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center text-sm text-gray-600">
-                    <Clock className="w-4 h-4 mr-2" />
-                    <span>6-12 months duration</span>
-                  </div>
-                  <div className="flex items-center text-sm text-gray-600">
-                    <MapPin className="w-4 h-4 mr-2" />
-                    <span>Buea, Southwest Region</span>
-                  </div>
-
-                  <div className="pt-4">
-                    <h4 className="font-semibold mb-2">What You'll Gain:</h4>
-                    <ul className="text-sm text-gray-600 space-y-1">
-                      <li>• Advanced project management skills</li>
-                      <li>• Client interaction and consultation</li>
-                      <li>• Business development experience</li>
-                      <li>• Technical certification preparation</li>
-                      <li>• Potential for full-time employment</li>
-                    </ul>
-                  </div>
-
-                  <div className="pt-4">
-                    <h4 className="font-semibold mb-2">Requirements:</h4>
-                    <ul className="text-sm text-gray-600 space-y-1">
-                      <li>• Technical background or relevant experience</li>
-                      <li>• Professional work experience preferred</li>
-                      <li>• Strong problem-solving abilities</li>
-                      <li>• Leadership potential</li>
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
+            <div className="grid md:grid-cols-2 gap-12 sm:gap-16">
+              {[
+                {
+                  title: "Academic",
+                  icon: <GraduationCap className="w-8 h-8" />,
+                  desc: "Ideal for students seeking official credit and foundational industry exposure.",
+                  duration: "3-6 months",
+                  learn: ["System Design & Flow", "Hardware Integration", "Modern CCTV Stacks", "Compliance Logic"],
+                  reqs: ["Enrolled in relevant BSc/BEng", "Logical consistency focus", "Fast learner mindset"]
+                },
+                {
+                  title: "Professional",
+                  icon: <Briefcase className="w-8 h-8" />,
+                  desc: "For graduates and career-shifters looking for intense 1-on-1 industry grooming.",
+                  duration: "6-12 months",
+                  learn: ["Project Leadership", "High-level Consultation", "Business Dev Strategies", "Technical Certification"],
+                  reqs: ["Technical core background", "Strong problem solving", "Leadership potential"]
+                }
+              ].map((program, idx) => (
+                <Card key={idx} className="bg-gray-50 border-transparent rounded-[3rem] overflow-hidden group hover:shadow-2xl hover:shadow-black/5 transition-all duration-500">
+                  <CardHeader className="p-10 sm:p-14">
+                    <div className="flex items-center gap-8 mb-10">
+                      <div className="w-16 h-16 bg-black text-white rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500 shadow-xl shadow-black/10">
+                        {program.icon}
+                      </div>
+                      <div>
+                        <CardTitle className="text-2xl font-black uppercase tracking-tight text-black mb-1">
+                          {program.title}
+                        </CardTitle>
+                        <div className="flex items-center text-[10px] font-black uppercase tracking-widest text-gray-400">
+                          <Clock className="w-3.5 h-3.5 mr-2" />
+                          <span>{program.duration}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-gray-500 text-sm font-medium leading-relaxed mb-10">
+                      {program.desc}
+                    </p>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+                      <div>
+                        <h4 className="text-[10px] font-black uppercase tracking-widest text-black mb-6">Learning Goals</h4>
+                        <ul className="space-y-3">
+                          {program.learn.map((l, i) => (
+                            <li key={i} className="flex items-center gap-2 group/item">
+                              <div className="w-1.5 h-1.5 bg-black/20 rounded-full group-hover/item:bg-black transition-colors"></div>
+                              <span className="text-[10px] font-black uppercase tracking-widest text-gray-400 group-hover/item:text-black transition-colors">{l}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="text-[10px] font-black uppercase tracking-widest text-black mb-6">Profile Reqs</h4>
+                        <ul className="space-y-3">
+                          {program.reqs.map((r, i) => (
+                            <li key={i} className="flex items-center gap-2">
+                              <div className="w-1.5 h-1.5 bg-black/20 rounded-full"></div>
+                              <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">{r}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </CardHeader>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
 
         {/* Application Process */}
-        <section className="py-20 bg-gray-50">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-20 sm:py-32 bg-gray-50">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-black mb-4">
-                Application Process
+              <h2 className="text-3xl sm:text-5xl font-black text-black mb-6 uppercase tracking-tighter">
+                How it Works
               </h2>
-              <p className="text-lg text-gray-600">
-                Ready to start your journey with WiCon Systems? Follow these
-                simple steps to apply.
+              <p className="text-lg text-gray-500 max-w-2xl mx-auto font-medium leading-relaxed">
+                A streamlined journey from application to impact.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-4 gap-8 mb-16">
-              <div className="text-center">
-                <div className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-4 text-lg font-bold">
-                  1
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+              {[
+                { step: "01", title: "Apply", desc: "Submit your details via our premium portal." },
+                { step: "02", title: "Review", desc: "Our team evaluates your technical core." },
+                { step: "03", title: "Connect", desc: "Deep dive interview on goals and alignment." },
+                { step: "04", title: "Launch", desc: "Onboard and start building the future." }
+              ].map((s, i) => (
+                <div key={i} className="text-center group">
+                  <div className="inline-flex items-center justify-center w-14 h-14 bg-black text-white rounded-2xl mb-6 text-sm font-black group-hover:rotate-12 transition-transform duration-500 shadow-xl shadow-black/10">
+                    {s.step}
+                  </div>
+                  <h3 className="text-[10px] font-black uppercase tracking-widest text-black mb-2">{s.title}</h3>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 max-w-[120px] mx-auto leading-tight">
+                    {s.desc}
+                  </p>
                 </div>
-                <h3 className="font-semibold mb-2">Submit Application</h3>
-                <p className="text-sm text-gray-600">
-                  Complete the form below with your details and motivation
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-4 text-lg font-bold">
-                  2
-                </div>
-                <h3 className="font-semibold mb-2">Initial Review</h3>
-                <p className="text-sm text-gray-600">
-                  We'll review your application within 5 business days
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-4 text-lg font-bold">
-                  3
-                </div>
-                <h3 className="font-semibold mb-2">Interview</h3>
-                <p className="text-sm text-gray-600">
-                  Phone or in-person interview with our team
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-4 text-lg font-bold">
-                  4
-                </div>
-                <h3 className="font-semibold mb-2">Start Date</h3>
-                <p className="text-sm text-gray-600">
-                  Begin your internship journey with us
-                </p>
-              </div>
+              ))}
             </div>
+          </div>
+        </section>
 
-            {/* Application Form */}
-            <Card id="application-form" className="border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="text-2xl text-center">
-                  Internship Application
-                </CardTitle>
-                <CardDescription className="text-center">
-                  Fill out the form below to apply for our internship program.
-                  All fields marked with * are required.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
+        {/* Application Form */}
+        <section className="py-20 sm:py-32 bg-white" id="application-form">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <Card className="bg-white border-transparent rounded-[3rem] overflow-hidden shadow-2xl shadow-black/5">
+              <CardContent className="p-8 sm:p-16">
                 <form
                   onSubmit={handleSubmit}
-                  className="space-y-10"
+                  className="space-y-16"
                   aria-busy={submitting}
                 >
                   {/* Applicant Information */}
-                  <div className="space-y-6">
-                    <h3 className="text-lg font-semibold border-b pb-2">
-                      Applicant Information
-                    </h3>
-                    <div className="grid md:grid-cols-3 gap-6">
-                      {/* Fields */}
-                      <div className="md:col-span-2 grid md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <Label htmlFor="fullName">Full Name *</Label>
-                          <Input
-                            id="fullName"
-                            value={formData.fullName}
-                            onChange={(e) =>
-                              handleInputChange("fullName", e.target.value)
-                            }
-                            placeholder="Enter your full name"
-                            aria-invalid={errors.fullName || undefined}
-                          />
-                          {errors.fullName && (
-                            <p className="text-sm text-red-600">
-                              Full name is required
-                            </p>
-                          )}
+                  <div className="space-y-10">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-8 h-1 bg-black rounded-full"></div>
+                      <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400">
+                        01. Personal Information
+                      </h3>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                      <div className="lg:col-span-2 space-y-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                          <div className="space-y-2">
+                            <Label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Full Name *</Label>
+                            <Input
+                              value={formData.fullName}
+                              onChange={(e) => handleInputChange("fullName", e.target.value)}
+                              placeholder="John Smith"
+                              className={`h-14 sm:h-16 rounded-2xl bg-gray-50 border-none shadow-sm focus:ring-black/5 ${errors.fullName ? "ring-2 ring-red-500" : ""}`}
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Address *</Label>
+                            <Input
+                              value={formData.address}
+                              onChange={(e) => handleInputChange("address", e.target.value)}
+                              placeholder="Yaoundé, Cameroon"
+                              className={`h-14 sm:h-16 rounded-2xl bg-gray-50 border-none shadow-sm focus:ring-black/5 ${errors.address ? "ring-2 ring-red-500" : ""}`}
+                            />
+                          </div>
                         </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="address">Address *</Label>
-                          <Input
-                            id="address"
-                            value={formData.address}
-                            onChange={(e) =>
-                              handleInputChange("address", e.target.value)
-                            }
-                            placeholder="Street, City, Region"
-                            aria-invalid={errors.address || undefined}
-                          />
-                          {errors.address && (
-                            <p className="text-sm text-red-600">
-                              Address is required
-                            </p>
-                          )}
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="email">Email Address *</Label>
-                          <Input
-                            id="email"
-                            type="email"
-                            value={formData.email}
-                            onChange={(e) =>
-                              handleInputChange("email", e.target.value)
-                            }
-                            placeholder="your.email@example.com"
-                            aria-invalid={errors.email || undefined}
-                          />
-                          {errors.email && (
-                            <p className="text-sm text-red-600">
-                              Email is required
-                            </p>
-                          )}
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="phone">Phone Number *</Label>
-                          <div className="mt-1">
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                          <div className="space-y-2">
+                            <Label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Email *</Label>
+                            <Input
+                              type="email"
+                              value={formData.email}
+                              onChange={(e) => handleInputChange("email", e.target.value)}
+                              placeholder="john@example.com"
+                              className={`h-14 sm:h-16 rounded-2xl bg-gray-50 border-none shadow-sm focus:ring-black/5 ${errors.email ? "ring-2 ring-red-500" : ""}`}
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Phone *</Label>
                             <PhoneField
-                              id="phone"
                               value={formData.phone || undefined}
                               defaultCountry="CM"
                               onChange={(val) => {
                                 const next = val || "";
                                 handleInputChange("phone", next);
-                                if (
-                                  next &&
-                                  typeof next === "string" &&
-                                  isValidPhoneNumber(next)
-                                ) {
+                                if (next && typeof next === "string" && isValidPhoneNumber(next)) {
                                   setErrors((p) => ({ ...p, phone: false }));
                                 }
                               }}
-                              placeholder="e.g. +237 6XX XXX XXX"
                               error={!!errors.phone}
                             />
                           </div>
-                          {errors.phone ? (
-                            <p className="text-sm text-red-600">
-                              {formData.phone &&
-                              typeof formData.phone === "string" &&
-                              !isValidPhoneNumber(formData.phone)
-                                ? "Enter a valid phone number"
-                                : "Phone is required"}
-                            </p>
-                          ) : (
-                            <p className="text-[12px] text-gray-500">
-                              Includes country code with flag (e.g., Cameroon
-                              +237)
-                            </p>
-                          )}
                         </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="dob">Date of Birth *</Label>
-                          <Input
-                            id="dob"
-                            type="date"
-                            value={formData.dob}
-                            onChange={(e) =>
-                              handleInputChange("dob", e.target.value)
-                            }
-                            aria-invalid={errors.dob || undefined}
-                          />
-                          {errors.dob && (
-                            <p className="text-sm text-red-600">
-                              Date of birth is required
-                            </p>
-                          )}
-                        </div>
-                        <div className="space-y-2">
-                          <Label>Sex *</Label>
-                          <Select
-                            value={String(formData.sex)}
-                            onValueChange={(value) =>
-                              handleInputChange("sex", value)
-                            }
-                          >
-                            <SelectTrigger
-                              aria-invalid={errors.sex || undefined}
-                            >
-                              <SelectValue placeholder="Select" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="male">Male</SelectItem>
-                              <SelectItem value="female">Female</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          {errors.sex && (
-                            <p className="text-sm text-red-600">
-                              Please select your sex
-                            </p>
-                          )}
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                          <div className="space-y-2">
+                            <Label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Date of Birth *</Label>
+                            <Input
+                              type="date"
+                              value={formData.dob}
+                              onChange={(e) => handleInputChange("dob", e.target.value)}
+                              className={`h-14 sm:h-16 rounded-2xl bg-gray-50 border-none shadow-sm focus:ring-black/5 ${errors.dob ? "ring-2 ring-red-500" : ""}`}
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Sex *</Label>
+                            <Select value={String(formData.sex)} onValueChange={(v) => handleInputChange("sex", v)}>
+                              <SelectTrigger className={`h-14 sm:h-16 rounded-2xl bg-gray-50 border-none shadow-sm focus:ring-black/5 ${errors.sex ? "ring-2 ring-red-500" : ""}`}>
+                                <SelectValue placeholder="Select" />
+                              </SelectTrigger>
+                              <SelectContent className="rounded-2xl border-none shadow-2xl p-2 font-black uppercase tracking-widest text-[10px]">
+                                <SelectItem className="rounded-xl" value="male">Male</SelectItem>
+                                <SelectItem className="rounded-xl" value="female">Female</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
                         </div>
                       </div>
 
-                      {/* Photo upload */}
-                      <div className="md:col-span-1">
-                        <div className="space-y-3">
-                          <Label htmlFor="photo">Passport Photo (Square)</Label>
-                          <div className="aspect-square w-full max-w-xs mx-auto rounded-lg overflow-hidden bg-gray-100 border border-dashed border-gray-300 flex items-center justify-center">
-                            {formData.photoPreview ? (
-                              // eslint-disable-next-line @next/next/no-img-element
-                              <img
-                                src={formData.photoPreview}
-                                alt="Photo preview"
-                                className="w-full h-full object-cover"
-                              />
-                            ) : (
-                              <span className="text-sm text-gray-500">
-                                Upload 1:1 photo
-                              </span>
-                            )}
-                          </div>
+                      <div className="space-y-6">
+                        <Label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1 text-center block">Passport Photo</Label>
+                        <div className="aspect-square w-full max-w-[200px] mx-auto rounded-3xl overflow-hidden bg-gray-50 border-2 border-dashed border-gray-200 flex items-center justify-center relative group transition-colors hover:border-black/10">
+                          {formData.photoPreview ? (
+                            <img src={formData.photoPreview} alt="Preview" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                          ) : (
+                            <div className="text-center p-4">
+                              <Plus className="w-8 h-8 mx-auto mb-2 text-gray-300" />
+                              <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Upload 1:1</span>
+                            </div>
+                          )}
                           <Input
-                            id="photo"
                             type="file"
                             accept="image/*"
                             onChange={handlePhotoChange}
-                            className="cursor-pointer"
+                            className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                           />
-                          <p className="text-xs text-gray-500">
-                            Square image recommended. Max 5MB.
-                          </p>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Academic Background (repeatable) */}
-                  <div className="space-y-6">
-                    <div className="flex items-center justify-between border-b pb-2">
-                      <h3 className="text-lg font-semibold">
-                        Academic Background
-                      </h3>
+                  {/* Academic Background */}
+                  <div className="space-y-10">
+                    <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+                      <div className="flex items-center gap-4">
+                        <div className="w-8 h-1 bg-black rounded-full"></div>
+                        <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400">
+                          02. Academic Background
+                        </h3>
+                      </div>
                       <Button
                         type="button"
-                        variant="outline"
+                        variant="ghost"
                         onClick={addAcademic}
-                        className="gap-2 cursor-pointer"
+                        className="h-10 px-4 rounded-xl hover:bg-black hover:text-white text-[10px] font-black uppercase tracking-widest transition-all"
                       >
-                        <Plus className="w-4 h-4" /> Add
+                        <Plus className="w-4 h-4 mr-2" /> Add Record
                       </Button>
                     </div>
-                    <div className="space-y-4">
+
+                    <div className="space-y-6">
                       {formData.academicEntries.map((row, idx) => (
-                        <div
-                          key={idx}
-                          className="grid md:grid-cols-2 gap-3 border rounded-md p-4"
-                        >
-                          <div className="space-y-2">
-                            <Label>Institution</Label>
-                            <Input
-                              placeholder="Institution"
-                              value={row.institution}
-                              onChange={(e) =>
-                                updateAcademic(
-                                  idx,
-                                  "institution",
-                                  e.target.value
-                                )
-                              }
-                            />
-                          </div>
-                          <div className="space-y-2">
-                            <Label>Degree/Certificate</Label>
-                            <Input
-                              placeholder="Degree/Certificate"
-                              value={row.degree}
-                              onChange={(e) =>
-                                updateAcademic(idx, "degree", e.target.value)
-                              }
-                            />
-                          </div>
-                          <div className="space-y-2">
-                            <Label>Major</Label>
-                            <Input
-                              placeholder="Major"
-                              value={row.major}
-                              onChange={(e) =>
-                                updateAcademic(idx, "major", e.target.value)
-                              }
-                            />
-                          </div>
-                          <div className="flex items-end gap-2">
-                            <div className="flex-1 justify-between space-y-2">
-                              <Label htmlFor={`graduation-${idx}`}>
-                                Graduation Date
-                              </Label>
+                        <div key={idx} className="bg-gray-50/50 p-8 rounded-[2rem] relative group border border-transparent hover:border-black/5 transition-all">
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <div className="space-y-2">
+                              <Label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Institution</Label>
                               <Input
-                                id={`graduation-${idx}`}
-                                className="cursor-pointer"
-                                type="month"
-                                value={row.graduationDate}
-                                onChange={(e) =>
-                                  updateAcademic(
-                                    idx,
-                                    "graduationDate",
-                                    e.target.value
-                                  )
-                                }
+                                placeholder="University"
+                                value={row.institution}
+                                onChange={(e) => updateAcademic(idx, "institution", e.target.value)}
+                                className="h-14 rounded-xl bg-white border-none shadow-sm"
                               />
                             </div>
-                            {formData.academicEntries.length > 1 && (
-                              <Button
-                                type="button"
-                                className="cursor-pointer hover:text-red-700 hover:bg-red-100"
-                                variant="ghost"
-                                onClick={() => removeAcademic(idx)}
-                                aria-label="Remove academic row"
-                              >
-                                <Trash2 className="w-4 h-4" />
-                              </Button>
-                            )}
+                            <div className="space-y-2">
+                              <Label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Degree</Label>
+                              <Input
+                                placeholder="BSc"
+                                value={row.degree}
+                                onChange={(e) => updateAcademic(idx, "degree", e.target.value)}
+                                className="h-14 rounded-xl bg-white border-none shadow-sm"
+                              />
+                            </div>
+                            <div className="space-y-2">
+                              <Label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Major</Label>
+                              <Input
+                                placeholder="Electrical"
+                                value={row.major}
+                                onChange={(e) => updateAcademic(idx, "major", e.target.value)}
+                                className="h-14 rounded-xl bg-white border-none shadow-sm"
+                              />
+                            </div>
+                            <div className="space-y-2">
+                              <Label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Graduation</Label>
+                              <div className="flex gap-2">
+                                <Input
+                                  type="month"
+                                  value={row.graduationDate}
+                                  onChange={(e) => updateAcademic(idx, "graduationDate", e.target.value)}
+                                  className="h-14 rounded-xl bg-white border-none shadow-sm flex-1"
+                                />
+                                {formData.academicEntries.length > 1 && (
+                                  <Button
+                                    type="button"
+                                    variant="ghost"
+                                    onClick={() => removeAcademic(idx)}
+                                    className="h-14 w-14 rounded-xl hover:bg-red-50 hover:text-red-500 transition-colors"
+                                  >
+                                    <Trash2 className="w-5 h-5" />
+                                  </Button>
+                                )}
+                              </div>
+                            </div>
                           </div>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  {/* Internship Preference */}
-                  <div className="space-y-6">
-                    <h3 className="text-lg font-semibold border-b pb-2">
-                      Internship Preference
-                    </h3>
-                    <div className="grid md:grid-cols-2 gap-6">
+                  {/* Preference */}
+                  <div className="space-y-10">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-8 h-1 bg-black rounded-full"></div>
+                      <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400">
+                        03. Internship Preference
+                      </h3>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div className="space-y-2">
-                        <Label htmlFor="position">Position Applied For *</Label>
+                        <Label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Position *</Label>
                         <Input
-                          id="position"
                           value={formData.position}
-                          onChange={(e) =>
-                            handleInputChange("position", e.target.value)
-                          }
+                          onChange={(e) => handleInputChange("position", e.target.value)}
                           placeholder="e.g., Electrical Intern"
-                          aria-invalid={errors.position || undefined}
+                          className={`h-14 sm:h-16 rounded-2xl bg-gray-50 border-none shadow-sm focus:ring-black/5 ${errors.position ? "ring-2 ring-red-500" : ""}`}
                         />
-                        {errors.position && (
-                          <p className="text-sm text-red-600">
-                            Position is required
-                          </p>
-                        )}
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="availability">Availability *</Label>
-                        <Select
-                          value={String(formData.availability)}
-                          onValueChange={(v) =>
-                            handleInputChange("availability", v)
-                          }
-                        >
-                          <SelectTrigger
-                            aria-invalid={errors.availability || undefined}
-                          >
-                            <SelectValue placeholder="Select availability" />
+                        <Label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Availability *</Label>
+                        <Select value={String(formData.availability)} onValueChange={(v) => handleInputChange("availability", v)}>
+                          <SelectTrigger className={`h-14 sm:h-16 rounded-2xl bg-gray-50 border-none shadow-sm focus:ring-black/5 ${errors.availability ? "ring-2 ring-red-500" : ""}`}>
+                            <SelectValue placeholder="Select" />
                           </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="full-time">Full-time</SelectItem>
-                            <SelectItem value="part-time">Part-time</SelectItem>
+                          <SelectContent className="rounded-2xl border-none shadow-2xl p-2 font-black uppercase tracking-widest text-[10px]">
+                            <SelectItem className="rounded-xl" value="full-time">Full-time</SelectItem>
+                            <SelectItem className="rounded-xl" value="part-time">Part-time</SelectItem>
                           </SelectContent>
                         </Select>
-                        {errors.availability && (
-                          <p className="text-sm text-red-600">
-                            Availability is required
-                          </p>
-                        )}
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="startDate">Preferred Start Date</Label>
-                        <Input
-                          id="startDate"
-                          type="date"
-                          value={formData.startDate}
-                          onChange={(e) =>
-                            handleInputChange("startDate", e.target.value)
-                          }
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="endDate">Preferred End Date</Label>
-                        <Input
-                          id="endDate"
-                          type="date"
-                          value={formData.endDate}
-                          onChange={(e) =>
-                            handleInputChange("endDate", e.target.value)
-                          }
-                        />
                       </div>
                     </div>
                   </div>
 
-                  {/* Professional Experience (repeatable) */}
-                  <div className="space-y-6">
-                    <div className="flex items-center justify-between border-b pb-2">
-                      <h3 className="text-lg font-semibold">
-                        Professional Experience
+                  {/* Skills & Experience */}
+                  <div className="space-y-10">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-8 h-1 bg-black rounded-full"></div>
+                      <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400">
+                        04. Skills & Documents
                       </h3>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        onClick={addExperience}
-                        className="gap-2 cursor-pointer"
-                      >
-                        <Plus className="w-4 h-4" /> Add
-                      </Button>
                     </div>
-                    <div className="space-y-4">
-                      {formData.experienceEntries.map((row, idx) => (
-                        <div
-                          key={idx}
-                          className="space-y-4 p-4 border rounded-md"
-                        >
-                          <div className="grid md:grid-cols-2 gap-6">
-                            <Input
-                              placeholder="Company"
-                              value={row.company}
-                              onChange={(e) =>
-                                updateExperience(idx, "company", e.target.value)
-                              }
-                            />
-                            <Input
-                              placeholder="Job Title"
-                              value={row.title}
-                              onChange={(e) =>
-                                updateExperience(idx, "title", e.target.value)
-                              }
-                            />
-                          </div>
-                          <Textarea
-                            placeholder="Responsibilities"
-                            value={row.responsibilities}
-                            onChange={(e) =>
-                              updateExperience(
-                                idx,
-                                "responsibilities",
-                                e.target.value
-                              )
-                            }
-                            rows={3}
-                          />
-                          <div className="flex  ">
-                            <Input
-                              className="flex-1"
-                              placeholder="Duration (e.g., Jun 2023 - Sep 2023)"
-                              value={row.duration}
-                              onChange={(e) =>
-                                updateExperience(
-                                  idx,
-                                  "duration",
-                                  e.target.value
-                                )
-                              }
-                            />
-                            {formData.experienceEntries.length > 1 && (
-                              <Button
-                                type="button"
-                                className="cursor-pointer hover:text-red-700 hover:bg-red-100"
-                                variant="ghost"
-                                onClick={() => removeExperience(idx)}
-                                aria-label="Remove experience row"
-                              >
-                                <Trash2 className="w-4 h-4" />
-                              </Button>
-                            )}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
 
-                  {/* Skills */}
-                  <div className="space-y-6">
-                    <h3 className="text-lg font-semibold border-b pb-2">
-                      Skills
-                    </h3>
-                    <div className="space-y-4">
+                    <div className="space-y-8">
                       <div className="space-y-2">
-                        <Label htmlFor="skills">Skills & Competencies</Label>
+                        <Label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Skills & Competencies</Label>
                         <Textarea
-                          id="skills"
-                          placeholder="List your technical and soft skills..."
                           value={formData.skills}
-                          onChange={(e) =>
-                            handleInputChange("skills", e.target.value)
-                          }
-                          rows={4}
+                          onChange={(e) => handleInputChange("skills", e.target.value)}
+                          placeholder="List your technical strengths..."
+                          className="min-h-[140px] rounded-[2rem] bg-gray-50 border-none shadow-sm focus:ring-black/5 p-8"
                         />
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="certifications">Certifications</Label>
-                        <Textarea
-                          id="certifications"
-                          placeholder="List any relevant certifications..."
-                          value={formData.certifications}
-                          onChange={(e) =>
-                            handleInputChange("certifications", e.target.value)
-                          }
-                          rows={3}
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="languages">Languages</Label>
-                        <Textarea
-                          id="languages"
-                          placeholder="List languages you speak and proficiency level..."
-                          value={formData.languages}
-                          onChange={(e) =>
-                            handleInputChange("languages", e.target.value)
-                          }
-                          rows={2}
-                        />
-                      </div>
-                    </div>
-                  </div>
 
-                  {/* References (repeatable) */}
-                  <div className="space-y-6">
-                    <div className="flex items-center justify-between border-b pb-2">
-                      <h3 className="text-lg font-semibold">References</h3>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        onClick={addReference}
-                        className="gap-2 cursor-pointer"
-                      >
-                        <Plus className="w-4 h-4" /> Add
-                      </Button>
-                    </div>
-                    <div className="space-y-4">
-                      {formData.references.map((row, idx) => (
-                        <div
-                          key={idx}
-                          className="grid md:grid-cols-3 gap-3 border rounded-md p-4"
-                        >
-                          <div className="space-y-2">
-                            <Label>Referee Name</Label>
-                            <Input
-                              placeholder="Name"
-                              value={row.referee}
-                              onChange={(e) =>
-                                updateReference(idx, "referee", e.target.value)
-                              }
-                            />
-                          </div>
-                          <div className="space-y-2">
-                            <Label>Relationship</Label>
-                            <Input
-                              placeholder="e.g., Former Supervisor"
-                              value={row.relationship}
-                              onChange={(e) =>
-                                updateReference(
-                                  idx,
-                                  "relationship",
-                                  e.target.value
-                                )
-                              }
-                            />
-                          </div>
-                          <div className="flex items-end gap-2">
-                            <div className="flex-1 space-y-2">
-                              <Label>Contact</Label>
-                              <Input
-                                placeholder="Email or Phone"
-                                value={row.contact}
-                                onChange={(e) =>
-                                  updateReference(idx, "contact", e.target.value)
-                                }
-                              />
-                            </div>
-                            {formData.references.length > 1 && (
-                              <Button
-                                type="button"
-                                className="cursor-pointer hover:text-red-700 hover:bg-red-100"
-                                variant="ghost"
-                                onClick={() => removeReference(idx)}
-                                aria-label="Remove reference row"
-                              >
-                                <Trash2 className="w-4 h-4" />
-                              </Button>
-                            )}
-                          </div>
+                      <div className="space-y-2">
+                        <Label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">CV / Resume *</Label>
+                        <div className="relative">
+                          <Input
+                            type="file"
+                            accept=".pdf,.doc,.docx"
+                            onChange={handleFileChange}
+                            className={`h-14 sm:h-16 rounded-2xl bg-gray-50 border-none shadow-sm focus:ring-black/5 pt-4 ${errors.cvFile ? "ring-2 ring-red-500" : ""}`}
+                          />
+                          <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mt-3 ml-1">PDF, DOCX. Max 5MB.</p>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* CV Upload */}
-                  <div className="space-y-6">
-                    <h3 className="text-lg font-semibold border-b pb-2">
-                      Documents
-                    </h3>
-                    <div className="space-y-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="cvFile">CV/Resume *</Label>
-                        <Input
-                          id="cvFile"
-                          type="file"
-                          accept=".pdf,.doc,.docx"
-                          onChange={handleFileChange}
-                          className="cursor-pointer"
-                          aria-invalid={errors.cvFile || undefined}
-                        />
-                        {errors.cvFile && (
-                          <p className="text-sm text-red-600">
-                            CV/Resume is required
-                          </p>
-                        )}
-                        <p className="text-xs text-gray-500">
-                          PDF, DOC, or DOCX format. Max 5MB.
-                        </p>
                       </div>
                     </div>
                   </div>
 
-                  {/* Terms and Submit */}
-                  <div className="space-y-6">
-                    <div className="flex items-center space-x-2">
+                  {/* Submission */}
+                  <div className="pt-10 border-t border-gray-100">
+                    <div className="flex items-center space-x-3 bg-gray-50 p-6 rounded-2xl mb-10">
                       <Checkbox
                         id="agreeToTerms"
                         checked={formData.agreeToTerms}
-                        onCheckedChange={(c) =>
-                          handleInputChange("agreeToTerms", Boolean(c))
-                        }
-                        className="cursor-pointer"
+                        className="w-5 h-5 rounded-lg border-2 border-gray-200 data-[state=checked]:bg-black data-[state=checked]:border-black"
+                        onCheckedChange={(c) => handleInputChange("agreeToTerms", Boolean(c))}
                       />
-                      <Label htmlFor="agreeToTerms" className="text-sm">
-                        I agree to the terms and conditions and understand that
-                        my application is subject to review *
+                      <Label htmlFor="agreeToTerms" className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-normal">
+                        I confirm all information is accurate and agree to review terms *
                       </Label>
                     </div>
-                    {errors.agreeToTerms && (
-                      <p className="text-sm text-red-600">
-                        You must accept the terms
-                      </p>
-                    )}
+
                     <Button
                       type="submit"
-                      size="lg"
-                      className="w-full bg-black text-white hover:bg-gray-800 py-6 text-lg cursor-pointer"
+                      className="w-full h-20 rounded-[2rem] bg-black text-white hover:bg-gray-800 text-xs font-black uppercase tracking-[0.2em] shadow-2xl shadow-black/20 transition-all active:scale-[0.98] cursor-pointer"
                       disabled={submitting}
-                      aria-busy={submitting}
                     >
-                      {submitting ? (
-                        <>
-                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Submitting...
-                        </>
-                      ) : (
-                        "Submit Application"
-                      )}
+                      {submitting ? <Loader2 className="w-6 h-6 animate-spin" /> : "Submit Application"}
                     </Button>
                   </div>
                 </form>

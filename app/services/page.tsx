@@ -29,199 +29,94 @@ export default function ServicesPage() {
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-gray-50 to-white py-20">
+        <section className="bg-gradient-to-b from-gray-50 to-white py-16 sm:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-black mb-6">Our Services</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Comprehensive electrical services from installation to maintenance. We provide professional, reliable
-              solutions backed by over 10 years of experience in Cameroon.
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-black mb-6 uppercase tracking-tighter leading-none">Our Services</h1>
+            <p className="text-lg sm:text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed font-medium">
+              Comprehensive electrical solutions from foundation to automation. 
+              Professional, reliable, and backed by over 10 years of regional expertise.
             </p>
           </div>
         </section>
         
         {/* Main Services Grid */}
+        {/* Main Services Grid */}
         <section className="pb-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Installation Services */}
-              <Card className="bg-gray-50 border-gray-200 hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mr-4">
-                      <Wrench className="w-6 h-6 text-white" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-12">
+              {[
+                {
+                  title: "Installation Services",
+                  icon: <Wrench className="w-6 h-6 text-white" />,
+                  desc: "Professional installation of all electrical systems with certified technicians and quality materials.",
+                  items: ["WiCon Wireless Controller setup", "Complete electrical wiring", "CCTV security system setup"],
+                  badges: ["Certified", "Quality Materials", "Compliant"],
+                  btnText: "Request Installation",
+                  primary: true
+                },
+                {
+                  title: "Maintenance & Support",
+                  icon: <Settings className="w-6 h-6 text-white" />,
+                  desc: "Ongoing maintenance and technical support to ensure your electrical systems operate at peak performance.",
+                  items: ["Preventive maintenance", "Performance optimization", "Remote diagnostics", "Software updates"],
+                  badges: ["24/7 Support", "Remote Help", "Performance Logs"],
+                  btnText: "Schedule Maintenance"
+                },
+                {
+                  title: "Consultation & Design",
+                  icon: <Users className="w-6 h-6 text-white" />,
+                  desc: "Expert consultation and custom design services to create the perfect electrical solution.",
+                  items: ["Site assessment", "Custom system design", "Efficiency optimization", "Cost-benefit analysis"],
+                  badges: ["Free Consultation", "Custom", "Expert Advice"],
+                  btnText: "Book Consultation"
+                },
+                {
+                  title: "Emergency Services",
+                  icon: <AlertTriangle className="w-6 h-6 text-white" />,
+                  desc: "24/7 emergency electrical services for urgent repairs and safety issues. Fast response times.",
+                  items: ["24/7 emergency response", "Fault diagnosis", "Safety resolution", "Temporary power"],
+                  badges: ["24/7 Available", "Fast Response", "Priority"],
+                  btnText: "Emergency Call",
+                  danger: true
+                }
+              ].map((service, idx) => (
+                <Card key={idx} className={`rounded-[2rem] border-gray-50 overflow-hidden hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group ${service.primary ? 'bg-black text-white' : 'bg-gray-50'}`}>
+                  <CardContent className="p-8 sm:p-12 space-y-8">
+                    <div className="flex items-center gap-6">
+                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-transform group-hover:rotate-6 duration-500 ${service.danger ? 'bg-red-600' : service.primary ? 'bg-white/10' : 'bg-black'}`}>
+                        {service.icon}
+                      </div>
+                      <h3 className={`text-xl sm:text-2xl font-black uppercase tracking-tighter ${service.primary ? 'text-white' : 'text-black'}`}>{service.title}</h3>
                     </div>
-                    <CardTitle className="text-2xl">Installation Services</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <p className="text-gray-600">
-                    Professional installation of all electrical systems with certified technicians and quality
-                    materials.
-                  </p>
-                  <div className="space-y-3">
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                      <span className="text-sm">WiCon Wireless Controller setup</span>
+                    
+                    <p className={`text-sm sm:text-base leading-relaxed font-medium ${service.primary ? 'text-gray-400' : 'text-gray-500'}`}>
+                      {service.desc}
+                    </p>
+                    
+                    <div className="space-y-4">
+                      {service.items.map((item, i) => (
+                        <div key={i} className="flex items-center">
+                          <CheckCircle className={`w-4 h-4 mr-3 ${service.primary ? 'text-white' : 'text-green-600'}`} />
+                          <span className="text-xs sm:text-sm font-bold tracking-tight">{item}</span>
+                        </div>
+                      ))}
                     </div>
-                    {/* <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                      <span className="text-sm">Solar PV system installation</span>
-                    </div> */}
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                      <span className="text-sm">Complete electrical wiring</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                      <span className="text-sm">CCTV security system setup</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary">Certified Technicians</Badge>
-                    <Badge variant="secondary">Quality Materials</Badge>
-                    <Badge variant="secondary">Code Compliant</Badge>
-                  </div>
-                  <Button className="w-full bg-black text-white hover:bg-gray-800 cursor-pointer">
-                    Request Installation
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Button>
-                </CardContent>
-              </Card>
 
-              {/* Maintenance & Support */}
-              <Card className="bg-gray-50 border-gray-200 hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mr-4">
-                      <Settings className="w-6 h-6 text-white" />
+                    <div className="flex flex-wrap gap-2">
+                      {service.badges.map((badge, i) => (
+                        <Badge key={i} variant="secondary" className={`px-4 py-2 rounded-xl text-[8px] sm:text-[10px] uppercase font-black tracking-widest border-none ${service.primary ? 'bg-white/10 text-white' : 'bg-white text-gray-400'}`}>
+                          {badge}
+                        </Badge>
+                      ))}
                     </div>
-                    <CardTitle className="text-2xl">Maintenance & Support</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <p className="text-gray-600">
-                    Ongoing maintenance and technical support to ensure your electrical systems operate at peak
-                    performance.
-                  </p>
-                  <div className="space-y-3">
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                      <span className="text-sm">Preventive maintenance programs</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                      <span className="text-sm">System performance optimization</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                      <span className="text-sm">Remote monitoring and diagnostics</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                      <span className="text-sm">Software updates and upgrades</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary">Scheduled Maintenance</Badge>
-                    <Badge variant="secondary">Remote Support</Badge>
-                    <Badge variant="secondary">Performance Reports</Badge>
-                  </div>
-                  <Button variant="outline" className="w-full bg-transparent cursor-pointer">
-                    Schedule Maintenance
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Button>
-                </CardContent>
-              </Card>
 
-              {/* Consultation & Design */}
-              <Card className="bg-gray-50 border-gray-200 hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mr-4">
-                      <Users className="w-6 h-6 text-white" />
-                    </div>
-                    <CardTitle className="text-2xl">Consultation & Design</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <p className="text-gray-600">
-                    Expert consultation and custom design services to create the perfect electrical solution for your
-                    specific needs.
-                  </p>
-                  <div className="space-y-3">
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                      <span className="text-sm">Site assessment and analysis</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                      <span className="text-sm">Custom system design</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                      <span className="text-sm">Energy efficiency optimization</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                      <span className="text-sm">Cost-benefit analysis</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary">Free Consultation</Badge>
-                    <Badge variant="secondary">Custom Solutions</Badge>
-                    <Badge variant="secondary">Expert Advice</Badge>
-                  </div>
-                  <Button variant="outline" className="w-full bg-transparent cursor-pointer">
-                    Book Consultation
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Button>
-                </CardContent>
-              </Card>
-
-              {/* Emergency Services */}
-              <Card className="bg-gray-50 border-gray-200 hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mr-4">
-                      <AlertTriangle className="w-6 h-6 text-white" />
-                    </div>
-                    <CardTitle className="text-2xl">Emergency Services</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <p className="text-gray-600">
-                    24/7 emergency electrical services for urgent repairs and safety issues. Fast response times across
-                    Southwest Region.
-                  </p>
-                  <div className="space-y-3">
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                      <span className="text-sm">24/7 emergency response</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                      <span className="text-sm">Electrical fault diagnosis</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                      <span className="text-sm">Safety hazard resolution</span>
-                    </div>
-                    <div className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-green-600 mr-3" />
-                      <span className="text-sm">Temporary power solutions</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="destructive">24/7 Available</Badge>
-                    <Badge variant="secondary">Fast Response</Badge>
-                    <Badge variant="secondary">Safety Priority</Badge>
-                  </div>
-                  <Button className="w-full bg-red-600 text-white hover:bg-red-700 cursor-pointer">
-                    Emergency Call
-                    <Phone className="ml-2 w-4 h-4" />
-                  </Button>
-                </CardContent>
-              </Card>
+                    <Button className={`w-full h-14 rounded-2xl font-bold uppercase tracking-widest text-[10px] sm:text-xs transition-all cursor-pointer ${service.danger ? 'bg-red-600 hover:bg-red-700 text-white' : service.primary ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800 shadow-xl shadow-black/10'}`}>
+                      {service.btnText}
+                      {service.danger ? <Phone className="ml-2 w-4 h-4" /> : <ArrowRight className="ml-2 w-4 h-4" />}
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
@@ -275,41 +170,27 @@ export default function ServicesPage() {
         </section>
 
         {/* Service Process */}
-        <section className="py-20 bg-white">
+        <section className="py-20 sm:py-32 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Our Service Process</h2>
-              <p className="text-xl text-gray-600">Simple, transparent process from consultation to completion</p>
+            <div className="text-center mb-16 sm:mb-24">
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-black mb-4 uppercase tracking-tighter sm:leading-tight">Our Service Process</h2>
+              <p className="text-lg sm:text-xl text-gray-400 font-medium">Simple, transparent, and built for your convenience</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-bold text-xl">1</span>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-12 sm:gap-6">
+              {[
+                { step: "1", title: "Consultation", desc: "Understanding your needs through a free initial talk." },
+                { step: "2", title: "Assessment", desc: "Detailed evaluation and custom solution design." },
+                { step: "3", title: "Installation", desc: "Expert setup with professional-grade materials." },
+                { step: "4", title: "Support", desc: "Maintenance to ensure optimal performance." }
+              ].map((item, idx) => (
+                <div key={idx} className="text-center group">
+                  <div className="w-20 h-20 bg-gray-50 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:bg-black group-hover:text-white transition-all duration-500 group-hover:rotate-6 shadow-sm group-hover:shadow-xl group-hover:shadow-black/10">
+                    <span className="font-black text-2xl tracking-tighter">{item.step}</span>
+                  </div>
+                  <h3 className="text-lg font-black text-black mb-2 uppercase tracking-tight">{item.title}</h3>
+                  <p className="text-gray-400 text-sm font-medium leading-relaxed">{item.desc}</p>
                 </div>
-                <h3 className="text-lg font-bold text-black mb-2">Contact & Consultation</h3>
-                <p className="text-gray-600 text-sm">Free initial consultation to understand your needs</p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-bold text-xl">2</span>
-                </div>
-                <h3 className="text-lg font-bold text-black mb-2">Site Assessment</h3>
-                <p className="text-gray-600 text-sm">Detailed evaluation and custom solution design</p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-bold text-xl">3</span>
-                </div>
-                <h3 className="text-lg font-bold text-black mb-2">Professional Installation</h3>
-                <p className="text-gray-600 text-sm">Expert installation with quality materials</p>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-bold text-xl">4</span>
-                </div>
-                <h3 className="text-lg font-bold text-black mb-2">Ongoing Support</h3>
-                <p className="text-gray-600 text-sm">Maintenance and support for optimal performance</p>
-              </div>
+              ))}
             </div>
           </div>
         </section>

@@ -15,7 +15,7 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [orderInfo, setOrderInfo] = useState<any>(null)
-  
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -58,32 +58,33 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen flex flex-col bg-white">
         <Header />
-        <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-24 text-center">
-          <div className="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-8 animate-bounce">
-            <CheckCircle2 className="w-12 h-12" />
+        <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-20 sm:py-32 text-center">
+          <div className="w-24 h-24 sm:w-32 sm:h-32 bg-green-50 text-green-500 rounded-[2rem] flex items-center justify-center mx-auto mb-10 animate-bounce">
+            <CheckCircle2 className="w-12 h-12 sm:w-16 sm:h-16" />
           </div>
-          <h1 className="text-4xl font-black text-black mb-4">Order Received!</h1>
-          <p className="text-gray-600 text-lg mb-8 leading-relaxed">
-            Thank you, <span className="font-bold text-black">{formData.name}</span>! 
-            Your order ID is <code className="bg-gray-100 px-2 py-1 rounded font-mono font-bold">{orderInfo?.orderId?.slice(0,8).toUpperCase()}</code>.
+          <h1 className="text-3xl sm:text-5xl font-black text-black mb-6 uppercase tracking-tighter leading-none">Order Received!</h1>
+          <p className="text-gray-400 text-base sm:text-xl mb-10 leading-relaxed font-medium">
+            Thank you, <span className="text-black font-black">{formData.name}</span>!
+            Your order ID is <code className="bg-gray-50 border border-gray-100 px-3 py-1 rounded-lg font-mono font-black text-black">{orderInfo?.orderId?.slice(0, 8).toUpperCase()}</code>.
           </p>
-          
-          <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 mb-12 text-left">
-            <h3 className="font-bold text-blue-900 mb-2 flex items-center gap-2">
-              <CreditCard className="w-5 h-5" />
+
+          <div className="bg-blue-50/50 border border-blue-100 rounded-[2rem] p-8 sm:p-10 mb-12 text-left relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-3xl rounded-full translate-x-10 -translate-y-10 group-hover:scale-150 transition-transform duration-1000"></div>
+            <h3 className="font-black text-blue-900 mb-4 flex items-center gap-3 uppercase tracking-tighter text-lg">
+              <CreditCard className="w-6 h-6" />
               Payment Instruction
             </h3>
-            <p className="text-blue-800 text-sm leading-relaxed">
-              We have initiated a MoMo payment request to <span className="font-bold">{formData.phone}</span>. 
-              Please check your phone and enter your PIN to confirm the payment of <span className="font-black underline">{totalAmount.toLocaleString()} XAF</span>.
+            <p className="text-blue-800 text-sm sm:text-base leading-relaxed font-medium">
+              We have initiated a MoMo payment request to <span className="font-black border-b-2 border-blue-200">{formData.phone}</span>.
+              Please check your phone and enter your PIN to confirm the payment of <span className="font-black text-black text-lg">{totalAmount.toLocaleString()} XAF</span>.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/store" className="bg-black text-white px-8 py-4 rounded-2xl font-bold hover:bg-gray-800 transition-all">
+            <Link href="/store" className="bg-black text-white px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-gray-800 transition-all shadow-xl hover:shadow-black/20">
               Continue Shopping
             </Link>
-            <Link href="/" className="bg-gray-100 text-black px-8 py-4 rounded-2xl font-bold hover:bg-gray-200 transition-all">
+            <Link href="/" className="bg-gray-50 text-gray-500 px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-gray-100 transition-all border border-gray-100">
               Back to Home
             </Link>
           </div>
@@ -110,69 +111,69 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
-      
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+      <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 sm:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-20">
           {/* Checkout Form */}
-          <div className="space-y-8">
+          <div className="space-y-10">
             <div>
-              <h1 className="text-3xl font-black text-black mb-2">Checkout</h1>
-              <p className="text-gray-500">Provide your details to complete the order.</p>
+              <h1 className="text-3xl sm:text-5xl font-black text-black mb-4 uppercase tracking-tighter leading-none">Checkout</h1>
+              <p className="text-gray-400 font-medium text-sm sm:text-lg">Provide your details to complete the order.</p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase tracking-widest text-gray-400 flex items-center gap-2">
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="bg-white rounded-[2rem] border border-gray-50 p-8 sm:p-10 shadow-2xl shadow-black/5 space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-300 flex items-center gap-2">
                       <User className="w-3 h-3" /> Full Name
                     </label>
                     <input
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="John Doe"
-                      className="w-full bg-gray-50 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-black outline-none transition-all"
+                      placeholder="e.g. Glenn Dev"
+                      className="w-full bg-gray-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-black outline-none transition-all font-bold text-black placeholder:text-gray-200 placeholder:font-medium"
                     />
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold uppercase tracking-widest text-gray-400 flex items-center gap-2">
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-300 flex items-center gap-2">
                       <Mail className="w-3 h-3" /> Email (Optional)
                     </label>
                     <input
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="john@example.com"
-                      className="w-full bg-gray-50 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-black outline-none transition-all"
+                      placeholder="hello@wi-con.com"
+                      className="w-full bg-gray-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-black outline-none transition-all font-bold text-black placeholder:text-gray-200 placeholder:font-medium"
                     />
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-widest text-gray-400 flex items-center gap-2">
+                <div className="space-y-3">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-300 flex items-center gap-2">
                     <Phone className="w-3 h-3" /> MoMo / Orange Number
                   </label>
                   <input
                     required
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    placeholder="67xxxxxxx / 69xxxxxxx"
-                    className="w-full bg-gray-50 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-black outline-none transition-all"
+                    placeholder="6xxxxxxxx"
+                    className="w-full bg-gray-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-black outline-none transition-all font-black text-black tracking-widest placeholder:text-gray-200 placeholder:font-medium text-lg placeholder:text-sm"
                   />
-                  <p className="text-[10px] text-gray-400 font-medium">This number will be used for the payment request and delivery updates.</p>
+                  <p className="text-[10px] text-gray-300 font-bold uppercase tracking-widest">Confirmed instantly via SMS and MoMo Push.</p>
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-widest text-gray-400 flex items-center gap-2">
+                <div className="space-y-3">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-300 flex items-center gap-2">
                     <MapPin className="w-3 h-3" /> Delivery Address
                   </label>
                   <textarea
                     required
                     value={formData.address}
                     onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                    placeholder="Describe your location (e.g. Molyko, opposite University of Buea)"
-                    className="w-full bg-gray-50 border-none rounded-xl px-4 py-3 h-24 focus:ring-2 focus:ring-black outline-none transition-all resize-none"
+                    placeholder="Describe your location (e.g. Molyko, Buea)"
+                    className="w-full bg-gray-50 border-none rounded-2xl px-5 py-4 h-32 focus:ring-2 focus:ring-black outline-none transition-all resize-none font-bold text-black placeholder:text-gray-200 placeholder:font-medium"
                   />
                 </div>
               </div>
@@ -180,7 +181,7 @@ export default function CheckoutPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-black text-white py-5 rounded-3xl font-bold text-xl hover:bg-gray-800 transition-all flex items-center justify-center gap-3 shadow-2xl hover:shadow-black/20 disabled:opacity-50 group"
+                className="w-full bg-black text-white py-6 rounded-3xl font-black uppercase tracking-widest text-sm hover:bg-gray-800 transition-all flex items-center justify-center gap-4 shadow-[0_20px_50px_rgba(0,0,0,0.2)] disabled:opacity-20 group active:scale-95"
               >
                 {loading ? (
                   <>
@@ -194,62 +195,66 @@ export default function CheckoutPage() {
                   </>
                 )}
               </button>
-              
+
               <p className="text-center text-[10px] text-gray-400 font-medium px-8">
-                By clicking "Complete Order & Pay Now", you agree to pay via Mobile Money. 
+                By clicking "Complete Order & Pay Now", you agree to pay via Mobile Money.
                 A payment request will be sent immediately to your phone.
               </p>
             </form>
           </div>
 
-          {/* Order Summary */}
-          <div className="lg:pl-12 border-l border-gray-200">
-            <div className="sticky top-24 space-y-8">
-              <h2 className="text-xl font-bold text-gray-900 border-b pb-4">Order Summary</h2>
-              
-              <div className="space-y-4 max-h-[40vh] overflow-y-auto pr-2">
+          <div className="lg:pl-16 border-t lg:border-t-0 lg:border-l border-gray-100 pt-12 lg:pt-0">
+            <div className="sticky top-24 space-y-10">
+              <h2 className="text-lg font-black text-black uppercase tracking-tighter border-b border-gray-50 pb-6">Order Summary</h2>
+
+              <div className="space-y-6 max-h-[50vh] overflow-y-auto pr-4 scrollbar-hide">
                 {items.map((item) => (
-                  <div key={item.id} className="flex gap-4">
-                    <div className="w-16 h-16 bg-white rounded-xl border border-gray-100 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                  <div key={item.id} className="flex gap-6 group">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-50 rounded-2xl border border-gray-100 flex-shrink-0 flex items-center justify-center overflow-hidden group-hover:border-black transition-colors duration-500">
                       {item.imageUrl ? (
-                        <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
+                        <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                       ) : (
-                        <div className="text-[8px] font-bold text-gray-300 text-center uppercase p-1">{item.name}</div>
+                        <div className="text-[8px] font-black text-gray-300 text-center uppercase p-2 leading-tight">{item.name}</div>
                       )}
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-gray-900 truncate">{item.name}</p>
-                      <p className="text-xs text-gray-500">Qty: {item.quantity}</p>
+                    <div className="flex-1 min-w-0 py-1">
+                      <p className="text-sm sm:text-base font-bold text-black truncate leading-tight mb-1">{item.name}</p>
+                      <p className="text-[10px] font-black text-gray-300 uppercase tracking-widest">Qty: {item.quantity}</p>
                     </div>
-                    <p className="text-sm font-black text-black">{(item.price * item.quantity).toLocaleString()} XAF</p>
+                    <div className="py-1 text-right">
+                      <p className="text-sm sm:text-base font-black text-black tracking-tight">{(item.price * item.quantity).toLocaleString()}</p>
+                      <p className="text-[8px] font-black text-gray-300 uppercase tracking-widest leading-none">XAF</p>
+                    </div>
                   </div>
                 ))}
               </div>
 
-              <div className="space-y-4 pt-4 border-t border-gray-200">
-                <div className="flex justify-between text-gray-500">
+              <div className="space-y-4 pt-8 border-t border-gray-50">
+                <div className="flex justify-between text-[10px] font-black text-gray-300 uppercase tracking-[0.2em]">
                   <span>Subtotal</span>
-                  <span className="font-bold text-black">{totalAmount.toLocaleString()} XAF</span>
+                  <span className="text-black">{totalAmount.toLocaleString()}</span>
                 </div>
-                <div className="flex justify-between text-gray-500">
+                <div className="flex justify-between text-[10px] font-black text-gray-300 uppercase tracking-[0.2em]">
                   <span>Shipping</span>
-                  <span className="text-green-600 font-bold uppercase text-xs">Free (Limited Offer)</span>
+                  <span className="text-green-600">Free Promo</span>
                 </div>
-                <div className="pt-4 border-t-2 border-dashed border-gray-200 flex justify-between items-center text-black">
-                  <span className="text-lg font-black uppercase tracking-widest">Total</span>
+                <div className="pt-8 border-t-2 border-dashed border-gray-100 flex justify-between items-end text-black">
+                  <span className="text-sm font-black uppercase tracking-widest text-gray-400">Total Due</span>
                   <div className="text-right">
-                    <span className="block text-3xl font-black">{totalAmount.toLocaleString()} XAF</span>
+                    <span className="block text-4xl font-black tracking-tighter leading-none">{totalAmount.toLocaleString()}</span>
+                    <span className="text-[10px] font-black text-gray-300 uppercase tracking-[0.2em] mt-2 block">CFA Francs</span>
                   </div>
                 </div>
               </div>
-              
-              <div className="bg-gray-100/50 p-6 rounded-2xl flex items-center gap-4 border border-gray-200/50">
-                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm">
-                  <ShoppingBag className="w-6 h-6 text-gray-400" />
+
+              <div className="bg-gray-950 p-8 rounded-[2rem] flex items-center gap-6 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 blur-3xl rounded-full translate-x-10 -translate-y-10 group-hover:scale-150 transition-transform duration-1000"></div>
+                <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <ShoppingBag className="w-6 h-6 text-white/20" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-0.5">Secure Transaction</p>
-                  <p className="text-[10px] text-gray-400 leading-relaxed font-medium">Payments are processed securely via Fapshi Cameroon. Your data is encrypted.</p>
+                  <p className="text-[10px] font-black text-white uppercase tracking-widest mb-1">Secure Transaction</p>
+                  <p className="text-[10px] text-gray-500 leading-relaxed font-bold uppercase tracking-tight">Encrypted by Fapshi Cameroon. Your data is protected by WiCon security protocols.</p>
                 </div>
               </div>
             </div>

@@ -91,14 +91,14 @@ export default function BlogPage() {
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-gray-50 to-white py-20">
+        <section className="bg-gradient-to-b from-gray-50 to-white py-16 sm:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-black mb-6">
-              WiCon Systems Blog
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-black mb-6 uppercase tracking-tighter leading-none">
+              Insights
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Expert insights, tips, and updates on electrical systems, solar
-              energy, and smart technology solutions for Cameroon.
+            <p className="text-lg sm:text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed font-medium">
+              Expert insights, safety tips, and the latest updates on smart automation 
+              and energy solutions in Cameroon.
             </p>
           </div>
         </section>
@@ -107,41 +107,48 @@ export default function BlogPage() {
         <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12">
-              <Badge className="mb-4 bg-black text-white">Featured Post</Badge>
-              <Card className="bg-gray-50 border-gray-200 overflow-hidden">
+              <Badge className="mb-8 bg-black text-white px-6 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest border-none">Featured Article</Badge>
+              <Card className="bg-gray-50 border-transparent rounded-[2rem] overflow-hidden group">
                 <div className="grid grid-cols-1 lg:grid-cols-2">
-                  <div>
+                  <div className="relative overflow-hidden">
                     <img
                       src={blogPosts[0].image || "/wicon-box.png"}
                       alt={blogPosts[0].title}
-                      className="w-full h-64 lg:h-full object-cover"
+                      className="w-full h-80 lg:h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
+                    <div className="absolute inset-0 bg-black/10"></div>
                   </div>
-                  <CardContent className="p-8 flex flex-col justify-center">
-                    <Badge variant="secondary" className="w-fit mb-4">
+                  <CardContent className="p-8 sm:p-16 flex flex-col justify-center">
+                    <Badge variant="secondary" className="w-fit mb-6 bg-white text-gray-400 font-black uppercase tracking-widest text-[10px] px-4 py-1.5 rounded-lg">
                       {blogPosts[0].category}
                     </Badge>
-                    <h2 className="text-2xl md:text-3xl font-bold text-black mb-4">
+                    <h2 className="text-2xl sm:text-4xl font-black text-black mb-6 uppercase tracking-tighter leading-tight sm:leading-none">
                       {blogPosts[0].title}
                     </h2>
-                    <p className="text-gray-600 mb-6 leading-relaxed">
+                    <p className="text-gray-500 mb-8 leading-relaxed font-medium">
                       {blogPosts[0].excerpt}
                     </p>
-                    <div className="flex items-center text-sm text-gray-500 mb-6">
-                      <User className="w-4 h-4 mr-2" />
-                      <span className="mr-4">{blogPosts[0].author}</span>
-                      <Calendar className="w-4 h-4 mr-2" />
-                      <span className="mr-4">{blogPosts[0].date}</span>
-                      <Clock className="w-4 h-4 mr-2" />
-                      <span>{blogPosts[0].readTime}</span>
+                    <div className="flex flex-wrap items-center gap-y-4 text-[10px] font-black uppercase tracking-widest text-gray-400 mb-10">
+                      <div className="flex items-center mr-8">
+                        <User className="w-3.5 h-3.5 mr-2" />
+                        <span>{blogPosts[0].author}</span>
+                      </div>
+                      <div className="flex items-center mr-8">
+                        <Calendar className="w-3.5 h-3.5 mr-2" />
+                        <span>{blogPosts[0].date}</span>
+                      </div>
+                      <div className="flex items-center">
+                        <Clock className="w-3.5 h-3.5 mr-2" />
+                        <span>{blogPosts[0].readTime}</span>
+                      </div>
                     </div>
-                    <Button className="w-fit bg-black text-white hover:bg-gray-800">
+                    <Button className="w-full sm:w-fit h-14 px-10 rounded-2xl bg-black text-white hover:bg-gray-800 text-[10px] font-black uppercase tracking-widest shadow-2xl shadow-black/10 cursor-pointer">
                       <Link
                         href={blogPosts[0].href}
                         className="inline-flex items-center"
                       >
-                        Read Full Article
-                        <ArrowRight className="ml-2 w-4 h-4" />
+                        Read Full Story
+                        <ArrowRight className="ml-3 w-4 h-4" />
                       </Link>
                     </Button>
                   </CardContent>
@@ -152,19 +159,19 @@ export default function BlogPage() {
         </section>
 
         {/* Category Filter */}
-        <section className="py-8 bg-gray-50">
+        <section className="py-12 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-wrap gap-2 justify-center">
+            <div className="flex flex-wrap gap-3 justify-center">
               {categories.map((category) => (
                 <Button
                   key={category}
-                  variant={category === "All" ? "default" : "outline"}
+                  variant="outline"
                   size="sm"
-                  className={
+                  className={`h-10 px-6 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border-none ${
                     category === "All"
-                      ? "bg-black text-white"
-                      : "bg-transparent"
-                  }
+                      ? "bg-black text-white shadow-xl shadow-black/20"
+                      : "bg-white text-gray-400 hover:text-black hover:shadow-lg"
+                  }`}
                 >
                   {category}
                 </Button>
@@ -176,50 +183,46 @@ export default function BlogPage() {
         {/* Blog Posts Grid */}
         <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12">
               {blogPosts.slice(1).map((post) => (
                 <Card
                   key={post.id}
-                  className="bg-white border-gray-200 hover:shadow-lg transition-shadow"
+                  className="bg-white border-transparent rounded-[2rem] overflow-hidden hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group flex flex-col"
                 >
-                  <div className="overflow-hidden">
+                  <div className="overflow-hidden aspect-[4/3] relative">
                     <img
                       src={post.image || "/placeholder.svg"}
                       alt={post.title}
-                      className="w-full h-48 object-cover hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
+                    <div className="absolute top-6 left-6">
+                      <Badge className="bg-white/90 backdrop-blur-md text-black px-4 py-1.5 rounded-lg font-black uppercase tracking-widest text-[8px] border-none">
+                        {post.category}
+                      </Badge>
+                    </div>
                   </div>
-                  <CardHeader className="pb-4">
-                    <Badge variant="secondary" className="w-fit mb-2">
-                      {post.category}
-                    </Badge>
-                    <h3 className="text-xl font-bold text-black leading-tight">
+                  <CardHeader className="p-8 pb-4 flex-grow">
+                    <h3 className="text-xl font-black text-black leading-tight uppercase tracking-tight group-hover:text-gray-600 transition-colors">
                       {post.title}
                     </h3>
                   </CardHeader>
-                  <CardContent className="pt-0">
-                    <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                  <CardContent className="p-8 pt-0 space-y-6">
+                    <p className="text-gray-500 text-sm font-medium leading-relaxed line-clamp-2">
                       {post.excerpt}
                     </p>
-                    <div className="flex items-center text-xs text-gray-500 mb-4">
-                      <User className="w-3 h-3 mr-1" />
-                      <span className="mr-3">{post.author}</span>
-                      <Calendar className="w-3 h-3 mr-1" />
-                      <span className="mr-3">{post.date}</span>
-                      <Clock className="w-3 h-3 mr-1" />
-                      <span>{post.readTime}</span>
+                    <div className="flex items-center text-[10px] font-black uppercase tracking-widest text-gray-400">
+                      <Calendar className="w-3.5 h-3.5 mr-2" />
+                      <span>{post.date}</span>
                     </div>
                     <Button
-                      variant="outline"
-                      size="sm"
-                      className="w-full bg-transparent"
+                      className="w-full h-12 rounded-xl bg-gray-50 text-black hover:bg-black hover:text-white text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer border-none"
                     >
                       <Link
                         href={post.href}
-                        className="inline-flex items-center"
+                        className="w-full inline-flex items-center justify-center"
                       >
-                        Read More
-                        <ArrowRight className="ml-2 w-3 h-3" />
+                        Read Article
+                        <ArrowRight className="ml-2 w-3.5 h-3.5" />
                       </Link>
                     </Button>
                   </CardContent>

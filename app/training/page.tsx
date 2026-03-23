@@ -606,9 +606,8 @@ export default function TrainingPage() {
                         onChange={(e) =>
                           setPartner((p) => ({ ...p, name: e.target.value }))
                         }
-                        className={`mt-1 ${
-                          partnerErrors.name ? "border-red-500" : ""
-                        }`}
+                        className={`mt-1 ${partnerErrors.name ? "border-red-500" : ""
+                          }`}
                         aria-invalid={partnerErrors.name || undefined}
                       />
                       {partnerErrors.name && (
@@ -629,9 +628,8 @@ export default function TrainingPage() {
                             organization: e.target.value,
                           }))
                         }
-                        className={`mt-1 ${
-                          partnerErrors.organization ? "border-red-500" : ""
-                        }`}
+                        className={`mt-1 ${partnerErrors.organization ? "border-red-500" : ""
+                          }`}
                         aria-invalid={partnerErrors.organization || undefined}
                       />
                       {partnerErrors.organization && (
@@ -652,9 +650,8 @@ export default function TrainingPage() {
                         onChange={(e) =>
                           setPartner((p) => ({ ...p, email: e.target.value }))
                         }
-                        className={`mt-1 ${
-                          partnerErrors.email ? "border-red-500" : ""
-                        }`}
+                        className={`mt-1 ${partnerErrors.email ? "border-red-500" : ""
+                          }`}
                         aria-invalid={partnerErrors.email || undefined}
                       />
                       {partnerErrors.email && (
@@ -709,9 +706,8 @@ export default function TrainingPage() {
                       }
                     >
                       <SelectTrigger
-                        className={`mt-1 cursor-pointer ${
-                          partnerErrors.partnershipType ? "border-red-500" : ""
-                        }`}
+                        className={`mt-1 cursor-pointer ${partnerErrors.partnershipType ? "border-red-500" : ""
+                          }`}
                       >
                         <SelectValue placeholder="Select partnership type" />
                       </SelectTrigger>
@@ -769,9 +765,8 @@ export default function TrainingPage() {
                       onChange={(e) =>
                         setPartner((p) => ({ ...p, message: e.target.value }))
                       }
-                      className={`mt-1 ${
-                        partnerErrors.message ? "border-red-500" : ""
-                      }`}
+                      className={`mt-1 ${partnerErrors.message ? "border-red-500" : ""
+                        }`}
                       aria-invalid={partnerErrors.message || undefined}
                     />
                     {partnerErrors.message && (
@@ -915,9 +910,8 @@ export default function TrainingPage() {
                             firstName: e.target.value,
                           }))
                         }
-                        className={`mt-1 ${
-                          volunteerErrors.firstName ? "border-red-500" : ""
-                        }`}
+                        className={`mt-1 ${volunteerErrors.firstName ? "border-red-500" : ""
+                          }`}
                         aria-invalid={volunteerErrors.firstName || undefined}
                       />
                       {volunteerErrors.firstName && (
@@ -943,9 +937,8 @@ export default function TrainingPage() {
                             lastName: e.target.value,
                           }))
                         }
-                        className={`mt-1 ${
-                          volunteerErrors.lastName ? "border-red-500" : ""
-                        }`}
+                        className={`mt-1 ${volunteerErrors.lastName ? "border-red-500" : ""
+                          }`}
                         aria-invalid={volunteerErrors.lastName || undefined}
                       />
                       {volunteerErrors.lastName && (
@@ -971,9 +964,8 @@ export default function TrainingPage() {
                         onChange={(e) =>
                           setVolunteer((p) => ({ ...p, email: e.target.value }))
                         }
-                        className={`mt-1 ${
-                          volunteerErrors.email ? "border-red-500" : ""
-                        }`}
+                        className={`mt-1 ${volunteerErrors.email ? "border-red-500" : ""
+                          }`}
                         aria-invalid={volunteerErrors.email || undefined}
                       />
                       {volunteerErrors.email && (
@@ -1036,9 +1028,8 @@ export default function TrainingPage() {
                       }
                     >
                       <SelectTrigger
-                        className={`mt-1 ${
-                          volunteerErrors.expertise ? "border-red-500" : ""
-                        }`}
+                        className={`mt-1 ${volunteerErrors.expertise ? "border-red-500" : ""
+                          }`}
                       >
                         <SelectValue placeholder="Select your primary expertise" />
                       </SelectTrigger>
@@ -1078,9 +1069,8 @@ export default function TrainingPage() {
                         }
                       >
                         <SelectTrigger
-                          className={`mt-1 ${
-                            volunteerErrors.years ? "border-red-500" : ""
-                          }`}
+                          className={`mt-1 ${volunteerErrors.years ? "border-red-500" : ""
+                            }`}
                         >
                           <SelectValue placeholder="Select experience level" />
                         </SelectTrigger>
@@ -1146,9 +1136,8 @@ export default function TrainingPage() {
                           currentRole: e.target.value,
                         }))
                       }
-                      className={`mt-1 ${
-                        volunteerErrors.currentRole ? "border-red-500" : ""
-                      }`}
+                      className={`mt-1 ${volunteerErrors.currentRole ? "border-red-500" : ""
+                        }`}
                       aria-invalid={volunteerErrors.currentRole || undefined}
                     />
                     {volunteerErrors.currentRole && (
@@ -1188,9 +1177,8 @@ export default function TrainingPage() {
                       }
                     >
                       <SelectTrigger
-                        className={`mt-1 ${
-                          volunteerErrors.availability ? "border-red-500" : ""
-                        }`}
+                        className={`mt-1 ${volunteerErrors.availability ? "border-red-500" : ""
+                          }`}
                       >
                         <SelectValue placeholder="Select your availability" />
                       </SelectTrigger>
@@ -1229,9 +1217,8 @@ export default function TrainingPage() {
                           motivation: e.target.value,
                         }))
                       }
-                      className={`mt-1 min-h-[120px] ${
-                        volunteerErrors.motivation ? "border-red-500" : ""
-                      }`}
+                      className={`mt-1 min-h-[120px] ${volunteerErrors.motivation ? "border-red-500" : ""
+                        }`}
                       rows={4}
                       aria-invalid={volunteerErrors.motivation || undefined}
                     />

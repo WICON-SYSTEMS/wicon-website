@@ -157,12 +157,12 @@ export default function ContactPage() {
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-gray-50 to-white py-10 md:py-20">
+        <section className="bg-gradient-to-b from-gray-50 to-white py-16 sm:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-black mb-6">
-              Contact WiCon Systems
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black text-black mb-6 uppercase tracking-tighter leading-none">
+              Contact Us
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed font-medium">
               Ready to upgrade your electrical systems? Get in touch with our
               experts for a free consultation and customized quote.
             </p>
@@ -175,27 +175,27 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Contact Form */}
               <div>
-                <h2 className="text-3xl font-bold text-black mb-6">
+                <h2 className="text-2xl sm:text-4xl font-black text-black mb-6 uppercase tracking-tighter">
                   {requestType === "quote"
-                    ? "Get Your Free Quote"
-                    : "Contact Us"}
+                    ? "Get Your Quote"
+                    : "Send a Message"}
                 </h2>
-                <p className="text-gray-600 mb-6">
+                <p className="text-gray-500 mb-8 font-medium">
                   {requestType === "quote"
-                    ? "Fill out the form below and our team will get back to you within 24 hours with a detailed quote and consultation."
+                    ? "Fill out the form below and our team will get back to you within 24 hours with a detailed quote."
                     : "Have a question or need assistance? Fill out the form below and our team will get back to you within 24 hours."}
                 </p>
 
                 {/* Request Type Toggle */}
-                <div className="mb-8">
-                  <div className="flex items-center space-x-1 bg-gray-100 rounded-lg p-1 w-fit">
+                <div className="mb-10">
+                  <div className="flex items-center space-x-1 bg-gray-50 rounded-2xl p-1.5 w-fit border border-gray-100">
                     <button
                       type="button"
                       onClick={() => handleRequestTypeChange("inquiry")}
-                      className={`px-4 py-2 rounded-md text-sm font-medium transition-all cursor-pointer ${
+                      className={`px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer ${
                         requestType === "inquiry"
-                          ? "bg-white text-black shadow-sm"
-                          : "text-gray-600 hover:text-black"
+                          ? "bg-black text-white shadow-xl shadow-black/20"
+                          : "text-gray-400 hover:text-black"
                       }`}
                     >
                       General Inquiry
@@ -203,33 +203,33 @@ export default function ContactPage() {
                     <button
                       type="button"
                       onClick={() => handleRequestTypeChange("quote")}
-                      className={`px-4 py-2 rounded-md text-sm font-medium transition-all cursor-pointer ${
+                      className={`px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all cursor-pointer ${
                         requestType === "quote"
-                          ? "bg-white text-black shadow-sm"
-                          : "text-gray-600 hover:text-black"
+                          ? "bg-black text-white shadow-xl shadow-black/20"
+                          : "text-gray-400 hover:text-black"
                       }`}
                     >
                       Quote Request
                     </button>
                   </div>
                 </div>
-                <Card className="bg-gray-50 border-gray-200">
-                  <CardContent className="p-8">
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
+                <Card className="bg-gray-50 border-transparent rounded-[2rem] overflow-hidden">
+                  <CardContent className="p-8 sm:p-12">
+                    <form onSubmit={handleSubmit} className="space-y-8">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
                           <Label
                             htmlFor="firstName"
-                            className="text-sm font-medium text-black"
+                            className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1"
                           >
                             First Name *
                           </Label>
                           <Input
                             id="firstName"
                             type="text"
-                            placeholder="Enter your first name"
-                            className={`mt-1 ${
-                              errors.firstName ? "border-red-500" : ""
+                            placeholder="John"
+                            className={`h-14 sm:h-16 rounded-2xl bg-white border-none shadow-sm placeholder:text-gray-300 focus:ring-black/5 ${
+                              errors.firstName ? "ring-2 ring-red-500" : ""
                             }`}
                             value={formData.firstName}
                             onChange={(e) =>
@@ -238,24 +238,24 @@ export default function ContactPage() {
                             required
                           />
                           {errors.firstName && (
-                            <p className="text-red-500 text-sm mt-1">
+                            <p className="text-red-500 text-[10px] font-bold uppercase tracking-widest mt-1 ml-1">
                               {errors.firstName}
                             </p>
                           )}
                         </div>
-                        <div>
+                        <div className="space-y-2">
                           <Label
                             htmlFor="lastName"
-                            className="text-sm font-medium text-black"
+                            className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1"
                           >
                             Last Name *
                           </Label>
                           <Input
                             id="lastName"
                             type="text"
-                            placeholder="Enter your last name"
-                            className={`mt-1 ${
-                              errors.lastName ? "border-red-500" : ""
+                            placeholder="Doe"
+                            className={`h-14 sm:h-16 rounded-2xl bg-white border-none shadow-sm placeholder:text-gray-300 focus:ring-black/5 ${
+                              errors.lastName ? "ring-2 ring-red-500" : ""
                             }`}
                             value={formData.lastName}
                             onChange={(e) =>
@@ -264,25 +264,25 @@ export default function ContactPage() {
                             required
                           />
                           {errors.lastName && (
-                            <p className="text-red-500 text-sm mt-1">
+                            <p className="text-red-500 text-[10px] font-bold uppercase tracking-widest mt-1 ml-1">
                               {errors.lastName}
                             </p>
                           )}
                         </div>
                       </div>
-                      <div>
+                      <div className="space-y-2">
                         <Label
                           htmlFor="email"
-                          className="text-sm font-medium text-black"
+                          className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1"
                         >
                           Email Address *
                         </Label>
                         <Input
                           id="email"
                           type="email"
-                          placeholder="your.email@example.com"
-                          className={`mt-1 ${
-                            errors.email ? "border-red-500" : ""
+                          placeholder="john@example.com"
+                          className={`h-14 sm:h-16 rounded-2xl bg-white border-none shadow-sm placeholder:text-gray-300 focus:ring-black/5 ${
+                            errors.email ? "ring-2 ring-red-500" : ""
                           }`}
                           value={formData.email}
                           onChange={(e) =>
@@ -291,15 +291,15 @@ export default function ContactPage() {
                           required
                         />
                         {errors.email && (
-                          <p className="text-red-500 text-sm mt-1">
+                          <p className="text-red-500 text-[10px] font-bold uppercase tracking-widest mt-1 ml-1">
                             {errors.email}
                           </p>
                         )}
                       </div>
-                      <div>
+                      <div className="space-y-2">
                         <Label
                           htmlFor="phone"
-                          className="text-sm font-medium text-black"
+                          className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1"
                         >
                           Phone Number *
                         </Label>
@@ -318,7 +318,7 @@ export default function ContactPage() {
                               ) {
                                 setErrors((prev) => ({
                                   ...prev,
-                                  phone: "Please enter a valid phone number",
+                                  phone: "Invalid phone number",
                                 }));
                               } else {
                                 setErrors((prev) => ({ ...prev, phone: "" }));
@@ -328,21 +328,16 @@ export default function ContactPage() {
                             error={!!errors.phone}
                           />
                         </div>
-                        {errors.phone ? (
-                          <p className="text-red-500 text-sm mt-1">
+                        {errors.phone && (
+                          <p className="text-red-500 text-[10px] font-bold uppercase tracking-widest mt-1 ml-1">
                             {errors.phone}
-                          </p>
-                        ) : (
-                          <p className="text-[12px] text-gray-500 mt-1">
-                            Includes country code with flag (e.g., Cameroon
-                            +237)
                           </p>
                         )}
                       </div>
-                      <div>
+                      <div className="space-y-2">
                         <Label
                           htmlFor="service"
-                          className="text-sm font-medium text-black"
+                          className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1"
                         >
                           Service Interest *
                         </Label>
@@ -353,39 +348,25 @@ export default function ContactPage() {
                           }
                         >
                           <SelectTrigger
-                            className={`mt-1 cursor-pointer ${
-                              errors.service ? "border-red-500" : ""
+                            className={`h-14 sm:h-16 rounded-2xl bg-white border-none shadow-sm focus:ring-black/5 cursor-pointer ${
+                              errors.service ? "ring-2 ring-red-500" : ""
                             }`}
                           >
                             <SelectValue placeholder="Select a service" />
                           </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="wireless-controllers">
-                              WiCon Wireless Controllers
-                            </SelectItem>
-                            <SelectItem value="software">
-                              Software Solutions
-                            </SelectItem>
-                            <SelectItem value="electrical-wiring">
-                              Electrical Wiring
-                            </SelectItem>
-                            <SelectItem value="cctv-security">
-                              CCTV Security Systems
-                            </SelectItem>
-                            <SelectItem value="maintenance">
-                              Maintenance & Support
-                            </SelectItem>
-                            <SelectItem value="consultation">
-                              Consultation & Design
-                            </SelectItem>
-                            <SelectItem value="emergency">
-                              Emergency Services
-                            </SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
+                          <SelectContent className="rounded-2xl border-none shadow-2xl p-2 font-bold uppercase tracking-widest text-[10px]">
+                            <SelectItem value="wireless-controllers" className="rounded-xl">WiCon Wireless Controllers</SelectItem>
+                            <SelectItem value="software" className="rounded-xl">Software Solutions</SelectItem>
+                            <SelectItem value="electrical-wiring" className="rounded-xl">Electrical Wiring</SelectItem>
+                            <SelectItem value="cctv-security" className="rounded-xl">CCTV Security Systems</SelectItem>
+                            <SelectItem value="maintenance" className="rounded-xl">Maintenance & Support</SelectItem>
+                            <SelectItem value="consultation" className="rounded-xl">Consultation & Design</SelectItem>
+                            <SelectItem value="emergency" className="rounded-xl">Emergency Services</SelectItem>
+                            <SelectItem value="other" className="rounded-xl">Other</SelectItem>
                           </SelectContent>
                         </Select>
                         {errors.service && (
-                          <p className="text-red-500 text-sm mt-1">
+                          <p className="text-red-500 text-[10px] font-bold uppercase tracking-widest mt-1 ml-1">
                             {errors.service}
                           </p>
                         )}
@@ -393,12 +374,12 @@ export default function ContactPage() {
 
                       {/* Quote-Specific Fields */}
                       {requestType === "quote" && (
-                        <>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
+                        <div className="space-y-8 animate-in fade-in slide-in-from-top-4 duration-500">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="space-y-2">
                               <Label
                                 htmlFor="propertyType"
-                                className="text-sm font-medium text-black"
+                                className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1"
                               >
                                 Property Type *
                               </Label>
@@ -409,44 +390,27 @@ export default function ContactPage() {
                                 }
                               >
                                 <SelectTrigger
-                                  className={`mt-1 cursor-pointer ${
-                                    errors.propertyType ? "border-red-500" : ""
+                                  className={`h-14 sm:h-16 rounded-2xl bg-white border-none shadow-sm focus:ring-black/5 cursor-pointer ${
+                                    errors.propertyType ? "ring-2 ring-red-500" : ""
                                   }`}
                                 >
-                                  <SelectValue placeholder="Select property type" />
+                                  <SelectValue placeholder="Select type" />
                                 </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="residential-home">
-                                    Residential Home
-                                  </SelectItem>
-                                  <SelectItem value="residential-apartment">
-                                    Apartment/Condo
-                                  </SelectItem>
-                                  <SelectItem value="commercial-office">
-                                    Commercial Office
-                                  </SelectItem>
-                                  <SelectItem value="commercial-retail">
-                                    Retail Store
-                                  </SelectItem>
-                                  <SelectItem value="commercial-warehouse">
-                                    Warehouse/Industrial
-                                  </SelectItem>
-                                  <SelectItem value="commercial-restaurant">
-                                    Restaurant/Hotel
-                                  </SelectItem>
-                                  <SelectItem value="other">Other</SelectItem>
+                                <SelectContent className="rounded-2xl border-none shadow-2xl p-2 font-bold uppercase tracking-widest text-[10px]">
+                                  <SelectItem value="residential-home" className="rounded-xl">Residential Home</SelectItem>
+                                  <SelectItem value="residential-apartment" className="rounded-xl">Apartment/Condo</SelectItem>
+                                  <SelectItem value="commercial-office" className="rounded-xl">Commercial Office</SelectItem>
+                                  <SelectItem value="commercial-retail" className="rounded-xl">Retail Store</SelectItem>
+                                  <SelectItem value="commercial-warehouse" className="rounded-xl">Warehouse/Industrial</SelectItem>
+                                  <SelectItem value="commercial-restaurant" className="rounded-xl">Restaurant/Hotel</SelectItem>
+                                  <SelectItem value="other" className="rounded-xl">Other</SelectItem>
                                 </SelectContent>
                               </Select>
-                              {errors.propertyType && (
-                                <p className="text-red-500 text-sm mt-1">
-                                  {errors.propertyType}
-                                </p>
-                              )}
                             </div>
-                            <div>
+                            <div className="space-y-2">
                               <Label
                                 htmlFor="propertySize"
-                                className="text-sm font-medium text-black"
+                                className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1"
                               >
                                 Property Size *
                               </Label>
@@ -457,40 +421,27 @@ export default function ContactPage() {
                                 }
                               >
                                 <SelectTrigger
-                                  className={`mt-1 cursor-pointer ${
-                                    errors.propertySize ? "border-red-500" : ""
+                                  className={`h-14 sm:h-16 rounded-2xl bg-white border-none shadow-sm focus:ring-black/5 cursor-pointer ${
+                                    errors.propertySize ? "ring-2 ring-red-500" : ""
                                   }`}
                                 >
-                                  <SelectValue placeholder="Select size range" />
+                                  <SelectValue placeholder="Select size" />
                                 </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="small">
-                                    Small (&lt; 1,000 sq ft)
-                                  </SelectItem>
-                                  <SelectItem value="medium">
-                                    Medium (1,000 - 3,000 sq ft)
-                                  </SelectItem>
-                                  <SelectItem value="large">
-                                    Large (3,000 - 10,000 sq ft)
-                                  </SelectItem>
-                                  <SelectItem value="xlarge">
-                                    Very Large (&gt; 10,000 sq ft)
-                                  </SelectItem>
+                                <SelectContent className="rounded-2xl border-none shadow-2xl p-2 font-bold uppercase tracking-widest text-[10px]">
+                                  <SelectItem value="small" className="rounded-xl">Small (&lt; 1,000 sq ft)</SelectItem>
+                                  <SelectItem value="medium" className="rounded-xl">Medium (1,000 - 3,000 sq ft)</SelectItem>
+                                  <SelectItem value="large" className="rounded-xl">Large (3,000 - 10,000 sq ft)</SelectItem>
+                                  <SelectItem value="xlarge" className="rounded-xl">Very Large (&gt; 10,000 sq ft)</SelectItem>
                                 </SelectContent>
                               </Select>
-                              {errors.propertySize && (
-                                <p className="text-red-500 text-sm mt-1">
-                                  {errors.propertySize}
-                                </p>
-                              )}
                             </div>
                           </div>
 
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="space-y-2">
                               <Label
                                 htmlFor="budget"
-                                className="text-sm font-medium text-black"
+                                className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1"
                               >
                                 Budget Range *
                               </Label>
@@ -501,43 +452,26 @@ export default function ContactPage() {
                                 }
                               >
                                 <SelectTrigger
-                                  className={`mt-1 cursor-pointer ${
-                                    errors.budget ? "border-red-500" : ""
+                                  className={`h-14 sm:h-16 rounded-2xl bg-white border-none shadow-sm focus:ring-black/5 cursor-pointer ${
+                                    errors.budget ? "ring-2 ring-red-500" : ""
                                   }`}
                                 >
-                                  <SelectValue placeholder="Select budget range" />
+                                  <SelectValue placeholder="Select budget" />
                                 </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="under-500k">
-                                    Under 500,000 XAF
-                                  </SelectItem>
-                                  <SelectItem value="500k-1m">
-                                    500,000 - 1,000,000 XAF
-                                  </SelectItem>
-                                  <SelectItem value="1m-2m">
-                                    1,000,000 - 2,000,000 XAF
-                                  </SelectItem>
-                                  <SelectItem value="2m-5m">
-                                    2,000,000 - 5,000,000 XAF
-                                  </SelectItem>
-                                  <SelectItem value="over-5m">
-                                    Over 5,000,000 XAF
-                                  </SelectItem>
-                                  <SelectItem value="flexible">
-                                    Flexible/Discuss
-                                  </SelectItem>
+                                <SelectContent className="rounded-2xl border-none shadow-2xl p-2 font-bold uppercase tracking-widest text-[10px]">
+                                  <SelectItem value="under-500k" className="rounded-xl">Under 500k XAF</SelectItem>
+                                  <SelectItem value="500k-1m" className="rounded-xl">500k - 1m XAF</SelectItem>
+                                  <SelectItem value="1m-2m" className="rounded-xl">1m - 2m XAF</SelectItem>
+                                  <SelectItem value="2m-5m" className="rounded-xl">2m - 5m XAF</SelectItem>
+                                  <SelectItem value="over-5m" className="rounded-xl">Over 5m XAF</SelectItem>
+                                  <SelectItem value="flexible" className="rounded-xl">Flexible</SelectItem>
                                 </SelectContent>
                               </Select>
-                              {errors.budget && (
-                                <p className="text-red-500 text-sm mt-1">
-                                  {errors.budget}
-                                </p>
-                              )}
                             </div>
-                            <div>
+                            <div className="space-y-2">
                               <Label
                                 htmlFor="urgency"
-                                className="text-sm font-medium text-black"
+                                className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1"
                               >
                                 Project Timeline *
                               </Label>
@@ -548,52 +482,37 @@ export default function ContactPage() {
                                 }
                               >
                                 <SelectTrigger
-                                  className={`mt-1 cursor-pointer ${
-                                    errors.urgency ? "border-red-500" : ""
+                                  className={`h-14 sm:h-16 rounded-2xl bg-white border-none shadow-sm focus:ring-black/5 cursor-pointer ${
+                                    errors.urgency ? "ring-2 ring-red-500" : ""
                                   }`}
                                 >
                                   <SelectValue placeholder="Select timeline" />
                                 </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="urgent">
-                                    Urgent (Within 1 week)
-                                  </SelectItem>
-                                  <SelectItem value="soon">
-                                    Soon (Within 1 month)
-                                  </SelectItem>
-                                  <SelectItem value="planning">
-                                    Planning (1-3 months)
-                                  </SelectItem>
-                                  <SelectItem value="future">
-                                    Future (3+ months)
-                                  </SelectItem>
-                                  <SelectItem value="flexible">
-                                    Flexible
-                                  </SelectItem>
+                                <SelectContent className="rounded-2xl border-none shadow-2xl p-2 font-bold uppercase tracking-widest text-[10px]">
+                                  <SelectItem value="urgent" className="rounded-xl">Urgent (Within 1 week)</SelectItem>
+                                  <SelectItem value="soon" className="rounded-xl">Soon (Within 1 month)</SelectItem>
+                                  <SelectItem value="planning" className="rounded-xl">Planning (1-3 months)</SelectItem>
+                                  <SelectItem value="future" className="rounded-xl">Future (3+ months)</SelectItem>
+                                  <SelectItem value="flexible" className="rounded-xl">Flexible</SelectItem>
                                 </SelectContent>
                               </Select>
-                              {errors.urgency && (
-                                <p className="text-red-500 text-sm mt-1">
-                                  {errors.urgency}
-                                </p>
-                              )}
                             </div>
                           </div>
-                        </>
+                        </div>
                       )}
 
-                      <div>
+                      <div className="space-y-2">
                         <Label
                           htmlFor="message"
-                          className="text-sm font-medium text-black"
+                          className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1"
                         >
-                          Project Details & Message *
+                          Project Details *
                         </Label>
                         <Textarea
                           id="message"
-                          placeholder="Tell us about your project, requirements, and any specific questions you have..."
-                          className={`mt-1 min-h-[120px] ${
-                            errors.message ? "border-red-500" : ""
+                          placeholder="Tell us about your requirements..."
+                          className={`min-h-[160px] rounded-2xl bg-white border-none shadow-sm placeholder:text-gray-300 focus:ring-black/5 resize-none ${
+                            errors.message ? "ring-2 ring-red-500" : ""
                           }`}
                           value={formData.message}
                           onChange={(e) =>
@@ -601,27 +520,18 @@ export default function ContactPage() {
                           }
                           required
                         />
-                        {errors.message && (
-                          <p className="text-red-500 text-sm mt-1">
-                            {errors.message}
-                          </p>
-                        )}
                       </div>
                       <Button
                         type="submit"
-                        className="w-full bg-black text-white hover:bg-gray-800 py-3"
+                        className="w-full h-16 rounded-2xl bg-black text-white hover:bg-gray-800 text-[10px] font-black uppercase tracking-widest shadow-2xl shadow-black/20 transition-all active:scale-[0.98] cursor-pointer"
                         disabled={isSubmitting}
-                        aria-busy={isSubmitting}
                       >
                         {isSubmitting ? (
-                          <>
-                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                            Sending...
-                          </>
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
                         ) : (
                           <>
-                            <Send className="mr-2 w-4 h-4" />
-                            Send Message
+                            <Send className="mr-3 w-4 h-4" />
+                            Send Request
                           </>
                         )}
                       </Button>
@@ -631,111 +541,76 @@ export default function ContactPage() {
               </div>
 
               {/* Contact Information */}
-              <div>
-                <h2 className="text-3xl font-bold text-black mb-6">
-                  Contact Information
+              <div className="space-y-12">
+                <h2 className="text-2xl sm:text-4xl font-black text-black uppercase tracking-tighter">
+                  Quick Info
                 </h2>
                 <div className="space-y-6">
-                  {/* Office Address */}
-                  <Card className="bg-white border-gray-200">
-                    <CardContent className="p-6">
-                      <div className="flex items-start">
-                        <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                          <MapPin className="w-6 h-6 text-white" />
+                  {[
+                    {
+                      title: "Office Address",
+                      icon: <MapPin className="w-6 h-6 text-white" />,
+                      content: (
+                        <p className="text-gray-500 font-medium">
+                          WiCon Systems Headquarters<br />
+                          Buea, Southwest Region<br />
+                          Cameroon
+                        </p>
+                      )
+                    },
+                    {
+                      title: "Direct Channels",
+                      icon: <Phone className="w-6 h-6 text-white" />,
+                      content: (
+                        <div className="text-gray-500 font-medium space-y-1">
+                          <p><strong>Phone:</strong> +237 674802971</p>
+                          <p><strong>Email:</strong> info@wiconltd.com</p>
                         </div>
-                        <div>
-                          <h3 className="text-lg font-bold text-black mb-2">
-                            Office Address
-                          </h3>
-                          <p className="text-gray-600">
-                            WiCon Systems Headquarters
-                            <br />
-                            Buea, Southwest Region
-                            <br />
-                            Cameroon
-                          </p>
+                      )
+                    },
+                    {
+                      title: "Business Hours",
+                      icon: <Clock className="w-6 h-6 text-white" />,
+                      content: (
+                        <div className="text-gray-500 font-medium space-y-1">
+                          <p><strong>Mon - Fri:</strong> 8:00 AM - 5:00 PM</p>
+                          <p><strong>Saturday:</strong> 9:00 AM - 4:00 PM</p>
+                          <p><strong>Sunday:</strong> Emergency Calls Only</p>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Phone & Email */}
-                  <Card className="bg-white border-gray-200">
-                    <CardContent className="p-6">
-                      <div className="flex items-start">
-                        <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                          <Phone className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-bold text-black mb-2">
-                            Phone & Email
-                          </h3>
-                          <p className="text-gray-600 mb-2">
-                            <strong>Phone:</strong> +237 674802971
-                          </p>
-                          <p className="text-gray-600">
-                            <strong>Email:</strong> info@wiconltd.com
-                          </p>
-                          We Serve Southwest Region
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Business Hours */}
-                  <Card className="bg-white border-gray-200">
-                    <CardContent className="p-6">
-                      <div className="flex items-start">
-                        <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                          <Clock className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-bold text-black mb-2">
-                            Business Hours
-                          </h3>
-                          <div className="text-gray-600 space-y-1">
-                            <p>
-                              <strong>Monday - Friday:</strong> 8:00 AM - 5:00
-                              PM
-                            </p>
-                            <p>
-                              <strong>Saturday:</strong> 9:00 AM - 4:00 PM
-                            </p>
-                            <p>
-                              <strong>Sunday:</strong> Emergency calls only
-                            </p>
+                      )
+                    }
+                  ].map((info, idx) => (
+                    <Card key={idx} className="bg-white border-gray-50 rounded-[2rem] overflow-hidden group hover:shadow-2xl hover:shadow-black/5 transition-all duration-500">
+                      <CardContent className="p-8">
+                        <div className="flex items-start gap-6">
+                          <div className="w-14 h-14 bg-black rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:rotate-6 transition-transform duration-500">
+                            {info.icon}
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-black text-black mb-2 uppercase tracking-tight">{info.title}</h3>
+                            {info.content}
                           </div>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      </CardContent>
+                    </Card>
+                  ))}
 
-                  {/* WhatsApp Contact */}
-                  <Card className="bg-green-50 border-green-200">
-                    <CardContent className="p-6">
-                      <div className="flex items-start">
-                        <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                  <Card className="bg-green-50 border-transparent rounded-[2rem] overflow-hidden group">
+                    <CardContent className="p-8 sm:p-10">
+                      <div className="flex items-start gap-6">
+                        <div className="w-14 h-14 bg-green-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500">
                           <MessageCircle className="w-6 h-6 text-white" />
                         </div>
                         <div className="flex-1">
-                          <h3 className="text-lg font-bold text-black mb-2">
-                            WhatsApp Support
-                          </h3>
-                          <p className="text-gray-600 mb-4">
-                            Get instant support via WhatsApp. Popular and
-                            convenient for quick questions and updates.
+                          <h3 className="text-lg font-black text-black mb-2 uppercase tracking-tight">WhatsApp</h3>
+                          <p className="text-green-800/60 text-sm font-medium mb-6">
+                            Instant support for quick questions and updates.
                           </p>
                           <Button
-                            className="bg-green-600 text-white hover:bg-green-700"
-                            onClick={() =>
-                              window.open(
-                                "https://wa.me/237674802971",
-                                "_blank"
-                              )
-                            }
+                            className="w-full sm:w-auto h-12 px-8 rounded-xl bg-green-600 text-white hover:bg-green-700 text-[10px] font-black uppercase tracking-widest shadow-xl shadow-green-600/20 active:scale-95 transition-all cursor-pointer"
+                            onClick={() => window.open("https://wa.me/237674802971", "_blank")}
                           >
-                            <MessageCircle className="mr-2 w-4 h-4" />
-                            Chat on WhatsApp
+                            Chat with us
                           </Button>
                         </div>
                       </div>
