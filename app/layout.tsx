@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Poppins } from "next/font/google"
 import Script from "next/script"
 import { Toaster } from "sonner"
 import "./globals.css"
@@ -12,10 +12,10 @@ import { Analytics } from "@vercel/analytics/next"
 import { CartProvider } from "@/components/cart-context"
 import { CartDrawer } from "@/components/cart-drawer"
 
-const inter = Inter({
+const poppins = Poppins({
   subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-poppins",
 })
 
 export const metadata: Metadata = {
@@ -101,12 +101,12 @@ export default function RootLayout({
         </Script>
         <style>{`
 html {
-  font-family: ${inter.style.fontFamily};
-  --font-sans: ${inter.variable};
+  font-family: ${poppins.style.fontFamily};
+  --font-sans: ${poppins.variable};
 }
         `}</style>
       </head>
-      <body className={inter.className}>
+      <body className={poppins.className}>
         <CartProvider>
           {/* <RouteLoader /> */}
           <TopProgress />
