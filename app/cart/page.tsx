@@ -12,11 +12,11 @@ export default function CartPage() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
-      
+
       <main className="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
         <h1 className="text-3xl sm:text-4xl font-black text-black mb-8 sm:mb-12 flex items-center gap-4 uppercase tracking-tighter">
-          <ShoppingBag className="w-8 h-8 sm:w-10 sm:h-10" />
           Shopping Cart
+          <img src="/icons/cart.gif" alt="Cart" className="w-12 h-12" />
         </h1>
 
         {items.length === 0 ? (
@@ -47,7 +47,7 @@ export default function CartPage() {
                       </div>
                     )}
                   </div>
-                  
+
                   <div className="flex-1 min-w-0">
                     <div className="flex justify-between items-start gap-4 mb-2 sm:mb-4">
                       <div>
@@ -59,25 +59,25 @@ export default function CartPage() {
                         <p className="text-[10px] font-black text-gray-300 uppercase tracking-widest">Total XAF</p>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center justify-between sm:justify-start gap-4 sm:gap-8 mt-2">
                       <div className="flex items-center border border-gray-100 rounded-xl bg-gray-50 overflow-hidden">
-                        <button 
+                        <button
                           onClick={() => updateQuantity(item.id, item.quantity - 1)}
                           className="p-2 sm:p-3 hover:bg-white transition-colors"
                         >
                           <Minus className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400 hover:text-black" />
                         </button>
                         <span className="w-6 sm:w-10 text-center font-black text-xs sm:text-sm">{item.quantity}</span>
-                        <button 
+                        <button
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
                           className="p-2 sm:p-3 hover:bg-white transition-colors"
                         >
                           <Plus className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400 hover:text-black" />
                         </button>
                       </div>
-                      
-                      <button 
+
+                      <button
                         onClick={() => removeItem(item.id)}
                         className="text-red-400 hover:text-red-600 transition-colors flex items-center gap-2 text-xs font-black uppercase tracking-widest"
                       >
@@ -88,7 +88,7 @@ export default function CartPage() {
                   </div>
                 </div>
               ))}
-              
+
               <Link href="/store" className="inline-flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-black pt-4 transition-colors group">
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                 Back to Store
@@ -98,7 +98,7 @@ export default function CartPage() {
             <div className="lg:col-span-1">
               <div className="bg-white rounded-[2rem] border border-gray-50 p-8 sm:p-10 shadow-2xl shadow-black/5 sticky top-24">
                 <h2 className="text-lg sm:text-xl font-black text-black mb-8 uppercase tracking-tighter">Order Summary</h2>
-                
+
                 <div className="space-y-6 mb-10">
                   <div className="flex justify-between text-gray-400 text-sm font-bold uppercase tracking-widest">
                     <span>Subtotal</span>
@@ -123,7 +123,7 @@ export default function CartPage() {
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </Link>
-                
+
                 <p className="text-xs text-center text-gray-400 mt-6 font-medium leading-relaxed">
                   Fast delivery within Buea, Douala, and Yaoundé.
                   Payment via MTN and Orange MoMo confirmed instantly.

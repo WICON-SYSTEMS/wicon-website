@@ -75,7 +75,7 @@ export default function CheckoutPage() {
               Payment Instruction
             </h3>
             <p className="text-blue-800 text-sm sm:text-base leading-relaxed font-medium">
-              We have initiated a MoMo payment request to <span className="font-black border-b-2 border-blue-200">{formData.phone}</span>.
+              We have initiated a MoMo payment request to <span className="font-black border-b-2 border-blue-400">{formData.phone}</span>.
               Please check your phone and enter your PIN to confirm the payment of <span className="font-black text-black text-lg">{totalAmount.toLocaleString()} XAF</span>.
             </p>
           </div>
@@ -117,41 +117,44 @@ export default function CheckoutPage() {
           {/* Checkout Form */}
           <div className="space-y-10">
             <div>
-              <h1 className="text-3xl sm:text-5xl font-black text-black mb-4 uppercase tracking-tighter leading-none">Checkout</h1>
-              <p className="text-gray-400 font-medium text-sm sm:text-lg">Provide your details to complete the order.</p>
+              <div className="flex items-center justify-center gap-4">
+                <h1 className="text-3xl sm:text-5xl font-black text-black uppercase tracking-tighter leading-none">Checkout</h1>
+                <img src="/icons/checkout.png" alt="Checkout" className="w-12 h-12" />
+              </div>
+              <p className="text-gray-700 text-center font-medium text-sm sm:text-lg">Provide your details to complete the order.</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-8">
               <div className="bg-white rounded-[2rem] border border-gray-50 p-8 sm:p-10 shadow-2xl shadow-black/5 space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-300 flex items-center gap-2">
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-600 flex items-center gap-2">
                       <User className="w-3 h-3" /> Full Name
                     </label>
                     <input
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="e.g. Glenn Dev"
-                      className="w-full bg-gray-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-black outline-none transition-all font-bold text-black placeholder:text-gray-200 placeholder:font-medium"
+                      placeholder="e.g. John Doe"
+                      className="w-full bg-gray-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-black outline-none transition-all font-bold text-black placeholder:text-gray-400 placeholder:font-medium"
                     />
                   </div>
                   <div className="space-y-3">
-                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-300 flex items-center gap-2">
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-600 flex items-center gap-2">
                       <Mail className="w-3 h-3" /> Email (Optional)
                     </label>
                     <input
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="hello@wi-con.com"
-                      className="w-full bg-gray-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-black outline-none transition-all font-bold text-black placeholder:text-gray-200 placeholder:font-medium"
+                      placeholder="email@example.com"
+                      className="w-full bg-gray-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-black outline-none transition-all font-bold text-black placeholder:text-gray-400 placeholder:font-medium"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-3">
-                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-300 flex items-center gap-2">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-600 flex items-center gap-2">
                     <Phone className="w-3 h-3" /> MoMo / Orange Number
                   </label>
                   <input
@@ -159,13 +162,13 @@ export default function CheckoutPage() {
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="6xxxxxxxx"
-                    className="w-full bg-gray-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-black outline-none transition-all font-black text-black tracking-widest placeholder:text-gray-200 placeholder:font-medium text-lg placeholder:text-sm"
+                    className="w-full bg-gray-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-black outline-none transition-all font-black text-black tracking-widest placeholder:text-gray-400 placeholder:font-medium text-lg placeholder:text-sm"
                   />
                   <p className="text-[10px] text-gray-300 font-bold uppercase tracking-widest">Confirmed instantly via SMS and MoMo Push.</p>
                 </div>
 
                 <div className="space-y-3">
-                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-300 flex items-center gap-2">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-600 flex items-center gap-2">
                     <MapPin className="w-3 h-3" /> Delivery Address
                   </label>
                   <textarea
@@ -173,7 +176,7 @@ export default function CheckoutPage() {
                     value={formData.address}
                     onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                     placeholder="Describe your location (e.g. Molyko, Buea)"
-                    className="w-full bg-gray-50 border-none rounded-2xl px-5 py-4 h-32 focus:ring-2 focus:ring-black outline-none transition-all resize-none font-bold text-black placeholder:text-gray-200 placeholder:font-medium"
+                    className="w-full bg-gray-50 border-none rounded-2xl px-5 py-4 h-32 focus:ring-2 focus:ring-black outline-none transition-all resize-none font-bold text-black placeholder:text-gray-400 placeholder:font-medium"
                   />
                 </div>
               </div>
@@ -181,7 +184,7 @@ export default function CheckoutPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-black text-white py-6 rounded-3xl font-black uppercase tracking-widest text-sm hover:bg-gray-800 transition-all flex items-center justify-center gap-4 shadow-[0_20px_50px_rgba(0,0,0,0.2)] disabled:opacity-20 group active:scale-95"
+                className="w-full bg-black cursor-pointer text-white py-6 rounded-3xl font-black uppercase tracking-widest text-sm hover:bg-gray-800 transition-all flex items-center justify-center gap-4 shadow-[0_20px_50px_rgba(0,0,0,0.2)] disabled:opacity-20 group active:scale-95"
               >
                 {loading ? (
                   <>
@@ -205,7 +208,10 @@ export default function CheckoutPage() {
 
           <div className="lg:pl-16 border-t lg:border-t-0 lg:border-l border-gray-100 pt-12 lg:pt-0">
             <div className="sticky top-24 space-y-10">
-              <h2 className="text-lg font-black text-black uppercase tracking-tighter border-b border-gray-50 pb-6">Order Summary</h2>
+              <div className="flex items-center justify-center gap-4">
+                <h2 className="text-lg font-black text-black uppercase tracking-tighter">Order Summary</h2>
+                <img src="/icons/order-summary.png" alt="Order Summary" className="w-12 h-12" />
+              </div>
 
               <div className="space-y-6 max-h-[50vh] overflow-y-auto pr-4 scrollbar-hide">
                 {items.map((item) => (
@@ -219,7 +225,7 @@ export default function CheckoutPage() {
                     </div>
                     <div className="flex-1 min-w-0 py-1">
                       <p className="text-sm sm:text-base font-bold text-black truncate leading-tight mb-1">{item.name}</p>
-                      <p className="text-[10px] font-black text-gray-300 uppercase tracking-widest">Qty: {item.quantity}</p>
+                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Qty: {item.quantity}</p>
                     </div>
                     <div className="py-1 text-right">
                       <p className="text-sm sm:text-base font-black text-black tracking-tight">{(item.price * item.quantity).toLocaleString()}</p>
@@ -230,19 +236,19 @@ export default function CheckoutPage() {
               </div>
 
               <div className="space-y-4 pt-8 border-t border-gray-50">
-                <div className="flex justify-between text-[10px] font-black text-gray-300 uppercase tracking-[0.2em]">
+                <div className="flex justify-between text-[10px] font-black text-gray-600 uppercase tracking-[0.2em]">
                   <span>Subtotal</span>
                   <span className="text-black">{totalAmount.toLocaleString()}</span>
                 </div>
-                <div className="flex justify-between text-[10px] font-black text-gray-300 uppercase tracking-[0.2em]">
+                <div className="flex justify-between text-[10px] font-black text-gray-600 uppercase tracking-[0.2em]">
                   <span>Shipping</span>
                   <span className="text-green-600">Free Promo</span>
                 </div>
                 <div className="pt-8 border-t-2 border-dashed border-gray-100 flex justify-between items-end text-black">
-                  <span className="text-sm font-black uppercase tracking-widest text-gray-400">Total Due</span>
+                  <span className="text-sm font-black uppercase tracking-widest text-gray-600">Total Due</span>
                   <div className="text-right">
                     <span className="block text-4xl font-black tracking-tighter leading-none">{totalAmount.toLocaleString()}</span>
-                    <span className="text-[10px] font-black text-gray-300 uppercase tracking-[0.2em] mt-2 block">CFA Francs</span>
+                    <span className="text-[10px] font-black text-gray-600 uppercase tracking-[0.2em] mt-2 block">CFA Francs</span>
                   </div>
                 </div>
               </div>
@@ -254,7 +260,7 @@ export default function CheckoutPage() {
                 </div>
                 <div>
                   <p className="text-[10px] font-black text-white uppercase tracking-widest mb-1">Secure Transaction</p>
-                  <p className="text-[10px] text-gray-500 leading-relaxed font-bold uppercase tracking-tight">Encrypted by Fapshi Cameroon. Your data is protected by WiCon security protocols.</p>
+                  <p className="text-[10px] text-gray-500 leading-relaxed font-bold uppercase tracking-tight">Encrypted. Your data is protected by WiCon security protocols.</p>
                 </div>
               </div>
             </div>
