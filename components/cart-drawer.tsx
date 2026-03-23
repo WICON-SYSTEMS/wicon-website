@@ -22,8 +22,8 @@ export function CartDrawer() {
   return (
     <div className="fixed inset-0 z-[200] flex justify-end">
       {/* Overlay */}
-      <div 
-        className="absolute inset-0 bg-black/40 backdrop-blur-[2px] animate-in fade-in duration-300" 
+      <div
+        className="absolute inset-0 bg-black/40 backdrop-blur-[2px] animate-in fade-in duration-300"
         onClick={() => setIsOpen(false)}
       />
 
@@ -37,9 +37,9 @@ export function CartDrawer() {
               {totalCount}
             </span>
           </div>
-          <button 
+          <button
             onClick={() => setIsOpen(false)}
-            className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-all text-gray-400"
+            className="w-10 h-10 cursor-pointer flex items-center justify-center rounded-full hover:bg-gray-100 transition-all text-gray-400"
           >
             <X className="w-6 h-6" />
           </button>
@@ -54,7 +54,7 @@ export function CartDrawer() {
               </div>
               <h3 className="text-lg font-bold text-black mb-2">Cart is empty</h3>
               <p className="text-gray-400 text-sm max-w-[200px] mb-8">Looks like you haven't added any products yet.</p>
-              <button 
+              <button
                 onClick={() => setIsOpen(false)}
                 className="bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition-all"
               >
@@ -64,8 +64,8 @@ export function CartDrawer() {
           ) : (
             items.map((item) => (
               <div key={item.id} className="flex gap-4 group">
-                <Link 
-                  href={`/store/${item.slug || item.id}`} 
+                <Link
+                  href={`/store/${item.slug || item.id}`}
                   onClick={() => setIsOpen(false)}
                   className="w-24 h-24 bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 flex-shrink-0"
                 >
@@ -77,19 +77,19 @@ export function CartDrawer() {
                     </div>
                   )}
                 </Link>
-                
+
                 <div className="flex-1 flex flex-col justify-between py-1">
                   <div>
                     <div className="flex justify-between items-start gap-2">
-                      <Link 
+                      <Link
                         href={`/store/${item.slug || item.id}`}
                         onClick={() => setIsOpen(false)}
                       >
                         <h4 className="font-bold text-black text-sm line-clamp-2 hover:underline">{item.name}</h4>
                       </Link>
-                      <button 
+                      <button
                         onClick={() => removeItem(item.id)}
-                        className="text-gray-300 hover:text-red-500 transition-colors"
+                        className="text-gray-300 cursor-pointer hover:text-red-500 transition-colors"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -99,16 +99,16 @@ export function CartDrawer() {
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3 bg-gray-50 rounded-xl px-2 py-1">
-                      <button 
+                      <button
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-black hover:bg-white rounded-lg transition-all"
+                        className="w-6 h-6 cursor-pointer flex items-center justify-center text-gray-400 hover:text-black hover:bg-white rounded-lg transition-all"
                       >
                         <Minus className="w-3.5 h-3.5" />
                       </button>
                       <span className="text-xs font-bold w-4 text-center">{item.quantity}</span>
-                      <button 
+                      <button
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-black hover:bg-white rounded-lg transition-all"
+                        className="w-6 h-6 cursor-pointer flex items-center justify-center text-gray-400 hover:text-black hover:bg-white rounded-lg transition-all"
                       >
                         <Plus className="w-3.5 h-3.5" />
                       </button>
@@ -127,19 +127,19 @@ export function CartDrawer() {
               <span className="text-gray-400 font-bold uppercase tracking-widest text-xs">Total Amount</span>
               <span className="text-2xl font-black text-black">{totalAmount.toLocaleString()} XAF</span>
             </div>
-            
+
             <div className="space-y-3">
-              <Link 
-                href="/checkout" 
+              <Link
+                href="/checkout"
                 onClick={() => setIsOpen(false)}
                 className="w-full bg-black text-white py-5 rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-gray-800 transition-all shadow-xl hover:shadow-black/20"
               >
                 Checkout Now
                 <CreditCard className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </Link>
-              
-              <Link 
-                href="/cart" 
+
+              <Link
+                href="/cart"
                 onClick={() => setIsOpen(false)}
                 className="w-full bg-gray-50 text-gray-900 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-gray-100 transition-all"
               >
@@ -147,7 +147,7 @@ export function CartDrawer() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
-            
+
             <p className="text-[10px] text-gray-400 text-center mt-6 font-medium"> Free delivery on orders over 150,000 XAF</p>
           </div>
         )}

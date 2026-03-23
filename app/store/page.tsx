@@ -52,7 +52,7 @@ export default function StorePage() {
               <button
                 key={c}
                 onClick={() => setCategory(c)}
-                className={`px-4 py-2 rounded-full text-sm font-medium capitalize border transition-all ${category === c
+                className={`px-4 py-2 cursor-pointer rounded-full text-sm font-medium capitalize border transition-all ${category === c
                   ? "bg-black text-white border-black"
                   : "bg-white text-gray-700 border-gray-200 hover:border-black"
                   }`}
@@ -145,8 +145,8 @@ function AddToCartButton({ product, addItem, setIsOpen }: { product: any, addIte
             onClick={handleAdd}
             disabled={product.stock <= 0}
             className={`w-11 h-11 rounded-xl transition-all duration-300 flex items-center justify-center overflow-hidden flex-shrink-0 ${added
-                ? "bg-green-500 text-white"
-                : "bg-black text-white hover:bg-gray-800 active:scale-95"
+              ? "bg-green-500 text-white"
+              : "bg-black text-white hover:bg-gray-800 active:scale-95"
               } disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer`}
           >
             {added ? (
