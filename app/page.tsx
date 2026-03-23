@@ -133,8 +133,8 @@ export default function HomePage() {
                 className={`border-gray-100 rounded-2xl sm:rounded-3xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 overflow-hidden group ${styles.reveal}`}
               >
                 <CardContent className="p-8 sm:p-10 text-center">
-                  <div className="w-16 h-16 bg-gray-50 text-black rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:bg-black group-hover:text-white transition-all duration-500 rotate-3 group-hover:rotate-0">
-                    <Shield className="w-8 h-8" />
+                  <div className="w-20 h-20 bg-gray-50 text-black rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:bg-gray-200 group-hover:text-white transition-all duration-500 rotate-3 group-hover:rotate-0">
+                    <img src="/icons/technology.png" alt="Safe & Reliable Technology" />
                   </div>
                   <h3 className="text-xl font-bold text-black mb-4">
                     Safe & Reliable Technology
@@ -151,8 +151,8 @@ export default function HomePage() {
                 className={`border-gray-100 rounded-2xl sm:rounded-3xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 overflow-hidden group ${styles.reveal} ${styles.st1}`}
               >
                 <CardContent className="p-8 sm:p-10 text-center">
-                  <div className="w-16 h-16 bg-gray-50 text-black rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:bg-black group-hover:text-white transition-all duration-500 -rotate-3 group-hover:rotate-0">
-                    <DollarSign className="w-8 h-8" />
+                  <div className="w-20 h-20 bg-gray-50 text-black rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:bg-gray group-hover:text-white transition-all duration-500 -rotate-3 group-hover:rotate-0">
+                    <img src="/icons/cost-effective.png" alt="Cost-Effective Digital Solutions" />
                   </div>
                   <h3 className="text-xl font-bold text-black mb-4">
                     Cost-Effective Digital Solutions
@@ -169,8 +169,8 @@ export default function HomePage() {
                 className={`border-gray-100 rounded-2xl sm:rounded-3xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 overflow-hidden group ${styles.reveal} ${styles.st2}`}
               >
                 <CardContent className="p-8 sm:p-10 text-center">
-                  <div className="w-16 h-16 bg-gray-50 text-black rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:bg-black group-hover:text-white transition-all duration-500 rotate-6 group-hover:rotate-0">
-                    <Users className="w-8 h-8" />
+                  <div className="w-20 h-20 bg-gray-50 text-black rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:bg-gray-100 group-hover:text-white transition-all duration-500 rotate-6 group-hover:rotate-0">
+                    <img src="/icons/software-dev.png" alt="Expert Development & Support" />
                   </div>
                   <h3 className="text-xl font-bold text-black mb-4">
                     Expert Development & Support
@@ -210,8 +210,8 @@ export default function HomePage() {
                 className={`bg-white border-gray-100 rounded-2xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group ${styles.reveal}`}
               >
                 <CardContent className="p-5 sm:p-8 flex flex-col h-full">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                    <Zap className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <div className="w-20 h-20 sm:w-12 sm:h-12 text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                    <img src="/icons/controller.png" alt="WiCon Wireless Controllers" />
                   </div>
                   <h3 className="text-sm sm:text-lg font-bold text-black mb-2 sm:mb-3 leading-tight">
                     WiCon Wireless Controllers
@@ -227,8 +227,8 @@ export default function HomePage() {
                 className={`bg-white border-gray-100 rounded-2xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group ${styles.reveal} ${styles.st1}`}
               >
                 <CardContent className="p-5 sm:p-8 flex flex-col h-full">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                    <Code className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <div className="w-20 h-20 sm:w-12 sm:h-12 text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                    <img src="/icons/software-solutions.png" alt="Custom Software Solutions" />
                   </div>
                   <h3 className="text-sm sm:text-lg font-bold text-black mb-2 sm:mb-3 leading-tight">
                     Custom Software Solutions
@@ -244,8 +244,8 @@ export default function HomePage() {
                 className={`bg-white border-gray-100 rounded-2xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group ${styles.reveal} ${styles.st2}`}
               >
                 <CardContent className="p-5 sm:p-8 flex flex-col h-full">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                    <Cpu className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <div className="w-20 h-20 sm:w-12 sm:h-12 text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                    <img src="/icons/iot.png" alt="IoT Solutions" />
                   </div>
                   <h3 className="text-sm sm:text-lg font-bold text-black mb-2 sm:mb-3 leading-tight">
                     IoT Solutions
@@ -261,8 +261,8 @@ export default function HomePage() {
                 className={`bg-white border-gray-100 rounded-2xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group ${styles.reveal} ${styles.st3}`}
               >
                 <CardContent className="p-5 sm:p-8 flex flex-col h-full">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                    <Wrench className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <div className="w-20 h-20 sm:w-12 sm:h-12 text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                    <img src="/icons/electrical-wiring.png" alt="Electrical Wiring" />
                   </div>
                   <h3 className="text-sm sm:text-lg font-bold text-black mb-2 sm:mb-3 leading-tight">
                     Electrical Wiring
@@ -278,8 +278,8 @@ export default function HomePage() {
                 className={`bg-white border-gray-100 rounded-2xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group ${styles.reveal} ${styles.st4}`}
               >
                 <CardContent className="p-5 sm:p-8 flex flex-col h-full">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                    <Camera className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <div className="w-20 h-20 sm:w-12 sm:h-12 text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                    <img src="/icons/cctv.png" alt="CCTV Security Systems" />
                   </div>
                   <h3 className="text-sm sm:text-lg font-bold text-black mb-2 sm:mb-3 leading-tight">
                     CCTV Security Systems
