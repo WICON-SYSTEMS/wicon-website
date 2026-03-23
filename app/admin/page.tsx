@@ -17,6 +17,7 @@ import {
   SidebarInset,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { ProductModal } from "@/components/admin/product-modal"
 
 const STORAGE_PASS = "admin@wicon"
 const STORAGE_USER = "admin"
@@ -142,6 +143,9 @@ export default function AdminPage() {
   const [pageProducts, setPageProducts] = useState(1)
   const [pageOrders, setPageOrders] = useState(1)
   const pageSize = 10
+
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false)
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null)
   
   function StatusBadge({ status }: { status: string }) {
     const config = {
@@ -596,7 +600,15 @@ export default function AdminPage() {
         return (
           <>
             <div className="flex justify-end mb-4">
-              <Link href="/admin/products/new" className="px-4 py-2 bg-black text-white rounded text-sm hover:bg-gray-800">Add New Product</Link>
+              <button 
+                onClick={() => {
+                  setEditingProduct(null)
+                  setIsProductModalOpen(true)
+                }} 
+                className="px-4 py-2 bg-black text-white rounded text-sm hover:bg-gray-800 cursor-pointer"
+              >
+                Add New Product
+              </button>
             </div>
             <Table
               headers={["Name","Category","Price","Stock","Status","Actions"]}
@@ -607,7 +619,15 @@ export default function AdminPage() {
                 p.stock,
                 <StatusBadge key={`status-${p.id}`} status={p.status === 'active' ? 'accepted' : p.status === 'draft' ? 'pending' : 'declined'} />,
                 <div key={p.id} className="flex flex-wrap gap-3">
-                  <Link className="underline" href={`/admin/products/${p.id}`}>Edit</Link>
+                  <button 
+                    onClick={() => {
+                      setEditingProduct(p)
+                      setIsProductModalOpen(true)
+                    }} 
+                    className="underline cursor-pointer"
+                  >
+                    Edit
+                  </button>
                 </div>
               ])}
             />
@@ -617,6 +637,14 @@ export default function AdminPage() {
             <div className="mt-2 text-sm text-gray-500">
               Showing {filtered.length} of {products.length} products
             </div>
+
+            <ProductModal 
+              isOpen={isProductModalOpen}
+              onClose={() => setIsProductModalOpen(false)}
+              onSuccess={fetchTab}
+              product={editingProduct}
+              adminHeaders={headers}
+            />
           </>
         )
       })()}

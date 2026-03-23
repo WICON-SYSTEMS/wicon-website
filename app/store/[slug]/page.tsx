@@ -10,16 +10,16 @@ import { ShoppingCart, ArrowLeft, Shield, Zap, Truck, CheckCircle2 } from "lucid
 import Link from "next/link"
 
 export default function ProductDetailPage() {
-  const { id } = useParams()
+  const { slug } = useParams()
   const router = useRouter()
   const [product, setProduct] = useState<any>(null)
   const [loading, setLoading] = useState(true)
-  const { addItem } = useCart()
+  const { addItem, setIsOpen } = useCart()
 
   useEffect(() => {
     async function load() {
       try {
-        const res = await fetch(`/api/products/${id}`)
+        const res = await fetch(`/api/products/${slug}`)
         const data = await res.json()
         if (data.ok) {
           setProduct(data.item)
@@ -34,7 +34,7 @@ export default function ProductDetailPage() {
       }
     }
     load()
-  }, [id, router])
+  }, [slug, router])
 
   if (loading) return <div className="p-24 text-center">Loading...</div>
   if (!product) return null
@@ -110,6 +110,7 @@ export default function ProductDetailPage() {
               <button
                 onClick={() => {
                   addItem(product)
+                  setIsOpen(true)
                   toast.success(`${product.name} added to cart`)
                 }}
                 disabled={product.stock <= 0}

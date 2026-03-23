@@ -10,6 +10,7 @@ import TopProgress from "@/components/top-progress"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/next"
 import { CartProvider } from "@/components/cart-context"
+import { CartDrawer } from "@/components/cart-drawer"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -110,6 +111,7 @@ html {
           {/* <RouteLoader /> */}
           <TopProgress />
           {children}
+          <CartDrawer />
           <Toaster richColors position="top-center" />
           <SpeedInsights />
           <Analytics />

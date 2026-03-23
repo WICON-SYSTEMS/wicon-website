@@ -10,14 +10,25 @@ function checkPass(req: Request) {
   return user === expectedUser && pass === expectedPass;
 }
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+function slugify(text: string) {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')     // Replace spaces with -
+    .replace(/[^\w-]+/g, '')  // Remove all non-word chars
+    .replace(/--+/g, '-')     // Replace multiple - with single -
+}
+
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     if (!checkPass(req))
       return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
 
     // @ts-ignore
     const product = await prisma.product.findUnique({
-      where: { id: params.id },
+      where: { id: id },
     });
 
     if (!product)
@@ -38,19 +49,32 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     if (!checkPass(req))
       return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
 
     const body = await req.json();
     const { name, description, price, imageUrl, category, stock, status } = body;
 
+    let slug = undefined;
+    if (name) {
+      slug = slugify(name);
+      // Check for collision
+      // @ts-ignore
+      const existing = await prisma.product.findFirst({ where: { slug, id: { not: id } } });
+      if (existing) {
+        slug = `${slug}-${Math.floor(Math.random() * 1000)}`;
+      }
+    }
+
     // @ts-ignore
     const product = await prisma.product.update({
-      where: { id: params.id },
+      where: { id: id },
       data: {
         name,
+        slug,
         description,
         price: price !== undefined ? Number(price) : undefined,
         imageUrl,
@@ -69,14 +93,15 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     if (!checkPass(req))
       return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
 
     // @ts-ignore
     await prisma.product.delete({
-      where: { id: params.id },
+      where: { id: id },
     });
 
     return NextResponse.json({ ok: true });

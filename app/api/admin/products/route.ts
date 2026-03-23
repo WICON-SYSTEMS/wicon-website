@@ -10,6 +10,16 @@ function checkPass(req: Request) {
   return user === expectedUser && pass === expectedPass;
 }
 
+function slugify(text: string) {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')     // Replace spaces with -
+    .replace(/[^\w-]+/g, '')  // Remove all non-word chars
+    .replace(/--+/g, '-')     // Replace multiple - with single -
+}
+
 export async function GET(req: Request) {
   try {
     if (!checkPass(req))
@@ -64,10 +74,19 @@ export async function POST(req: Request) {
       );
     }
 
+    let slug = slugify(name);
+    // Check for collision
+    // @ts-ignore
+    const existing = await prisma.product.findUnique({ where: { slug } });
+    if (existing) {
+      slug = `${slug}-${Math.floor(Math.random() * 1000)}`;
+    }
+
     // @ts-ignore
     const product = await prisma.product.create({
       data: {
         name,
+        slug,
         description: description || "",
         price: Number(price),
         imageUrl,

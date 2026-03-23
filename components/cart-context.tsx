@@ -8,6 +8,7 @@ export type CartItem = {
   price: number
   imageUrl?: string | null
   quantity: number
+  slug: string
 }
 
 type CartContextType = {
@@ -18,6 +19,9 @@ type CartContextType = {
   clearCart: () => void
   totalCount: number
   totalAmount: number
+  isOpen: boolean
+  setIsOpen: (val: boolean) => void
+  toggleCart: () => void
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
@@ -42,6 +46,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("wicon-cart", JSON.stringify(items))
   }, [items])
 
+  const [isOpen, setIsOpen] = useState(false)
+  const toggleCart = () => setIsOpen((v) => !v)
+
   const addItem = (product: any) => {
     setItems((prev) => {
       const existing = prev.find((i) => i.id === product.id)
@@ -55,7 +62,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         name: product.name, 
         price: product.price, 
         imageUrl: product.imageUrl || product.image_url,
-        quantity: 1 
+        quantity: 1,
+        slug: product.slug
       }]
     })
   }
@@ -89,6 +97,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         clearCart,
         totalCount,
         totalAmount,
+        isOpen,
+        setIsOpen,
+        toggleCart,
       }}
     >
       {children}

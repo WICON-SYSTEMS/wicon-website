@@ -10,14 +10,15 @@ function checkPass(req: Request) {
   return user === expectedUser && pass === expectedPass;
 }
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     if (!checkPass(req))
       return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
 
     // @ts-ignore
     const order = await prisma.order.findUnique({
-      where: { id: params.id },
+      where: { id: id },
       include: {
         items: {
           include: { product: true },
@@ -46,8 +47,9 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     if (!checkPass(req))
       return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
 
@@ -56,7 +58,7 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
 
     // @ts-ignore
     const order = await prisma.order.update({
-      where: { id: params.id },
+      where: { id: id },
       data: {
         status,
         paymentStatus,

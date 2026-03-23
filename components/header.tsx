@@ -7,7 +7,7 @@ import { Menu, X, Phone, ChevronDown, ShoppingCart } from "lucide-react";
 import { useCart } from "@/components/cart-context";
 
 export function Header() {
-  const { totalCount } = useCart();
+  const { totalCount, toggleCart } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const closeTimerRef = useRef<number | null>(null);
@@ -187,14 +187,17 @@ export function Header() {
 
           {/* Contact Info & CTA */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link href="/cart" className="relative p-2 text-gray-700 hover:text-black transition-colors">
-              <ShoppingCart className="w-6 h-6" />
+            <button 
+              onClick={toggleCart}
+              className="relative p-2 text-gray-700 hover:text-black transition-colors cursor-pointer group"
+            >
+              <ShoppingCart className="w-6 h-6 group-hover:scale-110 transition-transform" />
               {totalCount > 0 && (
                 <span className="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">
                   {totalCount}
                 </span>
               )}
-            </Link>
+            </button>
             <Link href="/contact">
               <Button className="rounded-lg bg-black text-white hover:bg-gray-800 px-6">
                 Get Quote
@@ -204,14 +207,17 @@ export function Header() {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-4">
-            <Link href="/cart" className="relative p-1 text-gray-700 hover:text-black transition-colors">
+            <button 
+              onClick={toggleCart}
+              className="relative p-1 text-gray-700 hover:text-black transition-colors cursor-pointer"
+            >
               <ShoppingCart className="w-6 h-6" />
               {totalCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">
                   {totalCount}
                 </span>
               )}
-            </Link>
+            </button>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-700 hover:text-black p-2"
