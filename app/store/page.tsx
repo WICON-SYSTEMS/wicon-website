@@ -44,7 +44,7 @@ export default function StorePage() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12 sm:mb-20 mt-4 sm:mt-0">
           <div>
             <div className="flex items-center justify-center gap-4">
-              <h1 className="text-3xl sm:text-5xl font-black text-black uppercase tracking-tighter leading-none">WiCon Store</h1>
+              <h1 className="text-3xl sm:text-5xl font-black text-black tracking-tighter ">WiCon Ltd STORE</h1>
               <img src="/icons/store.png" className="w-15 h-15" alt="Store" />
             </div>
             <p className="text-sm sm:text-lg text-gray-500 font-medium">Premium automation and electrical solutions.</p>
