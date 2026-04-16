@@ -335,10 +335,10 @@ export default function TrainingPage() {
               </p>
               <div className="bg-gray-900 rounded-lg p-6 inline-block mb-8">
                 <div className="text-3xl font-bold mb-2">
-                  November 2025 Program
+                  April 2026 Program
                 </div>
                 <div className="text-gray-300">
-                  Registration Opens: September 2025
+                  Registration Opens: April 2026
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -355,7 +355,7 @@ export default function TrainingPage() {
                     download="Program Brochure.pdf"
                   >
                     <Download className="w-4 h-4 mr-2" />
-                    Download 2025 Bronchure
+                    Download 2026 Bronchure
                   </a>
                 </Button>
               </div>
@@ -373,7 +373,7 @@ export default function TrainingPage() {
                 </h2>
                 <p className="text-lg text-gray-600 mb-6">
                   WiCon SMART HOME SOLUTION FOR DIGITAL EDUCATION is an
-                  intensive 4-week training program designed to equip
+                  intensive 12-weeks training program designed to equip
                   participants with cutting-edge skills in software development,
                   IoT solutions, and our proprietary WiCon controller
                   technology.
@@ -1168,7 +1168,7 @@ export default function TrainingPage() {
                       htmlFor="availability"
                       className="text-sm font-medium text-black"
                     >
-                      Availability for November 2025 Program *
+                      Availability for April 2026 Program *
                     </Label>
                     <Select
                       value={volunteer.availability}
@@ -1299,7 +1299,7 @@ export default function TrainingPage() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
-                Register for 2025 Program
+                Register for 2026 Program
               </h2>
               <p className="text-xl text-gray-600">
                 Secure your spot in the next WiCon SMART SOLUTION FOR DIGITAL
@@ -1431,6 +1431,9 @@ export default function TrainingPage() {
                         <SelectItem value="iot">IoT Solutions Track</SelectItem>
                         <SelectItem value="wicon">
                           WiCon Controller Track
+                        </SelectItem>
+                        <SelectItem value="design">
+                          Graphics Design and Marketing
                         </SelectItem>
                         <SelectItem value="comprehensive">
                           Comprehensive Program (All Tracks)
@@ -1579,7 +1582,7 @@ export default function TrainingPage() {
                     )}
                     {submittingRegister
                       ? "Submitting..."
-                      : "Register for 2025 Program"}
+                      : "Register for 2026 Program"}
                   </Button>
                 </form>
               </CardContent>

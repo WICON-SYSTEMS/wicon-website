@@ -344,7 +344,7 @@ export default function HomePage() {
                     className="border-gray-800 text-white hover:bg-white hover:text-black bg-transparent rounded-xl font-bold py-6 px-8"
                     asChild
                   >
-                    <a href="/training#registration">Register for 2025</a>
+                    <a href="/training#registration">Register for 2026</a>
                   </Button>
                 </div>
               </div>
@@ -355,23 +355,27 @@ export default function HomePage() {
                 <div className="inline-block w-full sm:w-auto bg-gray-950 border border-gray-900 rounded-3xl p-8 sm:p-10 shadow-2xl overflow-hidden relative group">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 blur-3xl rounded-full translate-x-10 -translate-y-10 group-hover:scale-150 transition-transform duration-1000"></div>
                   <div className="text-3xl sm:text-4xl font-black text-white mb-2 tracking-tighter">
-                    Nov 2025
+                    April 2026
                   </div>
                   <div className="text-gray-500 font-bold uppercase tracking-widest text-xs mb-8">
                     12 Weeks Intensive Program
                   </div>
                   <div className="grid grid-cols-3 gap-4 text-center">
                     <div className="p-3 bg-white/5 rounded-2xl">
-                      <div className="font-black text-lg text-white">Soft</div>
+                      <div className="font-black text-lg text-white">Software Development</div>
                       <div className="text-[10px] uppercase font-bold text-gray-400 tracking-widest">Dev</div>
                     </div>
                     <div className="p-3 bg-white/5 rounded-2xl">
                       <div className="font-black text-lg text-white">IoT</div>
-                      <div className="text-[10px] uppercase font-bold text-gray-400 tracking-widest">Smart</div>
+                      <div className="text-[10px] uppercase font-bold text-gray-400 tracking-widest">IoT</div>
                     </div>
                     <div className="p-3 bg-white/5 rounded-2xl">
-                      <div className="font-black text-lg text-white">WiCon</div>
+                      <div className="font-black text-lg text-white">WiCon Controller</div>
                       <div className="text-[10px] uppercase font-bold text-gray-400 tracking-widest">Tech</div>
+                    </div>
+                    <div className="p-3 bg-white/5 rounded-2xl">
+                      <div className="font-black text-lg text-white">Graphics Design and Marketing</div>
+                      <div className="text-[10px] uppercase font-bold text-gray-400 tracking-widest">Design</div>
                     </div>
                   </div>
                 </div>
