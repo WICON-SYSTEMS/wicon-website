@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import https from "https";
 
-const FAPSHI_API_URL = "https://api.fapshi.com/v1";
+const FAPSHI_API_URL = process.env.FAPSHI_API_URL;
 const FAPSHI_API_KEY = process.env.FAPSHI_API_KEY;
 const FAPSHI_API_USER = process.env.FAPSHI_API_USER;
 
@@ -58,21 +59,61 @@ export async function POST(req: Request) {
     }
 
     try {
-      const fapshiRes = await fetch(`${FAPSHI_API_URL}/direct-pay`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "apiuser": FAPSHI_API_USER,
-          "apikey": FAPSHI_API_KEY,
-        },
-        body: JSON.stringify({
-          amount: totalAmount,
-          phone: customer.phone,
-          externalId: order.id,
-        }),
+      const payload: any = {
+        amount: Math.max(totalAmount, 100),
+        phone: customer.phone,
+        externalId: order.id,
+        message: `Payment for WiCon Ltd Order ${order.id}`,
+      };
+      if (customer.name) payload.name = customer.name;
+      if (customer.email) payload.email = customer.email;
+
+      // Using native https request to force IPv4 due to Node 18 ETIMEDOUT bug on Vercel/Local dev
+      const fapshiRes = await new Promise<{ ok: boolean; status: number; data: any; text: string }>((resolve, reject) => {
+        const url = new URL(!FAPSHI_API_URL?.endsWith('/') && !FAPSHI_API_URL ? "https://sandbox.fapshi.com/direct-pay" : `${FAPSHI_API_URL}/direct-pay`);
+        const options = {
+          hostname: url.hostname,
+          port: url.port || 443,
+          path: url.pathname,
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apiuser': String(FAPSHI_API_USER),
+            'apikey': String(FAPSHI_API_KEY),
+          },
+          family: 4 // FORCE IPv4 HERE
+        };
+
+        const req = https.request(options, (res) => {
+          let body = "";
+          res.on('data', (d) => { body += d; });
+          res.on('end', () => {
+            let data: any = {};
+            try {
+              data = JSON.parse(body);
+            } catch (err) {
+              // Not JSON
+            }
+            resolve({
+              ok: res.statusCode ? res.statusCode >= 200 && res.statusCode < 300 : false,
+              status: res.statusCode || 500,
+              text: body,
+              data
+            });
+          });
+        });
+
+        req.on('error', (e) => reject(e));
+        req.write(JSON.stringify(payload));
+        req.end();
       });
 
-      const fapshiData = await fapshiRes.json();
+      const fapshiData = fapshiRes.data;
+      const textRes = fapshiRes.text;
+
+      if (!fapshiData || Object.keys(fapshiData).length === 0) {
+        throw new Error(`Fapshi returned non-JSON: ${textRes.substring(0, 100)}`);
+      }
 
       if (fapshiRes.ok && fapshiData.transId) {
         // Update order with Fapshi transaction ID
@@ -82,24 +123,29 @@ export async function POST(req: Request) {
           data: { fapshiTransId: fapshiData.transId },
         });
 
-        return NextResponse.json({ 
-          ok: true, 
-          orderId: order.id, 
+        return NextResponse.json({
+          ok: true,
+          orderId: order.id,
           transId: fapshiData.transId,
-          message: "Payment initiated. Please check your phone for a MoMo push notification." 
+          message: "Payment initiated. Please check your phone for a MoMo push notification."
         });
       } else {
-        console.error("Fapshi error:", fapshiData);
-        return NextResponse.json({ 
-          ok: true, 
-          orderId: order.id, 
+        console.error("Fapshi error status:", fapshiRes.status, "data:", fapshiData);
+        return NextResponse.json({
+          ok: true,
+          orderId: order.id,
           paymentError: true,
-          message: "Order placed, but payment initiation failed. Please contact support." 
+          message: fapshiData.message || fapshiData.error || "Payment initiation failed at gateway."
         });
       }
     } catch (e: any) {
       console.error("Fapshi fetch error:", e);
-      return NextResponse.json({ ok: true, orderId: order.id, paymentError: true, message: "Order placed, but payment system is offline." });
+      return NextResponse.json({
+        ok: true,
+        orderId: order.id,
+        paymentError: true,
+        message: "Payment system error: " + (e?.message || e.toString())
+      });
     }
 
   } catch (e: any) {

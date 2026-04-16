@@ -85,7 +85,7 @@ export function ProductModal({ isOpen, onClose, onSuccess, product, adminHeaders
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-      
+
       <div className="relative bg-white w-full max-w-2xl rounded-[2.5rem] shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
         <div className="flex items-center justify-between p-8 border-b border-gray-50">
           <div>
@@ -94,7 +94,7 @@ export function ProductModal({ isOpen, onClose, onSuccess, product, adminHeaders
             </h2>
             <p className="text-gray-400 text-sm font-medium">Capture the details of your hardware solution.</p>
           </div>
-          <button 
+          <button
             onClick={onClose}
             className="w-12 h-12 flex items-center justify-center rounded-fill bg-gray-50 text-gray-400 hover:bg-red-50 hover:text-red-500 transition-all"
           >
@@ -125,6 +125,7 @@ export function ProductModal({ isOpen, onClose, onSuccess, product, adminHeaders
                 <option value="Security">Security</option>
                 <option value="Automation">Automation</option>
                 <option value="Energy">Energy</option>
+                <option value="Electrical-Installation">Electrical Installation</option>
                 <option value="Hardware">Other Hardware</option>
               </select>
             </div>
