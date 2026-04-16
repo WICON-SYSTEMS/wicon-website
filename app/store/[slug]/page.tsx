@@ -47,23 +47,23 @@ export default function ProductDetailPage() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
-      
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
-        <button 
-          onClick={() => router.back()} 
+
+      <main className="flex-1 max-w-[1600px] mx-auto w-full px-4 sm:px-8 lg:px-12 py-6 sm:py-10">
+        <button
+          onClick={() => router.back()}
           className="flex items-center gap-2 text-gray-400 hover:text-black mb-6 sm:mb-10 transition-colors group text-xs sm:text-sm font-bold uppercase tracking-widest"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           <span>Back</span>
         </button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
           {/* Image Section */}
           <div className="w-full">
             <div className="aspect-square rounded-2xl sm:rounded-3xl overflow-hidden bg-gray-50 border border-gray-100 shadow-sm relative group">
               {product.imageUrl ? (
-                <img 
-                  src={product.imageUrl} 
+                <img
+                  src={product.imageUrl}
                   alt={product.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
@@ -82,29 +82,29 @@ export default function ProductDetailPage() {
 
           {/* Details Section */}
           <div className="flex flex-col h-full lg:py-4">
-            <div className="mb-6">
-              <span className="inline-block px-2.5 py-1 bg-gray-100 text-gray-600 rounded-lg text-[10px] font-bold uppercase tracking-[0.2em] mb-3 sm:mb-4">
+            <div className="mb-5 sm:mb-6">
+              <span className="inline-block px-2 py-1 bg-gray-100 text-gray-600 rounded-lg text-[9px] font-bold uppercase tracking-[0.2em] mb-2 sm:mb-3">
                 {product.category || 'Professional Hardware'}
               </span>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-black mb-3 sm:mb-4 leading-[1.1]">{product.name}</h1>
-              <div className="flex items-baseline gap-3">
-                <p className="text-2xl sm:text-3xl font-black text-black">{product.price.toLocaleString()} XAF</p>
-                <span className="text-xs font-bold text-green-600 uppercase tracking-widest bg-green-50 px-2 py-0.5 rounded">In Stock</span>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-black mb-2 sm:mb-3 leading-[1.15]">{product.name}</h1>
+              <div className="flex items-baseline gap-2 sm:gap-3">
+                <p className="text-xl sm:text-2xl font-black text-black">{product.price.toLocaleString()} XAF</p>
+                <span className="text-[10px] sm:text-xs font-bold text-green-600 uppercase tracking-widest bg-green-50 px-2 py-0.5 rounded">In Stock</span>
               </div>
             </div>
 
-            <div className="prose prose-gray mb-8 sm:mb-10">
-              <p className="text-gray-500 text-sm sm:text-base leading-relaxed">{product.description || "No description available for this premium WiCon product."}</p>
+            <div className="prose prose-gray mb-6 sm:mb-8 max-w-none">
+              <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">{product.description || "No description available for this premium WiCon product."}</p>
             </div>
 
             <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-8 sm:mb-10">
-              <div className="flex flex-col gap-2 p-3 sm:p-4 bg-gray-50 rounded-xl sm:rounded-2xl border border-gray-100">
+              {/* <div className="flex flex-col gap-2 p-3 sm:p-4 bg-gray-50 rounded-xl sm:rounded-2xl border border-gray-100">
                 <Shield className="w-5 h-5 text-gray-400" />
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Warranty</p>
                   <p className="text-xs sm:text-sm font-bold text-black">12 Months</p>
                 </div>
-              </div>
+              </div> */}
               <div className="flex flex-col gap-2 p-3 sm:p-4 bg-gray-50 rounded-xl sm:rounded-2xl border border-gray-100">
                 <Truck className="w-5 h-5 text-gray-400" />
                 <div>
@@ -127,10 +127,10 @@ export default function ProductDetailPage() {
                 <ShoppingCart className="w-5 h-5 group-hover:animate-bounce" />
                 {product.stock <= 0 ? "Out of Stock" : "Add to Cart"}
               </button>
-              
-              <div className="flex items-center justify-center gap-2 text-[10px] sm:text-xs text-gray-400 font-bold uppercase tracking-widest pt-2">
+
+              <div className="flex items-center justify-center gap-2 text-[10px] sm:text-xs text-gray-400 font-bold tracking-widest pt-2">
                 <CheckCircle2 className="w-3 h-3 text-green-500" />
-                <span>WiCon Systems Certified</span>
+                <span>WiCon Ltd. Certified</span>
               </div>
             </div>
           </div>
@@ -138,28 +138,28 @@ export default function ProductDetailPage() {
 
         {/* Features/Specs Section */}
         <div className="mt-16 sm:mt-24 pt-16 sm:pt-24 border-t border-gray-100">
-          <h2 className="text-2xl sm:text-3xl font-black text-black mb-10 sm:mb-16 text-center uppercase tracking-tighter">Engineered for Excellence</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
-            <div className="text-center group">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-blue-50 text-blue-600 rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:rotate-6 transition-transform">
-                <Zap className="w-7 h-7 sm:w-8 sm:h-8" />
+          <h2 className="text-xl sm:text-2xl font-black text-black mb-8 sm:mb-12 text-center uppercase tracking-tighter">Engineered for Excellence</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-10">
+            <div className="text-center group flex flex-col items-center">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-50 text-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 group-hover:rotate-6 transition-transform">
+                <Zap className="w-6 h-6 sm:w-7 sm:h-7" />
               </div>
-              <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-4">High Efficiency</h3>
-              <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">Optimized for low power consumption and high performance in Cameroon's electrical environment.</p>
+              <h3 className="text-base sm:text-lg font-bold mb-2 sm:mb-3">High Efficiency</h3>
+              <p className="text-gray-500 text-xs sm:text-sm leading-relaxed max-w-xs">Optimized for low power consumption and high performance in Cameroon's electrical environment.</p>
             </div>
-            <div className="text-center group">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-purple-50 text-purple-600 rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:rotate-6 transition-transform">
-                <Shield className="w-7 h-7 sm:w-8 sm:h-8" />
+            <div className="text-center group flex flex-col items-center">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-purple-50 text-purple-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 group-hover:rotate-6 transition-transform">
+                <Shield className="w-6 h-6 sm:w-7 sm:h-7" />
               </div>
-              <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-4">Industrial Grade</h3>
-              <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">Built with premium components to withstand voltage fluctuations and heavy usage.</p>
+              <h3 className="text-base sm:text-lg font-bold mb-2 sm:mb-3">Industrial Grade</h3>
+              <p className="text-gray-500 text-xs sm:text-sm leading-relaxed max-w-xs">Built with premium components to withstand voltage fluctuations and heavy usage.</p>
             </div>
-            <div className="text-center group">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-orange-50 text-orange-600 rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:rotate-6 transition-transform">
-                <ShoppingCart className="w-7 h-7 sm:w-8 sm:h-8" />
+            <div className="text-center group flex flex-col items-center">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-orange-50 text-orange-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 group-hover:rotate-6 transition-transform">
+                <ShoppingCart className="w-6 h-6 sm:w-7 sm:h-7" />
               </div>
-              <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-4">Stock Ready</h3>
-              <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">Maintain local stock in Buea for immediate installation and replacement services.</p>
+              <h3 className="text-base sm:text-lg font-bold mb-2 sm:mb-3">Stock Ready</h3>
+              <p className="text-gray-500 text-xs sm:text-sm leading-relaxed max-w-xs">Maintain local stock in Buea for immediate installation and replacement services.</p>
             </div>
           </div>
         </div>
