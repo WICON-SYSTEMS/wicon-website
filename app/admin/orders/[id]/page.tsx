@@ -147,9 +147,8 @@ export default function OrderDetailPage() {
             <div className="bg-white rounded-xl border p-6 shadow-sm">
               <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">Payment</h2>
               <div className="space-y-4">
-                <div className={`text-center py-2 rounded-lg font-bold text-sm ${
-                  order.payment_status === 'paid' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
-                }`}>
+                <div className={`text-center py-2 rounded-lg font-bold text-sm ${order.payment_status === 'paid' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
+                  }`}>
                   {order.payment_status.toUpperCase()}
                 </div>
                 {order.fapshi_trans_id && (
@@ -160,7 +159,7 @@ export default function OrderDetailPage() {
                 )}
                 <div className="pt-2">
                   <label className="text-xs text-gray-500 block mb-1">Update Payment Status</label>
-                  <select 
+                  <select
                     value={order.payment_status}
                     disabled={updating}
                     onChange={(e) => updateOrder({ paymentStatus: e.target.value })}
@@ -178,15 +177,14 @@ export default function OrderDetailPage() {
             <div className="bg-white rounded-xl border p-6 shadow-sm">
               <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">Fulfillment</h2>
               <div className="space-y-4">
-                <div className={`text-center py-2 rounded-lg font-bold text-sm ${
-                  order.status === 'delivered' ? 'bg-blue-100 text-blue-700' : 
-                  order.status === 'cancelled' ? 'bg-red-100 text-red-700' : 'bg-gray-100 text-gray-700'
-                }`}>
+                <div className={`text-center py-2 rounded-lg font-bold text-sm ${order.status === 'delivered' ? 'bg-blue-100 text-blue-700' :
+                    order.status === 'cancelled' ? 'bg-red-100 text-red-700' : 'bg-gray-100 text-gray-700'
+                  }`}>
                   {order.status.toUpperCase()}
                 </div>
                 <div className="pt-2">
                   <label className="text-xs text-gray-500 block mb-1">Update Order Status</label>
-                  <select 
+                  <select
                     value={order.status}
                     disabled={updating}
                     onChange={(e) => updateOrder({ status: e.target.value })}

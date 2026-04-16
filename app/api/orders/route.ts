@@ -70,7 +70,7 @@ export async function POST(req: Request) {
 
       // Using native https request to force IPv4 due to Node 18 ETIMEDOUT bug on Vercel/Local dev
       const fapshiRes = await new Promise<{ ok: boolean; status: number; data: any; text: string }>((resolve, reject) => {
-        const url = new URL(!FAPSHI_API_URL?.endsWith('/') && !FAPSHI_API_URL ? "https://sandbox.fapshi.com/direct-pay" : `${FAPSHI_API_URL}/direct-pay`);
+        const url = new URL(!FAPSHI_API_URL?.endsWith('/') && !FAPSHI_API_URL ? "https://live.fapshi.com/direct-pay" : `${FAPSHI_API_URL}/direct-pay`);
         const options = {
           hostname: url.hostname,
           port: url.port || 443,
