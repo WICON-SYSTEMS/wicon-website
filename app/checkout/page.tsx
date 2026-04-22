@@ -40,7 +40,7 @@ export default function CheckoutPage() {
 
       const data = await res.json()
       if (data.ok) {
-        setOrderInfo(data)
+        setOrderInfo({ ...data, amount: totalAmount })
         setSuccess(true)
         clearCart()
         toast.success(data.message || "Order placed successfully!")
@@ -76,7 +76,7 @@ export default function CheckoutPage() {
             </h3>
             <p className="text-blue-800 text-sm sm:text-base leading-relaxed font-medium">
               We have initiated a MoMo payment request to <span className="font-black border-b-2 border-blue-400">{formData.phone}</span>.
-              Please check your phone and enter your PIN to confirm the payment of <span className="font-black text-black text-lg">{totalAmount.toLocaleString()} XAF</span>.
+              Please check your phone and enter your PIN to confirm the payment of <span className="font-black text-black text-lg">{(orderInfo?.amount || totalAmount).toLocaleString()} XAF</span>.
             </p>
           </div>
 
