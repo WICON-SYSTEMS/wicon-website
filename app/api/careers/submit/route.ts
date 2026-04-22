@@ -76,7 +76,8 @@ export async function POST(req: Request) {
         upsert: false,
       })
       if (cvErr) {
-        return NextResponse.json({ ok: false, error: `CV upload failed: ${cvErr.message}` }, { status: 500 })
+        console.error("CV upload technical error:", cvErr);
+        return NextResponse.json({ ok: false, error: "Failed to upload CV. Please try again with a different format or smaller file." }, { status: 500 })
       }
       cv_path = path
     }
@@ -91,7 +92,8 @@ export async function POST(req: Request) {
         upsert: false,
       })
       if (pErr) {
-        return NextResponse.json({ ok: false, error: `Photo upload failed: ${pErr.message}` }, { status: 500 })
+        console.error("Photo upload technical error:", pErr);
+        return NextResponse.json({ ok: false, error: "Failed to upload photo. Please check the file type and try again." }, { status: 500 })
       }
       photo_path = path
     }
@@ -122,7 +124,8 @@ export async function POST(req: Request) {
     }).select('*').single()
 
     if (error) {
-      return NextResponse.json({ ok: false, error: error.message }, { status: 500 })
+      console.error("Internship application insert error:", error);
+      return NextResponse.json({ ok: false, error: "Failed to save your application. Please try again later." }, { status: 500 })
     }
 
     // send confirmation email (fire and forget)
@@ -173,6 +176,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true, id: data.id })
   } catch (e: any) {
-    return NextResponse.json({ ok: false, error: e?.message || 'Unknown error' }, { status: 500 })
+    console.error("Careers form technical error:", e);
+    return NextResponse.json({ ok: false, error: "An unexpected error occurred. Please try again later." }, { status: 500 })
   }
 }

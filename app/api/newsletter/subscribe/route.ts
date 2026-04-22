@@ -37,7 +37,8 @@ export async function POST(req: Request) {
       .from('newsletter_subscribers')
       .upsert(payload, { onConflict: 'email' })
     if (upsertError) {
-      return NextResponse.json({ error: upsertError.message }, { status: 500 })
+      console.error("Supabase upsert error:", upsertError);
+      return NextResponse.json({ error: "Failed to process your subscription. Please try again later." }, { status: 500 })
     }
 
     // Send confirmation email to subscriber

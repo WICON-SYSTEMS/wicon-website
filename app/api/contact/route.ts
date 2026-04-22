@@ -195,9 +195,9 @@ export async function POST(req: Request) {
       message: "Contact form submitted successfully",
     });
   } catch (e: any) {
-    console.error("Contact form error:", e);
+    console.error("Contact form technical error:", e);
     return NextResponse.json(
-      { ok: false, error: e?.message || "Unknown error" },
+      { ok: false, error: "Something went wrong sending your message. Please try again or contact us directly." },
       { status: 500 }
     );
   }

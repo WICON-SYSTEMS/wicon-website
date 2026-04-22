@@ -36,6 +36,9 @@ export async function POST(req: Request) {
     }
 
     // 2. Create order in database
+    const shippingCost = 0;
+    const finalTotal = totalAmount + shippingCost;
+
     // @ts-ignore
     const order = await prisma.order.create({
       data: {
@@ -43,7 +46,7 @@ export async function POST(req: Request) {
         email: customer.email || "",
         phone: customer.phone,
         address: customer.address || "",
-        totalAmount,
+        totalAmount: finalTotal,
         status: "processing",
         paymentStatus: "pending",
         items: {
@@ -60,7 +63,7 @@ export async function POST(req: Request) {
 
     try {
       const payload: any = {
-        amount: Math.max(totalAmount, 100),
+        amount: Math.max(finalTotal, 100),
         phone: customer.phone,
         externalId: order.id,
         message: `Payment for WiCon Ltd Order ${order.id}`,
@@ -149,7 +152,11 @@ export async function POST(req: Request) {
     }
 
   } catch (e: any) {
-    console.error("Order creation error:", e);
-    return NextResponse.json({ ok: false, error: e?.message || "Internal server error" }, { status: 500 });
+    console.error("Order creation technical error:", e);
+    // Hide raw database/system errors from the user
+    return NextResponse.json({ 
+      ok: false, 
+      error: "Unable to process order at this moment. Please check your connection or contact support." 
+    }, { status: 500 });
   }
 }

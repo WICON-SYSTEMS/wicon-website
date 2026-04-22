@@ -18,8 +18,9 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
 
     return NextResponse.json({ ok: true, item: product });
   } catch (e: any) {
+    console.error("[GET /api/products/slug] Error:", e);
     return NextResponse.json(
-      { ok: false, error: e?.message || "Unknown error" },
+      { ok: false, error: "Product currently unavailable. Please try again later." },
       { status: 500 }
     );
   }

@@ -23,7 +23,7 @@ export async function GET(req: Request) {
   } catch (e: any) {
     console.error("[GET /api/products] Error:", e);
     return NextResponse.json(
-      { ok: false, error: e?.message || "Unknown error" },
+      { ok: false, error: "Unable to load products. Please check your connection." },
       { status: 500 }
     );
   }
