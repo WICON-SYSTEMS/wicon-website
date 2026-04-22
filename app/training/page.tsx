@@ -325,7 +325,7 @@ export default function TrainingPage() {
                   alt="training-logo"
                 />
                 <h1 className="text-2xl md:text-4xl font-bold text-left md:text-center">
-                  WiCon SMART HOME SOLUTION FOR DIGITAL EDUCATION
+                  WiCon INNOVATION SHOWCASE
                 </h1>
               </div>
               <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
@@ -372,7 +372,7 @@ export default function TrainingPage() {
                   Program Overview
                 </h2>
                 <p className="text-lg text-gray-600 mb-6">
-                  WiCon SMART HOME SOLUTION FOR DIGITAL EDUCATION is an
+                  WiCon INNOVATION SHOWCASE is an
                   intensive 12-weeks training program designed to equip
                   participants with cutting-edge skills in software development,
                   IoT solutions, and our proprietary WiCon controller

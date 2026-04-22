@@ -315,7 +315,7 @@ export default function HomePage() {
                     data-reveal
                     className={`text-xl sm:text-2xl font-black leading-tight tracking-tight ${styles.reveal}`}
                   >
-                    SMART HOME SOLUTIONS <br className="hidden sm:block" />FOR DIGITAL EDUCATION
+                    SMART <br className="hidden sm:block" />INNOVATION SHOWCASE
                   </h2>
                 </div>
                 <p
