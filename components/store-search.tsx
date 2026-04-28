@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { Search, X, ShieldCheck } from "lucide-react"
+import { Search, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface StoreSearchProps {
@@ -81,25 +81,7 @@ export function StoreSearch({ onSearch }: StoreSearchProps) {
         </div>
       </div>
 
-      {/* Footer Info */}
-      {/* <div className="mt-4 flex items-center justify-between px-4">
-        <div className="flex flex-col gap-0.5">
-          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.25em]">
-            {query ? `Refining results for "${query}"` : "Search Engine Active"}
-          </p>
-          <div className="h-0.5 w-full bg-gray-50 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-black transition-all duration-700 ease-out"
-              style={{ width: query ? '100%' : '0%' }}
-            />
-          </div>
-        </div>
 
-        <div className="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-all cursor-help group">
-           <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 group-hover:scale-110 transition-transform" />
-           <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Secure Input Active</span>
-        </div>
-      </div> */}
     </div>
   )
 }
