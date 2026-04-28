@@ -5,15 +5,19 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { useCart } from "@/components/cart-context"
 import { toast } from "sonner"
-import { ShoppingCart, ArrowRight, Loader2 } from "lucide-react"
+import { ShoppingCart, ArrowRight, Loader2, Search } from "lucide-react"
 import Link from "next/link"
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip"
+import { StoreSearch } from "@/components/store-search"
+
 
 export default function StorePage() {
   const [products, setProducts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [category, setCategory] = useState<string>("all")
+  const [searchQuery, setSearchQuery] = useState("")
   const { addItem, setIsOpen } = useCart()
+
 
   useEffect(() => {
     async function load() {
@@ -36,28 +40,43 @@ export default function StorePage() {
 
   const categories = ["all", ...Array.from(new Set(products.map(p => p.category).filter(Boolean)))]
 
+  const filteredProducts = products.filter(p => {
+    const matchesCategory = category === "all" || p.category === category
+    const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (p.description?.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (p.category?.toLowerCase().includes(searchQuery.toLowerCase()))
+    return matchesCategory && matchesSearch
+  })
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
 
       <main className="flex-1 max-w-[1600px] mx-auto w-full px-4 sm:px-8 lg:px-12 py-10">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10 sm:mb-16 mt-4 sm:mt-0">
-          <div>
-            <div className="flex items-center gap-3">
-              <h1 className="text-2xl sm:text-4xl font-black text-black tracking-tight ">WiCon Ltd. STORE</h1>
-              <img src="/icons/store.png" className="w-10 h-10 object-contain" alt="Store" />
-            </div>
-            <p className="text-xs sm:text-sm text-gray-500 font-medium mt-1">Premium automation and electrical solutions.</p>
+        <div className="flex flex-col items-center text-center mb-16 px-4">
+          <div
+            className="flex items-center justify-center gap-4 mb-4 animate-in fade-in slide-in-from-bottom-5 duration-1000"
+          >
+            <h1 className="text-4xl sm:text-6xl font-black text-black tracking-tighter uppercase">
+              WiCon <span className="text-gray-300">Catalog</span>
+            </h1>
+            <img src="/icons/store.png" className="w-12 h-12 sm:w-16 sm:h-16 object-contain" alt="Store" />
           </div>
 
-          <div className="flex flex-wrap gap-2 sm:gap-3">
+          <p className="text-xs sm:text-sm text-gray-400 font-bold uppercase tracking-[0.3em] mb-12">
+            Engineering excellence, delivered globally.
+          </p>
+
+          <StoreSearch onSearch={(q) => setSearchQuery(q)} />
+
+          <div className="flex flex-wrap justify-center gap-3 mt-4">
             {categories.map((c: any) => (
               <button
                 key={c}
                 onClick={() => setCategory(c)}
-                className={`px-4 py-2 cursor-pointer rounded-xl text-[11px] font-bold uppercase tracking-widest transition-all duration-300 ${category === c
-                  ? "bg-black text-white shadow-xl shadow-black/10"
-                  : "bg-white text-gray-400 border border-gray-100 hover:border-black hover:text-black"
+                className={`px-6 py-2.5 cursor-pointer rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-500 ${category === c
+                  ? "bg-black text-white shadow-2xl shadow-black/20 scale-105"
+                  : "bg-white text-gray-400 border border-gray-100 hover:border-black hover:text-black hover:shadow-lg"
                   }`}
               >
                 {c}
@@ -65,6 +84,7 @@ export default function StorePage() {
             ))}
           </div>
         </div>
+
 
         {loading ? (
           <div className="flex flex-col items-center justify-center py-32">
@@ -74,14 +94,23 @@ export default function StorePage() {
             </div>
             <p className="text-xs font-bold uppercase tracking-widest text-gray-400 animate-pulse">Refining the catalog...</p>
           </div>
-        ) : products.length === 0 ? (
-          <div className="text-center py-32 bg-white rounded-3xl border border-dashed border-gray-200">
-            <p className="text-gray-400 font-bold uppercase tracking-widest text-xs mb-6">No products found in this category.</p>
-            <button onClick={() => setCategory('all')} className="bg-black text-white px-8 py-4 rounded-2xl font-bold uppercase tracking-widest text-xs shadow-xl hover:shadow-black/10 transition-all">View all products</button>
+        ) : filteredProducts.length === 0 ? (
+          <div className="text-center py-40 bg-white/50 backdrop-blur-sm rounded-[40px] border border-dashed border-gray-200">
+            <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-8">
+              <Search className="w-8 h-8 text-gray-200" />
+            </div>
+            <p className="text-gray-400 font-bold uppercase tracking-widest text-xs mb-8">No results matching your high-end criteria.</p>
+            <button
+              onClick={() => { setCategory('all'); setSearchQuery(''); }}
+              className="bg-black text-white px-10 py-5 rounded-full font-black uppercase tracking-widest text-[10px] shadow-2xl hover:shadow-black/20 transition-all active:scale-95"
+            >
+              Reset Filters
+            </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
-            {products.map((product) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 sm:gap-8">
+            {filteredProducts.map((product) => (
+
               <div
                 key={product.id}
                 className="group bg-white rounded-2xl sm:rounded-3xl border border-gray-50 overflow-hidden hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 flex flex-col h-full"
