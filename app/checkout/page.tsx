@@ -1,11 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { useCart } from "@/components/cart-context"
 import { toast } from "sonner"
-import { Loader2, CheckCircle2, ShoppingBag, CreditCard, User, Mail, Phone, MapPin, FileText } from "lucide-react"
+import { Loader2, CheckCircle2, ShoppingBag, CreditCard, User, Mail, Phone, MapPin, FileText, X, RefreshCw } from "lucide-react"
+
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
@@ -22,6 +23,10 @@ export default function CheckoutPage() {
   const [success, setSuccess] = useState(false)
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false)
   const [orderInfo, setOrderInfo] = useState<any>(null)
+  // "pending" | "paid" | "failed" | "expired"
+  const [paymentStatus, setPaymentStatus] = useState<string>("pending")
+  const [pollTimeout, setPollTimeout] = useState(false) // true if 5min elapsed without confirmation
+  const [isCheckingStatus, setIsCheckingStatus] = useState(false)
 
   const [formData, setFormData] = useState({
     name: "",
@@ -42,7 +47,7 @@ export default function CheckoutPage() {
         body: JSON.stringify({
           customer: formData,
           items: items,
-          amount: finalTotal, // Send total including shipping
+          amount: finalTotal,
           shipping: shippingCost
         }),
       })
@@ -63,8 +68,92 @@ export default function CheckoutPage() {
     }
   }
 
+  /**
+   * Payment Status Polling (Optimized)
+   * 
+   * Features:
+   * 1. Visibility Check: Stops polling if user switches tabs to save resources.
+   * 2. Exponential Backoff: Reduces frequency over time (4s -> 8s -> 15s).
+   * 3. Hard Timeout: Stops after 5 minutes with a fallback "Check Again" button.
+   */
+  useEffect(() => {
+    if (!success || !orderInfo?.orderId || paymentStatus !== "pending") return;
+
+    let stopped = false;
+    let timeoutId: any;
+    let currentInterval = 4000; // Start at 4 seconds
+    const startTime = Date.now();
+    const MAX_WAIT = 5 * 60 * 1000; // 5 minute hard limit
+
+    const checkStatus = async () => {
+      if (stopped || document.hidden) {
+        // If tab is hidden, skip this check and wait for visibility
+        timeoutId = setTimeout(checkStatus, currentInterval);
+        return;
+      }
+
+      if (Date.now() - startTime > MAX_WAIT) {
+        setPollTimeout(true);
+        stopped = true;
+        clearTimeout(timeoutId);
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/orders/${orderInfo.orderId}`);
+        const data = await res.json();
+        
+        if (data.ok) {
+          const status = data.order.paymentStatus;
+          if (status === "paid") {
+            setPaymentStatus("paid");
+            stopped = true;
+            return;
+          } else if (status === "failed") {
+            setPaymentStatus("failed");
+            stopped = true;
+            return;
+          }
+        }
+      } catch (e) {
+        console.error("Polling error:", e);
+      }
+
+      // Backoff logic: increase interval slowly up to 15 seconds
+      if (currentInterval < 15000) {
+        currentInterval += 1000; 
+      }
+      
+      timeoutId = setTimeout(checkStatus, currentInterval);
+    };
+
+    // Start polling
+    timeoutId = setTimeout(checkStatus, currentInterval);
+
+    // Event listener for tab visibility
+    const handleVisibilityChange = () => {
+      if (!document.hidden && !stopped) {
+        // User came back! Reset interval and check immediately
+        currentInterval = 4000;
+        checkStatus();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      stopped = true;
+      clearTimeout(timeoutId);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [success, orderInfo?.orderId, paymentStatus]);
+
   const handleDownloadReceipt = async () => {
     if (isGeneratingPdf) return
+    if (paymentStatus !== "paid") {
+      toast.error("Receipts are only available after successful payment confirmation.")
+      return
+    }
     setIsGeneratingPdf(true)
 
     try {
@@ -251,6 +340,32 @@ export default function CheckoutPage() {
     }
   }
 
+  const handleManualRefresh = async () => {
+    if (isCheckingStatus || !orderInfo?.orderId) return;
+    setIsCheckingStatus(true);
+    try {
+      const res = await fetch(`/api/orders/${orderInfo.orderId}`);
+      const data = await res.json();
+      if (data.ok) {
+        const updatedStatus = data.order.paymentStatus;
+        if (updatedStatus === "paid") {
+          setPaymentStatus("paid");
+          toast.success("Payment confirmed!");
+        } else if (updatedStatus === "failed") {
+          setPaymentStatus("failed");
+          toast.error("Payment failed or cancelled.");
+        } else {
+          toast.info("Payment is still pending. Please wait or check your phone.");
+        }
+      }
+    } catch (e) {
+      console.error("Manual refresh error:", e);
+      toast.error("Could not verify status.");
+    } finally {
+      setIsCheckingStatus(false);
+    }
+  };
+
   if (success) {
     return (
       <div className="min-h-screen flex flex-col bg-white">
@@ -275,21 +390,55 @@ export default function CheckoutPage() {
               We have initiated a MoMo payment request to <span className="font-black border-b-2 border-blue-400">{formData.phone}</span>.
               Please check your phone and enter your PIN to confirm the payment of <span className="font-black text-black text-lg">{orderInfo?.amount?.toLocaleString() || finalTotal.toLocaleString()} XAF</span>.
             </p>
+
+            <div className="mt-6 flex flex-wrap items-center gap-4 bg-white/60 p-4 rounded-2xl border border-blue-100/50">
+              {paymentStatus === "paid" ? (
+                <div className="flex items-center gap-3 text-green-600 font-black uppercase tracking-widest text-xs animate-in zoom-in duration-500">
+                  <CheckCircle2 className="w-5 h-5" />
+                  Payment Verified
+                </div>
+              ) : paymentStatus === "failed" ? (
+                <div className="flex items-center gap-3 text-red-600 font-black uppercase tracking-widest text-xs">
+                  <X className="w-5 h-5" />
+                  Payment Failed
+                </div>
+              ) : pollTimeout ? (
+                <button 
+                  onClick={handleManualRefresh}
+                  disabled={isCheckingStatus}
+                  className="flex items-center gap-3 text-blue-600 font-black uppercase tracking-widest text-[10px] hover:underline transition-all"
+                >
+                  {isCheckingStatus ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
+                  Session timed out. Check status manually?
+                </button>
+              ) : (
+                <div className="flex items-center gap-3 text-blue-600 font-black uppercase tracking-widest text-xs">
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Waiting for MoMo confirmation...
+                </div>
+              )}
+            </div>
           </div>
+
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={handleDownloadReceipt}
-              disabled={isGeneratingPdf}
-              className="bg-black text-white px-10 cursor-pointer py-5 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-gray-800 transition-all shadow-xl hover:shadow-black/20 flex items-center justify-center gap-3 disabled:opacity-50"
+              disabled={isGeneratingPdf || paymentStatus !== "paid"}
+              className={`${paymentStatus === "paid"
+                  ? "bg-black text-white hover:bg-gray-800"
+                  : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                } px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-[10px] sm:text-xs transition-all shadow-xl hover:shadow-black/20 flex items-center justify-center gap-3 disabled:opacity-50`}
             >
               {isGeneratingPdf ? <Loader2 className="w-4 h-4 animate-spin" /> : <FileText className="w-4 h-4" />}
               {isGeneratingPdf ? "Generating..." : "Download Receipt"}
+              {paymentStatus !== "paid" && <span className="opacity-50 inline-flex items-center ml-1">(Pending)</span>}
             </button>
             <Link href="/store" className="bg-gray-50 text-gray-500 px-10 cursor-pointer py-5 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-gray-100 transition-all border border-gray-100 flex items-center justify-center">
               Continue Shopping
             </Link>
           </div>
+
 
         </main>
         <Footer />
