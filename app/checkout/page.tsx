@@ -370,81 +370,178 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen flex flex-col bg-white">
         <Header />
-        <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-20 sm:py-32 text-center">
-          <div className="w-24 h-24 sm:w-32 sm:h-32 bg-green-50 text-green-500 rounded-[2rem] flex items-center justify-center mx-auto mb-10 animate-bounce">
-            <CheckCircle2 className="w-12 h-12 sm:w-16 sm:h-16" />
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-black mb-6 uppercase tracking-tighter leading-none">Order Received!</h1>
-          <p className="text-gray-400 text-base sm:text-xl mb-10 leading-relaxed font-medium">
-            Thank you, <span className="text-black font-black">{formData.name}</span>!
-            Your order ID is <code className="bg-gray-50 border border-gray-100 px-3 py-1 rounded-lg font-mono font-black text-black">{orderInfo?.orderId?.slice(0, 8).toUpperCase()}</code>.
-          </p>
+        <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-16 sm:py-24">
 
-          <div className="bg-blue-50/50 border border-blue-100 rounded-[2rem] p-8 sm:p-10 mb-12 text-left relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-3xl rounded-full translate-x-10 -translate-y-10 group-hover:scale-150 transition-transform duration-1000"></div>
-            <h3 className="font-black text-blue-900 mb-4 flex items-center gap-3 uppercase tracking-tighter text-lg">
-              <CreditCard className="w-6 h-6" />
-              Payment Instruction
-            </h3>
-            <p className="text-blue-800 text-sm sm:text-base leading-relaxed font-medium">
-              We have initiated a MoMo payment request to <span className="font-black border-b-2 border-blue-400">{formData.phone}</span>.
-              Please check your phone and enter your PIN to confirm the payment of <span className="font-black text-black text-lg">{orderInfo?.amount?.toLocaleString() || finalTotal.toLocaleString()} XAF</span>.
-            </p>
+          {/* ── STATE: PAYMENT PENDING ──────────────────────────────── */}
+          {paymentStatus === "pending" && (
+            <div className="text-center">
+              <div className="w-20 h-20 bg-blue-50 text-blue-500 rounded-[2rem] flex items-center justify-center mx-auto mb-8">
+                <Loader2 className="w-10 h-10 animate-spin" />
+              </div>
+              <h1 className="text-3xl sm:text-4xl font-black text-black mb-4 uppercase tracking-tighter leading-none">Awaiting Payment</h1>
+              <p className="text-gray-400 text-sm sm:text-base mb-10 font-medium">
+                Order <code className="bg-gray-50 border border-gray-100 px-2 py-0.5 rounded-lg font-mono font-black text-black text-xs">{orderInfo?.orderId?.slice(0, 8).toUpperCase()}</code> is ready.
+              </p>
 
-            <div className="mt-6 flex flex-wrap items-center gap-4 bg-white/60 p-4 rounded-2xl border border-blue-100/50">
-              {paymentStatus === "paid" ? (
-                <div className="flex items-center gap-3 text-green-600 font-black uppercase tracking-widest text-xs animate-in zoom-in duration-500">
-                  <CheckCircle2 className="w-5 h-5" />
-                  Payment Verified
+              <div className="bg-blue-50/60 border border-blue-100 rounded-[2rem] p-8 sm:p-10 text-left">
+                <h3 className="font-black text-blue-900 mb-3 flex items-center gap-3 uppercase tracking-tighter">
+                  <CreditCard className="w-5 h-5" />
+                  Complete Your Payment
+                </h3>
+                <p className="text-blue-800 text-sm leading-relaxed font-medium mb-6">
+                  A MoMo push notification has been sent to <span className="font-black border-b-2 border-blue-300">{formData.phone}</span>. Open your MoMo app or approve via SMS to pay <span className="font-black text-black">{orderInfo?.amount?.toLocaleString()} XAF</span>.
+                </p>
+                <div className="flex flex-wrap items-center gap-3 bg-white/70 py-3 px-4 rounded-2xl border border-blue-100/60">
+                  {pollTimeout ? (
+                    <button
+                      onClick={handleManualRefresh}
+                      disabled={isCheckingStatus}
+                      className="flex items-center gap-2 text-blue-600 font-black uppercase tracking-widest text-[10px] hover:underline"
+                    >
+                      {isCheckingStatus ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
+                      Session timed out — check status manually
+                    </button>
+                  ) : (
+                    <div className="flex items-center gap-2 text-blue-500 font-black uppercase tracking-widest text-[10px]">
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Waiting for confirmation... this page updates automatically
+                    </div>
+                  )}
                 </div>
-              ) : paymentStatus === "failed" ? (
-                <div className="flex items-center gap-3 text-red-600 font-black uppercase tracking-widest text-xs">
-                  <X className="w-5 h-5" />
-                  Payment Failed
-                </div>
-              ) : pollTimeout ? (
-                <button 
-                  onClick={handleManualRefresh}
-                  disabled={isCheckingStatus}
-                  className="flex items-center gap-3 text-blue-600 font-black uppercase tracking-widest text-[10px] hover:underline transition-all"
-                >
-                  {isCheckingStatus ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
-                  Session timed out. Check status manually?
-                </button>
-              ) : (
-                <div className="flex items-center gap-3 text-blue-600 font-black uppercase tracking-widest text-xs">
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  Waiting for MoMo confirmation...
-                </div>
-              )}
+              </div>
             </div>
-          </div>
+          )}
 
+          {/* ── STATE: PAYMENT FAILED ───────────────────────────────── */}
+          {paymentStatus === "failed" && (
+            <div className="text-center">
+              <div className="w-20 h-20 bg-red-50 text-red-400 rounded-[2rem] flex items-center justify-center mx-auto mb-8">
+                <X className="w-10 h-10" />
+              </div>
+              <h1 className="text-3xl sm:text-4xl font-black text-black mb-4 uppercase tracking-tighter leading-none">Payment Failed</h1>
+              <p className="text-gray-400 text-sm sm:text-base mb-10 font-medium max-w-sm mx-auto">
+                The payment for order <code className="bg-gray-100 px-2 py-0.5 rounded font-mono text-black text-xs">{orderInfo?.orderId?.slice(0, 8).toUpperCase()}</code> was not completed. Please contact our team to resolve this.
+              </p>
+              <Link href="/store" className="inline-flex items-center gap-2 bg-black text-white px-8 py-4 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-gray-800 transition-all">
+                Return to Store
+              </Link>
+            </div>
+          )}
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={handleDownloadReceipt}
-              disabled={isGeneratingPdf || paymentStatus !== "paid"}
-              className={`${paymentStatus === "paid"
-                  ? "bg-black text-white hover:bg-gray-800"
-                  : "bg-gray-200 text-gray-400 cursor-not-allowed"
-                } px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-[10px] sm:text-xs transition-all shadow-xl hover:shadow-black/20 flex items-center justify-center gap-3 disabled:opacity-50`}
-            >
-              {isGeneratingPdf ? <Loader2 className="w-4 h-4 animate-spin" /> : <FileText className="w-4 h-4" />}
-              {isGeneratingPdf ? "Generating..." : "Download Receipt"}
-              {paymentStatus !== "paid" && <span className="opacity-50 inline-flex items-center ml-1">(Pending)</span>}
-            </button>
-            <Link href="/store" className="bg-gray-50 text-gray-500 px-10 cursor-pointer py-5 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-gray-100 transition-all border border-gray-100 flex items-center justify-center">
-              Continue Shopping
-            </Link>
-          </div>
+          {/* ── STATE: PAYMENT CONFIRMED — RECEIPT PREVIEW ─────────── */}
+          {paymentStatus === "paid" && (
+            <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+              <div className="text-center mb-10">
+                <div className="w-20 h-20 bg-green-50 text-green-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle2 className="w-10 h-10" />
+                </div>
+                <h1 className="text-3xl sm:text-4xl font-black text-black mb-2 uppercase tracking-tighter leading-none">Payment Confirmed!</h1>
+                <p className="text-gray-400 text-sm font-medium">Your receipt is ready. Review it below and download a copy.</p>
+              </div>
 
+              {/* ── Inline Receipt Preview ─────────────────────────── */}
+              <div className="border border-gray-100 rounded-[2rem] overflow-hidden shadow-2xl shadow-black/5 mb-8">
+                {/* Header */}
+                <div className="bg-gray-950 px-8 py-6 flex items-center justify-between">
+                  <div>
+                    <p className="text-white font-black text-lg tracking-tight">WiCon Ltd.</p>
+                    <p className="text-gray-500 text-xs font-bold uppercase tracking-widest">Official Receipt</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-white font-black text-2xl tracking-tighter">RECEIPT</p>
+                    <p className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">#{orderInfo?.orderId?.slice(0, 8).toUpperCase()}</p>
+                  </div>
+                </div>
+
+                {/* Meta */}
+                <div className="bg-gray-50 px-8 py-4 flex flex-wrap gap-x-8 gap-y-2 justify-between border-b border-gray-100 text-xs">
+                  <div>
+                    <p className="text-gray-400 font-bold uppercase tracking-widest text-[9px] mb-0.5">Billed To</p>
+                    <p className="font-black text-black">{formData.name}</p>
+                    {formData.email && <p className="text-gray-500 font-medium">{formData.email}</p>}
+                    <p className="text-gray-500 font-medium">{formData.phone}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-gray-400 font-bold uppercase tracking-widest text-[9px] mb-0.5">Date</p>
+                    <p className="font-black text-black">{new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</p>
+                    <p className="text-gray-400 font-bold uppercase tracking-widest text-[9px] mt-1 mb-0.5">Status</p>
+                    <span className="inline-flex items-center gap-1 bg-green-50 text-green-700 text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full">
+                      <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Paid
+                    </span>
+                  </div>
+                </div>
+
+                {/* Items */}
+                <div className="px-8 py-6">
+                  <table className="w-full text-xs">
+                    <thead>
+                      <tr className="border-b border-gray-100">
+                        <th className="text-left text-[9px] font-black text-gray-400 uppercase tracking-widest pb-3 pr-4">Item</th>
+                        <th className="text-center text-[9px] font-black text-gray-400 uppercase tracking-widest pb-3 w-10">Qty</th>
+                        <th className="text-right text-[9px] font-black text-gray-400 uppercase tracking-widest pb-3 w-24">Unit Price</th>
+                        <th className="text-right text-[9px] font-black text-gray-400 uppercase tracking-widest pb-3 w-24">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {(orderInfo?.items || []).map((item: any, i: number) => (
+                        <tr key={i} className="border-b border-gray-50">
+                          <td className="py-3 pr-4 font-bold text-black text-xs">{item.name}</td>
+                          <td className="py-3 text-center text-gray-500 font-bold">{item.quantity}</td>
+                          <td className="py-3 text-right text-gray-500 font-bold">{(item.price || 0).toLocaleString()} XAF</td>
+                          <td className="py-3 text-right font-black text-black">{((item.price || 0) * item.quantity).toLocaleString()} XAF</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Totals */}
+                <div className="px-8 pb-8">
+                  <div className="ml-auto w-56 space-y-2">
+                    <div className="flex justify-between text-[10px] text-gray-500 font-bold">
+                      <span>Subtotal</span>
+                      <span>{(orderInfo?.subtotal || 0).toLocaleString()} XAF</span>
+                    </div>
+                    <div className="flex justify-between text-[10px] font-bold">
+                      <span className="text-gray-500">Shipping</span>
+                      <span className="text-green-600">{orderInfo?.shipping === 0 ? "Free" : `${(orderInfo?.shipping || 0).toLocaleString()} XAF`}</span>
+                    </div>
+                    <div className="pt-2 border-t border-gray-200 flex justify-between text-sm font-black text-black">
+                      <span>Total Paid</span>
+                      <span>{(orderInfo?.amount || 0).toLocaleString()} XAF</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Footer note */}
+                <div className="bg-gray-50 border-t border-gray-100 px-8 py-4 text-center">
+                  <p className="text-gray-400 text-[10px] font-medium">Thank you for your business! This is an official receipt from WiCon Ltd. · office@wiconltd.com · +237 670791815</p>
+                </div>
+              </div>
+
+              {/* ── Actions ─────────────────────────────────────────── */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button
+                  onClick={handleDownloadReceipt}
+                  disabled={isGeneratingPdf}
+                  className="bg-black text-white px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-gray-800 transition-all shadow-xl hover:shadow-black/20 flex items-center justify-center gap-3 disabled:opacity-50"
+                >
+                  {isGeneratingPdf ? <Loader2 className="w-4 h-4 animate-spin" /> : <FileText className="w-4 h-4" />}
+                  {isGeneratingPdf ? "Generating PDF..." : "Download PDF Receipt"}
+                </button>
+                <Link href="/store" className="bg-gray-50 text-gray-500 px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-gray-100 transition-all border border-gray-100 flex items-center justify-center">
+                  Continue Shopping
+                </Link>
+              </div>
+            </div>
+          )}
 
         </main>
         <Footer />
       </div>
     )
   }
+
 
   if (items.length === 0) {
     return (

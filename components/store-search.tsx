@@ -66,7 +66,7 @@ export function StoreSearch({ onSearch }: StoreSearchProps) {
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder="Search premium solutions..."
-          className="w-full bg-transparent pl-16 pr-14 py-6 sm:py-7 text-sm sm:text-lg font-medium text-black placeholder:text-gray-400 focus:outline-none transition-all selection:bg-black selection:text-white"
+          className="w-full bg-transparent pl-16 pr-14 py-6 sm:py-4 text-sm sm:text-lg font-medium text-black placeholder:text-gray-400 focus:outline-none transition-all selection:bg-black selection:text-white"
         />
 
         <div className="absolute right-6 top-1/2 -translate-y-1/2 flex items-center gap-2">

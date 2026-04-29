@@ -58,10 +58,10 @@ async function checkFapshiStatus(transId: string): Promise<string | null> {
  */
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
-    const id = params.id;
 
     // @ts-ignore
     const order = await prisma.order.findUnique({
@@ -124,7 +124,7 @@ export async function GET(
     return NextResponse.json({ ok: true, order });
 
   } catch (e: any) {
-    console.error(`[GET /api/orders/${params?.id}] Error:`, e);
+    console.error(`[GET /api/orders/${id}] Error:`, e);
     return NextResponse.json(
       { ok: false, error: "Internal server error" },
       { status: 500 }
