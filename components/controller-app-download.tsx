@@ -76,8 +76,8 @@ export function ControllerAppDownload({
               <Download className="h-4 w-4 shrink-0" />
               Download for Android
             </a>
-            <p className="text-center text-xs text-gray-500 sm:text-left">
-              v{WICON_CONTROLLER_APP.version} · APK · Android{" "}
+            <p className="text-center text-xs tabular-nums text-gray-500 sm:text-left">
+              v{WICON_CONTROLLER_APP.version} · {WICON_CONTROLLER_APP.fileSize} · Android{" "}
               {WICON_CONTROLLER_APP.minAndroid}+
             </p>
           </div>

@@ -6,6 +6,7 @@ export const WICON_CONTROLLER_APP = {
   downloadPath: "/downloads/Smart-Home.apk",
   fileName: "Smart-Home.apk",
   version: "1.0.0",
+  fileSize: "82.1 MB",
   platform: "Android",
   minAndroid: "8.0",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://wiconltd.com",
