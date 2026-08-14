@@ -33,6 +33,7 @@
 .delay2 { animation-delay: 0.2s; }
 .delay3 { animation-delay: 0.3s; }
 .delay4 { animation-delay: 0.4s; }
+.delay5 { animation-delay: 0.5s; }
 
 /* Underline accent that grows in */
 @keyframes underlineGrow {
@@ -53,14 +54,18 @@
   .floatY, .shadowPulse, .fadeUp, .underline, .reveal { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
 }
 
-/* Generic reveal-on-scroll styles */
+/* Generic reveal-on-scroll — content stays visible; subtle slide-in when JS runs */
 .reveal {
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 600ms ease, transform 600ms ease;
-}
-.reveal:global(.inView) {
   opacity: 1;
+  transform: none;
+}
+
+:global(html.reveal-enhanced) .reveal {
+  transform: translateY(16px);
+  transition: transform 600ms ease, opacity 600ms ease;
+}
+
+:global(html.reveal-enhanced) .reveal:global(.inView) {
   transform: none;
 }
 

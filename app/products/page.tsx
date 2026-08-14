@@ -28,6 +28,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import Link from "next/link";
+import { ControllerAppDownload } from "@/components/controller-app-download";
 
 export const metadata: Metadata = {
   title: "Products",
@@ -303,6 +304,14 @@ export default function ProductsPage() {
                     </div>
                   </TabsContent>
                 </Tabs>
+                <Link
+                  href="/app"
+                  className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition-colors hover:text-black"
+                >
+                  <Smartphone className="h-4 w-4" />
+                  Get the WiCon Controller app
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
               </div>
               <div>
                 <img
@@ -311,6 +320,10 @@ export default function ProductsPage() {
                   className="w-full h-auto rounded-md"
                 />
               </div>
+            </div>
+
+            <div id="controller-app" className="mt-12 scroll-mt-24 sm:mt-16 sm:scroll-mt-28">
+              <ControllerAppDownload />
             </div>
           </div>
         </section>

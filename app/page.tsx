@@ -21,6 +21,7 @@ import {
   GraduationCap,
 } from "lucide-react";
 import Link from "next/link";
+import { ControllerAppHeroPill } from "@/components/controller-app-hero-pill";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -37,8 +38,7 @@ export default function HomePage() {
         <RevealOnScroll />
         {/* Hero Section */}
         <section
-          data-reveal
-          className={`bg-gradient-to-b from-gray-50 to-white pt-10 ${styles.reveal}`}
+          className={`bg-gradient-to-b from-gray-50 to-white pt-10`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -90,6 +90,9 @@ export default function HomePage() {
                     </Button>
                   </Link>
                 </div>
+                <ControllerAppHeroPill
+                  className={`mt-5 sm:mt-6 ${styles.fadeUp} ${styles.delay5}`}
+                />
               </div>
               <div className="relative">
                 {/* Soft round shadow below */}
@@ -205,9 +208,10 @@ export default function HomePage() {
               </p>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+              <Link href="/app" className="block">
               <Card
                 data-reveal
-                className={`bg-white border-gray-100 rounded-2xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group ${styles.reveal}`}
+                className={`bg-white border-gray-100 rounded-2xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group h-full ${styles.reveal}`}
               >
                 <CardContent className="p-5 sm:p-8 flex flex-col h-full">
                   <div className="w-20 h-20 sm:w-12 sm:h-12 text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
@@ -220,8 +224,13 @@ export default function HomePage() {
                     Control lighting, power, and systems wirelessly with
                     reliable, secure controllers.
                   </p>
+                  <span className="mt-auto pt-4 inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-semibold text-gray-400 group-hover:text-black transition-colors">
+                    Get the app
+                    <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                  </span>
                 </CardContent>
               </Card>
+              </Link>
               <Card
                 data-reveal
                 className={`bg-white border-gray-100 rounded-2xl hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group ${styles.reveal} ${styles.st1}`}

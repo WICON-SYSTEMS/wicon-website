@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Poppins } from "next/font/google"
+import { DM_Sans } from "next/font/google"
 import Script from "next/script"
 import { Toaster } from "sonner"
 import "./globals.css"
@@ -12,10 +12,10 @@ import { Analytics } from "@vercel/analytics/next"
 import { CartProvider } from "@/components/cart-context"
 import { CartDrawer } from "@/components/cart-drawer"
 
-const poppins = Poppins({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-dm-sans",
 })
 
 export const metadata: Metadata = {
@@ -83,7 +83,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={dmSans.variable}>
       <head>
         {/* Google tag (gtag.js) */}
         <Script
@@ -99,14 +99,8 @@ export default function RootLayout({
             gtag('config', 'G-ECLD18KNHV');
           `}
         </Script>
-        <style>{`
-html {
-  font-family: ${poppins.style.fontFamily};
-  --font-sans: ${poppins.variable};
-}
-        `}</style>
       </head>
-      <body className={poppins.className}>
+      <body className={`${dmSans.className} antialiased`}>
         <CartProvider>
           {/* <RouteLoader /> */}
           <TopProgress />
