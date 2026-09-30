@@ -194,58 +194,69 @@ export default function AboutPage() {
                 Certified professionals dedicated to delivering excellence
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-10">
-              <Card className="bg-white border-gray-50 rounded-[2rem] text-center overflow-hidden hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group">
-                <CardContent className="p-8 sm:p-12">
-                  <div className="relative inline-block mb-8">
-                    <div className="absolute -inset-2 bg-gray-50 rounded-full -z-10 rotate-12 group-hover:rotate-0 transition-transform duration-500"></div>
-                    <img
-                      src="/placeholder.svg?height=200&width=200&text=CEO"
-                      alt="CEO"
-                      className="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto object-cover border-4 border-white shadow-xl"
-                    />
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-black text-black mb-2 uppercase tracking-tight">Engr. Akum Bate</h3>
-                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Founder & CEO</p>
-                  <p className="text-sm text-gray-500 font-medium leading-relaxed">
-                    Electrical Engineer with 15+ years experience in power systems and wireless technology.
-                  </p>
-                </CardContent>
-              </Card>
-              <Card className="bg-white border-gray-50 rounded-[2rem] text-center overflow-hidden hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group">
-                <CardContent className="p-8 sm:p-12">
-                  <div className="relative inline-block mb-8">
-                    <div className="absolute -inset-2 bg-gray-50 rounded-full -z-10 -rotate-12 group-hover:rotate-0 transition-transform duration-500"></div>
-                    <img
-                      src="/placeholder.svg?height=200&width=200&text=CTO"
-                      alt="CTO"
-                      className="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto object-cover border-4 border-white shadow-xl"
-                    />
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-black text-black mb-2 uppercase tracking-tight">Sarah Mballa</h3>
-                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Chief Tech Officer</p>
-                  <p className="text-sm text-gray-500 font-medium leading-relaxed">
-                    Electronics specialist focused on developing innovative wireless control solutions.
-                  </p>
-                </CardContent>
-              </Card>
-              <Card className="bg-white border-gray-50 rounded-[2rem] text-center overflow-hidden hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group">
-                <CardContent className="p-8 sm:p-12">
-                  <div className="relative inline-block mb-8">
-                    <div className="absolute -inset-2 bg-gray-50 rounded-full -z-10 rotate-45 group-hover:rotate-0 transition-transform duration-500"></div>
-                    <img
-                      src="/placeholder.svg?height=200&width=200&text=Lead+Tech"
-                      alt="Lead Technician"
-                      className="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto object-cover border-4 border-white shadow-xl"
-                    />
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-black text-black mb-2 uppercase tracking-tight">Paul Talla</h3>
-                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Lead Technician</p>
-                  <p className="text-sm text-gray-500 font-medium leading-relaxed">
-                    Certified electrician with expertise in solar PV systems and security installations.
-                  </p>
-                </CardContent>
-              </Card>
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 sm:gap-10">
+              {[
+                {
+                  name: "Akum Bate",
+                  role: "Founder & CEO",
+                  imageAlt: "Akum Bate",
+                  placeholder: "CEO",
+                  bio: "Electrical Engineer with 15+ years experience in power systems and wireless technology.",
+                  rotate: "rotate-12",
+                },
+                {
+                  name: "Glenn Tanze",
+                  role: "Chief Technology Officer",
+                  imageAlt: "Glenn Tanze",
+                  image: "/team/glenn-tanze.jpg",
+                  placeholder: "CTO",
+                  bio: "Leads software, IoT, and product engineering for WiCon's smart home and automation platforms.",
+                  rotate: "-rotate-12",
+                },
+                {
+                  name: "Telvine Enow Ekangaki",
+                  role: "Lead Technician",
+                  imageAlt: "Telvine Enow Ekangaki",
+                  placeholder: "Lead+Tech",
+                  bio: "Certified electrician with expertise in wireless controller installation, solar PV, and security systems.",
+                  rotate: "rotate-45",
+                },
+                {
+                  name: "Akum Oben",
+                  role: "Design Engineer/Intern",
+                  imageAlt: "Akum Oben",
+                  placeholder: "Engineer",
+                  bio: "Supports product design and engineering development across WiCon's hardware and smart home solutions.",
+                  rotate: "-rotate-6",
+                },
+              ].map((member: { name: string; role: string; imageAlt: string; image?: string; placeholder: string; bio: string; rotate: string }) => (
+                <Card
+                  key={member.name}
+                  className="bg-white border-gray-50 rounded-[2rem] text-center overflow-hidden hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 group"
+                >
+                  <CardContent className="p-8 sm:p-12">
+                    <div className="relative inline-block mb-8">
+                      <div
+                        className={`absolute -inset-2 bg-gray-50 rounded-full -z-10 ${member.rotate} group-hover:rotate-0 transition-transform duration-500`}
+                      ></div>
+                      <img
+                        src={member.image ?? `/placeholder.svg?height=200&width=200&text=${member.placeholder}`}
+                        alt={member.imageAlt}
+                        className="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto object-cover border-4 border-white shadow-xl"
+                      />
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-black text-black mb-2 uppercase tracking-tight">
+                      {member.name}
+                    </h3>
+                    <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">
+                      {member.role}
+                    </p>
+                    <p className="text-sm text-gray-500 font-medium leading-relaxed">
+                      {member.bio}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
